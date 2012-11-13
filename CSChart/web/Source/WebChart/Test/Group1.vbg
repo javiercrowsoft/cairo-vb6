@@ -1,0 +1,4 @@
+VBGROUP 5.0
+Project=..\CSChartServer.vbp
+StartupProject=Project1.vbp
+Project=..\..\GDI+\Codigo2\GpGDIPlus\GpGDIPlus.vbp

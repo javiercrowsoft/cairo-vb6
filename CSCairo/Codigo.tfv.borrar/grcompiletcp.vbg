@@ -1,0 +1,4 @@
+VBGROUP 5.0
+StartupProject=sfsCAIRO.vbp
+Project=..\..\CSLogin\Codigo\sfsCSLogin.vbp
+Project=..\..\CSTCP-IP\Client\Codigo\sfsCSTCP-IPClient.vbp

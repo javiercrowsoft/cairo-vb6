@@ -1,0 +1,5 @@
+VBGROUP 5.0
+StartupProject=..\CSTCP-IP\Server\CSTCPIPServer.vbp
+Project=CSADOAux.vbp
+Project=..\CSExecute\CSExecute.vbp
+Project=..\CSTCP-IP\CSTCPIPManager\CSTCPIPManager.vbp

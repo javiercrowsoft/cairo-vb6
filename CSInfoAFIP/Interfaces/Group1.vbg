@@ -1,0 +1,6 @@
+VBGROUP 5.0
+Project=..\..\CSABMInterface\Codigo\CSABMInterface.vbp
+Project=..\Codigo\CSInfoAFIP.vbp
+Project=CSInterfacesInfoAFIP.vbp
+Project=..\Informes\Resolucion 1361\Codigo\CSAFIPRes1361.vbp
+StartupProject=..\..\CSCairo\Codigo\CairoInfoAFIP.vbp

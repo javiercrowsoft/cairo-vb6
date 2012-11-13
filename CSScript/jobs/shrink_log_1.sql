@@ -1,0 +1,1 @@
+exec sp_force_shrink_log 0, 100

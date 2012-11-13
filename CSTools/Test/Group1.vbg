@@ -1,0 +1,4 @@
+VBGROUP 5.0
+Project=..\CSTools.vbp
+Project=Test.vbp
+StartupProject=..\CSSQLAdmin\CSSQLAdmin.vbp

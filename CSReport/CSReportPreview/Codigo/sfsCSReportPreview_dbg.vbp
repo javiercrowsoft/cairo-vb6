@@ -1,0 +1,46 @@
+Type=Control
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINNT\system32\stdole2.tlb#OLE Automation
+Object={F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0; COMDLG32.OCX
+Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; mscomctl.ocx
+UserControl=cReportPreview.ctl
+Module=mDebug; ..\..\..\CSDebug\Codigo\mDebug.bas
+Startup="(None)"
+HelpFile=""
+Title="CSReportPreview"
+ExeName32="CSReportPreview.ocx"
+Path32="..\..\..\DLL - OCX - EXE"
+Command32=""
+Name="CSReportPreview"
+HelpContextID="0"
+Description="< CrowSoft CSReportPreview"
+CompatibleMode="2"
+CompatibleEXE32="..\..\..\Dll.Compatibility\CSReportPreview.ocx"
+VersionCompatible32="1"
+MajorVer=1
+MinorVer=0
+RevisionVer=13
+AutoIncrementVer=1
+ServerSupportFiles=0
+VersionCompanyName="CrowSoft"
+CondComp="PREPROC_DEBUG = -1"
+CompilationType=0
+OptimizationType=1
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=-1
+BoundsCheck=-1
+OverflowCheck=-1
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=1
+DebugStartupComponent=cReportPreview
+
+[MS Transaction Server]
+AutoRefresh=1

@@ -1,0 +1,6 @@
+VBGROUP 5.0
+Project=CSPrintManagerService.vbp
+StartupProject=CSPrintManagerServExe.vbp
+Project=..\..\Clientes\Olaen\CSOlaen\Codigo\sfsCSOlaen.vbp
+Project=..\..\CSReport\CSReportExport\Codigo\sfsCSReportExport.vbp
+Project=..\..\CSReport\CSReportPaint\Codigo\sfsCSReportTinyPaint.vbp

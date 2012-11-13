@@ -1,0 +1,9 @@
+VBGROUP 5.0
+StartupProject=sfsCAIRO.vbp
+Project=..\..\CSPrintManager\Codigo\sfsCSPrintManager.vbp
+Project=..\..\CSInforme\Codigo\sfsCSInforme.vbp
+Project=..\..\CSABMInterface\Codigo\sfsCSABMInterface.vbp
+Project=..\..\CSReport\CSReportPaint\Codigo\sfsCSReportTinyPaint.vbp
+Project=..\..\CSReport\CSReportPreview\Codigo\sfsCSReportPreview.vbp
+Project=..\..\CSReport\CSReportExport\Codigo\sfsCSReportExport.vbp
+Project=..\..\CSReport\CSReportDll\Codigo\sfsCSReportTinyDll.vbp

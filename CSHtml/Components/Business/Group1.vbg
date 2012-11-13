@@ -1,0 +1,3 @@
+VBGROUP 5.0
+StartupProject=CSWebBusiness.vbp
+Project=..\DataBase\CSWebDataBase.vbp

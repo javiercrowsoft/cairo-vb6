@@ -1,0 +1,3 @@
+VBGROUP 5.0
+StartupProject=..\..\..\..\CSTCP-IP\Server\sfsCSTCPIPServer2Exe.vbp
+Project=CSCatalogCSCart.vbp

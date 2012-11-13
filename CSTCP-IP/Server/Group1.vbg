@@ -1,0 +1,6 @@
+VBGROUP 5.0
+StartupProject=CSTCPIPServerExe.vbp
+Project=..\..\CSChat\CSChat.vbp
+Project=..\..\CSADOAux\CSADOAux.vbp
+Project=..\..\CSInterfaces\CSIService.vbp
+Project=..\..\CSExecute\CSExecute.vbp

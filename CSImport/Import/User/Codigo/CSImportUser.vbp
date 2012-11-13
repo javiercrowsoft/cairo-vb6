@@ -1,0 +1,39 @@
+Type=Exe
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINNT\system32\STDOLE2.TLB#OLE Automation
+Reference=*\G{00000201-0000-0010-8000-00AA006D2EA4}#2.1#0#C:\Program Files\Common Files\System\ADO\msado21.tlb#Microsoft ActiveX Data Objects 2.1 Library
+Reference=*\G{9F1218E7-17DE-4BAC-AB12-D395690D6266}#1.0#0#..\..\..\..\DLL - OCX - EXE\CSEncrypt.dll#< CrowSoft Encrypt Service
+Module=mMain; mMain.bas
+Startup="Sub Main"
+HelpFile=""
+Title="CSImportUser"
+ExeName32="CSImportUser.exe"
+Path32="..\..\..\..\DLL - OCX - EXE"
+Command32="file name=C:\updateusuers.udl"
+Name="CSImportUser"
+HelpContextID="0"
+Description="< CrowSoft Update Import Usuarios"
+CompatibleMode="0"
+MajorVer=1
+MinorVer=0
+RevisionVer=0
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="CrowSoft"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=0
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+
+[MS Transaction Server]
+AutoRefresh=1

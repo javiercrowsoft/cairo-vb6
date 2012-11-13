@@ -1,0 +1,3 @@
+delete comunidadinternetrespuesta
+delete comunidadinternetmailitem
+delete comunidadinternetmail

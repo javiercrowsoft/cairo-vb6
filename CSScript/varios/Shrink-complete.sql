@@ -1,0 +1,2 @@
+backup log cairosalmax with truncate_only
+sp_force_shrink_log

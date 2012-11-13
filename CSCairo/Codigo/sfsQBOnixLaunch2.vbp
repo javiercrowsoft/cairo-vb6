@@ -1,0 +1,41 @@
+Type=Exe
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\stdole2.tlb#OLE Automation
+Module=mMain; mQBMainLaunch2.bas
+Module=mMngIni; ..\..\CSOAPI\Codigo\mMngIni.bas
+Module=mShell; ..\..\CSExecute\mShell.bas
+Form=fQBLoginServer.frm
+IconForm="fLogin"
+Startup="Sub Main"
+HelpFile=""
+Title="QBOnixLaunch"
+ExeName32="QBOnixSrv.exe"
+Path32="..\..\DLL - OCX - EXE"
+Command32=""
+Name="QBOnixLaunch"
+HelpContextID="0"
+CompatibleMode="0"
+MajorVer=1
+MinorVer=0
+RevisionVer=0
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="QBPoint"
+CondComp="PREPROC_CAIRO_LAUNCH = -1"
+CompilationType=0
+OptimizationType=1
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=-1
+BoundsCheck=-1
+OverflowCheck=-1
+FlPointCheck=-1
+FDIVCheck=0
+UnroundedFP=0
+StartMode=0
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+
+[MS Transaction Server]
+AutoRefresh=1

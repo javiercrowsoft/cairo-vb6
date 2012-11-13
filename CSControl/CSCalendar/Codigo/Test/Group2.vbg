@@ -1,0 +1,4 @@
+VBGROUP 5.0
+Project=..\..\..\CSMaskEdit\Codigo\CSMaskEdit.vbp
+Project=..\CSCalendar.vbp
+StartupProject=..\..\..\CSMaskEdit\Codigo\Test\Project1.vbp

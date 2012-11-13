@@ -1,0 +1,5 @@
+select * from asiento where as_id in (select as_id from depositobanco where est_id = 7)
+select * from asiento where as_id in (select as_id from ordenpago where est_id = 7)
+select * from asiento where as_id in (select as_id from cobranza where est_id = 7)
+select * from asiento where as_id in (select as_id from facturaventa where est_id = 7)
+select * from asiento where as_id in (select as_id from facturacompra where est_id = 7)

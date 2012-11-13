@@ -1,0 +1,10 @@
+VBGROUP 5.0
+StartupProject=sfsCAIRO.vbp
+Project=..\..\CSPrintManager\Codigo\sfsCSPrintManager.vbp
+Project=..\..\CSInforme\Codigo\sfsCSInforme.vbp
+Project=..\..\CSABMInterface\Codigo\sfsCSABMInterface.vbp
+Project=sfsCAIROSmall.vbp
+Project=sfsCAIROSmall2.vbp
+Project=..\..\CSSmall\CSVentas\CSFactura\Codigo\CSFacturaVenta.vbp
+Project=..\..\CSReport\CSReportPaint\Codigo\sfsCSReportTinyPaint.vbp
+Project=..\..\CSAAARBA\Ventas\Codigo\sfsCSAAARBAFacturaVenta.vbp

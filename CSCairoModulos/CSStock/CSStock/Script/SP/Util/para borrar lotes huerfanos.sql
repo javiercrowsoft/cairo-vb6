@@ -1,0 +1,41 @@
+-- -- select st_id1 from parteprodkit where ppk_id = 8052
+-- 
+-- select 'update productonumeroserie set prns_codigo = ''00' + convert(varchar(15),prns_id-129422) +'''' 
+-- 		 + ' where prns_id = ' + convert(varchar(15),prns_id)
+-- 
+--  from productonumeroserie where prns_id
+-- 
+-- in (select prns_id from stockitem where st_id = 64350)
+-- 
+-- -- select 131886 - 2463
+-- -- select * from productonumeroserie 
+-- -- where prns_codigo > '002463' 
+-- -- 	and prns_codigo < '002962' 
+-- -- 	and pr_id = 2055
+-- 
+-- -- select *
+-- -- 
+-- --  from productonumeroserie where prns_id
+-- -- 
+-- -- in (select prns_id from stockitem where st_id = 64350)
+-- 
+-- -- select * from stocklote where pr_id = 2055
+-- 
+-- sp_docstockcachecreate2 0,0
+-- 
+-- begin tran
+-- 
+-- update stockitem set stl_id = 111 where st_id = 64350 and pr_id = 2055
+-- 
+-- update productonumeroserie set stl_id = 111 
+-- 
+-- where prns_id in (
+-- 
+--  select prns_id from stockitem where st_id = 64350
+-- 
+-- )
+-- commit tran
+
+select * from stocklote s where not exists(select stl_id from stockitem where stl_id = s.stl_id)
+
+delete stocklote where not exists(select stl_id from stockitem where stl_id = stocklote.stl_id)

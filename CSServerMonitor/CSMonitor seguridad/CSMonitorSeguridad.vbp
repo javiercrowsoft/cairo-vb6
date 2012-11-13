@@ -1,0 +1,37 @@
+Type=Exe
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINNT\System32\stdole2.tlb#OLE Automation
+Reference=*\G{01AF80AF-C11C-49B4-ABD7-7B8464DC0A45}#1.0#0#..\DLL - OCX - EXE\CSInterfaces.dll#CSInterfaces
+Reference=*\G{AFE11B4D-66C3-40AE-9FFF-0519F7ACDD8E}#1.0#0#..\DLL - OCX - EXE\CSConfig.dll#CSConfig
+Form=fMain.frm
+Startup="fMain"
+HelpFile=""
+ExeName32="CSMonitorSeguridad.exe"
+Path32="..\DLL - OCX - EXE"
+Command32=""
+Name="CSMonitorSeguridad"
+HelpContextID="0"
+CompatibleMode="0"
+MajorVer=1
+MinorVer=0
+RevisionVer=0
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="los bagos de nuñes"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=0
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+
+[MS Transaction Server]
+AutoRefresh=1

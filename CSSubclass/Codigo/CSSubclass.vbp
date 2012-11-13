@@ -1,0 +1,46 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\WINNT\System32\stdole2.tlb#OLE Automation
+Class=cSubclass; cSubclass.cls
+Class=cISubclass; cISubclass.cls
+Module=mTimer; mTimer.bas
+Module=mSubclass; mSubclass.bas
+Class=cTimer; cTimer.cls
+Startup="(None)"
+HelpFile=""
+Title="CSSubclassing"
+ExeName32="CSSubclass.dll"
+Path32="..\..\DLL - OCX - EXE"
+Command32=""
+Name="CSSubclass"
+HelpContextID="0"
+Description="< CrowSoft Dll de Subclassing"
+CompatibleMode="2"
+CompatibleEXE32="..\..\DLL - OCX - EXE\CSSubclass.dll"
+VersionCompatible32="1"
+MajorVer=1
+MinorVer=0
+RevisionVer=22
+AutoIncrementVer=1
+ServerSupportFiles=0
+DllBaseAddress=&H2e8c0000
+VersionCompanyName="CrowSoft"
+VersionProductName="CrowSoft Subclassing"
+CondComp="afDebug = 0 : fComponent = 1"
+CompilationType=0
+OptimizationType=1
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+
+[MS Transaction Server]
+AutoRefresh=1

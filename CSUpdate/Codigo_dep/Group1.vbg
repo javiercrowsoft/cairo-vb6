@@ -1,0 +1,4 @@
+VBGROUP 5.0
+StartupProject=..\Codigo\CSUpdate.vbp
+Project=sfsCSTCP-IPClientUpdate.vbp
+Project=sfsCSTCPIPManagerUpdate.vbp

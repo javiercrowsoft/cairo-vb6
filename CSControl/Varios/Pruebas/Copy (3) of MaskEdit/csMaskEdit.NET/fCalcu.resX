@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" targetNamespace="" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <data name="cmdClear.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdClear.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAfQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAGgBAACTsgAAaAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAABDAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAOjEhziQAAABmAG8AcgBlAGMAbwBsAG8AcgD/AAAAAAADAAkAJnUlvsT+//9i
+        AGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="cmdMultiplicar.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdMultiplicar.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAqAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="ToolTip1.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdNumero.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_9.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_9.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA5AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_0.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_0.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeAD/
+        BQAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAwAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_1.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_1.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAxAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_2.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_2.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAyAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_3.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_3.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAzAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_4.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_4.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA0AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_5.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_5.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA1AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_6.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_6.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA2AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_7.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_7.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA3AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="_cmdNumero_8.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="_cmdNumero_8.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA4AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="cmdMasMenos.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdMasMenos.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAXQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEgBAACTsgAASAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyQAAABjAGEAcAB0AGkAbwBu
+        AAMAAAArAC8ALQANAAQAdfMNvDwAAABmAG8AbgB0AANS4wuRj84RneMAqgBLuFEBAAAAvALcfAEADU1T
+        IFNhbnMgU2VyaWYLAAgAunFWiyAAAABmAG8AbgB0AGIAbwBsAGQA//8AAAgACAC7V1azPAAAAGYAbwBu
+        AHQAbgBhAG0AZQANAAAATQBTACAAUwBhAG4AcwAgAFMAZQByAGkAZgAAAAQACAA7uVSTIAAAAGYAbwBu
+        AHQAcwBpAHoAZQAAABxBAwAJACZ1Jb7k/v//YgBhAGMAawBjAG8AbABvAHIAwMD/AAAACw==
+</value>
+  </data>
+  <data name="cmdResta.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdResta.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAtAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8AsDUAQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAQEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="LbDisplay.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdPunto.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdPunto.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAKQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAABQBAACTsgAAFAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAABpAA0ABAB18w28OAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQECAAD0Adx8AQAHTWFybGV0
+        dAAACAAIALtXVrMwAAAAZgBvAG4AdABuAGEAbQBlAAcAAABNAGEAcgBsAGUAdAB0AAAABAAIADu5VJMg
+        AAAAZgBvAG4AdABzAGkAegBlAAAAHEEDAAkAJnUlvhj///9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="cmdDividir.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdDividir.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAAvAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="cmdSuma.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdSuma.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeACV
+        AgAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAArAA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8AsDUAQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAQEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="cmdIgual.Modifiers" type="System.CodeDom.MemberAttributes, System">
+    <value>Public</value>
+  </data>
+  <data name="cmdIgual.OcxState" mimetype="text/microsoft-urt/binary-serialized/base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0xLjAuMjQx
+        MS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFT
+        eXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAWQEA
+        AAIBAAAAAQAAAAAAAAAAAAAAAEQBAACTsgAARAEAAAMACAAL8ldHIAAAAF8AZQB4AHQAZQBuAHQAeAD/
+        BQAAAwAIAAryV0cgAAAAXwBlAHgAdABlAG4AdAB5AEYCAAAIAAcArRoVoyAAAABjAGEAcAB0AGkAbwBu
+        AAEAAAA9AA0ABAB18w28PAAAAGYAbwBuAHQAA1LjC5GPzhGd4wCqAEu4UQEAAAC8Atx8AQANTVMgU2Fu
+        cyBTZXJpZgsACAC6cVaLIAAAAGYAbwBuAHQAYgBvAGwAZAD//wAACAAIALtXVrM8AAAAZgBvAG4AdABu
+        AGEAbQBlAA0AAABNAFMAIABTAGEAbgBzACAAUwBlAHIAaQBmAAAABAAIADu5VJMgAAAAZgBvAG4AdABz
+        AGkAegBlAAAAHEEDAAkAJnUlvuj+//9iAGEAYwBrAGMAbwBsAG8AcgDAwP8AAAAL
+</value>
+  </data>
+  <data name="$this.Name">
+    <value>FrmCalcu</value>
+  </data>
+  <resheader name="ResMimeType">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="Version">
+    <value>1.0.0.0</value>
+  </resheader>
+  <resheader name="Reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="Writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+</root>

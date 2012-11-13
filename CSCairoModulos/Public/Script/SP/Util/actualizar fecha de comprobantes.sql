@@ -1,0 +1,7 @@
+update movimientofondo set mf_fecha = convert(varchar,mf_fecha,112)
+update asiento set as_fecha = convert(varchar,as_fecha,112)
+update facturaventa set fv_fecha = convert(varchar,fv_fecha,112)
+update facturacompra set fc_fecha = convert(varchar,fc_fecha,112)
+update ordenpago set opg_fecha = convert(varchar,opg_fecha,112)
+update cobranza set cobz_fecha = convert(varchar,cobz_fecha,112)
+update depositobanco set dbco_fecha = convert(varchar,dbco_fecha,112)

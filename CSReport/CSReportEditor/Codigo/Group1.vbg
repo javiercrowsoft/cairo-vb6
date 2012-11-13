@@ -1,0 +1,4 @@
+VBGROUP 5.0
+StartupProject=sfsCSReportEditor.vbp
+Project=..\..\CSReportPaint\Codigo\sfsCSReportPaint.vbp
+Project=..\..\CSReportDll\Codigo\sfsCSReportDll.vbp

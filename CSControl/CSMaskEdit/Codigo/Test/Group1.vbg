@@ -1,0 +1,3 @@
+VBGROUP 5.0
+Project=..\CSMaskEdit.vbp
+StartupProject=Project1.vbp

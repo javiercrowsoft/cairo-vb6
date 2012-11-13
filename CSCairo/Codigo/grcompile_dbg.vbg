@@ -1,0 +1,6 @@
+VBGROUP 5.0
+Project=..\..\CSPrintManager\Codigo\sfsCSPrintManager_dbg.vbp
+Project=..\..\CSInforme\Codigo\sfsCSInforme_dbg.vbp
+Project=..\..\CSABMInterface\Codigo\sfsCSABMInterface_dbg.vbp
+Project=..\..\CSReport\CSReportPaint\Codigo\sfsCSReportTinyPaint_dbg.vbp
+StartupProject=sfsCAIRO_dbg.vbp

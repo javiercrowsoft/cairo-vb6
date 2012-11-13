@@ -1,0 +1,12 @@
+VBGROUP 5.0
+StartupProject=..\..\CSCompras\CSCompra\Codigo\sfsCSCompra.vbp
+Project=..\..\CSContabilidad\CSContabilidad\Codigo\sfsCSContabilidad.vbp
+Project=..\..\CSStock\CSStock\Codigo\sfsCSStock.vbp
+Project=..\..\CSTesoreria\CSTesoreria\Codigo\sfsCSTesoreria.vbp
+Project=..\..\CSVentas\CSPedidoVenta\Codigo\sfsCSPedidoVenta.vbp
+Project=..\..\CSVentas\CSVenta\Codigo\sfsCSVenta.vbp
+Project=..\..\..\CSExport\Codigo\sfsCSExport.vbp
+Project=..\..\..\CSEnvio\Codigo\sfsCSEnvio.vbp
+Project=..\..\CSVentas\CSTicket\Codigo\sfsCSTicket.vbp
+Project=..\..\..\CSTask\Codigo\sfsCSTarea.vbp
+Project=..\..\..\CSGeneral\Codigo\sfscsGeneral.vbp
