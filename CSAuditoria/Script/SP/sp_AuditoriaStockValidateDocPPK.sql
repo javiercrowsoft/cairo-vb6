@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaStockValidateDocPPK (
 
-	@@ppk_id       int,
-	@@aud_id 			int
+  @@ppk_id       int,
+  @@aud_id       int
 
 )
 as
@@ -19,22 +19,22 @@ begin
 
   set nocount on
 
-	declare @st_id1  int
-	declare @st_id2  int
-	declare @doct_id int
+  declare @st_id1  int
+  declare @st_id2  int
+  declare @doct_id int
 
-	select @st_id1 = st_id1, @st_id2 = st_id2, @doct_id = doct_id from ParteProdKit where ppk_id = @@ppk_id
+  select @st_id1 = st_id1, @st_id2 = st_id2, @doct_id = doct_id from ParteProdKit where ppk_id = @@ppk_id
 
-	if @doct_id = 30 begin 
+  if @doct_id = 30 begin 
 
-		exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id1,0
-		exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id2,1
+    exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id1,0
+    exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id2,1
 
-	end else begin
+  end else begin
 
-		exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id2,0
-		exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id1,1
+    exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id2,0
+    exec sp_AuditoriaStockValidateDocPPK2 @@ppk_id, @@aud_id, @st_id1,1
 
-	end
+  end
 end
 go

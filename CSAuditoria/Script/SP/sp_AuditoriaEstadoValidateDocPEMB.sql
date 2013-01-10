@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaEstadoValidateDocPEMB (
 
-	@@pemb_id     int,
-	@@aud_id 			int
+  @@pemb_id     int,
+  @@aud_id       int
 
 )
 as

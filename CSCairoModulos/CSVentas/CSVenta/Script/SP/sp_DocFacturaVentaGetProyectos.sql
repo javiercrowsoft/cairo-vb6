@@ -13,27 +13,27 @@ exec sp_DocFacturaVentaGetProyectos 6,3,2
 
 create procedure sp_DocFacturaVentaGetProyectos (
   @@emp_id          int,
-	@@cli_id 					int,
+  @@cli_id           int,
   @@mon_id          int
 )
 as
 
 begin
 
-	select 
+  select 
 
-				proy.proy_id,
-				proy_nombre,
+        proy.proy_id,
+        proy_nombre,
         proy_descrip
 
   from Proyecto proy 
-	where 
-					proy.cli_id  = @@cli_id
-		and   proy.activo <> 0
+  where 
+          proy.cli_id  = @@cli_id
+    and   proy.activo <> 0
     and   exists(select hora_id from hora where proy_id = proy.proy_id and hora_pendiente > 0)
 
-	order by 
+  order by 
 
-				proy_nombre
+        proy_nombre
 end
 go

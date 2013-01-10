@@ -21,21 +21,21 @@ begin
 
 select 
 
-			'Warning'																	as warning,
-			'Lajas'   																as Articulo, 
-			'Compras utiles'													as [Centro de Costo],
-			convert (datetime, '20040101')            as Fecha,
- 			'FACT A'											   					as Documento,
-			'A-45000122'														  as Numero,
-			'Factura'         											  as Comprobante,
-			'lalalalalal'															as Detalle,
-			'45.22'																		as Valor,
-			'150'																			as Ingreso,
-			'853'																			as [Importe Ingresos],
-			'120'																			as Egreso,
-			'53'																			as [Importe Egresos],
-			'50'																			as [Stock Actual],
-			'4.45'																		as [Importe Actual]
+      'Warning'                                  as warning,
+      'Lajas'                                   as Articulo, 
+      'Compras utiles'                          as [Centro de Costo],
+      convert (datetime, '20040101')            as Fecha,
+       'FACT A'                                   as Documento,
+      'A-45000122'                              as Numero,
+      'Factura'                                 as Comprobante,
+      'lalalalalal'                              as Detalle,
+      '45.22'                                    as Valor,
+      '150'                                      as Ingreso,
+      '853'                                      as [Importe Ingresos],
+      '120'                                      as Egreso,
+      '53'                                      as [Importe Egresos],
+      '50'                                      as [Stock Actual],
+      '4.45'                                    as [Importe Actual]
 
 
 end

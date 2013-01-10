@@ -11,7 +11,7 @@ go
 -- sp_embarqueGet 2
 
 create procedure sp_embarqueGet (
-	@@emb_id	int
+  @@emb_id  int
 )
 as
 
@@ -20,14 +20,14 @@ set nocount on
 begin
 
  select
-		Embarque.*,
-		origen.pue_nombre   as [Puerto origen],
-		destino.pue_nombre  as [Puerto destino],
-		barc_nombre         
+    Embarque.*,
+    origen.pue_nombre   as [Puerto origen],
+    destino.pue_nombre  as [Puerto destino],
+    barc_nombre         
  from
  
- Embarque left join Puerto as origen  			on Embarque.pue_id_origen  = origen.pue_id
-					left join Puerto as destino  			on Embarque.pue_id_destino = destino.pue_id
+ Embarque left join Puerto as origen        on Embarque.pue_id_origen  = origen.pue_id
+          left join Puerto as destino        on Embarque.pue_id_destino = destino.pue_id
           left join Barco                   on Embarque.barc_id        = Barco.barc_id
 
  where

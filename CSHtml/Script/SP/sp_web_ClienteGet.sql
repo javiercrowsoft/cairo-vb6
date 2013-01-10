@@ -15,22 +15,22 @@ sp_web_ClienteGet 7
 
 create Procedure sp_web_ClienteGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select top 200 cli_id, 
-				 	cli_nombre as [Cliente]
+  select top 200 cli_id, 
+           cli_nombre as [Cliente]
 
-	from Cliente
+  from Cliente
 
-	union
+  union
 
-	select 	0 as cli_id,
-					'(Ninguno)' as [Cliente]
+  select   0 as cli_id,
+          '(Ninguno)' as [Cliente]
 
-	order by cli_nombre
+  order by cli_nombre
 
 end
 go

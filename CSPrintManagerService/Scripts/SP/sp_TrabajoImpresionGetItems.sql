@@ -7,16 +7,16 @@ drop procedure [dbo].[sp_TrabajoImpresionGetItems]
 
 go
 create procedure sp_TrabajoImpresionGetItems (
-	@@timp_id int
+  @@timp_id int
 ) 
 as
 
 begin
 
-	select *
-	from TrabajoImpresionItem
-	where timp_id = @@timp_id
-	order by timpi_id
+  select *
+  from TrabajoImpresionItem
+  where timp_id = @@timp_id
+  order by timpi_id
 
 end
 

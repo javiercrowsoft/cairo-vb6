@@ -16,9 +16,9 @@ sp_ram_convertid '20030101','20030403',41087
 
 */
 create Procedure sp_ArbConvertId(
-	@@id 				varchar(255),
-  @@hoja_id 	int out,
-  @@ram_id 		int out
+  @@id         varchar(255),
+  @@hoja_id   int out,
+  @@ram_id     int out
 )
 as
 begin
@@ -29,7 +29,7 @@ begin
 
     if substring(@@id,1,1) = 'n' -- esto significa que es un nodo
        select @@ram_id = convert(int,substring(@@id,2,datalength(@@id) -1))
-		else
+    else
        select @@hoja_id = convert(int,@@id)
 
 end

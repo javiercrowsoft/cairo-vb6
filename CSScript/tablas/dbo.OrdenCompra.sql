@@ -3,12 +3,12 @@ drop table [dbo].[OrdenCompra]
 GO
 
 CREATE TABLE [dbo].[OrdenCompra] (
-	[oc_id] [int] NOT NULL ,
-	[te_id] [int] NOT NULL ,
-	[creado] [datetime] NOT NULL ,
-	[modificado] [datetime] NOT NULL ,
-	[modifico] [int] NOT NULL ,
-	[total] [int] NOT NULL 
+  [oc_id] [int] NOT NULL ,
+  [te_id] [int] NOT NULL ,
+  [creado] [datetime] NOT NULL ,
+  [modificado] [datetime] NOT NULL ,
+  [modifico] [int] NOT NULL ,
+  [total] [int] NOT NULL 
 ) ON [PRIMARY]
 GO
 

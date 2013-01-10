@@ -9,23 +9,23 @@ drop procedure [dbo].[sp_ProductoGetCatalogoCategoriasWeb]
 
 go
 create procedure sp_ProductoGetCatalogoCategoriasWeb (
-	@@pr_id 		int
+  @@pr_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select 
          catwci_id,
-				 catwci_posicion,
-				 catwc.catwc_id,
+         catwci_posicion,
+         catwc.catwc_id,
          catwc_nombre
 
   from CatalogoWebCategoria catwc 
-					left join CatalogoWebCategoriaItem catwci	on  catwc.catwc_id = catwci.catwc_id
-																												and catwci.pr_id = @@pr_id
+          left join CatalogoWebCategoriaItem catwci  on  catwc.catwc_id = catwci.catwc_id
+                                                        and catwci.pr_id = @@pr_id
 
 end
 

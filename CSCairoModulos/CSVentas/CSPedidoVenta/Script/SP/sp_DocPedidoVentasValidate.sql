@@ -3,7 +3,7 @@ drop procedure [dbo].[sp_DocPedidoVentasValidate]
 
 /*
 
-	exec	sp_DocPedidoVentasValidate
+  exec  sp_DocPedidoVentasValidate
 
 */
 
@@ -13,8 +13,8 @@ as
 
 begin
 
-	exec sp_DocPedidoVentasSetPendiente 
-	exec sp_DocPedidoVentasSetEstado
+  exec sp_DocPedidoVentasSetPendiente 
+  exec sp_DocPedidoVentasSetEstado
 end 
 
 go

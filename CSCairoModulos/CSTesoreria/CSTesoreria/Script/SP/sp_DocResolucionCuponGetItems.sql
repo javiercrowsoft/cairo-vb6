@@ -15,14 +15,14 @@ sp_DocResolucionCuponGetItems 1
 
 */
 create procedure sp_DocResolucionCuponGetItems (
-	@@rcup_id int
+  @@rcup_id int
 )
 as
 
 begin
 
-	select 	rci.*, 
-					cuepre.cue_nombre as cue_presentado,
+  select   rci.*, 
+          cuepre.cue_nombre as cue_presentado,
           cuepre.cue_id     as cue_id_presentado,
 
           cuebco.cue_nombre,
@@ -42,19 +42,19 @@ begin
           tjccu_cantidad,
           bco_nombre
 
-	from 	ResolucionCuponItem rci
+  from   ResolucionCuponItem rci
         inner join TarjetaCreditoCupon tjcc     on rci.tjcc_id         = tjcc.tjcc_id
         inner join TarjetaCreditoCuota tjccu    on tjcc.tjccu_id       = tjccu.tjccu_id
-				inner join Cuenta  cuebco					      on rci.cue_id          = cuebco.cue_id
+        inner join Cuenta  cuebco                on rci.cue_id          = cuebco.cue_id
         inner join DepositoCuponItem dcupi      on tjcc.tjcc_id        = dcupi.tjcc_id
-				inner join Cuenta  cuepre					      on dcupi.cue_id        = cuepre.cue_id
-        inner join TarjetaCredito tjc				    on tjcc.tjc_id         = tjc.tjc_id
+        inner join Cuenta  cuepre                on dcupi.cue_id        = cuepre.cue_id
+        inner join TarjetaCredito tjc            on tjcc.tjc_id         = tjc.tjc_id
         inner join Cuenta cuebcot               on tjc.cue_id_banco    = cuebcot.cue_id
         inner join Cuenta cuerech               on tjc.cue_id_rechazo  = cuerech.cue_id
         left  join Banco                        on cuebco.bco_id       = Banco.bco_id
-	where 
-			rcup_id = @@rcup_id
+  where 
+      rcup_id = @@rcup_id
 
-	order by rcupi_orden
+  order by rcupi_orden
 end
 go

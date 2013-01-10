@@ -1,19 +1,19 @@
 delete clientecachecredito where cli_id = 256
 
 update cliente set 
-									cli_deudapedido				=0,
-									cli_deudaremito				=0,
-									cli_deudapackinglist	=0,
-									cli_deudamanifiesto		=0,
-									cli_deudactacte				=0,
-									cli_deudadoc					=0,
-									cli_deudatotal				=0
+                  cli_deudapedido        =0,
+                  cli_deudaremito        =0,
+                  cli_deudapackinglist  =0,
+                  cli_deudamanifiesto    =0,
+                  cli_deudactacte        =0,
+                  cli_deudadoc          =0,
+                  cli_deudatotal        =0
 -- Version GNGas
 ,
-									cli_gng_deudapedido				=0,
-									cli_gng_deudaremito				=0,
-									cli_gng_deudafactura			=0,
-									cli_gng_deudacobranza			=0
+                  cli_gng_deudapedido        =0,
+                  cli_gng_deudaremito        =0,
+                  cli_gng_deudafactura      =0,
+                  cli_gng_deudacobranza      =0
 
 where cli_id = 256
 

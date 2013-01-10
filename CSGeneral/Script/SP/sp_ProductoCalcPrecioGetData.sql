@@ -11,7 +11,7 @@ go
 -- sp_ProductoCalcPrecioGetData 2
 
 create procedure sp_ProductoCalcPrecioGetData (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -19,14 +19,14 @@ set nocount on
 
 begin
 
-	select 	pr_ventacompra,
-					pr_porcinternov,
-					tiiva.ti_porcentaje as iva,
-					tiint.ti_porcentaje as internos
+  select   pr_ventacompra,
+          pr_porcinternov,
+          tiiva.ti_porcentaje as iva,
+          tiint.ti_porcentaje as internos
 
-	from producto pr left join TasaImpositiva tiiva on pr.ti_id_ivariventa = tiiva.ti_id
-									 left join TasaImpositiva tiint on pr.ti_id_internosv  = tiint.ti_id
-	where pr_id = @@pr_id
+  from producto pr left join TasaImpositiva tiiva on pr.ti_id_ivariventa = tiiva.ti_id
+                   left join TasaImpositiva tiint on pr.ti_id_internosv  = tiint.ti_id
+  where pr_id = @@pr_id
 
 end
 

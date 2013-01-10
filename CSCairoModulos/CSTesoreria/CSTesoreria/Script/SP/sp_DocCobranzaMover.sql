@@ -24,7 +24,7 @@ sp_DocCobranzaMover 104,1,17 -- LAST
 
 go
 create procedure sp_DocCobranzaMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -32,47 +32,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select cobz_id from Cobranza 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select cobz_id from Cobranza 
                                                         where cobz_numero = (
-																																	select min(cobz_numero) from Cobranza 
+                                                                  select min(cobz_numero) from Cobranza 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select cobz_id from Cobranza 
+                                                        select cobz_id from Cobranza 
                                                         where cobz_numero = (
-																																	select max(cobz_numero) from Cobranza 
+                                                                  select max(cobz_numero) from Cobranza 
                                                                   where doc_id = @@DocId 
-																																			and cobz_numero < @@currNro 
-																																)
+                                                                      and cobz_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select cobz_id from Cobranza 
+                                                        select cobz_id from Cobranza 
                                                         where cobz_numero = (
-																																	select min(cobz_numero) from Cobranza 
+                                                                  select min(cobz_numero) from Cobranza 
                                                                   where doc_id = @@DocId 
                                                                       and cobz_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select cobz_id from Cobranza 
+                                                        select cobz_id from Cobranza 
                                                         where cobz_numero = (
-																																	select max(cobz_numero) from Cobranza 
+                                                                  select max(cobz_numero) from Cobranza 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

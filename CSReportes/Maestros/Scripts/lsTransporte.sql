@@ -18,7 +18,7 @@ Transporte Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 34      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Transporte%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Transporte%'
 
 Para testear:
 
@@ -33,46 +33,46 @@ drop procedure [dbo].[lsTransporte]
 go
 create procedure lsTransporte (
 
-@@trans_id			varchar(255)
+@@trans_id      varchar(255)
 
 )as 
 
 declare @trans_id int
 declare @ram_id_transporte int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@trans_id, @trans_id out, @ram_id_transporte out
 
 if @ram_id_transporte <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_transporte, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_transporte, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_transporte, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_transporte, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_transporte = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_transporte = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select *
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
   Transporte
 
 where 
@@ -80,14 +80,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 34 -- tbl_id de Transporte
                   and  rptarb_hojaid = Transporte.trans_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_transporte = 0)
-			 )
+           (@ram_id_transporte = 0)
+       )

@@ -14,29 +14,29 @@ sp_tables '%TipoOperacion%'
 
 go
 create procedure sp_tipoOperacionDelete (
-	@@to_id 		int
+  @@to_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete TipoOperacionCuentaGrupo where to_id = @@to_id
-	if @@error <> 0 goto ControlError
+  delete TipoOperacionCuentaGrupo where to_id = @@to_id
+  if @@error <> 0 goto ControlError
 
-	delete TipoOperacion where to_id = @@to_id
-	if @@error <> 0 goto ControlError
+  delete TipoOperacion where to_id = @@to_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el tipo de operación. sp_tipoOperacionDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el tipo de operación. sp_tipoOperacionDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

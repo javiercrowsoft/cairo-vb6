@@ -8,9 +8,9 @@ fetch next from c_pr into @pr_id
 
 while @@fetch_status=0 begin
 
-	exec sp_ProductoSaveKit @pr_id
+  exec sp_ProductoSaveKit @pr_id
 
-	fetch next from c_pr into @pr_id
+  fetch next from c_pr into @pr_id
 
 end
 

@@ -9,23 +9,23 @@ drop procedure [dbo].[sp_ProductoGetCatalogosWeb]
 
 go
 create procedure sp_ProductoGetCatalogosWeb (
-	@@pr_id 		int
+  @@pr_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select 
          catwi_id,
-				 catw.catw_id,
+         catw.catw_id,
          catw_nombre
 
-  from CatalogoWeb catw left join CatalogoWebItem catwi	on  catw.catw_id = catwi.catw_id
-																												and catwi.pr_id = @@pr_id
+  from CatalogoWeb catw left join CatalogoWebItem catwi  on  catw.catw_id = catwi.catw_id
+                                                        and catwi.pr_id = @@pr_id
 
-	order by catw_nombre
+  order by catw_nombre
 end
 
 go

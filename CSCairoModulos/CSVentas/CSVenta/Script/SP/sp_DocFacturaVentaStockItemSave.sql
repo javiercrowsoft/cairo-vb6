@@ -9,109 +9,109 @@ drop procedure [dbo].[sp_DocFacturaVentaStockItemSave]
 
 go
 create procedure sp_DocFacturaVentaStockItemSave (
-	@@sti_grupo				int,
-	@@st_id 					int,
-	@@sti_orden				int out,
-	@@fvi_cantidad    decimal(18,6),
+  @@sti_grupo        int,
+  @@st_id           int,
+  @@sti_orden        int out,
+  @@fvi_cantidad    decimal(18,6),
   @@fvi_descrip     varchar(255),
   @@pr_id           int,
   @@depl_id_origen  int,
   @@depl_id_destino int,
-	@@prns_id         int,
+  @@prns_id         int,
   @@stik_id         int,
-	@@stl_id          int,
+  @@stl_id          int,
 
-	@@bSuccess 				tinyint out,
+  @@bSuccess         tinyint out,
   @@MsgError        varchar(5000)= '' out
 )
 as
 begin
 
-	declare	@sti_id					int
+  declare  @sti_id          int
 
-	exec SP_DBGetNewId 'StockItem','sti_id',@sti_id out, 0
+  exec SP_DBGetNewId 'StockItem','sti_id',@sti_id out, 0
 
-	declare @pr_id_kit int
-	if @@stik_id is not null begin
-		select @pr_id_kit = pr_id from StockItemKit where stik_id = @@stik_id
-	end
+  declare @pr_id_kit int
+  if @@stik_id is not null begin
+    select @pr_id_kit = pr_id from StockItemKit where stik_id = @@stik_id
+  end
 
-	insert into StockItem (
-													st_id,  
-													sti_id,  
-													sti_orden,  
-													sti_ingreso, 
-													sti_salida,  
-													sti_descrip,  
-													sti_grupo,
-													pr_id,  
-													depl_id,
-													prns_id,
-													stik_id,
-													pr_id_kit,
-													stl_id
-												)
-									values(
-													@@st_id, 
-													@sti_id, 
-													@@sti_orden,           
-													0, 
-													@@fvi_cantidad, 
-													@@fvi_descrip, 
-													@@sti_grupo,
-													@@pr_id, 
-													@@depl_id_origen,
-													@@prns_id,
-													@@stik_id,
-													@pr_id_kit,
+  insert into StockItem (
+                          st_id,  
+                          sti_id,  
+                          sti_orden,  
+                          sti_ingreso, 
+                          sti_salida,  
+                          sti_descrip,  
+                          sti_grupo,
+                          pr_id,  
+                          depl_id,
+                          prns_id,
+                          stik_id,
+                          pr_id_kit,
+                          stl_id
+                        )
+                  values(
+                          @@st_id, 
+                          @sti_id, 
+                          @@sti_orden,           
+                          0, 
+                          @@fvi_cantidad, 
+                          @@fvi_descrip, 
+                          @@sti_grupo,
+                          @@pr_id, 
+                          @@depl_id_origen,
+                          @@prns_id,
+                          @@stik_id,
+                          @pr_id_kit,
                           @@stl_id
-												)
+                        )
   if @@error <> 0 goto ControlError
 
-	set @@sti_orden = @@sti_orden + 1
+  set @@sti_orden = @@sti_orden + 1
 
-	exec SP_DBGetNewId 'StockItem','sti_id',@sti_id out, 0
+  exec SP_DBGetNewId 'StockItem','sti_id',@sti_id out, 0
 
-	insert into StockItem (
-													st_id,  
-													sti_id,  
-													sti_orden,  
-													sti_ingreso, 
-													sti_salida, 
-													sti_descrip,  
-													sti_grupo,
-													pr_id,  
-													depl_id,
-													prns_id,
-													stik_id,
-													pr_id_kit,
-													stl_id
-												)
-									values(
-													@@st_id, 
-													@sti_id, 
-													@@sti_orden, 
-													@@fvi_cantidad,          
-													0, 
-													@@fvi_descrip, 
-													@@sti_grupo,
-													@@pr_id, 
-													@@depl_id_destino,
-													@@prns_id,
-													@@stik_id,
-													@pr_id_kit,
-													@@stl_id
-												)
+  insert into StockItem (
+                          st_id,  
+                          sti_id,  
+                          sti_orden,  
+                          sti_ingreso, 
+                          sti_salida, 
+                          sti_descrip,  
+                          sti_grupo,
+                          pr_id,  
+                          depl_id,
+                          prns_id,
+                          stik_id,
+                          pr_id_kit,
+                          stl_id
+                        )
+                  values(
+                          @@st_id, 
+                          @sti_id, 
+                          @@sti_orden, 
+                          @@fvi_cantidad,          
+                          0, 
+                          @@fvi_descrip, 
+                          @@sti_grupo,
+                          @@pr_id, 
+                          @@depl_id_destino,
+                          @@prns_id,
+                          @@stik_id,
+                          @pr_id_kit,
+                          @@stl_id
+                        )
   if @@error <> 0 goto ControlError
 
-	set @@sti_orden = @@sti_orden + 1
+  set @@sti_orden = @@sti_orden + 1
 
-	set @@bSuccess = 1
-	return
+  set @@bSuccess = 1
+  return
 
 ControlError:
 
-	set @@bSuccess = 0
-	set @@MsgError = 'Ha ocurrido un error al grabar el item de stock de la factura de venta. sp_DocFacturaVentaStockItemSave.'
+  set @@bSuccess = 0
+  set @@MsgError = 'Ha ocurrido un error al grabar el item de stock de la factura de venta. sp_DocFacturaVentaStockItemSave.'
 end
 go

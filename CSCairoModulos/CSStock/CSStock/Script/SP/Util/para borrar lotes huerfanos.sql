@@ -1,7 +1,7 @@
 -- -- select st_id1 from parteprodkit where ppk_id = 8052
 -- 
 -- select 'update productonumeroserie set prns_codigo = ''00' + convert(varchar(15),prns_id-129422) +'''' 
--- 		 + ' where prns_id = ' + convert(varchar(15),prns_id)
+--      + ' where prns_id = ' + convert(varchar(15),prns_id)
 -- 
 --  from productonumeroserie where prns_id
 -- 
@@ -10,8 +10,8 @@
 -- -- select 131886 - 2463
 -- -- select * from productonumeroserie 
 -- -- where prns_codigo > '002463' 
--- -- 	and prns_codigo < '002962' 
--- -- 	and pr_id = 2055
+-- --   and prns_codigo < '002962' 
+-- --   and pr_id = 2055
 -- 
 -- -- select *
 -- -- 

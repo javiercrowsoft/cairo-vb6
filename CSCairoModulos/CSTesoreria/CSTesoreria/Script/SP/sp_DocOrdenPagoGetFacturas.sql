@@ -23,9 +23,9 @@ exec sp_DocOrdenPagoGetFacturas 6,1,0
 
 CREATE procedure sp_DocOrdenPagoGetFacturas (
   @@emp_id            int,
-	@@prov_id 					int,
-  @@bSoloVencidos 	  tinyint = 1,
-  @@bAgrupado 			  tinyint = 0
+  @@prov_id           int,
+  @@bSoloVencidos     tinyint = 1,
+  @@bAgrupado         tinyint = 0
 )
 as
 

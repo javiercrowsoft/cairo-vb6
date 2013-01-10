@@ -3,9 +3,9 @@ drop table [dbo].[PresupuestoVentaItem]
 GO
 
 CREATE TABLE [dbo].[PresupuestoVentaItem] (
-	[pvi_id] [int] NOT NULL ,
-	[pv_id] [int] NULL ,
-	[pr_id] [int] NULL 
+  [pvi_id] [int] NOT NULL ,
+  [pv_id] [int] NULL ,
+  [pr_id] [int] NULL 
 ) ON [PRIMARY]
 GO
 

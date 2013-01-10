@@ -13,66 +13,66 @@ sp_stocklotehelp 4, 1, 0, 'GCB0001',1,0,
 
 */
 create procedure sp_StockLoteHelp (
-	@@emp_id          int,
+  @@emp_id          int,
   @@us_id           int,
-	@@bForAbm         tinyint,
-	@@filter 					varchar(255)  = '',
-  @@check  					smallint 			= 0,
-  @@stl_id       		int						= 0,
+  @@bForAbm         tinyint,
+  @@filter           varchar(255)  = '',
+  @@check            smallint       = 0,
+  @@stl_id           int            = 0,
   @@filter2         varchar(5000) = ''
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	set @@filter = replace(@@filter,'''','''''')
-	
-	declare @sqlstmt varchar(8000)
+  set @@filter = replace(@@filter,'''','''''')
+  
+  declare @sqlstmt varchar(8000)
 
-	if @@check <> 0 begin
+  if @@check <> 0 begin
 
-		set @sqlstmt = 
+    set @sqlstmt = 
 
-	 'select	stl_id,
-						stl_codigo				as [Codigo],
-						stl_nroLote   		as [Nro. Lote]
+   'select  stl_id,
+            stl_codigo        as [Codigo],
+            stl_nroLote       as [Nro. Lote]
 
-		from StockLote stl 
-		where (stl_nroLote = '''+@@filter+''' or stl_codigo = '''+@@filter+''') '
+    from StockLote stl 
+    where (stl_nroLote = '''+@@filter+''' or stl_codigo = '''+@@filter+''') '
 
-		if @@stl_id <> 0
-			set @sqlstmt = @sqlstmt + '	 and (stl_id = ' + convert(varchar(20),@@stl_id) + ') '
+    if @@stl_id <> 0
+      set @sqlstmt = @sqlstmt + '   and (stl_id = ' + convert(varchar(20),@@stl_id) + ') '
 
-		if @@filter2 <> '' 
-			set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
+    if @@filter2 <> '' 
+      set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
 
-	end else begin
+  end else begin
 
-			set @sqlstmt = 
+      set @sqlstmt = 
 
-		 'select top 50
-						 stl_id,
-						 stl_codigo			   as [Codigo],
-						 stl_nroLote   	   as [Nro. Lote],
-						 stl_fecha         as [Fecha],
+     'select top 50
+             stl_id,
+             stl_codigo         as [Codigo],
+             stl_nroLote        as [Nro. Lote],
+             stl_fecha         as [Fecha],
              case 
-									when stl_fechaVto <> ''19000101'' then stl_fechaVto
+                  when stl_fechaVto <> ''19000101'' then stl_fechaVto
                   else                                   null
              end               as [Vto.],
-						 pr_nombrecompra   as [Artículo]
+             pr_nombrecompra   as [Artículo]
 
-			from StockLote stl inner join Producto pr on stl.pr_id = pr.pr_id
-			where (stl_codigo like ''%'+@@filter+'%'' or stl_nrolote like ''%'+@@filter+'%'' or ''' + @@filter + ''' = '''') '
+      from StockLote stl inner join Producto pr on stl.pr_id = pr.pr_id
+      where (stl_codigo like ''%'+@@filter+'%'' or stl_nrolote like ''%'+@@filter+'%'' or ''' + @@filter + ''' = '''') '
 
-			if @@filter2 <> '' begin
-				set @@filter2 = 'stl.' + @@filter2
-				set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
-			end
+      if @@filter2 <> '' begin
+        set @@filter2 = 'stl.' + @@filter2
+        set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
+      end
 
-	end
+  end
 
-	exec(@sqlstmt)
+  exec(@sqlstmt)
 
 end
 

@@ -3,9 +3,9 @@ drop table [dbo].[DocumentoTipo]
 GO
 
 CREATE TABLE [dbo].[DocumentoTipo] (
-	[doct_nombre] [varchar] (50) NOT NULL ,
-	[doct_alias] [varchar] (50) NOT NULL ,
-	[doct_id] [int] NOT NULL 
+  [doct_nombre] [varchar] (50) NOT NULL ,
+  [doct_alias] [varchar] (50) NOT NULL ,
+  [doct_id] [int] NOT NULL 
 )
 GO
 

@@ -3,48 +3,48 @@ drop procedure [dbo].[sp_DocPresupuestoVentaSetPendiente]
 
 /*
 
-	exec	sp_DocPresupuestoVentaSetPendiente 38
+  exec  sp_DocPresupuestoVentaSetPendiente 38
 
 */
 
 go
 create procedure sp_DocPresupuestoVentaSetPendiente (
-	@@prv_id 			int,
+  @@prv_id       int,
   @@bSuccess    tinyint = 0 out
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	set @@bSuccess = 0
+  set @@bSuccess = 0
 
-	declare @prv_pendiente decimal(18,6)
+  declare @prv_pendiente decimal(18,6)
 
-	begin transaction
+  begin transaction
 
-	-- Actualizo la deuda de la Presupuesto
-	exec sp_DocPresupuestoVentaSetItemPendiente @@prv_id, @@bSuccess out
+  -- Actualizo la deuda de la Presupuesto
+  exec sp_DocPresupuestoVentaSetItemPendiente @@prv_id, @@bSuccess out
 
-	-- Si fallo al guardar
-	if IsNull(@@bSuccess,0) = 0 goto ControlError
+  -- Si fallo al guardar
+  if IsNull(@@bSuccess,0) = 0 goto ControlError
 
-	select @prv_pendiente = sum(prvi_pendiente * (prvi_importe / prvi_cantidad)) from PresupuestoVentaItem where prv_id = @@prv_id
-	set @prv_pendiente = IsNull(@prv_pendiente,0)
+  select @prv_pendiente = sum(prvi_pendiente * (prvi_importe / prvi_cantidad)) from PresupuestoVentaItem where prv_id = @@prv_id
+  set @prv_pendiente = IsNull(@prv_pendiente,0)
 
-	update PresupuestoVenta set prv_pendiente = round(@prv_pendiente,2) where prv_id = @@prv_id
-	if @@error <> 0 goto ControlError
+  update PresupuestoVenta set prv_pendiente = round(@prv_pendiente,2) where prv_id = @@prv_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	set @@bSuccess = 1
+  set @@bSuccess = 1
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al actualizar el pendiente del presupuesto de venta. sp_DocPresupuestoVentaSetPendiente.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al actualizar el pendiente del presupuesto de venta. sp_DocPresupuestoVentaSetPendiente.', 16, 1)
+  rollback transaction  
 
 end 
 

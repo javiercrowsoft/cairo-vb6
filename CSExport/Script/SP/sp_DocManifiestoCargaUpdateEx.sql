@@ -9,14 +9,14 @@ drop procedure [dbo].[sp_DocManifiestoCargaUpdateEx]
 
 go
 create procedure sp_DocManifiestoCargaUpdateEx (
-	@@mfcTMP_id int,
-	@@mfc_id    int
+  @@mfcTMP_id int,
+  @@mfc_id    int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
 end
 GO

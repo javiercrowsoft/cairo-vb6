@@ -10,8 +10,8 @@ drop procedure [dbo].[sp_FE_UpdateConsultaTalonario]
 go
 create procedure [dbo].[sp_FE_UpdateConsultaTalonario] (
 
-	@@ta_id int,
-	@@ta_lastNumber int
+  @@ta_id int,
+  @@ta_lastNumber int
 
 )
 
@@ -19,8 +19,8 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	update Talonario set ta_ultimoNro = @@ta_lastNumber where ta_id = @@ta_id
+  update Talonario set ta_ultimoNro = @@ta_lastNumber where ta_id = @@ta_id
 
 end

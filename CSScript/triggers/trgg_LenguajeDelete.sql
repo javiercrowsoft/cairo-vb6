@@ -15,21 +15,21 @@ declare @leng_id int
 
 declare c_lengUpdate insensitive cursor for
 
-	select leng_id from deleted
+  select leng_id from deleted
 
 open c_lengUpdate
 
 fetch next from c_lengUpdate into @leng_id
 while @@fetch_status = 0
 begin
-	if @leng_id = 1 begin
+  if @leng_id = 1 begin
 
-		rollback transaction
-		raiserror ('El Lenguaje Castellano no puede borrarse', 16, 11)
+    rollback transaction
+    raiserror ('El Lenguaje Castellano no puede borrarse', 16, 11)
 
-	end
+  end
 
-	fetch next from c_lengUpdate into @leng_id
+  fetch next from c_lengUpdate into @leng_id
 end
 
 close c_lengUpdate

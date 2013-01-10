@@ -13,7 +13,7 @@ create procedure DC_CSC_STK_0200 (
 
   @@us_id     int,
   @@pr_id     varchar(255),
-	@@depl_id 	varchar(255)
+  @@depl_id   varchar(255)
 
 )as 
 begin
@@ -65,23 +65,23 @@ select
 
   (select case doct_id_ingreso
             when 2 then (select emp_nombre from FacturaCompra f inner join Documento d on f.doc_id = d.doc_id
-																																inner join Empresa e   on d.emp_id = e.emp_id
+                                                                inner join Empresa e   on d.emp_id = e.emp_id
                          where fc_id = doc_id_ingreso)
             when 4 then (select emp_nombre from RemitoCompra r  inner join Documento d on r.doc_id = d.doc_id
-																																inner join Empresa e   on d.emp_id = e.emp_id
+                                                                inner join Empresa e   on d.emp_id = e.emp_id
                          where rc_id = doc_id_ingreso)
           end) as  [Empresa Ingreso],
 
   (select case doct_id_salida
-            when 1 then (select emp_nombre from FacturaVenta f 	inner join Documento d on f.doc_id = d.doc_id
-																																inner join Empresa e   on d.emp_id = e.emp_id
+            when 1 then (select emp_nombre from FacturaVenta f   inner join Documento d on f.doc_id = d.doc_id
+                                                                inner join Empresa e   on d.emp_id = e.emp_id
                          where fv_id = doc_id_salida)
-            when 3 then (select emp_nombre from RemitoVenta r 	inner join Documento d on r.doc_id = d.doc_id
-																																inner join Empresa e   on d.emp_id = e.emp_id
+            when 3 then (select emp_nombre from RemitoVenta r   inner join Documento d on r.doc_id = d.doc_id
+                                                                inner join Empresa e   on d.emp_id = e.emp_id
                          where rv_id = doc_id_salida)
           end) as  [Empresa Egreso],
 
-	empp.emp_nombre      as [Empresa Produccion],
+  empp.emp_nombre      as [Empresa Produccion],
 
   (select case doct_id_ingreso
             when 2 then (select fc_fecha from FacturaCompra f
@@ -116,7 +116,7 @@ select
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
 ProductoNumeroSerie ps inner join Producto p        on ps.pr_id     = p.pr_id
                        inner join DepositoLogico d  on ps.depl_id   = d.depl_id
                        inner join DepositoFisico df on d.depf_id    = df.depf_id
@@ -125,19 +125,19 @@ ProductoNumeroSerie ps inner join Producto p        on ps.pr_id     = p.pr_id
                        left  join Proveedor prov   on ps.prov_id    = prov.prov_id
                        left  join ParteProdKit ppk on ps.ppk_id     = ppk.ppk_id
                        left  join Documento dppk   on ppk.doc_id    = dppk.doc_id
-											 left  join Empresa empp     on dppk.emp_id   = empp.emp_id
+                       left  join Empresa empp     on dppk.emp_id   = empp.emp_id
 where 
 
-	ps.prns_id in (
-	
-	select prns_id from stockitem 
-	where depl_id = @depl_id
-		and pr_id   = @pr_id 
+  ps.prns_id in (
+  
+  select prns_id from stockitem 
+  where depl_id = @depl_id
+    and pr_id   = @pr_id 
 
-	group by prns_id having sum(sti_ingreso)-sum(sti_salida)<>0
-	
-	)
-	
+  group by prns_id having sum(sti_ingreso)-sum(sti_salida)<>0
+  
+  )
+  
 /* -///////////////////////////////////////////////////////////////////////
 
 INICIO SEGUNDA PARTE DE ARBOLES

@@ -21,12 +21,12 @@ go
 create procedure DC_CSC_CON_0050 (
 
   @@us_id    int,
-	@@FDesde 		 datetime,
-	@@FHasta 		 datetime,
+  @@FDesde      datetime,
+  @@FHasta      datetime,
 
 @@cico_id varchar(255),
 @@ccos_id varchar(255),
-@@cue_id	varchar(255), -- TODO:EMPRESA
+@@cue_id  varchar(255), -- TODO:EMPRESA
 @@emp_id  varchar(255)
 
 )as 
@@ -63,47 +63,47 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_circuito <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_circuito, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_circuito, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_circuito, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_circuito, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_circuito, @clienteID 
-	end else 
-		set @ram_id_circuito = 0
+    exec sp_ArbGetAllHojas @ram_id_circuito, @clienteID 
+  end else 
+    set @ram_id_circuito = 0
 end
 
 if @ram_id_centrocosto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_centrocosto, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_centrocosto, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_centrocosto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_centrocosto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_centrocosto, @clienteID 
-	end else 
-		set @ram_id_centrocosto = 0
+    exec sp_ArbGetAllHojas @ram_id_centrocosto, @clienteID 
+  end else 
+    set @ram_id_centrocosto = 0
 end
 
 if @ram_id_cuenta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
-	end else 
-		set @ram_id_cuenta = 0
+    exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
+  end else 
+    set @ram_id_cuenta = 0
 end
 
 -- TODO:EMPRESA
 if @ram_id_Empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
-	end else 
-		set @ram_id_Empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
+  end else 
+    set @ram_id_Empresa = 0
 end
 /*- ///////////////////////////////////////////////////////////////////////
 
@@ -133,9 +133,9 @@ where
             as_fecha < @@FDesde  
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = d.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = d.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 /* -///////////////////////////////////////////////////////////////////////
 
 INICIO SEGUNDA PARTE DE ARBOLES
@@ -149,56 +149,56 @@ and   (Empresa.emp_id = @emp_id or @emp_id=0) -- TODO:EMPRESA
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1016 -- tbl_id de Proyecto
                   and  rptarb_hojaid = d.cico_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_circuito = 0)
-			 )
+           (@ram_id_circuito = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 21 -- tbl_id de Proyecto
                   and  rptarb_hojaid = ai.ccos_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_centrocosto = 0)
-			 )
+           (@ram_id_centrocosto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- tbl_id de Proyecto
                   and  rptarb_hojaid = ai.cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 -- TODO:EMPRESA
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- select * from tabla where tbl_nombre = 'empresa'
                   and  rptarb_hojaid = d.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
+           (@ram_id_Empresa = 0)
+       )
 
 group by 
             cue_id            
@@ -231,9 +231,9 @@ from
             as_fecha >= @@FDesde  
         and as_fecha <= @@FHasta
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = d.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = d.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -248,56 +248,56 @@ and   (Empresa.emp_id = @emp_id or @emp_id=0) -- TODO:EMPRESA
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1016 -- tbl_id de Proyecto
                   and  rptarb_hojaid = d.cico_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_circuito = 0)
-			 )
+           (@ram_id_circuito = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 21 -- tbl_id de Proyecto
                   and  rptarb_hojaid = ai.ccos_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_centrocosto = 0)
-			 )
+           (@ram_id_centrocosto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- tbl_id de Proyecto
                   and  rptarb_hojaid = ai.cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 -- TODO:EMPRESA
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- select * from tabla where tbl_nombre = 'empresa'
                   and  rptarb_hojaid = d.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
+           (@ram_id_Empresa = 0)
+       )
 
 group by 
             cue_id

@@ -9,14 +9,14 @@ drop procedure [dbo].[sp_DocPedidoVentaSetCredito]
 
 go
 create procedure sp_DocPedidoVentaSetCredito (
-	@@pv_id      int,
+  @@pv_id      int,
   @@borrar     tinyint = 0
 )
 as
 
 begin
 
-	exec sp_DocPedidoVentaSetCreditoCairo @@pv_id, @@borrar
+  exec sp_DocPedidoVentaSetCreditoCairo @@pv_id, @@borrar
 
 end
 go

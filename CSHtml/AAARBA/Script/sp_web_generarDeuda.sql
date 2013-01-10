@@ -15,86 +15,86 @@ sp_columns cuenta_corriente_asociados
 
 go
 create procedure sp_web_generarDeuda (
-	@@concepto 			int,
+  @@concepto       int,
   @@empresa       int,
   @@proveedor     int,
-	@@importe 			decimal(18,6),
-	@@importe_neto  decimal(18,6),
-	@@gravamen      decimal(18,2),
-	@@cpg_id        int
+  @@importe       decimal(18,6),
+  @@importe_neto  decimal(18,6),
+  @@gravamen      decimal(18,2),
+  @@cpg_id        int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @ivacate 					int
-	declare @nro_movimiento		int
-	declare @nro_comprobante  int
+  declare @ivacate           int
+  declare @nro_movimiento    int
+  declare @nro_comprobante  int
 
-	select @ivacate = iva from proveedores where proveedor = @@proveedor
+  select @ivacate = iva from proveedores where proveedor = @@proveedor
 
-	select @nro_movimiento = max(nro_movimiento), 
-				 @nro_comprobante = max(nro_comprobante) 
-	from cuenta_corriente_asociados 
-	where empresa = @@empresa
+  select @nro_movimiento = max(nro_movimiento), 
+         @nro_comprobante = max(nro_comprobante) 
+  from cuenta_corriente_asociados 
+  where empresa = @@empresa
 
-	set @nro_movimiento  = isnull(@nro_movimiento,0)+1
-	set @nro_comprobante = isnull(@nro_comprobante,0)+1
+  set @nro_movimiento  = isnull(@nro_movimiento,0)+1
+  set @nro_comprobante = isnull(@nro_comprobante,0)+1
 
-	insert into cuenta_corriente_asociados (		nro_movimiento,
-																							empresa,
-																							tipo_comprobante,
-																							nro_comprobante,
-																							asociado,
-																							rendidor,
-																							importe,
-																							saldo_aplicado,
-																							fecha,
-																							estado,
-																							concepto,
-																							tipo_de_iva,
-																							importe_neto,
-																							gravamen_aplicado,
-																							tipo_comp_generador,
-																							nro_comp_generador,
-																							fecha_venc,
-																							medio_pago,
-																							periodo
+  insert into cuenta_corriente_asociados (    nro_movimiento,
+                                              empresa,
+                                              tipo_comprobante,
+                                              nro_comprobante,
+                                              asociado,
+                                              rendidor,
+                                              importe,
+                                              saldo_aplicado,
+                                              fecha,
+                                              estado,
+                                              concepto,
+                                              tipo_de_iva,
+                                              importe_neto,
+                                              gravamen_aplicado,
+                                              tipo_comp_generador,
+                                              nro_comp_generador,
+                                              fecha_venc,
+                                              medio_pago,
+                                              periodo
 
-																					) values(
+                                          ) values(
 
-																							@nro_movimiento,
-																							@@empresa,
-																							44,
-																							@nro_comprobante,
-																							@@proveedor,
-																							0,
-																							@@importe,
-																							@@importe,
-																							getdate(),
-																							/* Para que puedan modificarla en tesoreria
-																											- si es para debito por honorarios debe ser 1
-																											- si es para facturar debe ser 2
-																							*/
-																							case @@cpg_id
-																								when 5 then 1
-																								else        2
-																							end, 
-																							@@concepto,
-																							@ivacate,
-																							@@importe_neto,
-																							@@gravamen,
-																							0,
-																							0,
-																							getdate(),
-																							null,
-																							convert(varchar(6),getdate(),112)
-																					)
-	
+                                              @nro_movimiento,
+                                              @@empresa,
+                                              44,
+                                              @nro_comprobante,
+                                              @@proveedor,
+                                              0,
+                                              @@importe,
+                                              @@importe,
+                                              getdate(),
+                                              /* Para que puedan modificarla en tesoreria
+                                                      - si es para debito por honorarios debe ser 1
+                                                      - si es para facturar debe ser 2
+                                              */
+                                              case @@cpg_id
+                                                when 5 then 1
+                                                else        2
+                                              end, 
+                                              @@concepto,
+                                              @ivacate,
+                                              @@importe_neto,
+                                              @@gravamen,
+                                              0,
+                                              0,
+                                              getdate(),
+                                              null,
+                                              convert(varchar(6),getdate(),112)
+                                          )
+  
 
-	select @nro_movimiento as deuda, @@proveedor as proveedor
+  select @nro_movimiento as deuda, @@proveedor as proveedor
 end
 
 go

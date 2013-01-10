@@ -18,7 +18,7 @@ Especie Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 12003      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Especie%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Especie%'
 
 Para testear:
 
@@ -31,46 +31,46 @@ drop procedure [dbo].[lsEspecie]
 go
 create procedure lsEspecie (
 
-@@esp_id			varchar(255)
+@@esp_id      varchar(255)
 
 )as 
 
 declare @esp_id int
 declare @ram_id_especie int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@esp_id, @esp_id out, @ram_id_especie out
 
 if @ram_id_especie <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_especie, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_especie, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_especie, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_especie, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_especie = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_especie = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select *
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
   Especie
 
 where 
@@ -78,14 +78,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12003 -- tbl_id de Especie
                   and  rptarb_hojaid = Especie.esp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_especie = 0)
-			 )
+           (@ram_id_especie = 0)
+       )

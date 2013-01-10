@@ -10,7 +10,7 @@ go
 */
 
 create procedure sp_DocEsCobranzaCdo (
-	@@fv_id    		int
+  @@fv_id        int
 )
 as
 
@@ -18,11 +18,11 @@ set nocount on
 
 begin
 
-	declare @cpg_id int
+  declare @cpg_id int
 
-	select @cpg_id = cpg_id from FacturaVenta where fv_id = @@fv_id
+  select @cpg_id = cpg_id from FacturaVenta where fv_id = @@fv_id
 
-	select cpg_escontado from CondicionPago where cpg_id = @cpg_id
+  select cpg_escontado from CondicionPago where cpg_id = @cpg_id
 end
 
 go

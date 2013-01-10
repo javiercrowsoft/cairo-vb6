@@ -8,13 +8,13 @@ drop procedure [dbo].[sp_TrabajoImpresionSetError]
 go
 create procedure sp_TrabajoImpresionSetError(
 
-	@@timp_id int
+  @@timp_id int
 ) 
 as
 
 begin
 
-	update TrabajoImpresion set timp_estado = 4 where timp_id = @@timp_id
+  update TrabajoImpresion set timp_estado = 4 where timp_id = @@timp_id
 
 end
 

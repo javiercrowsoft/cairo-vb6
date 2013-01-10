@@ -12,16 +12,16 @@ sp_CursoSave 1,10,2
 
 */
 create procedure sp_CursoSave (
-	@@cur_id  int
+  @@cur_id  int
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-		select 	1 	as success, 
-						0 	as warning, 
-						''	as message
+    select   1   as success, 
+            0   as warning, 
+            ''  as message
 
 end
 

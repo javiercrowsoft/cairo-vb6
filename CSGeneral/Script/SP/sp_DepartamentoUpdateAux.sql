@@ -12,14 +12,14 @@ drop procedure [dbo].[sp_DepartamentoUpdateAux]
 
 go
 create procedure sp_DepartamentoUpdateAux (
-	@@dpto_id		 int,
+  @@dpto_id     int,
   @@bheredar   tinyint
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   declare @pre_id_vernoticias           int
   declare @pre_id_editarnoticias        int
@@ -32,15 +32,15 @@ begin
 
   declare @modifico     int
 
-	select 
+  select 
           @pre_id_vernoticias       = pre_id_vernoticias,
-        	@pre_id_editarnoticias    = pre_id_editarnoticias,
-        	@pre_id_vertareas         = pre_id_vertareas,
-        	@pre_id_asignartareas     = pre_id_asignartareas,
-        	@pre_id_verdocumentos     = pre_id_verdocumentos,
-        	@pre_id_agregardocumentos = pre_id_agregardocumentos,
-        	@pre_id_borrardocumentos  = pre_id_borrardocumentos,
-        	@pre_id_editardocumentos  = pre_id_editardocumentos,
+          @pre_id_editarnoticias    = pre_id_editarnoticias,
+          @pre_id_vertareas         = pre_id_vertareas,
+          @pre_id_asignartareas     = pre_id_asignartareas,
+          @pre_id_verdocumentos     = pre_id_verdocumentos,
+          @pre_id_agregardocumentos = pre_id_agregardocumentos,
+          @pre_id_borrardocumentos  = pre_id_borrardocumentos,
+          @pre_id_editardocumentos  = pre_id_editardocumentos,
           @modifico                 = modifico
 
   from Departamento where dpto_id = @@dpto_id

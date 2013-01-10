@@ -12,7 +12,7 @@ drop procedure [dbo].[sp_DepartamentoUpdate]
 
 go
 create procedure sp_DepartamentoUpdate (
-	@@dpto_id		 int,
+  @@dpto_id     int,
   @@bheredar   tinyint
 )
 as

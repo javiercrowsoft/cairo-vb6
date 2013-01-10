@@ -9,28 +9,28 @@ drop procedure [dbo].[sp_DocOrdenPagosSetEstado]
 
 go
 create procedure sp_DocOrdenPagosSetEstado (
-	@@desde       datetime = '19900101',
-	@@hasta       datetime = '21000101'
+  @@desde       datetime = '19900101',
+  @@hasta       datetime = '21000101'
 )
 as
 
 begin
 
-	declare @opg_id int
+  declare @opg_id int
 
-	declare c_OrdenPagos insensitive cursor for 
-		select opg_id from OrdenPago where opg_fecha between @@desde and @@hasta
+  declare c_OrdenPagos insensitive cursor for 
+    select opg_id from OrdenPago where opg_fecha between @@desde and @@hasta
 
-	open c_OrdenPagos
+  open c_OrdenPagos
 
-	fetch next from c_OrdenPagos into @opg_id
-	while @@fetch_status = 0 begin
+  fetch next from c_OrdenPagos into @opg_id
+  while @@fetch_status = 0 begin
 
-		exec  sp_DocOrdenPagoSetEstado @opg_id
+    exec  sp_DocOrdenPagoSetEstado @opg_id
 
-		fetch next from c_OrdenPagos into @opg_id
+    fetch next from c_OrdenPagos into @opg_id
   end
 
-	close c_OrdenPagos
-	deallocate c_OrdenPagos
+  close c_OrdenPagos
+  deallocate c_OrdenPagos
 end

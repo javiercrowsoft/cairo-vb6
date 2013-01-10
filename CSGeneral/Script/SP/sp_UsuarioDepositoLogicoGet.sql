@@ -12,20 +12,20 @@ drop procedure [dbo].[sp_UsuarioDepositoLogicoGet]
 
 go
 create procedure sp_UsuarioDepositoLogicoGet (
-	@@depl_id 		int
+  @@depl_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select usdepl.*,
-				 us_nombre
+  select usdepl.*,
+         us_nombre
 
-	from UsuarioDepositoLogico usdepl inner join usuario us on usdepl.us_id = us.us_id
+  from UsuarioDepositoLogico usdepl inner join usuario us on usdepl.us_id = us.us_id
 
-	where depl_id = @@depl_id
+  where depl_id = @@depl_id
 
 end
 

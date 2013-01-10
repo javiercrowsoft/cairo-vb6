@@ -16,7 +16,7 @@ sp_DocImportacionTempFirmar 17,8
 */
 
 create procedure sp_DocImportacionTempFirmar (
-	@@impt_id int,
+  @@impt_id int,
   @@us_id int
 )
 as
@@ -24,15 +24,15 @@ as
 begin
 
   -- Si esta firmado le quita la firma
-	if exists(select impt_firmado from ImportacionTemp where impt_id = @@impt_id and impt_firmado <> 0)
-		update ImportacionTemp set impt_firmado = 0 where impt_id = @@impt_id
-	-- Sino lo firma
-	else
-		update ImportacionTemp set impt_firmado = @@us_id where impt_id = @@impt_id
+  if exists(select impt_firmado from ImportacionTemp where impt_id = @@impt_id and impt_firmado <> 0)
+    update ImportacionTemp set impt_firmado = 0 where impt_id = @@impt_id
+  -- Sino lo firma
+  else
+    update ImportacionTemp set impt_firmado = @@us_id where impt_id = @@impt_id
 
-	exec sp_DocImportacionTempSetEstado @@impt_id
+  exec sp_DocImportacionTempSetEstado @@impt_id
 
-	select ImportacionTemp.est_id,est_nombre 
-	from ImportacionTemp inner join Estado on ImportacionTemp.est_id = Estado.est_id
-	where impt_id = @@impt_id
+  select ImportacionTemp.est_id,est_nombre 
+  from ImportacionTemp inner join Estado on ImportacionTemp.est_id = Estado.est_id
+  where impt_id = @@impt_id
 end

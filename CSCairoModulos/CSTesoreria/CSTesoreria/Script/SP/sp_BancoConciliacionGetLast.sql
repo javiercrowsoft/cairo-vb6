@@ -11,27 +11,27 @@ sp_BancoConciliacionGetLast 160
 
 */
 create procedure sp_BancoConciliacionGetLast  (
-	@@cue_id  int
+  @@cue_id  int
 )
 as
 
 begin
 
-	declare @bcoc_numero int
+  declare @bcoc_numero int
 
-	select @bcoc_numero = max(bcoc_numero)
+  select @bcoc_numero = max(bcoc_numero)
 
-	from BancoConciliacion bcoc
+  from BancoConciliacion bcoc
 
-	where bcoc.cue_id = @@cue_id
+  where bcoc.cue_id = @@cue_id
 
-	------------------------------------------------------
+  ------------------------------------------------------
 
-	select bcoc_id
+  select bcoc_id
 
-	from BancoConciliacion bcoc
+  from BancoConciliacion bcoc
 
-	where bcoc.cue_id = @@cue_id
-		and	bcoc_numero = @bcoc_numero
+  where bcoc.cue_id = @@cue_id
+    and  bcoc_numero = @bcoc_numero
 
-end				
+end        

@@ -11,7 +11,7 @@ go
 -- sp_ProductoGetTasas 2
 
 create procedure sp_ProductoGetTasas (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -20,13 +20,13 @@ set nocount on
 begin
 
  select ti_id_ivaricompra, 
-				ti_id_ivarnicompra, 
-				ti_id_ivariventa, 
-				ti_id_ivarniventa, 
-				ti_id_internosc, 
-				ti_id_internosv,
-				pr_porcinternoc,
-				pr_porcinternov
+        ti_id_ivarnicompra, 
+        ti_id_ivariventa, 
+        ti_id_ivarniventa, 
+        ti_id_internosc, 
+        ti_id_internosv,
+        pr_porcinternoc,
+        pr_porcinternov
 
  from
  

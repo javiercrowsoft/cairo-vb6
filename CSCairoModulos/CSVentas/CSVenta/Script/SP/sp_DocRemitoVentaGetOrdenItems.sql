@@ -10,13 +10,13 @@ sp_DocRemitoVentaGetOrdenItems '11'
 */
 
 create procedure sp_DocRemitoVentaGetOrdenItems (
-	@@strIds varchar(5000)
+  @@strIds varchar(5000)
 )
 as
 
 begin
 
-	exec sp_DocRemitoVentaGetOrdenItemsCliente @@strIds
+  exec sp_DocRemitoVentaGetOrdenItemsCliente @@strIds
 
 end
 go

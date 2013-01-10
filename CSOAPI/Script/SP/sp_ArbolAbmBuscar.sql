@@ -14,19 +14,19 @@ GO
 */
 
 create procedure sp_ArbolAbmBuscar (
-	@@arb_id 		int,
-	@@id 				int
+  @@arb_id     int,
+  @@id         int
 )
 as
 begin
-	set nocount on
+  set nocount on
 
   select hoja.ram_id 
-	from hoja inner join rama on hoja.ram_id = rama.ram_id
-	where hoja.arb_id = @@arb_id
-		and rama.ram_id <> rama.ram_id_padre
-  	and id = @@id
-	
+  from hoja inner join rama on hoja.ram_id = rama.ram_id
+  where hoja.arb_id = @@arb_id
+    and rama.ram_id <> rama.ram_id_padre
+    and id = @@id
+  
 end
 
 

@@ -13,11 +13,11 @@ fetch next from c_fechas into @fcd_id, @fcd_fecha
 while @@fetch_status=0
 begin
 
-	exec sp_DocGetFecha2 @fcd_fecha, @fecha out, 0, null	
+  exec sp_DocGetFecha2 @fcd_fecha, @fecha out, 0, null  
 
-	update FacturaCompraDeuda set fcd_fecha2 = @fecha where fcd_id = @fcd_id
+  update FacturaCompraDeuda set fcd_fecha2 = @fecha where fcd_id = @fcd_id
 
-	fetch next from c_fechas into @fcd_id, @fcd_fecha
+  fetch next from c_fechas into @fcd_id, @fcd_fecha
 end
 close c_fechas
 deallocate c_fechas

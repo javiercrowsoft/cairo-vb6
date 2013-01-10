@@ -4,7 +4,7 @@ go
 
 /*
 
-	
+  
 
 */
 
@@ -14,11 +14,11 @@ create procedure sp_DocOrdenPagoGetRetencionRpt (
   @@prov_id        int,
   @@emp_id         varchar(255),
   @@pago           decimal(18,6),
-	@@opg_total			 decimal(18,6),
-	@@nuevoPago			 decimal(18,6),
-	@@base					 decimal(18,6),
-	@@tasa					 decimal(18,6),
-	@@ret 					 decimal(18,6)
+  @@opg_total       decimal(18,6),
+  @@nuevoPago       decimal(18,6),
+  @@base           decimal(18,6),
+  @@tasa           decimal(18,6),
+  @@ret            decimal(18,6)
 )
 as 
 begin
@@ -86,11 +86,11 @@ begin
   where opg_fecha between @@fdesde and @@fhasta 
     and opg.prov_id = @@prov_id 
     and d.emp_id    = @@emp_id
-		and not exists(select * 
+    and not exists(select * 
                  from facturacompraitem fci inner join producto pr on fci.pr_id = pr.pr_id
-								 where pr.ibc_id = 1 -- Exento
+                 where pr.ibc_id = 1 -- Exento
                    and fci.fc_id = fc.fc_id
-								)
+                )
 
   union
 

@@ -9,21 +9,21 @@ sp_infoClienteCheques '',114,1
 
 go
 create procedure sp_infoClienteCheques (
-	@@us_id         int,
-	@@emp_id        int,
-	@@cli_id        int,
-	@@info_aux      varchar(255) = ''
+  @@us_id         int,
+  @@emp_id        int,
+  @@cli_id        int,
+  @@info_aux      varchar(255) = ''
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	exec sp_infoClienteCheques2 @@us_id,
-															@@emp_id,
-															@@cli_id,
-															@@info_aux
+  exec sp_infoClienteCheques2 @@us_id,
+                              @@emp_id,
+                              @@cli_id,
+                              @@info_aux
 
 end
 go

@@ -7,32 +7,32 @@ drop procedure [dbo].[sp_percepcionDelete]
 
 go
 create procedure sp_percepcionDelete (
-	@@perc_id 				int
+  @@perc_id         int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete PercepcionItem where perc_id = @@perc_id
-	if @@error <> 0 goto ControlError
+  delete PercepcionItem where perc_id = @@perc_id
+  if @@error <> 0 goto ControlError
 
-	delete PercepcionProvincia where perc_id = @@perc_id
-	if @@error <> 0 goto ControlError
+  delete PercepcionProvincia where perc_id = @@perc_id
+  if @@error <> 0 goto ControlError
 
-	delete Percepcion where perc_id = @@perc_id
-	if @@error <> 0 goto ControlError
+  delete Percepcion where perc_id = @@perc_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la percepcion. sp_percepcionDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la percepcion. sp_percepcionDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

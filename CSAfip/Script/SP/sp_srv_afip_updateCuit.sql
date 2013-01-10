@@ -10,22 +10,22 @@ sp_srv_afip_updateCuit
 go
 create procedure sp_srv_afip_updateCuit(
 
-	@@safipc_id int,
-	@@success   tinyint,
-	@@errormsg  varchar(255)
+  @@safipc_id int,
+  @@success   tinyint,
+  @@errormsg  varchar(255)
 
 ) as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	update SRV_AfipCuit set 
-					safipc_pendiente = 0,
-					safipc_success   = @@success,
-					safipc_error     = @@errormsg
+  update SRV_AfipCuit set 
+          safipc_pendiente = 0,
+          safipc_success   = @@success,
+          safipc_error     = @@errormsg
 
-	where safipc_id = @@safipc_id
+  where safipc_id = @@safipc_id
 
 end
 

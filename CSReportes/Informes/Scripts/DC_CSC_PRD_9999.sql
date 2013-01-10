@@ -19,10 +19,10 @@ create procedure DC_CSC_PRD_9999 (
 
   @@us_id          int,
 
-	@@cue_id 				 varchar(255),
-	@@un_id          varchar(5000),
-	@@ti_idri        varchar(5000),
-	@@ti_idrni       varchar(5000)
+  @@cue_id          varchar(255),
+  @@un_id          varchar(5000),
+  @@ti_idri        varchar(5000),
+  @@ti_idrni       varchar(5000)
 )as 
 begin
 
@@ -49,13 +49,13 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_cuenta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
-	end else 
-		set @ram_id_cuenta = 0
+    exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
+  end else 
+    set @ram_id_cuenta = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -66,21 +66,21 @@ FIN PRIMERA PARTE DE ARBOLES
 
 --////////////////////////////////////////////////////////////////////////
 
-declare	@un_id          int
-declare	@ti_idri        int
-declare	@ti_idrni       int
+declare  @un_id          int
+declare  @ti_idri        int
+declare  @ti_idrni       int
 declare @cueg_id        int
 
 if isnumeric(@@un_id) = 0 begin
-	select 1, 'Debe indicar una unidad' as Error
+  select 1, 'Debe indicar una unidad' as Error
 end
 
 if isnumeric(@@ti_idri) = 0 begin
-	select 1, 'Debe indicar una tasa impositiva para el RI' as Error
+  select 1, 'Debe indicar una tasa impositiva para el RI' as Error
 end
 
 if isnumeric(@@ti_idrni) = 0 begin
-	select 1, 'Debe indicar una tasa impositiva para el RNI' as Error
+  select 1, 'Debe indicar una tasa impositiva para el RNI' as Error
 end
 
 set @un_id    = @@un_id
@@ -90,14 +90,14 @@ set @ti_idrni = @@ti_idrni
 declare c_cue insensitive cursor for 
 
 select 
-		cue_id,
-		cue_nombre,
-		cue_codigo,
-		cue_identificacionexterna
+    cue_id,
+    cue_nombre,
+    cue_codigo,
+    cue_identificacionexterna
 
 from
 
-		cuenta cue
+    cuenta cue
 
 where 
 
@@ -107,56 +107,56 @@ INICIO SEGUNDA PARTE DE ARBOLES
 
 /////////////////////////////////////////////////////////////////////// */
 
-   		(cue.cue_id = @cue_id or @cue_id=0)
+       (cue.cue_id = @cue_id or @cue_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 
                   and  rptarb_hojaid = cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 
 open c_cue
 
 declare @pr_id                      int
-declare @cue_nombre									varchar(255) 
-declare @cue_codigo									varchar(255) 
-declare @cue_identificacionexterna 	varchar(255)
+declare @cue_nombre                  varchar(255) 
+declare @cue_codigo                  varchar(255) 
+declare @cue_identificacionexterna   varchar(255)
 
 fetch next from c_cue into @cue_id, @cue_nombre, @cue_codigo, @cue_identificacionexterna
 while @@fetch_status = 0
 begin
 
-	exec sp_dbgetnewid 'CuentaGrupo','cueg_id',@cueg_id out, 0
+  exec sp_dbgetnewid 'CuentaGrupo','cueg_id',@cueg_id out, 0
 
-	if not exists (select cueg_id from CuentaGrupo where cueg_codigo = 'C-' + @cue_identificacionexterna) begin
+  if not exists (select cueg_id from CuentaGrupo where cueg_codigo = 'C-' + @cue_identificacionexterna) begin
 
-		insert into CuentaGrupo (cueg_id, cueg_nombre, cueg_codigo, cue_id, modifico, cueg_tipo)
-									values		(@cueg_id, 'C-' + @cue_nombre, 'C-' + @cue_identificacionexterna, @cue_id, @@us_id, 2)
-	
-		exec sp_dbgetnewid 'Producto','pr_id', @pr_id out, 0
+    insert into CuentaGrupo (cueg_id, cueg_nombre, cueg_codigo, cue_id, modifico, cueg_tipo)
+                  values    (@cueg_id, 'C-' + @cue_nombre, 'C-' + @cue_identificacionexterna, @cue_id, @@us_id, 2)
+  
+    exec sp_dbgetnewid 'Producto','pr_id', @pr_id out, 0
 
-		if exists(select pr_id from Producto where pr_codigo = @cue_identificacionexterna) 
-					set @cue_identificacionexterna = @cue_identificacionexterna + convert(varchar(8),getdate(),14)
-	
-		insert into Producto (pr_id, pr_nombrecompra, pr_nombreventa, pr_secompra, pr_codigo, ti_id_ivaricompra, ti_id_ivarnicompra, cueg_id_compra, un_id_compra, modifico)
-									values (@pr_id, @cue_nombre, @cue_nombre, 1, @cue_identificacionexterna, @ti_idri, @ti_idrni, @cueg_id, @un_id, @@us_id)
+    if exists(select pr_id from Producto where pr_codigo = @cue_identificacionexterna) 
+          set @cue_identificacionexterna = @cue_identificacionexterna + convert(varchar(8),getdate(),14)
+  
+    insert into Producto (pr_id, pr_nombrecompra, pr_nombreventa, pr_secompra, pr_codigo, ti_id_ivaricompra, ti_id_ivarnicompra, cueg_id_compra, un_id_compra, modifico)
+                  values (@pr_id, @cue_nombre, @cue_nombre, 1, @cue_identificacionexterna, @ti_idri, @ti_idrni, @cueg_id, @un_id, @@us_id)
 
-		insert into #t_dc_csc_prd_9999 (pr_id) values (@pr_id)
+    insert into #t_dc_csc_prd_9999 (pr_id) values (@pr_id)
 
-	end else
+  end else
 
-		insert into #t_dc_csc_prd_9999 (cue_id) values (@cue_id)
+    insert into #t_dc_csc_prd_9999 (cue_id) values (@cue_id)
 
-	fetch next from c_cue into @cue_id, @cue_nombre, @cue_codigo, @cue_identificacionexterna
+  fetch next from c_cue into @cue_id, @cue_nombre, @cue_codigo, @cue_identificacionexterna
 end
 
 close c_cue

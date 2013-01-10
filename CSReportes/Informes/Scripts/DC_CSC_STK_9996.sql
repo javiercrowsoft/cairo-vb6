@@ -11,49 +11,49 @@ DC_CSC_STK_9996 1
 
 create procedure DC_CSC_STK_9996 (
 
-	@@us_id int,
+  @@us_id int,
 
-	@@borrar	smallint
+  @@borrar  smallint
 
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	if @@borrar = 0 begin
+  if @@borrar = 0 begin
 
-		select 	ps.prns_id, 
-						pr_nombrecompra 	as Articulo,
-					 	prns_codigo 			as Serie,
-						ps.creado				  as Creado
+    select   ps.prns_id, 
+            pr_nombrecompra   as Articulo,
+             prns_codigo       as Serie,
+            ps.creado          as Creado
 
-		from productonumeroserie ps inner join producto pr on ps.pr_id = pr.pr_id 
-																	--and pr_eskit <> 0 and pr_id_kit is null
-																	and not exists (select * from stockitem where prns_id = ps.prns_id)
-		
-	end else begin
+    from productonumeroserie ps inner join producto pr on ps.pr_id = pr.pr_id 
+                                  --and pr_eskit <> 0 and pr_id_kit is null
+                                  and not exists (select * from stockitem where prns_id = ps.prns_id)
+    
+  end else begin
 
-		delete productonumeroserie where prns_id in (
-		
-		select ps.prns_id
-		from productonumeroserie ps inner join producto pr on ps.pr_id = pr.pr_id 
-																	--and pr_eskit <> 0 and pr_id_kit is null
-																	and not exists (select * from stockitem where prns_id = ps.prns_id)
-		)
-		
-		delete stockcache where prns_id in (
-		
-		select ps.prns_id
-		from productonumeroserie ps inner join producto pr on ps.pr_id = pr.pr_id 
-																	--and pr_eskit <> 0 and pr_id_kit is null
-																	and not exists (select * from stockitem where prns_id = ps.prns_id)
-		)
+    delete productonumeroserie where prns_id in (
+    
+    select ps.prns_id
+    from productonumeroserie ps inner join producto pr on ps.pr_id = pr.pr_id 
+                                  --and pr_eskit <> 0 and pr_id_kit is null
+                                  and not exists (select * from stockitem where prns_id = ps.prns_id)
+    )
+    
+    delete stockcache where prns_id in (
+    
+    select ps.prns_id
+    from productonumeroserie ps inner join producto pr on ps.pr_id = pr.pr_id 
+                                  --and pr_eskit <> 0 and pr_id_kit is null
+                                  and not exists (select * from stockitem where prns_id = ps.prns_id)
+    )
 
-		select 1, 'El comando se ejecuto con exito' as Info
+    select 1, 'El comando se ejecuto con exito' as Info
 
-	end
-		
+  end
+    
 end
 
 go

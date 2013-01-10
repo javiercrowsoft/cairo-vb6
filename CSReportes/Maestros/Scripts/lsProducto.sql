@@ -16,7 +16,7 @@ drop procedure [dbo].[lsProducto]
 go
 create procedure lsProducto (
 
-@@pr_id			varchar(255),
+@@pr_id      varchar(255),
 @@tipo      tinyint = 0
 
 )as 
@@ -24,30 +24,30 @@ create procedure lsProducto (
 declare @pr_id int
 declare @ram_id_Producto int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@pr_id, @pr_id out, @ram_id_Producto out
 
 if @ram_id_Producto <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_Producto = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_Producto = 0
+    set @clienteID = 0
+  end
 
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
@@ -88,7 +88,7 @@ from
 
 where 
   
-		  (producto.pr_id = @pr_id or @pr_id=0)
+      (producto.pr_id = @pr_id or @pr_id=0)
 
 and   (
         (
@@ -103,14 +103,14 @@ and   (
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Producto.pr_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Producto = 0)
-			 )
+           (@ram_id_Producto = 0)
+       )

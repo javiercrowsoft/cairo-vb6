@@ -24,7 +24,7 @@ from pedidoVenta pv inner join pedidoventaitem pvi on pv.pv_id  = pvi.pv_id
 
 where pvi_pendiente > 0
 
-		and pv.est_id <> 7
+    and pv.est_id <> 7
 
 group by  
       pr_nombrecompra, 

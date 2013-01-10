@@ -12,13 +12,13 @@ drop procedure [dbo].[sp_StockLoteGet]
 
 go
 create procedure sp_StockLoteGet (
-	@@stl_id 		int
+  @@stl_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select stl.*,
          pr_nombrecompra,
@@ -29,7 +29,7 @@ begin
                      left  join Pais pa         on stl.pa_id         = pa.pa_id
                      left  join StockLote stlp  on stl.stl_id_padre  = stlp.stl_id
 
-	where stl.stl_id = @@stl_id
+  where stl.stl_id = @@stl_id
 
 end
 

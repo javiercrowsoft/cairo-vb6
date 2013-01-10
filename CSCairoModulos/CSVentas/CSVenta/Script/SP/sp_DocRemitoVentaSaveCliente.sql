@@ -4,10 +4,10 @@ drop procedure [dbo].[sp_DocRemitoVentaSaveCliente]
 go
 
 create procedure sp_DocRemitoVentaSaveCliente (
-	@rv_id     		int,
-	@@rvTMP_ID		int,
+  @rv_id         int,
+  @@rvTMP_ID    int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out
+  @@bErrorMsg   varchar(5000) out
 )
 as
 
@@ -15,7 +15,7 @@ begin
 
   set nocount on
 
-	set @@bSuccess = 1
+  set @@bSuccess = 1
 
 end
 GO

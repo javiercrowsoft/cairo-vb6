@@ -8,14 +8,14 @@ go
 
 create procedure sp_srv_cvxi_saveEmailRespuesta (
 
-	@@cmi_id						int,
-	@@cmia_id						int,
-	@@idm_id            int,
-	@@cmie_id						int,
-	@@cmir_from					varchar(1000),
-	@@cmir_to						varchar(5000),
-	@@cmir_subject			varchar(5000),
-	@@cmir_body					varchar(8000)
+  @@cmi_id            int,
+  @@cmia_id            int,
+  @@idm_id            int,
+  @@cmie_id            int,
+  @@cmir_from          varchar(1000),
+  @@cmir_to            varchar(5000),
+  @@cmir_subject      varchar(5000),
+  @@cmir_body          varchar(8000)
 
 )
 
@@ -23,34 +23,34 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @cmir_id int
+  declare @cmir_id int
 
-	exec sp_dbgetnewid 'ComunidadInternetRespuesta', 'cmir_id', @cmir_id out, 0
+  exec sp_dbgetnewid 'ComunidadInternetRespuesta', 'cmir_id', @cmir_id out, 0
 
-	insert into ComunidadInternetRespuesta (
-																					cmir_id,
-																					cmi_id,
-																					cmia_id,
-																					idm_id,
-																					cmie_id,
-																					cmir_body,
-																					cmir_from,
-																					cmir_subject,
-																					cmir_to
-																				)
-																values  (
-																					@cmir_id,
-																					@@cmi_id,
-																					@@cmia_id,
-																					@@idm_id,
-																					@@cmie_id,
-																					@@cmir_body,
-																					@@cmir_from,
-																					@@cmir_subject,
-																					@@cmir_to
-																				)
+  insert into ComunidadInternetRespuesta (
+                                          cmir_id,
+                                          cmi_id,
+                                          cmia_id,
+                                          idm_id,
+                                          cmie_id,
+                                          cmir_body,
+                                          cmir_from,
+                                          cmir_subject,
+                                          cmir_to
+                                        )
+                                values  (
+                                          @cmir_id,
+                                          @@cmi_id,
+                                          @@cmia_id,
+                                          @@idm_id,
+                                          @@cmie_id,
+                                          @@cmir_body,
+                                          @@cmir_from,
+                                          @@cmir_subject,
+                                          @@cmir_to
+                                        )
 
 
 end

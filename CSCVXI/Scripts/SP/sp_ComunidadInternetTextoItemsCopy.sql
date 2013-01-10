@@ -8,57 +8,57 @@ go
 
 create procedure sp_comunidadInternetTextoItemsCopy (
 
-	@@cmit_id int
+  @@cmit_id int
 )
 
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @cmiti_id_padre int
-	declare @cmiti_id_padre_new int
-	declare @cmiti_codigo varchar(255)
+  declare @cmiti_id_padre int
+  declare @cmiti_id_padre_new int
+  declare @cmiti_codigo varchar(255)
 
-	declare c_padre insensitive cursor for 
-			select distinct cmiti_id_padre 
-			from ComunidadInternetTextoItem 
-			where cmit_id = @@cmit_id and cmiti_id_padre is not null
+  declare c_padre insensitive cursor for 
+      select distinct cmiti_id_padre 
+      from ComunidadInternetTextoItem 
+      where cmit_id = @@cmit_id and cmiti_id_padre is not null
 
-	open c_padre
-	
-	fetch next from c_padre into @cmiti_id_padre
-	while @@fetch_status=0
-	begin
+  open c_padre
+  
+  fetch next from c_padre into @cmiti_id_padre
+  while @@fetch_status=0
+  begin
 
-		-- Obtengo el codigo
-		--
-		select @cmiti_codigo = cmiti_codigo 
-		from ComunidadInternetTextoItem 
-		where cmiti_id = @cmiti_id_padre
+    -- Obtengo el codigo
+    --
+    select @cmiti_codigo = cmiti_codigo 
+    from ComunidadInternetTextoItem 
+    where cmiti_id = @cmiti_id_padre
 
-		-- Limpio el padre anterior
-		--
-		set @cmiti_id_padre_new = null
+    -- Limpio el padre anterior
+    --
+    set @cmiti_id_padre_new = null
 
-		-- Obtengo el padre para este codigo en este Texto
-		--
-		select @cmiti_id_padre_new = cmiti_id 
-		from ComunidadInternetTextoItem 
-		where cmit_id = @@cmit_id 
-			and cmiti_codigo = @cmiti_codigo
+    -- Obtengo el padre para este codigo en este Texto
+    --
+    select @cmiti_id_padre_new = cmiti_id 
+    from ComunidadInternetTextoItem 
+    where cmit_id = @@cmit_id 
+      and cmiti_codigo = @cmiti_codigo
 
-		-- Actulizo el padre
-		--
-		update ComunidadInternetTextoItem 
-						set cmiti_id_padre = @cmiti_id_padre_new 
-		where cmit_id = @@cmit_id 
-			and cmiti_id_padre = @cmiti_id_padre
+    -- Actulizo el padre
+    --
+    update ComunidadInternetTextoItem 
+            set cmiti_id_padre = @cmiti_id_padre_new 
+    where cmit_id = @@cmit_id 
+      and cmiti_id_padre = @cmiti_id_padre
 
-		fetch next from c_padre into @cmiti_id_padre
-	end
-	
-	close c_padre
-	deallocate c_padre
+    fetch next from c_padre into @cmiti_id_padre
+  end
+  
+  close c_padre
+  deallocate c_padre
 end

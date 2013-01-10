@@ -12,7 +12,7 @@ go
 -- sp_lsdoc_Legajo 1
 
 create procedure sp_lsdoc_Legajo (
-	@@Lgj_id	int
+  @@Lgj_id  int
 )
 as
 
@@ -22,23 +22,23 @@ begin
 
 select 
 
-	lgj_id,
-	'TypeTask'	  = '',
+  lgj_id,
+  'TypeTask'    = '',
   'Cliente'     = cli_nombre,
-	'Estado'	    = est_nombre,
-	'Código'      = lgj_codigo,
-	'Título'	    = lgj_titulo,
-	'Fecha'       = lgj_fecha,
-	'Descripción' = lgj_descrip
+  'Estado'      = est_nombre,
+  'Código'      = lgj_codigo,
+  'Título'      = lgj_titulo,
+  'Fecha'       = lgj_fecha,
+  'Descripción' = lgj_descrip
 
-	from 
+  from 
 
-		legajo lgj 	inner join estado est 	on lgj.est_id	=	est.est_id
-    				 		left  join cliente cli  on lgj.cli_id = cli.cli_id
-	where 
+    legajo lgj   inner join estado est   on lgj.est_id  =  est.est_id
+                 left  join cliente cli  on lgj.cli_id = cli.cli_id
+  where 
 
-		-- Filtros
-		@@Lgj_id = lgj.Lgj_id
+    -- Filtros
+    @@Lgj_id = lgj.Lgj_id
 end
 
 

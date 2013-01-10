@@ -12,7 +12,7 @@ go
 -- sp_productoKitEsEditable 13443
 
 create procedure sp_productoKitEsEditable (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -20,9 +20,9 @@ set nocount on
 
 begin
 
-	if exists(select pr_id_kit from StockItem where pr_id_kit = @@pr_id)
-					select 0
-	else		select 1
+  if exists(select pr_id_kit from StockItem where pr_id_kit = @@pr_id)
+          select 0
+  else    select 1
 end
 
 go

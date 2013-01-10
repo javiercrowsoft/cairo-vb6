@@ -9,56 +9,56 @@ drop procedure [dbo].[DC_CSC_COM_9991]
 go
 create procedure DC_CSC_COM_9991 (
 
-  @@us_id    		int,
+  @@us_id        int,
 
-  @@prov_id   			varchar(255),
-  @@emp_id	   			varchar(255) 
+  @@prov_id         varchar(255),
+  @@emp_id           varchar(255) 
 
 )as 
 begin
 
   set nocount on
 
-declare @emp_id	  		int
-declare @prov_id   		int
+declare @emp_id        int
+declare @prov_id       int
 
-declare @ram_id_empresa      		int
-declare @ram_id_proveedor       	int
+declare @ram_id_empresa          int
+declare @ram_id_proveedor         int
 
 declare @IsRaiz    tinyint
 declare @clienteID int
 
-exec sp_ArbConvertId @@emp_id,       @emp_id out, 			@ram_id_empresa out
-exec sp_ArbConvertId @@prov_id,  		 @prov_id out,  		@ram_id_proveedor out
+exec sp_ArbConvertId @@emp_id,       @emp_id out,       @ram_id_empresa out
+exec sp_ArbConvertId @@prov_id,       @prov_id out,      @ram_id_proveedor out
   
 exec sp_GetRptId @clienteID out
 
 if @ram_id_proveedor <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_proveedor, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_proveedor, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_proveedor, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_proveedor, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_proveedor, @clienteID 
-	end else 
-		set @ram_id_proveedor = 0
+    exec sp_ArbGetAllHojas @ram_id_proveedor, @clienteID 
+  end else 
+    set @ram_id_proveedor = 0
 end
 
 if @ram_id_empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
-	end else 
-		set @ram_id_empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
+  end else 
+    set @ram_id_empresa = 0
 end
 
 
 
   declare @prov_id2  int
-	declare @emp_id2  int
+  declare @emp_id2  int
   
   declare c_empprov insensitive cursor for 
   
@@ -68,45 +68,45 @@ end
       and   (prov_id = @prov_id or @prov_id = 0)
   
       and   (
-    					(exists(select rptarb_hojaid 
+              (exists(select rptarb_hojaid 
                       from rptArbolRamaHoja 
                       where
                            rptarb_cliente = @clienteID
                       and  tbl_id = 29
                       and  rptarb_hojaid = prov_id
-    							   ) 
+                     ) 
                )
             or 
-    					 (@ram_id_proveedor = 0)
-    			 )
+               (@ram_id_proveedor = 0)
+           )
 
 
       and   (
-    					(exists(select rptarb_hojaid 
+              (exists(select rptarb_hojaid 
                       from rptArbolRamaHoja 
                       where
                            rptarb_cliente = @clienteID
                       and  tbl_id = 1018 
                       and  rptarb_hojaid = emp_id
-    							   ) 
+                     ) 
                )
             or 
-    					 (@ram_id_empresa = 0)
-    			 )
+               (@ram_id_empresa = 0)
+           )
 
   open c_empprov
 
-	declare @empprov_id int
+  declare @empprov_id int
   
   fetch next from c_empprov into @prov_id2, @emp_id2
   while @@fetch_status = 0
   begin
   
-  	exec sp_dbgetnewid 'empresaproveedor','empprov_id',@empprov_id out, 0
+    exec sp_dbgetnewid 'empresaproveedor','empprov_id',@empprov_id out, 0
   
-		insert into empresaproveedor (empprov_id, emp_id, prov_id, modifico) values (@empprov_id, @emp_id2, @prov_id2, @@us_id)  
+    insert into empresaproveedor (empprov_id, emp_id, prov_id, modifico) values (@empprov_id, @emp_id2, @prov_id2, @@us_id)  
   
-  	fetch next from c_empprov into @prov_id2, @emp_id2
+    fetch next from c_empprov into @prov_id2, @emp_id2
   
   end
   

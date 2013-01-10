@@ -18,7 +18,7 @@ Reina Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 11002      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Reina%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Reina%'
 
 Para testear:
 
@@ -33,36 +33,36 @@ drop procedure [dbo].[lsReina]
 go
 create procedure lsReina (
 
-@@reina_id			varchar(255)
+@@reina_id      varchar(255)
 
 )as 
 
 declare @reina_id int
 declare @ram_id_reina int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@reina_id, @reina_id out, @ram_id_reina out
 
 if @ram_id_reina <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_reina, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_reina, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_reina, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_reina, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_reina = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_reina = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
@@ -78,12 +78,12 @@ select reina.*,
       end
       as calidaReina
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
       reina left join proveedor on reina.prov_id = proveedor.prov_id
             left join colmena   on reina.colm_id = colmena.colm_id
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
 
 
 where 
@@ -91,14 +91,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 11002 -- tbl_id de Reina
                   and  rptarb_hojaid = Reina.reina_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_reina = 0)
-			 )
+           (@ram_id_reina = 0)
+       )

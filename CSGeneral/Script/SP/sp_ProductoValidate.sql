@@ -12,7 +12,7 @@ go
 -- sp_ProductoValidate 255
 
 create procedure sp_ProductoValidate (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -22,22 +22,22 @@ begin
 
   set nocount on
 
-	declare @pr_codigobarra varchar(255)
-	select @pr_codigobarra = pr_codigobarra from producto where pr_id = @@pr_id
+  declare @pr_codigobarra varchar(255)
+  select @pr_codigobarra = pr_codigobarra from producto where pr_id = @@pr_id
 
-	if len(@pr_codigobarra)>0 begin
-	
-		if exists(select * from producto where pr_codigobarra = @pr_codigobarra and pr_id <> @@pr_id) begin
-	
-			select 0,'El producto ['+pr_nombrecompra +'] ya tiene asignado este codigo de barras ' + @pr_codigobarra
-			from producto where pr_codigobarra = @pr_codigobarra and pr_id <> @@pr_id 
-			return
-	
-		end
+  if len(@pr_codigobarra)>0 begin
+  
+    if exists(select * from producto where pr_codigobarra = @pr_codigobarra and pr_id <> @@pr_id) begin
+  
+      select 0,'El producto ['+pr_nombrecompra +'] ya tiene asignado este codigo de barras ' + @pr_codigobarra
+      from producto where pr_codigobarra = @pr_codigobarra and pr_id <> @@pr_id 
+      return
+  
+    end
 
-	end
+  end
 
-	select 1
+  select 1
 
 end
 

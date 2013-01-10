@@ -25,19 +25,19 @@ set nocount on
 
 begin
 
-	select 
-		proveedor.prov_id,
-		TypeTask  = '',
-		Nombre = prov_nombre,
-         	CUIT   = proveedor.prov_cuit,
-	        Fecha  = '',
-	        Cargado = 1,
+  select 
+    proveedor.prov_id,
+    TypeTask  = '',
+    Nombre = prov_nombre,
+           CUIT   = proveedor.prov_cuit,
+          Fecha  = '',
+          Cargado = 1,
           Comprobante='',
-	        dummy=''
+          dummy=''
 
-	from proveedor
+  from proveedor
 
-	where proveedor.prov_id = @@prov_id
+  where proveedor.prov_id = @@prov_id
 
 end
 GO

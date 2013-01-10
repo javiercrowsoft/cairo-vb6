@@ -10,18 +10,18 @@ sp_col inscripcion
 
 go
 create procedure sp_web_inscripcionIsPrincipal (
-	@@insc_id	int
+  @@insc_id  int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if exists(select * from aaarbaweb..Inscripcion insc where insc_id = @@insc_id and insc_id_padre is null)
-		select 1
-	else
-		select 0
+  if exists(select * from aaarbaweb..Inscripcion insc where insc_id = @@insc_id and insc_id_padre is null)
+    select 1
+  else
+    select 0
 
 end
 

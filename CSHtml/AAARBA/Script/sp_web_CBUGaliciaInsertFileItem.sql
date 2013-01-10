@@ -15,20 +15,20 @@ sp_col inscripcion
 
 go
 create procedure sp_web_CBUGaliciaInsertFileItem (
-	@@bgalarch_id		int,
-  @@insc_id				int
+  @@bgalarch_id    int,
+  @@insc_id        int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @bgalarchinsc_id int
+  declare @bgalarchinsc_id int
 
-	exec SP_DBGetNewId 'BGAL_ArchivoInscripcion', 'bgalarchinsc_id', @bgalarchinsc_id out, 0
+  exec SP_DBGetNewId 'BGAL_ArchivoInscripcion', 'bgalarchinsc_id', @bgalarchinsc_id out, 0
 
-	insert into bgal_archivoinscripcion (bgalarchinsc_id, bgalarch_id, insc_id)
+  insert into bgal_archivoinscripcion (bgalarchinsc_id, bgalarch_id, insc_id)
                      values(@bgalarchinsc_id, @@bgalarch_id, @@insc_id)
 
 end

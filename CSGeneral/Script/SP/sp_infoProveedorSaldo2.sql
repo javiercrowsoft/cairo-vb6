@@ -9,35 +9,35 @@ sp_infoProveedorSaldo2 '',114,1
 
 go
 create procedure sp_infoProveedorSaldo2 (
-	@@us_id        int,
-	@@emp_id       int,
-	@@prov_id      int,
-	@@info_aux     varchar(255) = ''
+  @@us_id        int,
+  @@emp_id       int,
+  @@prov_id      int,
+  @@info_aux     varchar(255) = ''
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 
+  select 
 
-			  prov_deudaorden
-			+ prov_deudaremito
-			+ prov_deudactacte 			
-			+ prov_deudadoc				as saldo,    
+        prov_deudaorden
+      + prov_deudaremito
+      + prov_deudactacte       
+      + prov_deudadoc        as saldo,    
 
-			prov_deudaorden,
-			prov_deudaremito,
-			prov_deudactacte,    
-			prov_deudadoc,
-			prov_deudatotal,
-			prov_creditoctacte,
-			prov_creditototal
-	
-	from Proveedor 
+      prov_deudaorden,
+      prov_deudaremito,
+      prov_deudactacte,    
+      prov_deudadoc,
+      prov_deudatotal,
+      prov_creditoctacte,
+      prov_creditototal
+  
+  from Proveedor 
 
-	where prov_id = @@prov_id
+  where prov_id = @@prov_id
 
 end
 go

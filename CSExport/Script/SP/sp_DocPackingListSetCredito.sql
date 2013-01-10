@@ -9,14 +9,14 @@ drop procedure [dbo].[sp_DocPackingListSetCredito]
 
 go
 create procedure sp_DocPackingListSetCredito (
-	@@pklst_id      int,
-  @@borrar     		tinyint = 0
+  @@pklst_id      int,
+  @@borrar         tinyint = 0
 )
 as
 
 begin
 
-	exec sp_DocPackingListSetCreditoCairo @@pklst_id, @@borrar
+  exec sp_DocPackingListSetCreditoCairo @@pklst_id, @@borrar
 
 end
 go

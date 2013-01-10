@@ -6,45 +6,45 @@ go
 -- sp_CursoDelete 1
 
 create procedure sp_CursoDelete (
-	@@cur_id int
+  @@cur_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin tran
+  begin tran
 
-	delete CursoItemCalificacion 
-	where curi_id in (select curi_id from CursoItem where cur_id = @@cur_id)
-	if @@error <> 0 goto ControlError
+  delete CursoItemCalificacion 
+  where curi_id in (select curi_id from CursoItem where cur_id = @@cur_id)
+  if @@error <> 0 goto ControlError
 
-	delete CursoItemAsistencia
-	where curi_id in (select curi_id from CursoItem where cur_id = @@cur_id)
-	if @@error <> 0 goto ControlError
+  delete CursoItemAsistencia
+  where curi_id in (select curi_id from CursoItem where cur_id = @@cur_id)
+  if @@error <> 0 goto ControlError
 
-	delete CursoClase where cur_id = @@cur_id
-	if @@error <> 0 goto ControlError
+  delete CursoClase where cur_id = @@cur_id
+  if @@error <> 0 goto ControlError
 
-	delete CursoExamen where cur_id = @@cur_id
-	if @@error <> 0 goto ControlError
+  delete CursoExamen where cur_id = @@cur_id
+  if @@error <> 0 goto ControlError
 
-	delete CursoItem where cur_id = @@cur_id
-	if @@error <> 0 goto ControlError
+  delete CursoItem where cur_id = @@cur_id
+  if @@error <> 0 goto ControlError
 
-	delete Curso where cur_id = @@cur_id
-	if @@error <> 0 goto ControlError
+  delete Curso where cur_id = @@cur_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el curso. sp_CursoDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el curso. sp_CursoDelete.', 16, 1)
+  rollback transaction  
 
-	return	
+  return  
 
 end
 

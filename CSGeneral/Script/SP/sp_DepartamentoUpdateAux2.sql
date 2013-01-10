@@ -12,7 +12,7 @@ drop procedure [dbo].[sp_DepartamentoUpdateAux2]
 
 go
 create procedure sp_DepartamentoUpdateAux2 (
-	@@pre_id		 int,
+  @@pre_id     int,
   @@bHeredar   tinyint,
   @@modifico   int
 )
@@ -20,7 +20,7 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
   declare @per_id       int
   declare @per_id_padre int

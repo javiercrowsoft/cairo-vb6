@@ -15,18 +15,18 @@ declare @to_id int
 
 declare c_topUpdate insensitive cursor for
 
-	select to_id from inserted
+  select to_id from inserted
 
 open c_topUpdate
 
 fetch next from c_topUpdate into @to_id
 while @@fetch_status = 0
 begin
-	if @to_id = 1 begin
-		update TipoOperacion set to_nombre = 'Comercial', to_generadeuda = 1, activo = 1 where to_id = 1
-	end
+  if @to_id = 1 begin
+    update TipoOperacion set to_nombre = 'Comercial', to_generadeuda = 1, activo = 1 where to_id = 1
+  end
 
-	fetch next from c_topUpdate into @to_id
+  fetch next from c_topUpdate into @to_id
 end
 
 close c_topUpdate

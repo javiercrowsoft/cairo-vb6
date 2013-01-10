@@ -17,7 +17,7 @@ sp_LengGetText 'menu-tarea',8
 */
 create Procedure sp_LengGetText(
   @@code        varchar(255),
-	@@us_id 			int
+  @@us_id       int
 )
 as
 begin
@@ -43,7 +43,7 @@ begin
 
   end
 
-	if isnull(@leng_id,0) = 0 set @leng_id = 1 -- Lenguaje nativo de CrowSoft (Castellano)
+  if isnull(@leng_id,0) = 0 set @leng_id = 1 -- Lenguaje nativo de CrowSoft (Castellano)
 
   -- Si hay ningun lenguaje definido 
   if isnull(@leng_id,0) <> 0 begin
@@ -52,7 +52,7 @@ begin
     select @rtn = lengi_texto from lenguajeitem where leng_id = @leng_id and lengi_codigo = @@code
   
     -- Si no lo encuentro veo si el lenguaje tiene un lenguaje padre
-  	if isnull(@rtn,'') = '' begin
+    if isnull(@rtn,'') = '' begin
   
       -- Busco el lenguaje tiene un lenguaje padre
       select @leng_id = leng_id_padre from lenguaje where leng_id = @leng_id
@@ -60,10 +60,10 @@ begin
       -- Si hay un lenguaje padre le pido que me traiga el texto
       if isnull(@leng_id ,0) <> 0 begin
   
-    		exec sp_LengGetTextAux @@code, @leng_id, @rtn out
+        exec sp_LengGetTextAux @@code, @leng_id, @rtn out
       end
-  	end
+    end
   end
-	
-	select @rtn
+  
+  select @rtn
 end

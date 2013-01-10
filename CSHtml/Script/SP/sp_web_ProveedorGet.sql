@@ -15,22 +15,22 @@ sp_web_ProveedorGet 7
 
 create Procedure sp_web_ProveedorGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select top 200 prov_id, 
-				 	prov_nombre as [Proveedor]
+  select top 200 prov_id, 
+           prov_nombre as [Proveedor]
 
-	from Proveedor
+  from Proveedor
 
-	union
+  union
 
-	select 	0 as prov_id,
-					'(Ninguno)' as [Proveedor]
+  select   0 as prov_id,
+          '(Ninguno)' as [Proveedor]
 
-	order by prov_nombre
+  order by prov_nombre
 
 end
 go

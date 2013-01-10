@@ -15,8 +15,8 @@ select * from usuario
  sp_LoginGetLogin 'lizza',2
 */
 create procedure sp_LoginGetLogin (
-	@@us_nombre	varchar(255),
-	@@emp_id    int
+  @@us_nombre  varchar(255),
+  @@emp_id    int
 )
 as
 
@@ -24,14 +24,14 @@ set nocount on
 
 begin
 
-	select us_clave,us_id,activo,us_externo from usuario 
+  select us_clave,us_id,activo,us_externo from usuario 
 
-	where 
-					us_nombre = @@us_nombre 
-			and (			us_id = 1 -- administrador
+  where 
+          us_nombre = @@us_nombre 
+      and (      us_id = 1 -- administrador
            or
-								exists (select us_id from EmpresaUsuario where us_id = usuario.us_id and emp_id = @@emp_id)
-					)
+                exists (select us_id from EmpresaUsuario where us_id = usuario.us_id and emp_id = @@emp_id)
+          )
 
 end
 

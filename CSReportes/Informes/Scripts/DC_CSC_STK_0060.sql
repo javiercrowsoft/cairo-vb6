@@ -18,31 +18,31 @@ begin
 
 select 
 
-			0                                         as st_id,
-			'Pacheco Sur'									            as Deposito,
-			'piedra caliza'	  												as Articulo, 
-			convert(datetime,'20040101')							as Fecha,
-			'Mov. Stock'                              as Documento,
+      0                                         as st_id,
+      'Pacheco Sur'                              as Deposito,
+      'piedra caliza'                            as Articulo, 
+      convert(datetime,'20040101')              as Fecha,
+      'Mov. Stock'                              as Documento,
       'Factura Compra'                          as [Tipo Documento],
       'A-0001-00000000'                         as [Documento Aux],
-			'IBM S.A.'                                as Proveedor,
+      'IBM S.A.'                                as Proveedor,
       'Repsol Y.P.F. S.A.'                      as Cliente,
 
- 			100   												   					as Cantidad,
-			'cajones'												 					as Unidad,
+       100                                        as Cantidad,
+      'cajones'                                   as Unidad,
 
-			1.20      		    									      as [Importe unitario],
-			1.500  																	  as Importe,
+      1.20                                      as [Importe unitario],
+      1.500                                      as Importe,
 
-			'H255280992648'  													as [Numero Serie],
+      'H255280992648'                            as [Numero Serie],
 
-			100 			         											  as [Stock Minimo],
-			100000		         											  as [Stock Maximo],
-			'Oeste' 		      											  as [Deposito Fisico],
+      100                                        as [Stock Minimo],
+      100000                                     as [Stock Maximo],
+      'Oeste'                                   as [Deposito Fisico],
       'Legajo'                                  as [Legajo],
-			'Banco Frances'														as [Centro de Costo]
+      'Banco Frances'                            as [Centro de Costo]
 
-		from usuario
+    from usuario
 
 end
 go

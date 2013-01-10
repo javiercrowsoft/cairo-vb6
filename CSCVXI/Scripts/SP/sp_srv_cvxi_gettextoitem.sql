@@ -8,7 +8,7 @@ go
 
 create procedure sp_srv_cvxi_getTextoItem (
 
-	@@cmiti_id int
+  @@cmiti_id int
 
 )
 
@@ -16,10 +16,10 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select * 
-	from ComunidadInternetTextoItem
-	where cmiti_id = @@cmiti_id
+  select * 
+  from ComunidadInternetTextoItem
+  where cmiti_id = @@cmiti_id
 
 end

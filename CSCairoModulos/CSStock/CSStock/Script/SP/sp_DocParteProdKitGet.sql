@@ -13,18 +13,18 @@ select max(ppk_numero) from ParteProdKit
 */
 
 create procedure sp_DocParteProdKitGet (
-	@@emp_id   int,
-	@@ppk_id   int,
+  @@emp_id   int,
+  @@ppk_id   int,
   @@us_id    int
 )
 as
 
 begin
 
-declare @bEditable 		tinyint
-declare @editMsg   		varchar(255)
-declare @doc_id    		int
-declare @ta_Mascara 	varchar(100)
+declare @bEditable     tinyint
+declare @editMsg       varchar(255)
+declare @doc_id        int
+declare @ta_Mascara   varchar(100)
 declare @ta_Propuesto tinyint
 
 /*
@@ -36,7 +36,7 @@ declare @ta_Propuesto tinyint
 */
   select @doc_id = doc_id from ParteProdKit where ppk_id = @@ppk_id
 
-	exec sp_talonarioGetPropuesto @doc_id, @ta_Mascara out, @ta_Propuesto out
+  exec sp_talonarioGetPropuesto @doc_id, @ta_Mascara out, @ta_Propuesto out
   exec sp_DocParteProdKitEditableGet @@emp_id, @@ppk_id, @@us_id, @bEditable out, @editMsg out
 
 /*
@@ -46,19 +46,19 @@ declare @ta_Propuesto tinyint
 //                                                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
-	select 
-			ParteProdKit.*,
+  select 
+      ParteProdKit.*,
       suc_nombre,
       doc_nombre,
       depl_nombre,
-      @bEditable				  as editable,
+      @bEditable          as editable,
       @editMsg            as editMsg,
-      @ta_Propuesto 			as TaPropuesto,
-			@ta_Mascara					as TaMascara
-	
-	from 
-			ParteProdKit inner join documento      on ParteProdKit.doc_id  = documento.doc_id
-									  inner join sucursal       on ParteProdKit.suc_id  = sucursal.suc_id
+      @ta_Propuesto       as TaPropuesto,
+      @ta_Mascara          as TaMascara
+  
+  from 
+      ParteProdKit inner join documento      on ParteProdKit.doc_id  = documento.doc_id
+                    inner join sucursal       on ParteProdKit.suc_id  = sucursal.suc_id
                     inner join depositologico on ParteProdKit.depl_id = depositologico.depl_id
 
   where ppk_id = @@ppk_id

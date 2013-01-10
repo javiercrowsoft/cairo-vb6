@@ -11,9 +11,9 @@ go
 -- sp_srv_cvxi_pedidoVentaSaveGetCliIdCliente  3
 
 create procedure sp_srv_cvxi_pedidoVentaSaveGetCliIdCliente (
-	@@cmie_id 				int,
-	@@cmi_id					int,
-	@@cli_id          int out
+  @@cmie_id         int,
+  @@cmi_id          int,
+  @@cli_id          int out
 )
 as
 
@@ -21,7 +21,7 @@ set nocount on
 
 begin
 
-	exec sp_srv_cvxi_pedidoVentaSaveGetCliIdCairo @@cmie_id, @@cmi_id, @@cli_id out
+  exec sp_srv_cvxi_pedidoVentaSaveGetCliIdCairo @@cmie_id, @@cmi_id, @@cli_id out
 
 end
 

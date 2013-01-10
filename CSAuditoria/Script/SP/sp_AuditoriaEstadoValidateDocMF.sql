@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaEstadoValidateDocMF (
 
-	@@mf_id       int,
-	@@aud_id 			int
+  @@mf_id       int,
+  @@aud_id       int
 
 )
 as

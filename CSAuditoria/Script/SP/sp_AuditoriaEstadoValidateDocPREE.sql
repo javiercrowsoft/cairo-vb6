@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaEstadoValidateDocPREE (
 
-	@@pree_id     int,
-	@@aud_id 			int
+  @@pree_id     int,
+  @@aud_id       int
 
 )
 as

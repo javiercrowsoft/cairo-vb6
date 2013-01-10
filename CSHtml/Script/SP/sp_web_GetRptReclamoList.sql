@@ -7,7 +7,7 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select min(rpt_id) as rpt_id
   from Reporte inner join Informe on Reporte.inf_id = Informe.inf_id

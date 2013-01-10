@@ -7,7 +7,7 @@ drop procedure [dbo].[sp_DocOrdenPagoMover]
 
 go
 create procedure sp_DocOrdenPagoMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -15,47 +15,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select opg_id from OrdenPago 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select opg_id from OrdenPago 
                                                         where opg_numero = (
-																																	select min(opg_numero) from OrdenPago 
+                                                                  select min(opg_numero) from OrdenPago 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select opg_id from OrdenPago 
+                                                        select opg_id from OrdenPago 
                                                         where opg_numero = (
-																																	select max(opg_numero) from OrdenPago 
+                                                                  select max(opg_numero) from OrdenPago 
                                                                   where doc_id = @@DocId 
-																																			and opg_numero < @@currNro 
-																																)
+                                                                      and opg_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select opg_id from OrdenPago 
+                                                        select opg_id from OrdenPago 
                                                         where opg_numero = (
-																																	select min(opg_numero) from OrdenPago 
+                                                                  select min(opg_numero) from OrdenPago 
                                                                   where doc_id = @@DocId 
                                                                       and opg_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select opg_id from OrdenPago 
+                                                        select opg_id from OrdenPago 
                                                         where opg_numero = (
-																																	select max(opg_numero) from OrdenPago 
+                                                                  select max(opg_numero) from OrdenPago 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

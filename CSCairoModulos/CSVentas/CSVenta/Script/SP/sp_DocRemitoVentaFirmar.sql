@@ -17,33 +17,33 @@ sp_DocRemitoVentaFirmar 17,8
 */
 
 create procedure sp_DocRemitoVentaFirmar (
-	@@rv_id int,
+  @@rv_id int,
   @@us_id int
 )
 as
 
 begin
 
-	declare @bFirmar tinyint
+  declare @bFirmar tinyint
 
   -- Si esta firmado le quita la firma
-	if exists(select rv_firmado from RemitoVenta where rv_id = @@rv_id and rv_firmado <> 0)
-	begin
-		update RemitoVenta set rv_firmado = 0 where rv_id = @@rv_id
-		set @bFirmar = 1
-	-- Sino lo firma
-	end else begin
-		update RemitoVenta set rv_firmado = @@us_id where rv_id = @@rv_id
-		set @bFirmar = 0
-	end
+  if exists(select rv_firmado from RemitoVenta where rv_id = @@rv_id and rv_firmado <> 0)
+  begin
+    update RemitoVenta set rv_firmado = 0 where rv_id = @@rv_id
+    set @bFirmar = 1
+  -- Sino lo firma
+  end else begin
+    update RemitoVenta set rv_firmado = @@us_id where rv_id = @@rv_id
+    set @bFirmar = 0
+  end
 
-	exec sp_DocRemitoVentaSetEstado @@rv_id
+  exec sp_DocRemitoVentaSetEstado @@rv_id
 
-	select RemitoVenta.est_id,est_nombre 
-	from RemitoVenta inner join Estado on RemitoVenta.est_id = Estado.est_id
-	where rv_id = @@rv_id
+  select RemitoVenta.est_id,est_nombre 
+  from RemitoVenta inner join Estado on RemitoVenta.est_id = Estado.est_id
+  where rv_id = @@rv_id
 
-	if @bFirmar <> 0 	exec sp_HistoriaUpdate 16002, @@rv_id, @@us_id, 9
-	else           		exec sp_HistoriaUpdate 16002, @@rv_id, @@us_id, 10
+  if @bFirmar <> 0   exec sp_HistoriaUpdate 16002, @@rv_id, @@us_id, 9
+  else               exec sp_HistoriaUpdate 16002, @@rv_id, @@us_id, 10
 
 end

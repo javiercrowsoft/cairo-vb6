@@ -15,7 +15,7 @@ sp_col inscripcion
 
 go
 create procedure sp_web_CBUGaliciaInsertFile (
-	@@archivo varchar(255),
+  @@archivo varchar(255),
   @@fecha   datetime,
   @@tipo    tinyint,
   @@us_id   int
@@ -24,17 +24,17 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @bgalarch_id int
+  declare @bgalarch_id int
 
-	exec SP_DBGetNewId 'BGAL_Archivo', 'bgalarch_id', @bgalarch_id out, 0
+  exec SP_DBGetNewId 'BGAL_Archivo', 'bgalarch_id', @bgalarch_id out, 0
 
-	insert into bgal_archivo (bgalarch_id, bgalarch_nombre, bgalarch_fecha, bgalarch_tipo, modifico)
+  insert into bgal_archivo (bgalarch_id, bgalarch_nombre, bgalarch_fecha, bgalarch_tipo, modifico)
                      values(@bgalarch_id, @@archivo, @@fecha, @@tipo, @@us_id)
 
-	select @bgalarch_id
-	
+  select @bgalarch_id
+  
 end
 
 go

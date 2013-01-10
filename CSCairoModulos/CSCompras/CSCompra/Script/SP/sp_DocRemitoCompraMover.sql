@@ -21,7 +21,7 @@ sp_DocRemitoCompraMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocRemitoCompraMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -29,47 +29,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select rc_id from RemitoCompra 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select rc_id from RemitoCompra 
                                                         where rc_numero = (
-																																	select min(rc_numero) from RemitoCompra 
+                                                                  select min(rc_numero) from RemitoCompra 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select rc_id from RemitoCompra 
+                                                        select rc_id from RemitoCompra 
                                                         where rc_numero = (
-																																	select max(rc_numero) from RemitoCompra 
+                                                                  select max(rc_numero) from RemitoCompra 
                                                                   where doc_id = @@DocId 
-																																			and rc_numero < @@currNro 
-																																)
+                                                                      and rc_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select rc_id from RemitoCompra 
+                                                        select rc_id from RemitoCompra 
                                                         where rc_numero = (
-																																	select min(rc_numero) from RemitoCompra 
+                                                                  select min(rc_numero) from RemitoCompra 
                                                                   where doc_id = @@DocId 
                                                                       and rc_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select rc_id from RemitoCompra 
+                                                        select rc_id from RemitoCompra 
                                                         where rc_numero = (
-																																	select max(rc_numero) from RemitoCompra 
+                                                                  select max(rc_numero) from RemitoCompra 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

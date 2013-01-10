@@ -22,7 +22,7 @@ sp_DocRemitoVentaMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocRemitoVentaMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -30,47 +30,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select rv_id from RemitoVenta 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select rv_id from RemitoVenta 
                                                         where rv_numero = (
-																																	select min(rv_numero) from RemitoVenta 
+                                                                  select min(rv_numero) from RemitoVenta 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select rv_id from RemitoVenta 
+                                                        select rv_id from RemitoVenta 
                                                         where rv_numero = (
-																																	select max(rv_numero) from RemitoVenta 
+                                                                  select max(rv_numero) from RemitoVenta 
                                                                   where doc_id = @@DocId 
-																																			and rv_numero < @@currNro 
-																																)
+                                                                      and rv_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select rv_id from RemitoVenta 
+                                                        select rv_id from RemitoVenta 
                                                         where rv_numero = (
-																																	select min(rv_numero) from RemitoVenta 
+                                                                  select min(rv_numero) from RemitoVenta 
                                                                   where doc_id = @@DocId 
                                                                       and rv_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select rv_id from RemitoVenta 
+                                                        select rv_id from RemitoVenta 
                                                         where rv_numero = (
-																																	select max(rv_numero) from RemitoVenta 
+                                                                  select max(rv_numero) from RemitoVenta 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

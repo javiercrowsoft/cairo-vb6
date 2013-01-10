@@ -21,11 +21,11 @@ begin
 
 select 
 
-			'piedra pomez'	  												as Articulo, 
-			'Pacheco Norte'								            as Deposito,
- 			'45000'												   					as Cantidad,
-			'BOLSA' 												 					as Unidad,
-			'C554XP8' 															  as Lote
+      'piedra pomez'                            as Articulo, 
+      'Pacheco Norte'                            as Deposito,
+       '45000'                                     as Cantidad,
+      'BOLSA'                                    as Unidad,
+      'C554XP8'                                 as Lote
 
 end
 go

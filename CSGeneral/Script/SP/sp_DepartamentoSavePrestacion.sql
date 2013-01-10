@@ -16,7 +16,7 @@ drop procedure [dbo].[sp_DepartamentoSavePrestacion]
 
 go
 create procedure sp_DepartamentoSavePrestacion (
-	@@dpto_id 		int
+  @@dpto_id     int
 )
 as
 

@@ -10,11 +10,11 @@ fetch next from c_ast into @as_id, @fv_id
 while @@fetch_status=0
 begin
 
-	update facturaventa set as_id = null where fv_id = @fv_id
+  update facturaventa set as_id = null where fv_id = @fv_id
 
-	exec sp_DocAsientoDelete @as_id
+  exec sp_DocAsientoDelete @as_id
 
-	fetch next from c_ast into @as_id, @fv_id
+  fetch next from c_ast into @as_id, @fv_id
 end
 
 close c_ast
@@ -32,11 +32,11 @@ fetch next from c_ast into @as_id, @fc_id
 while @@fetch_status=0
 begin
 
-	update facturacompra set as_id = null where fc_id = @fc_id
+  update facturacompra set as_id = null where fc_id = @fc_id
 
-	exec sp_DocAsientoDelete @as_id
+  exec sp_DocAsientoDelete @as_id
 
-	fetch next from c_ast into @as_id, @fc_id
+  fetch next from c_ast into @as_id, @fc_id
 end
 
 close c_ast
@@ -55,11 +55,11 @@ fetch next from c_ast into @as_id, @opg_id
 while @@fetch_status=0
 begin
 
-	update ordenpago set as_id = null where opg_id = @opg_id
+  update ordenpago set as_id = null where opg_id = @opg_id
 
-	exec sp_DocAsientoDelete @as_id
+  exec sp_DocAsientoDelete @as_id
 
-	fetch next from c_ast into @as_id, @opg_id
+  fetch next from c_ast into @as_id, @opg_id
 end
 
 close c_ast
@@ -77,11 +77,11 @@ fetch next from c_ast into @as_id, @cobz_id
 while @@fetch_status=0
 begin
 
-	update Cobranza set as_id = null where cobz_id = @cobz_id
+  update Cobranza set as_id = null where cobz_id = @cobz_id
 
-	exec sp_DocAsientoDelete @as_id
+  exec sp_DocAsientoDelete @as_id
 
-	fetch next from c_ast into @as_id, @cobz_id
+  fetch next from c_ast into @as_id, @cobz_id
 end
 
 close c_ast
@@ -99,11 +99,11 @@ fetch next from c_ast into @as_id, @dbco_id
 while @@fetch_status=0
 begin
 
-	update DepositoBanco set as_id = null where dbco_id = @dbco_id
+  update DepositoBanco set as_id = null where dbco_id = @dbco_id
 
-	exec sp_DocAsientoDelete @as_id
+  exec sp_DocAsientoDelete @as_id
 
-	fetch next from c_ast into @as_id, @dbco_id
+  fetch next from c_ast into @as_id, @dbco_id
 end
 
 close c_ast
@@ -121,11 +121,11 @@ fetch next from c_ast into @as_id, @mf_id
 while @@fetch_status=0
 begin
 
-	update MovimientoFondo set as_id = null where mf_id = @mf_id
+  update MovimientoFondo set as_id = null where mf_id = @mf_id
 
-	exec sp_DocAsientoDelete @as_id
+  exec sp_DocAsientoDelete @as_id
 
-	fetch next from c_ast into @as_id, @mf_id
+  fetch next from c_ast into @as_id, @mf_id
 end
 
 close c_ast

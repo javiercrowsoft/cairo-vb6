@@ -10,30 +10,30 @@ sp_docResolucionCuponget 47
 sp_lsdoc_ResolucionCupones
 
   7,
-	'20030101',
-	'20050101',
-		'0',
-		'0',
-		'0',
-		'0',
-		'0',
-		'0'
+  '20030101',
+  '20050101',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0',
+    '0'
 
 */
 
 create procedure sp_lsdoc_ResolucionCupones (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@tjc_id              varchar(255),
-@@bco_id  						varchar(255),
-@@cue_id  						varchar(255),
-@@est_id							varchar(255),
-@@suc_id							varchar(255),
-@@doc_id							varchar(255),
-@@emp_id	varchar(255)
+@@bco_id              varchar(255),
+@@cue_id              varchar(255),
+@@est_id              varchar(255),
+@@suc_id              varchar(255),
+@@doc_id              varchar(255),
+@@emp_id  varchar(255)
 )as 
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -75,90 +75,90 @@ exec sp_GetRptId @ClienteID out
 
 if @ram_id_Tarjeta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Tarjeta, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Tarjeta, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Tarjeta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Tarjeta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Tarjeta, @ClienteID 
-	end else 
-		set @ram_id_Tarjeta = 0
+    exec sp_ArbGetAllHojas @ram_id_Tarjeta, @ClienteID 
+  end else 
+    set @ram_id_Tarjeta = 0
 end
 
 if @ram_id_Banco <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Banco, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Banco, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Banco, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Banco, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Banco, @ClienteID 
-	end else 
-		set @ram_id_Banco = 0
+    exec sp_ArbGetAllHojas @ram_id_Banco, @ClienteID 
+  end else 
+    set @ram_id_Banco = 0
 end
 
 if @ram_id_Cuenta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Cuenta, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Cuenta, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Cuenta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Cuenta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Cuenta, @ClienteID 
-	end else 
-		set @ram_id_Cuenta = 0
+    exec sp_ArbGetAllHojas @ram_id_Cuenta, @ClienteID 
+  end else 
+    set @ram_id_Cuenta = 0
 end
 
 if @ram_id_CentroCosto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_CentroCosto, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_CentroCosto, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_CentroCosto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_CentroCosto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_CentroCosto, @ClienteID 
-	end else 
-		set @ram_id_CentroCosto = 0
+    exec sp_ArbGetAllHojas @ram_id_CentroCosto, @ClienteID 
+  end else 
+    set @ram_id_CentroCosto = 0
 end
 
 if @ram_id_Estado <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Estado, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Estado, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Estado, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Estado, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Estado, @ClienteID 
-	end else 
-		set @ram_id_Estado = 0
+    exec sp_ArbGetAllHojas @ram_id_Estado, @ClienteID 
+  end else 
+    set @ram_id_Estado = 0
 end
 
 if @ram_id_Sucursal <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Sucursal, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Sucursal, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Sucursal, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Sucursal, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Sucursal, @ClienteID 
-	end else 
-		set @ram_id_Sucursal = 0
+    exec sp_ArbGetAllHojas @ram_id_Sucursal, @ClienteID 
+  end else 
+    set @ram_id_Sucursal = 0
 end
 
 if @ram_id_Documento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Documento, @ClienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Documento, @ClienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Documento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Documento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Documento, @ClienteID 
-	end else 
-		set @ram_id_Documento = 0
+    exec sp_ArbGetAllHojas @ram_id_Documento, @ClienteID 
+  end else 
+    set @ram_id_Documento = 0
 end
 
 if @ram_id_empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
-	end else 
-		set @ram_id_empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
+  end else 
+    set @ram_id_empresa = 0
 end
 /*- ///////////////////////////////////////////////////////////////////////
 
@@ -169,44 +169,44 @@ FIN PRIMERA PARTE DE ARBOLES
 
 
 select distinct
-			ResolucionCupon.rcup_id,
-			''									  	as [TypeTask],
-			rcup_numero             as [Número],
-			rcup_nrodoc						  as [Comprobante],
-			tjc_nombre              as [Tarjeta],
-	    bco_nombre            	as [Banco],
+      ResolucionCupon.rcup_id,
+      ''                      as [TypeTask],
+      rcup_numero             as [Número],
+      rcup_nrodoc              as [Comprobante],
+      tjc_nombre              as [Tarjeta],
+      bco_nombre              as [Banco],
       cue_nombre              as [Cuenta],
-      doc_nombre					  	as [Documento],
-	    est_nombre					  	as [Estado],
-			rcup_fecha						  as [Fecha],
-			rcup_total							as [Total],
-			case rcup_firmado
-				when 0 then 'No'
-				else        'Si'
-			end											as [Firmado],
-			
-      suc_nombre							as [Sucursal],
-			emp_nombre              as [Empresa],
+      doc_nombre              as [Documento],
+      est_nombre              as [Estado],
+      rcup_fecha              as [Fecha],
+      rcup_total              as [Total],
+      case rcup_firmado
+        when 0 then 'No'
+        else        'Si'
+      end                      as [Firmado],
+      
+      suc_nombre              as [Sucursal],
+      emp_nombre              as [Empresa],
 
-			ResolucionCupon.Creado,
-			ResolucionCupon.Modificado,
-			usuario.us_nombre     	as [Modifico],
-			rcup_descrip						as [Observaciones]
+      ResolucionCupon.Creado,
+      ResolucionCupon.Modificado,
+      usuario.us_nombre       as [Modifico],
+      rcup_descrip            as [Observaciones]
 from 
-			ResolucionCupon  	inner join documento     				  on ResolucionCupon.doc_id   		= documento.doc_id
-											  inner join empresa        			  on documento.emp_id 					  = empresa.emp_id
-											 	inner join estado        				  on ResolucionCupon.est_id   		= estado.est_id
-											 	inner join sucursal      				  on ResolucionCupon.suc_id   		= sucursal.suc_id
-												inner join ResolucionCuponItem		on ResolucionCupon.rcup_id  		= ResolucionCuponItem.rcup_id
-		                   	inner join Cuenta       				  on ResolucionCuponItem.cue_id   = Cuenta.cue_id
-		                   	inner join Banco       					  on Cuenta.bco_id   						  = Banco.bco_id
-												inner join TarjetaCreditoCupon    on ResolucionCuponItem.tjcc_id  = TarjetaCreditoCupon.tjcc_id
-                        inner join TarjetaCredito     	  on TarjetaCreditoCupon.tjc_id   = TarjetaCredito.tjc_id
-		                   	left  join usuario       				  on ResolucionCupon.modifico 		= usuario.us_id
+      ResolucionCupon    inner join documento               on ResolucionCupon.doc_id       = documento.doc_id
+                        inner join empresa                on documento.emp_id             = empresa.emp_id
+                         inner join estado                  on ResolucionCupon.est_id       = estado.est_id
+                         inner join sucursal                on ResolucionCupon.suc_id       = sucursal.suc_id
+                        inner join ResolucionCuponItem    on ResolucionCupon.rcup_id      = ResolucionCuponItem.rcup_id
+                         inner join Cuenta                 on ResolucionCuponItem.cue_id   = Cuenta.cue_id
+                         inner join Banco                   on Cuenta.bco_id                 = Banco.bco_id
+                        inner join TarjetaCreditoCupon    on ResolucionCuponItem.tjcc_id  = TarjetaCreditoCupon.tjcc_id
+                        inner join TarjetaCredito         on TarjetaCreditoCupon.tjc_id   = TarjetaCredito.tjc_id
+                         left  join usuario                 on ResolucionCupon.modifico     = usuario.us_id
 where 
 
-				  @@Fini <= rcup_fecha
-			and	@@Ffin >= rcup_fecha 		
+          @@Fini <= rcup_fecha
+      and  @@Ffin >= rcup_fecha     
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -214,104 +214,104 @@ INICIO SEGUNDA PARTE DE ARBOLES
 
 /////////////////////////////////////////////////////////////////////// */
 
-and   (TarjetaCredito.tjc_id 	= @tjc_id 				or @tjc_id=0)
-and   (Banco.bco_id 					= @bco_id 				or @bco_id=0)
-and   (Cuenta.cue_id 					= @cue_id 				or @cue_id=0)
-and   (Estado.est_id 					= @est_id 				or @est_id=0)
-and   (Sucursal.suc_id 				= @suc_id 				or @suc_id=0)
-and   (Documento.doc_id 			= @doc_id 				or @doc_id=0)
+and   (TarjetaCredito.tjc_id   = @tjc_id         or @tjc_id=0)
+and   (Banco.bco_id           = @bco_id         or @bco_id=0)
+and   (Cuenta.cue_id           = @cue_id         or @cue_id=0)
+and   (Estado.est_id           = @est_id         or @est_id=0)
+and   (Sucursal.suc_id         = @suc_id         or @suc_id=0)
+and   (Documento.doc_id       = @doc_id         or @doc_id=0)
 and   (Empresa.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_Cliente = @ClienteID
                   and  tbl_id = 28 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TarjetaCredito.tjc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Tarjeta = 0)
-			 )
+           (@ram_id_Tarjeta = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_Cliente = @ClienteID
                   and  tbl_id = 28 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Banco.bco_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Banco = 0)
-			 )
+           (@ram_id_Banco = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_Cliente = @ClienteID
                   and  tbl_id = 17 -- select tbl_id,tbl_nombrefisico from tabla
                   and  rptarb_hojaid = Cuenta.cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Cuenta = 0)
-			 )
+           (@ram_id_Cuenta = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_Cliente = @ClienteID
                   and  tbl_id = 4005 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Estado.est_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Estado = 0)
-			 )
+           (@ram_id_Estado = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_Cliente = @ClienteID
                   and  tbl_id = 1007 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Sucursal.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Sucursal = 0)
-			 )
+           (@ram_id_Sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_Cliente = @ClienteID
                   and  tbl_id = 4001 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Documento.doc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Documento = 0)
-			 )
+           (@ram_id_Documento = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Empresa.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_empresa = 0)
-			 )
-	order by rcup_fecha
+           (@ram_id_empresa = 0)
+       )
+  order by rcup_fecha
 go

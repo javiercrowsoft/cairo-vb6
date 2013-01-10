@@ -4,14 +4,14 @@ Nombre: Listado de cobranza agrupado por cliente
 ---------------------------------------------------------------------*/
 /*
 DC_CSC_TSR_0010 7, 
-								'20000101', 
-								'20100101', 
-								'0', 
-								'0', 
-								'0', 
-								'0', 
-								'0', 
-								'0'
+                '20000101', 
+                '20100101', 
+                '0', 
+                '0', 
+                '0', 
+                '0', 
+                '0', 
+                '0'
 select * from rama where ram_nombre like 'el nombre de alguna rama de algun arbol de la tabla a listar'
 */
 if exists (select * from sysobjects where id = object_id(N'[dbo].[DC_CSC_TSR_0010]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -21,15 +21,15 @@ go
 create procedure DC_CSC_TSR_0010 (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@cli_id varchar(255),
 @@doc_id varchar(255),
-@@cob_id	varchar(255),
-@@lgj_id	varchar(255),
-@@suc_id	varchar(255),
-@@est_id	varchar(255), -- TODO:EMPRESA
+@@cob_id  varchar(255),
+@@lgj_id  varchar(255),
+@@suc_id  varchar(255),
+@@est_id  varchar(255), -- TODO:EMPRESA
 @@emp_id  varchar(255)
 )as 
 
@@ -83,80 +83,80 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_cliente <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cliente, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cliente, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cliente, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cliente, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cliente, @clienteID 
-	end else 
-		set @ram_id_cliente = 0
+    exec sp_ArbGetAllHojas @ram_id_cliente, @clienteID 
+  end else 
+    set @ram_id_cliente = 0
 end
 
 if @ram_id_documento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_documento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_documento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_documento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_documento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_documento, @clienteID 
-	end else 
-		set @ram_id_documento = 0
+    exec sp_ArbGetAllHojas @ram_id_documento, @clienteID 
+  end else 
+    set @ram_id_documento = 0
 end
 
 if @ram_id_cobrador <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cobrador, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cobrador, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cobrador, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cobrador, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cobrador, @clienteID 
-	end else 
-		set @ram_id_cobrador = 0
+    exec sp_ArbGetAllHojas @ram_id_cobrador, @clienteID 
+  end else 
+    set @ram_id_cobrador = 0
 end
 
 if @ram_id_legajo <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_legajo, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_legajo, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_legajo, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_legajo, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_legajo, @clienteID 
-	end else 
-		set @ram_id_legajo = 0
+    exec sp_ArbGetAllHojas @ram_id_legajo, @clienteID 
+  end else 
+    set @ram_id_legajo = 0
 end
 
 if @ram_id_sucursal <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_sucursal, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_sucursal, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_sucursal, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_sucursal, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_sucursal, @clienteID 
-	end else 
-		set @ram_id_sucursal = 0
+    exec sp_ArbGetAllHojas @ram_id_sucursal, @clienteID 
+  end else 
+    set @ram_id_sucursal = 0
 end
 
 if @ram_id_estado <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_estado, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_estado, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_estado, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_estado, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_estado, @clienteID 
-	end else 
-		set @ram_id_estado = 0
+    exec sp_ArbGetAllHojas @ram_id_estado, @clienteID 
+  end else 
+    set @ram_id_estado = 0
 end
 
 -- TODO:EMPRESA
 if @ram_id_Empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
-	end else 
-		set @ram_id_Empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
+  end else 
+    set @ram_id_Empresa = 0
 end
 /*- ///////////////////////////////////////////////////////////////////////
 
@@ -167,25 +167,25 @@ FIN PRIMERA PARTE DE ARBOLES
 
 select 
 
-				cobz_id              as comp_id,
-				cobz_fecha           as [Fecha],
-				cobz_numero          as [Numero],
-				cobz_nrodoc          as [Comprobante],
-				cli_nombre           as [Cliente],
-				cobz_total           as [Total],
-				cobz_pendiente       as [Pendiente],
-				est_nombre           as [Estado],
+        cobz_id              as comp_id,
+        cobz_fecha           as [Fecha],
+        cobz_numero          as [Numero],
+        cobz_nrodoc          as [Comprobante],
+        cli_nombre           as [Cliente],
+        cobz_total           as [Total],
+        cobz_pendiente       as [Pendiente],
+        est_nombre           as [Estado],
         doc_nombre           as [Documento],
         emp_nombre           as [Empresa], -- TODO:EMPRESA
         suc_nombre           as [Sucursal],
         cob_nombre           as [Cobrador],
         case when lgj_titulo <> '' then lgj_titulo else lgj_codigo end as [Legajo],
         ccos_nombre          as [Centro de Costo],
-				cobz_descrip         as [Observaciones]
+        cobz_descrip         as [Observaciones]
 
 from 
 
-	Cobranza cobz inner join Cliente cli 														on cobz.cli_id 		= cli.cli_id
+  Cobranza cobz inner join Cliente cli                             on cobz.cli_id     = cli.cli_id
                 inner join Estado est                             on cobz.est_id    = est.est_id
                 inner join Documento doc                          on cobz.doc_id    = doc.doc_id
                 inner join Empresa                                on doc.emp_id     = Empresa.emp_id -- TODO:EMPRESA
@@ -195,17 +195,17 @@ from
                 left  join CentroCosto ccos                       on cobz.ccos_id   = ccos.ccos_id
 where 
 
-				  @@Fini <= cobz_fecha
-			and	@@Ffin >= cobz_fecha 		
+          @@Fini <= cobz_fecha
+      and  @@Ffin >= cobz_fecha     
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
-			and (
-						exists(select * from UsuarioEmpresa where cli_id = cli.cli_id and us_id = @@us_id) or (@us_empresaEx = 0)
-					)
-					
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
+      and (
+            exists(select * from UsuarioEmpresa where cli_id = cli.cli_id and us_id = @@us_id) or (@us_empresaEx = 0)
+          )
+          
 /* -///////////////////////////////////////////////////////////////////////
 
 INICIO SEGUNDA PARTE DE ARBOLES
@@ -222,95 +222,95 @@ and   (Empresa.emp_id = @emp_id or @emp_id=0) -- TODO:EMPRESA
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 28 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cli.cli_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cliente = 0)
-			 )
+           (@ram_id_cliente = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 4001 -- tbl_id de Proyecto
                   and  rptarb_hojaid = doc.doc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_documento = 0)
-			 )
+           (@ram_id_documento = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 25 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cob.cob_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cobrador = 0)
-			 )
+           (@ram_id_cobrador = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 15001 -- tbl_id de Proyecto
                   and  rptarb_hojaid = lgj.lgj_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_legajo = 0)
-			 )
+           (@ram_id_legajo = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 -- tbl_id de Proyecto
                   and  rptarb_hojaid = suc.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_sucursal = 0)
-			 )
+           (@ram_id_sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 4005 -- tbl_id de Proyecto
                   and  rptarb_hojaid = est.est_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_estado = 0)
-			 )
+           (@ram_id_estado = 0)
+       )
 -- TODO:EMPRESA
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- select * from tabla where tbl_nombre = 'empresa'
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
+           (@ram_id_Empresa = 0)
+       )
 
 order by Cliente
 

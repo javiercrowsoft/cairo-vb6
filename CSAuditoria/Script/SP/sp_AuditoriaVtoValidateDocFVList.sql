@@ -9,7 +9,7 @@ go
 
 create procedure sp_AuditoriaVtoValidateDocFVList (
 
-	@@fv_id       int
+  @@fv_id       int
 
 )
 as
@@ -18,76 +18,76 @@ begin
 
   set nocount on
 
-	declare @doct_id      int
-	declare @fv_nrodoc 		varchar(50) 
-	declare @fv_numero 		varchar(50) 
+  declare @doct_id      int
+  declare @fv_nrodoc     varchar(50) 
+  declare @fv_numero     varchar(50) 
 
-	select 
-						@doct_id 		= doct_id,
-						@fv_nrodoc  = fv_nrodoc,
-						@fv_numero  = convert(varchar,fv_numero)
+  select 
+            @doct_id     = doct_id,
+            @fv_nrodoc  = fv_nrodoc,
+            @fv_numero  = convert(varchar,fv_numero)
 
-	from FacturaVenta where fv_id = @@fv_id
+  from FacturaVenta where fv_id = @@fv_id
 
-	select *,
-				 IsNull(
-					(select sum(fvcobz_importe) from FacturaVentaCobranza 
-					 where fvd_id = fvd.fvd_id),0)
+  select *,
+         IsNull(
+          (select sum(fvcobz_importe) from FacturaVentaCobranza 
+           where fvd_id = fvd.fvd_id),0)
 
-							as Cobranzas,
+              as Cobranzas,
 
-				 IsNull(
-				  (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
-		       where 
-		             (fvd_id_factura     = fvd.fvd_id and @doct_id in (1,9))
-		          or (fvd_id_notacredito = fvd.fvd_id and @doct_id = 7)
-		      ),0) 
+         IsNull(
+          (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
+           where 
+                 (fvd_id_factura     = fvd.fvd_id and @doct_id in (1,9))
+              or (fvd_id_notacredito = fvd.fvd_id and @doct_id = 7)
+          ),0) 
 
-							as [Notas de Credito]
+              as [Notas de Credito]
 
-	from FacturaVentaDeuda fvd
-	where (fvd_pendiente +  (		IsNull(
-																(select sum(fvcobz_importe) from FacturaVentaCobranza 
-																 where fvd_id = fvd.fvd_id),0)
-														+	IsNull(
-															  (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
-	                               where 
-	                                     (fvd_id_factura     = fvd.fvd_id and @doct_id in (1,9))
-	                                  or (fvd_id_notacredito = fvd.fvd_id and @doct_id = 7)
-	                              ),0)
-													) 
-				) <> fvd_importe
+  from FacturaVentaDeuda fvd
+  where (fvd_pendiente +  (    IsNull(
+                                (select sum(fvcobz_importe) from FacturaVentaCobranza 
+                                 where fvd_id = fvd.fvd_id),0)
+                            +  IsNull(
+                                (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
+                                 where 
+                                       (fvd_id_factura     = fvd.fvd_id and @doct_id in (1,9))
+                                    or (fvd_id_notacredito = fvd.fvd_id and @doct_id = 7)
+                                ),0)
+                          ) 
+        ) <> fvd_importe
 
-		and fv_id = @@fv_id
-	
-	select *,
-				 IsNull(
-					(select sum(fvcobz_importe) from FacturaVentaCobranza 
-					 where fvp_id = fvp.fvp_id),0)
+    and fv_id = @@fv_id
+  
+  select *,
+         IsNull(
+          (select sum(fvcobz_importe) from FacturaVentaCobranza 
+           where fvp_id = fvp.fvp_id),0)
 
-							as Cobranzas,
+              as Cobranzas,
 
-				 IsNull(
-				  (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
+         IsNull(
+          (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
            where 
                  (fvp_id_factura     = fvp.fvp_id and @doct_id in (1,9))
               or (fvp_id_notacredito = fvp.fvp_id and @doct_id = 7)
           ),0) 
 
-							as [Notas de Credito]
+              as [Notas de Credito]
 
   from FacturaVentaPago fvp
-	where fvp_importe   <> (		IsNull(
-																(select sum(fvcobz_importe) from FacturaVentaCobranza 
-																 where fvp_id = fvp.fvp_id),0)
-														+	IsNull(
-															  (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
-	                               where 
-	                                     (fvp_id_factura     = fvp.fvp_id and @doct_id in (1,9))
-	                                  or (fvp_id_notacredito = fvp.fvp_id and @doct_id = 7)
-	                              ),0)
-													) 
-		and fv_id = @@fv_id
+  where fvp_importe   <> (    IsNull(
+                                (select sum(fvcobz_importe) from FacturaVentaCobranza 
+                                 where fvp_id = fvp.fvp_id),0)
+                            +  IsNull(
+                                (select sum(fvnc_importe)   from FacturaVentaNotaCredito 
+                                 where 
+                                       (fvp_id_factura     = fvp.fvp_id and @doct_id in (1,9))
+                                    or (fvp_id_notacredito = fvp.fvp_id and @doct_id = 7)
+                                ),0)
+                          ) 
+    and fv_id = @@fv_id
 
 end
 GO

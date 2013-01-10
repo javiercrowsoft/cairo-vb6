@@ -31,37 +31,37 @@ begin
 
   set nocount on
 
-	declare @dpto_id int
+  declare @dpto_id int
 
-	declare c_dpto insensitive cursor for select dpto_id from departamento where dpto_nombre like '%revestimientos%'
-	open c_dpto
+  declare c_dpto insensitive cursor for select dpto_id from departamento where dpto_nombre like '%revestimientos%'
+  open c_dpto
 
-	fetch next from c_dpto into @dpto_id	
-	while @@fetch_status = 0
-	begin
+  fetch next from c_dpto into @dpto_id  
+  while @@fetch_status = 0
+  begin
 
-		exec MUR_DepartamentoCliente @dpto_id, 300000, 399999
+    exec MUR_DepartamentoCliente @dpto_id, 300000, 399999
 
-		fetch next from c_dpto into @dpto_id
-	end
+    fetch next from c_dpto into @dpto_id
+  end
 
-	close c_dpto
-	deallocate c_dpto
+  close c_dpto
+  deallocate c_dpto
 
-	declare c_dpto insensitive cursor for select dpto_id from departamento where dpto_nombre like '%lib.env.%'
-	open c_dpto
+  declare c_dpto insensitive cursor for select dpto_id from departamento where dpto_nombre like '%lib.env.%'
+  open c_dpto
 
-	fetch next from c_dpto into @dpto_id	
-	while @@fetch_status = 0
-	begin
+  fetch next from c_dpto into @dpto_id  
+  while @@fetch_status = 0
+  begin
 
-		exec MUR_DepartamentoCliente @dpto_id, 400000, 499999
+    exec MUR_DepartamentoCliente @dpto_id, 400000, 499999
 
-		fetch next from c_dpto into @dpto_id
-	end
+    fetch next from c_dpto into @dpto_id
+  end
 
-	close c_dpto
-	deallocate c_dpto
+  close c_dpto
+  deallocate c_dpto
 end
 
 

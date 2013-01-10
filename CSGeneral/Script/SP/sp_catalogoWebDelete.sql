@@ -14,29 +14,29 @@ sp_tables '%cliente%'
 
 go
 create procedure sp_catalogoWebDelete (
-	@@catw_id int
+  @@catw_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete CatalogoWebItem where catw_id = @@catw_id
-	if @@error <> 0 goto ControlError
+  delete CatalogoWebItem where catw_id = @@catw_id
+  if @@error <> 0 goto ControlError
 
-	delete CatalogoWeb where catw_id = @@catw_id
-	if @@error <> 0 goto ControlError
+  delete CatalogoWeb where catw_id = @@catw_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el catalogo web. sp_catalogoWebDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el catalogo web. sp_catalogoWebDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

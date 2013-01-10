@@ -11,7 +11,7 @@ go
 -- sp_ProductoGetListasPrecio 2
 
 create procedure sp_ProductoGetListasPrecio (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -19,21 +19,21 @@ set nocount on
 
 begin
 
-	select lp.lp_id,
-				 lpi_id,
-				 lpi_precio,
-				 lpi_porcentaje,
-				 lp_nombre
+  select lp.lp_id,
+         lpi_id,
+         lpi_precio,
+         lpi_porcentaje,
+         lp_nombre
 
-	from ListaPrecio lp inner join ListaPrecioItem lpi on lp.lp_id = lpi.lp_id
+  from ListaPrecio lp inner join ListaPrecioItem lpi on lp.lp_id = lpi.lp_id
 
- 	where
+   where
 
      pr_id = @@pr_id
 
-	and lp_tipo = 1
+  and lp_tipo = 1
 
-	order by lp_nombre desc
+  order by lp_nombre desc
 
 end
 

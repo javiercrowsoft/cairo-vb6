@@ -11,7 +11,7 @@ go
 -- sp_ListaPrecioShowDuplicados 3
 
 create procedure sp_ListaPrecioShowDuplicados (
-	@@lp_id	int
+  @@lp_id  int
 )
 as
 
@@ -19,13 +19,13 @@ set nocount on
 
 begin
 
-	if exists(select pr_id from ListaPrecioItem where lp_id = @@lp_id group by pr_id having count(*)>1)
+  if exists(select pr_id from ListaPrecioItem where lp_id = @@lp_id group by pr_id having count(*)>1)
 
-		select 1
+    select 1
 
-	else
+  else
 
-		select 0
+    select 0
 
 end
 

@@ -51,46 +51,46 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_prestacion <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_prestacion, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_prestacion, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_prestacion, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_prestacion, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_prestacion, @clienteID 
-	end else 
-		set @ram_id_prestacion = 0
+    exec sp_ArbGetAllHojas @ram_id_prestacion, @clienteID 
+  end else 
+    set @ram_id_prestacion = 0
 end
 
 if @ram_id_usuario <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
-	end else 
-		set @ram_id_usuario = 0
+    exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
+  end else 
+    set @ram_id_usuario = 0
 end
 
 if @ram_id_agenda <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_agenda, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_agenda, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_agenda, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_agenda, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_agenda, @clienteID 
-	end else 
-		set @ram_id_agenda = 0
+    exec sp_ArbGetAllHojas @ram_id_agenda, @clienteID 
+  end else 
+    set @ram_id_agenda = 0
 end
 
 if @ram_id_dpto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_dpto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_dpto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_dpto, @clienteID 
-	end else 
-		set @ram_id_dpto = 0
+    exec sp_ArbGetAllHojas @ram_id_dpto, @clienteID 
+  end else 
+    set @ram_id_dpto = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -148,55 +148,55 @@ and   (d.dpto_id = @dpto_id or @dpto_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1 -- tbl_id de Proyecto
                   and  rptarb_hojaid = p.pre_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_prestacion = 0)
-			 )
+           (@ram_id_prestacion = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 3 -- tbl_id de Proyecto
                   and  rptarb_hojaid = p.us_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_usuario = 0)
-			 )
+           (@ram_id_usuario = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1015 -- select tbl_id from tabla where tbl_nombrefisico ='agenda'
                   and  rptarb_hojaid = d.dpto_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_dpto = 0)
-			 )
+           (@ram_id_dpto = 0)
+       )
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 2010 -- select tbl_id from tabla where tbl_nombrefisico ='agenda'
                   and  rptarb_hojaid = a.agn_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_agenda = 0)
-			 )
+           (@ram_id_agenda = 0)
+       )
 
 
 GO

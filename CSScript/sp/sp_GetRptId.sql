@@ -5,16 +5,16 @@ go
 
 /* 
 
-	select * from id
+  select * from id
 
-	declare @myId int
-	exec sp_GetRptId @myId output
-	print @myId
+  declare @myId int
+  exec sp_GetRptId @myId output
+  print @myId
 
 */
 
 create procedure sp_GetRptId (
-	@@ClienteID int out
+  @@ClienteID int out
 )
 as
 
@@ -24,10 +24,10 @@ select @@ClienteID = id_NextId from id where Id_Tabla = 'rptArbolRamaHoja' and i
 
 if isnull(@@ClienteID,0) = 0 begin 
 
-	insert into id (id_NextId,id_Tabla,id_CampoId) 
+  insert into id (id_NextId,id_Tabla,id_CampoId) 
   values (0,'rptArbolRamaHoja','rptarb_cliente')
 
-	set @@ClienteID = 1
+  set @@ClienteID = 1
 end
 
 update id 

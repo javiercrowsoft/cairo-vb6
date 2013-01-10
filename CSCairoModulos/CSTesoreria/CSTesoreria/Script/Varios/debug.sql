@@ -15,22 +15,22 @@ rollback transaction
 
 /*
 
-				select c.cue_id, sum(fvi_importe), c.mon_id 
-										from FacturaVentaItem fvi inner join Cuenta c on fvi.cue_id = c.cue_id
-										  												inner join FacturaVentaCobranza fvc on fvc.fv_id = fvi.fv_id
+        select c.cue_id, sum(fvi_importe), c.mon_id 
+                    from FacturaVentaItem fvi inner join Cuenta c on fvi.cue_id = c.cue_id
+                                              inner join FacturaVentaCobranza fvc on fvc.fv_id = fvi.fv_id
         where cobz_id = 16
         group by c.cue_id, c.mon_id
 
 
-				select c.cue_id, sum(fvi_importe), c.mon_id 
-										from FacturaVentaItem fvi inner join Cuenta c on fvi.cue_id = c.cue_id
+        select c.cue_id, sum(fvi_importe), c.mon_id 
+                    from FacturaVentaItem fvi inner join Cuenta c on fvi.cue_id = c.cue_id
         group by c.cue_id, c.mon_id
 
 
-				select * from Cobranza 
-				select * from facturaventacobranza
-				select * from FacturaVentadeuda 
-				select * from FacturaVentapago 
+        select * from Cobranza 
+        select * from facturaventacobranza
+        select * from FacturaVentadeuda 
+        select * from FacturaVentapago 
 
 delete facturaventacobranza
 delete facturaventadeuda

@@ -3,7 +3,7 @@ drop procedure [dbo].[SP_ArbBajarRama]
 
 go
 create procedure SP_ArbBajarRama (
-	@@ram_id int
+  @@ram_id int
 )
 as
 

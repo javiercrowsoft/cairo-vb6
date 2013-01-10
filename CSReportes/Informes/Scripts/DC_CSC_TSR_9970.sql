@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------
 Nombre: Lista las diferencias entre una conciliacion 
-				y el estado actual de la cuenta conciliada
+        y el estado actual de la cuenta conciliada
 ---------------------------------------------------------------------*/
 /*
 
@@ -16,7 +16,7 @@ create procedure DC_CSC_TSR_9970 (
 
   @@us_id    int,
 
-	@@bcoc_id  int
+  @@bcoc_id  int
 
 )as 
 
@@ -24,7 +24,7 @@ begin
 
 set nocount on
 
-	exec frBancoConciliacionDif @@bcoc_id
+  exec frBancoConciliacionDif @@bcoc_id
 
 end
 go

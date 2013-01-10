@@ -6,19 +6,19 @@ create procedure sp_DepartamentosSavePrestacion
 as
 
 begin
-	declare c_depto insensitive cursor for select dpto_id from departamento
-	declare @dpto_id int
-	
-	open c_depto
-	
-	fetch next from c_depto into @dpto_id
-	while @@fetch_status=0
-	begin
-	
-		exec sp_DepartamentoSavePrestacion @dpto_id
-		fetch next from c_depto into @dpto_id
-	end
-	
-	close c_depto
-	deallocate c_depto
+  declare c_depto insensitive cursor for select dpto_id from departamento
+  declare @dpto_id int
+  
+  open c_depto
+  
+  fetch next from c_depto into @dpto_id
+  while @@fetch_status=0
+  begin
+  
+    exec sp_DepartamentoSavePrestacion @dpto_id
+    fetch next from c_depto into @dpto_id
+  end
+  
+  close c_depto
+  deallocate c_depto
 end

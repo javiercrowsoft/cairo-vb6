@@ -8,7 +8,7 @@ go
 
 create procedure SP_RptGetLogosChico (
 
-	@@emp_id int = 0
+  @@emp_id int = 0
 )
 as
 

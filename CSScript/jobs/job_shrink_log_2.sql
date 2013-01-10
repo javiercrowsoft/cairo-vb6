@@ -40,26 +40,26 @@ BEGIN
 
   -- Add the job
   EXECUTE @ReturnCode = msdb.dbo.sp_add_job @job_id = @JobID OUTPUT , 
-					@job_name = N'Shrink Log 2', 
-					@owner_login_name = N'sa', 
-					@description = N'No description available.', 
-					@category_name = N'Database Maintenance', 
-					@enabled = 1, 
-					@notify_level_email = 0, 
-					@notify_level_page = 0, 
-					@notify_level_netsend = 0, 
-					@notify_level_eventlog = 2, 
-					@delete_level= 0
-					
+          @job_name = N'Shrink Log 2', 
+          @owner_login_name = N'sa', 
+          @description = N'No description available.', 
+          @category_name = N'Database Maintenance', 
+          @enabled = 1, 
+          @notify_level_email = 0, 
+          @notify_level_page = 0, 
+          @notify_level_netsend = 0, 
+          @notify_level_eventlog = 2, 
+          @delete_level= 0
+          
   IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback 
 
   -- Add the job steps
   EXECUTE @ReturnCode = msdb.dbo.sp_add_jobstep @job_id = @JobID, 
-					@step_id = 1, 
-					@step_name = N'Paso_0', 
-					@command = N'declare @db         sysname, 
-				@sqlstmt		varchar(5000),
-				@log_size   decimal(15,2)
+          @step_id = 1, 
+          @step_name = N'Paso_0', 
+          @command = N'declare @db         sysname, 
+        @sqlstmt    varchar(5000),
+        @log_size   decimal(15,2)
 
 select  @db = db_name()
 
@@ -81,27 +81,27 @@ from    #loginfo
 
 if @log_size < 90 begin
 
-	set @sqlstmt = ''ALTER DATABASE ''+@db+'' MODIFY FILE (NAME = Cairo_Log, SIZE = 100MB)''
+  set @sqlstmt = ''ALTER DATABASE ''+@db+'' MODIFY FILE (NAME = Cairo_Log, SIZE = 100MB)''
 
-	exec(@sqlstmt)
+  exec(@sqlstmt)
 
 end
 
 drop table #loginfo 
 ', 
-					@database_name = N'__database_name__', 
-					@server = N'', 
-					@database_user_name = N'', 
-					@subsystem = N'TSQL', 
-					@cmdexec_success_code = 0, 
-					@flags = 0, 
-					@retry_attempts = 0, 
-					@retry_interval = 0, 
-					@output_file_name = N'', 
-					@on_success_step_id = 0, 
-					@on_success_action = 1, 
-					@on_fail_step_id = 0, 
-					@on_fail_action = 2
+          @database_name = N'__database_name__', 
+          @server = N'', 
+          @database_user_name = N'', 
+          @subsystem = N'TSQL', 
+          @cmdexec_success_code = 0, 
+          @flags = 0, 
+          @retry_attempts = 0, 
+          @retry_interval = 0, 
+          @output_file_name = N'', 
+          @on_success_step_id = 0, 
+          @on_success_action = 1, 
+          @on_fail_step_id = 0, 
+          @on_fail_action = 2
 
   IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback 
   EXECUTE @ReturnCode = msdb.dbo.sp_update_job @job_id = @JobID, @start_step_id = 1 
@@ -110,18 +110,18 @@ drop table #loginfo
 
   -- Add the job schedules
   EXECUTE @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id = @JobID, 
-					@name = N'Programacion_0', 
-					@enabled = 1, 
-					@freq_type = 4, 
-					@active_start_date = 20070312, 
-					@active_start_time = 233000, 
-					@freq_interval = 1, 
-					@freq_subday_type = 1, 
-					@freq_subday_interval = 0, 
-					@freq_relative_interval = 1, 
-					@freq_recurrence_factor = 0, 
-					@active_end_date = 99991231, 
-					@active_end_time = 235959
+          @name = N'Programacion_0', 
+          @enabled = 1, 
+          @freq_type = 4, 
+          @active_start_date = 20070312, 
+          @active_start_time = 233000, 
+          @freq_interval = 1, 
+          @freq_subday_type = 1, 
+          @freq_subday_interval = 0, 
+          @freq_relative_interval = 1, 
+          @freq_recurrence_factor = 0, 
+          @active_end_date = 99991231, 
+          @active_end_time = 235959
 
   IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback 
 

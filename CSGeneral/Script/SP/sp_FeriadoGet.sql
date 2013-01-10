@@ -12,22 +12,22 @@ drop procedure [dbo].[sp_FeriadoGet ]
 
 go
 create procedure sp_FeriadoGet  (
-	@@fe_id 		int
+  @@fe_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select  fe.*,
-					pa_nombre,
-					pro_nombre
+  select  fe.*,
+          pa_nombre,
+          pro_nombre
 
-	from Feriado fe left join Pais pa 			on fe.pa_id  = pa.pa_id
-									left join Provincia pro on fe.pro_id = pro.pro_id
+  from Feriado fe left join Pais pa       on fe.pa_id  = pa.pa_id
+                  left join Provincia pro on fe.pro_id = pro.pro_id
 
-	where fe_id = @@fe_id
+  where fe_id = @@fe_id
 
 end
 

@@ -10,13 +10,13 @@ GO
 
 */
 create procedure sp_HelpGetFilter (
-	@@bFilterType     tinyint,
-	@@filter 					varchar(255) out
+  @@bFilterType     tinyint,
+  @@filter           varchar(255) out
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
 --/////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,20 +28,20 @@ Public Const c_HelpFilterWildcard = 3
 Public Const c_HelpFilterEndLike = 4
 Public Const c_HelpFilterIsLike = 5
 */
-	set @@filter =
+  set @@filter =
 
-			case @@bFilterType
+      case @@bFilterType
 
-				when 1 then @@filter + '%'
-				when 3 then replace(@@filter,'*','%')
-				when 4 then '%' + @@filter
-				when 5 then @@filter
+        when 1 then @@filter + '%'
+        when 3 then replace(@@filter,'*','%')
+        when 4 then '%' + @@filter
+        when 5 then @@filter
 
-				-- Default
-				-- case 2 then '%' + @@filter + '%'    
-				else				'%' + @@filter + '%'
+        -- Default
+        -- case 2 then '%' + @@filter + '%'    
+        else        '%' + @@filter + '%'
 
-			end
+      end
 
 --/////////////////////////////////////////////////////////////////////////////////////
 

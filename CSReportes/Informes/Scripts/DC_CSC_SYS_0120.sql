@@ -8,16 +8,16 @@ GO
 
 create procedure DC_CSC_SYS_0120 (
 
-	@@us_id 	int,
-	@@arb_id	int
+  @@us_id   int,
+  @@arb_id  int
 
 )
 as
 begin
 
-	exec sp_ArbSortRamas @@arb_id
+  exec sp_ArbSortRamas @@arb_id
 
-	select 1, 'El proceso se ejecuto con éxito' as Info
+  select 1, 'El proceso se ejecuto con éxito' as Info
 
 end
 go

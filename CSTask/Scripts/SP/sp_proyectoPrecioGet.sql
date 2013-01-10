@@ -13,7 +13,7 @@ go
 -- sp_proyectoPrecioGet 1
 
 create procedure sp_proyectoPrecioGet (
-	@@proy_id	int
+  @@proy_id  int
 )
 as
 
@@ -21,15 +21,15 @@ set nocount on
 
 begin
 
-	select        
-					proyp.*,
-	        us_nombre,
-					pr_nombreventa
+  select        
+          proyp.*,
+          us_nombre,
+          pr_nombreventa
 
-	From proyectoPrecio proyp inner join usuario us  on proyp.us_id = us.us_id
-														left 	join producto pr on proyp.pr_id = pr.pr_id
+  From proyectoPrecio proyp inner join usuario us  on proyp.us_id = us.us_id
+                            left   join producto pr on proyp.pr_id = pr.pr_id
 
-	where proy_id = @@proy_id
+  where proy_id = @@proy_id
 
 end
 

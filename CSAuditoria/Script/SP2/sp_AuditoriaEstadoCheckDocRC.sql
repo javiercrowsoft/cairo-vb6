@@ -9,9 +9,9 @@ go
 
 create procedure sp_AuditoriaEstadoCheckDocRC (
 
-	@@rc_id       int,
+  @@rc_id       int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out
+  @@bErrorMsg   varchar(5000) out
 )
 as
 
@@ -19,86 +19,86 @@ begin
 
   set nocount on
 
-	declare @bError tinyint
+  declare @bError tinyint
 
-	set @bError     = 0
-	set @@bSuccess 	= 0
-	set @@bErrorMsg = '@@ERROR_SP:'
+  set @bError     = 0
+  set @@bSuccess   = 0
+  set @@bErrorMsg = '@@ERROR_SP:'
 
-	declare @doct_id      int
-	declare @rc_nrodoc 		varchar(50) 
-	declare @rc_numero 		varchar(50) 
-	declare @est_id       int
+  declare @doct_id      int
+  declare @rc_nrodoc     varchar(50) 
+  declare @rc_numero     varchar(50) 
+  declare @est_id       int
 
-	select 
-						@doct_id 		= doct_id,
-						@rc_nrodoc  = rc_nrodoc,
-						@rc_numero  = convert(varchar,rc_numero),
-						@est_id     = est_id
+  select 
+            @doct_id     = doct_id,
+            @rc_nrodoc  = rc_nrodoc,
+            @rc_numero  = convert(varchar,rc_numero),
+            @est_id     = est_id
 
-	from RemitoCompra where rc_id = @@rc_id
+  from RemitoCompra where rc_id = @@rc_id
 
-	if exists(select * from RemitoCompraItem rci
-						where (rci_pendientefac + (	IsNull(
-																					(select sum(rcfc_cantidad) from RemitoFacturaCompra 
-																					 where rci_id = rci.rci_id),0)
-																			+	IsNull(
-																				  (select sum(rcdc_cantidad)   from RemitoDevolucionCompra 
+  if exists(select * from RemitoCompraItem rci
+            where (rci_pendientefac + (  IsNull(
+                                          (select sum(rcfc_cantidad) from RemitoFacturaCompra 
+                                           where rci_id = rci.rci_id),0)
+                                      +  IsNull(
+                                          (select sum(rcdc_cantidad)   from RemitoDevolucionCompra 
                                            where 
                                                  (rci_id_remito      = rci.rci_id and @doct_id = 4)
                                               or (rci_id_devolucion  = rci.rci_id and @doct_id = 25)
                                           ),0)
-																		) 
-									) <> rci_cantidadaremitir
+                                    ) 
+                  ) <> rci_cantidadaremitir
 
-							and rc_id = @@rc_id
-						)
-	begin
+              and rc_id = @@rc_id
+            )
+  begin
 
-			set @bError = 1
-			set @@bErrorMsg = @@bErrorMsg + 'El pendiente de los items de este remito no coincide con la suma de sus aplicaciones' + char(10)
+      set @bError = 1
+      set @@bErrorMsg = @@bErrorMsg + 'El pendiente de los items de este remito no coincide con la suma de sus aplicaciones' + char(10)
 
-	end
+  end
 
-	if exists(select * from RemitoCompraItem rci
-						where (rci_pendiente + (		IsNull(
-																					(select sum(ocrc_cantidad) from OrdenRemitoCompra 
-																					 where rci_id = rci.rci_id),0)
-																		) 
-									) <> rci_cantidad
+  if exists(select * from RemitoCompraItem rci
+            where (rci_pendiente + (    IsNull(
+                                          (select sum(ocrc_cantidad) from OrdenRemitoCompra 
+                                           where rci_id = rci.rci_id),0)
+                                    ) 
+                  ) <> rci_cantidad
 
-							and rc_id = @@rc_id
-						)
-	begin
+              and rc_id = @@rc_id
+            )
+  begin
 
-			set @bError = 1
-			set @@bErrorMsg = @@bErrorMsg + 'El pendiente de los items de este remito no coincide con la suma de sus aplicaciones' + char(10)
+      set @bError = 1
+      set @@bErrorMsg = @@bErrorMsg + 'El pendiente de los items de este remito no coincide con la suma de sus aplicaciones' + char(10)
 
-	end
+  end
 
-	if 		@est_id <> 7 
-		and @est_id <> 5 
-		and @est_id <> 4 begin
+  if     @est_id <> 7 
+    and @est_id <> 5 
+    and @est_id <> 4 begin
 
-		declare @rc_pendiente	decimal(18,6)
+    declare @rc_pendiente  decimal(18,6)
 
-	  select 
-						@rc_pendiente		= sum(rci_pendientefac)
+    select 
+            @rc_pendiente    = sum(rci_pendientefac)
 
-		from RemitoCompraItem where rc_id = @@rc_id
+    from RemitoCompraItem where rc_id = @@rc_id
 
-		if @rc_pendiente = 0 begin
+    if @rc_pendiente = 0 begin
 
-				set @bError = 1
-				set @@bErrorMsg = @@bErrorMsg + 'El remito no tiene items pendientes y su estado no es finalizado, o anulado, o pendiente de firma' + char(10)
+        set @bError = 1
+        set @@bErrorMsg = @@bErrorMsg + 'El remito no tiene items pendientes y su estado no es finalizado, o anulado, o pendiente de firma' + char(10)
 
-		end
+    end
 
-	end
+  end
 
-	-- No hubo errores asi que todo bien
-	--
-	if @bError = 0 set @@bSuccess = 1
+  -- No hubo errores asi que todo bien
+  --
+  if @bError = 0 set @@bSuccess = 1
 
 end
 GO

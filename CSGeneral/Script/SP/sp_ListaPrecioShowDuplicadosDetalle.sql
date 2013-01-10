@@ -11,7 +11,7 @@ go
 -- sp_ListaPrecioShowDuplicadosDetalle 3
 
 create procedure sp_ListaPrecioShowDuplicadosDetalle (
-	@@lp_id	int
+  @@lp_id  int
 )
 as
 
@@ -19,13 +19,13 @@ set nocount on
 
 begin
 
-	select pr_id, pr_nombrecompra as [Nombre Compra], pr_nombreventa as [Nombre Venta]
-	from Producto
-	where pr_id in (select pr_id 
-									from ListaPrecioItem 
-									where lp_id = @@lp_id 
-									group by pr_id 
-									having count(*)>1)
+  select pr_id, pr_nombrecompra as [Nombre Compra], pr_nombreventa as [Nombre Venta]
+  from Producto
+  where pr_id in (select pr_id 
+                  from ListaPrecioItem 
+                  where lp_id = @@lp_id 
+                  group by pr_id 
+                  having count(*)>1)
 
 end
 

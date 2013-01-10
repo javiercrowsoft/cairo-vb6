@@ -12,8 +12,8 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select * from ComunidadInternetAplicacion
+  select * from ComunidadInternetAplicacion
 
 end

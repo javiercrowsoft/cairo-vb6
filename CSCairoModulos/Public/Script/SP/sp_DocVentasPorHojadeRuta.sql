@@ -17,19 +17,19 @@ set nocount on
 
 begin
 
-	-- Antes que nada valido que este el centro de costo
-	--
-	declare @cfg_valor varchar(5000) 
+  -- Antes que nada valido que este el centro de costo
+  --
+  declare @cfg_valor varchar(5000) 
 
-	exec sp_Cfg_GetValor  'Ventas-General',
-											  'Ventas por Hoja de Ruta',
-											  @cfg_valor out,
-											  0
+  exec sp_Cfg_GetValor  'Ventas-General',
+                        'Ventas por Hoja de Ruta',
+                        @cfg_valor out,
+                        0
   set @cfg_valor = IsNull(@cfg_valor,0)
-	if convert(int,@cfg_valor) <> 0 
-		select 1
-	else
-		select 0
+  if convert(int,@cfg_valor) <> 0 
+    select 1
+  else
+    select 0
 end
 
 go

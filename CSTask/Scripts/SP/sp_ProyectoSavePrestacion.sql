@@ -16,7 +16,7 @@ drop procedure [dbo].[sp_ProyectoSavePrestacion]
 
 go
 create procedure sp_ProyectoSavePrestacion (
-	@@proy_id 		int
+  @@proy_id     int
 )
 as
 
@@ -25,61 +25,61 @@ begin
   declare @pre_id int
   declare @proy_nombre varchar(100)
 
-  declare @pre_id_listTarea 		int
-  declare @pre_id_editTarea			int
-  declare @pre_id_delTarea			int
-  declare @pre_id_addTarea			int
-  declare @pre_id_listTareaP		int
-  declare @pre_id_editTareaP		int
-  declare @pre_id_delTareaP			int
-  declare @pre_id_listTareaD		int
-  declare @pre_id_editTareaD		int
-  declare @pre_id_delTareaD			int
-  declare @pre_id_listHoraD			int
-  declare @pre_id_listHora			int
-  declare @pre_id_editHoraP			int
-  declare @pre_id_delHoraP			int
-  declare @pre_id_editHora			int
-  declare @pre_id_delHora				int
-  declare @pre_id_addHora				int
-  declare @pre_id_tomarTarea		int
-  declare @pre_id_asignarTarea	int
-  declare @pre_id_aprobarTarea	int
+  declare @pre_id_listTarea     int
+  declare @pre_id_editTarea      int
+  declare @pre_id_delTarea      int
+  declare @pre_id_addTarea      int
+  declare @pre_id_listTareaP    int
+  declare @pre_id_editTareaP    int
+  declare @pre_id_delTareaP      int
+  declare @pre_id_listTareaD    int
+  declare @pre_id_editTareaD    int
+  declare @pre_id_delTareaD      int
+  declare @pre_id_listHoraD      int
+  declare @pre_id_listHora      int
+  declare @pre_id_editHoraP      int
+  declare @pre_id_delHoraP      int
+  declare @pre_id_editHora      int
+  declare @pre_id_delHora        int
+  declare @pre_id_addHora        int
+  declare @pre_id_tomarTarea    int
+  declare @pre_id_asignarTarea  int
+  declare @pre_id_aprobarTarea  int
 
 
 
-  select  @proy_nombre 						= proy_nombre,
+  select  @proy_nombre             = proy_nombre,
 
-					@pre_id_listTarea				= pre_id_listTarea,
-					@pre_id_editTarea				= pre_id_editTarea,
-					@pre_id_delTarea				= pre_id_delTarea,
-					@pre_id_addTarea				= pre_id_addTarea,
-					@pre_id_editTareaP			= pre_id_editTareaP,
-					@pre_id_delTareaP				= pre_id_delTareaP,
-					@pre_id_listTareaD			= pre_id_listTareaD,
-					@pre_id_editTareaD			= pre_id_editTareaD,
-					@pre_id_delTareaD				= pre_id_delTareaD,
-					@pre_id_listHoraD				= pre_id_listHoraD,
-					@pre_id_listHora				= pre_id_listHora,
-					@pre_id_editHora				= pre_id_editHora,
-					@pre_id_editHoraP				= pre_id_editHoraP,
-					@pre_id_delHoraP				= pre_id_delHoraP,
-					@pre_id_delHora					= pre_id_delHora,
-					@pre_id_addHora					= pre_id_addHora,
-					@pre_id_tomarTarea			= pre_id_tomarTarea,
-					@pre_id_asignarTarea		= pre_id_asignarTarea,
-					@pre_id_aprobarTarea		= pre_id_aprobarTarea
+          @pre_id_listTarea        = pre_id_listTarea,
+          @pre_id_editTarea        = pre_id_editTarea,
+          @pre_id_delTarea        = pre_id_delTarea,
+          @pre_id_addTarea        = pre_id_addTarea,
+          @pre_id_editTareaP      = pre_id_editTareaP,
+          @pre_id_delTareaP        = pre_id_delTareaP,
+          @pre_id_listTareaD      = pre_id_listTareaD,
+          @pre_id_editTareaD      = pre_id_editTareaD,
+          @pre_id_delTareaD        = pre_id_delTareaD,
+          @pre_id_listHoraD        = pre_id_listHoraD,
+          @pre_id_listHora        = pre_id_listHora,
+          @pre_id_editHora        = pre_id_editHora,
+          @pre_id_editHoraP        = pre_id_editHoraP,
+          @pre_id_delHoraP        = pre_id_delHoraP,
+          @pre_id_delHora          = pre_id_delHora,
+          @pre_id_addHora          = pre_id_addHora,
+          @pre_id_tomarTarea      = pre_id_tomarTarea,
+          @pre_id_asignarTarea    = pre_id_asignarTarea,
+          @pre_id_aprobarTarea    = pre_id_aprobarTarea
 
 
-	from 
-					Proyecto 
-	
-	where 
-					proy_id = @@proy_id
+  from 
+          Proyecto 
+  
+  where 
+          proy_id = @@proy_id
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_listTarea	
+  set @pre_id = @pre_id_listTarea  
 
   if @pre_id is null begin
 
@@ -101,7 +101,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_editTarea	
+  set @pre_id = @pre_id_editTarea  
 
   if @pre_id is null begin
 
@@ -122,7 +122,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_delTarea	
+  set @pre_id = @pre_id_delTarea  
 
   if @pre_id is null begin
 
@@ -143,7 +143,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_addTarea	
+  set @pre_id = @pre_id_addTarea  
 
   if @pre_id is null begin
 
@@ -164,7 +164,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_editTareaP
+  set @pre_id = @pre_id_editTareaP
 
   if @pre_id is null begin
 
@@ -185,7 +185,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_delTareaP
+  set @pre_id = @pre_id_delTareaP
 
   if @pre_id is null begin
 
@@ -206,7 +206,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_listTareaD
+  set @pre_id = @pre_id_listTareaD
 
   if @pre_id is null begin
 
@@ -227,7 +227,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_editTareaD
+  set @pre_id = @pre_id_editTareaD
 
   if @pre_id is null begin
 
@@ -248,7 +248,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_delTareaD
+  set @pre_id = @pre_id_delTareaD
 
   if @pre_id is null begin
 
@@ -269,7 +269,7 @@ begin
 
   --//////////////////////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_listHoraD
+  set @pre_id = @pre_id_listHoraD
 
   if @pre_id is null begin
 
@@ -290,7 +290,7 @@ begin
 
   --////////////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_listHora
+  set @pre_id = @pre_id_listHora
 
   if @pre_id is null begin
 
@@ -311,7 +311,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_editHora
+  set @pre_id = @pre_id_editHora
 
   if @pre_id is null begin
 
@@ -332,7 +332,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_delHora
+  set @pre_id = @pre_id_delHora
 
   if @pre_id is null begin
 
@@ -353,7 +353,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_editHoraP
+  set @pre_id = @pre_id_editHoraP
 
   if @pre_id is null begin
 
@@ -374,7 +374,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_delHoraP
+  set @pre_id = @pre_id_delHoraP
 
   if @pre_id is null begin
 
@@ -395,7 +395,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_addHora
+  set @pre_id = @pre_id_addHora
 
   if @pre_id is null begin
 
@@ -416,7 +416,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_tomarTarea
+  set @pre_id = @pre_id_tomarTarea
 
   if @pre_id is null begin
 
@@ -437,7 +437,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_asignarTarea
+  set @pre_id = @pre_id_asignarTarea
 
   if @pre_id is null begin
 
@@ -458,7 +458,7 @@ begin
 
   --///////////////////////////////////////////////////////////////////////////////////
   --
-	set @pre_id = @pre_id_aprobarTarea
+  set @pre_id = @pre_id_aprobarTarea
 
   if @pre_id is null begin
 

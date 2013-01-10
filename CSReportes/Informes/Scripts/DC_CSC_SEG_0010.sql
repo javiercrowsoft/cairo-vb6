@@ -5,7 +5,7 @@ Nombre: Permisos por usuario
 if exists (select * from sysobjects where id = object_id(N'[dbo].[DC_CSC_SEG_0010]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 drop procedure [dbo].[DC_CSC_SEG_0010]
 /*
-	 DC_CSC_SEG_0010 1,'0'
+   DC_CSC_SEG_0010 1,'0'
 */
 go
 create procedure DC_CSC_SEG_0010 (
@@ -28,13 +28,13 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_Usuario <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Usuario, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Usuario, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Usuario, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Usuario, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Usuario, @clienteID 
-	end else 
-		set @ram_id_Usuario = 0
+    exec sp_ArbGetAllHojas @ram_id_Usuario, @clienteID 
+  end else 
+    set @ram_id_Usuario = 0
 end
 /*- ///////////////////////////////////////////////////////////////////////
 
@@ -64,17 +64,17 @@ FIN PRIMERA PARTE DE ARBOLES
           (usuario.us_id = @us_id_usuario or @us_id_usuario=0)
     
     and   (
-    					(exists(select rptarb_hojaid 
+              (exists(select rptarb_hojaid 
                       from rptArbolRamaHoja 
                       where
                            rptarb_cliente = @clienteID
                       and  tbl_id = 3 -- tbl_id de Usuario
                       and  rptarb_hojaid = usuario.us_id
-    							   ) 
+                     ) 
                )
             or 
-    					 (@ram_id_Usuario = 0)
-    			 )
+               (@ram_id_Usuario = 0)
+           )
 
 union all
 
@@ -103,20 +103,20 @@ union all
           (usuario.us_id = @us_id_usuario or @us_id_usuario=0)
     
     and   (
-    					(exists(select rptarb_hojaid 
+              (exists(select rptarb_hojaid 
                       from rptArbolRamaHoja 
                       where
                            rptarb_cliente = @clienteID
                       and  tbl_id = 3 -- tbl_id de Usuario
                       and  rptarb_hojaid = usuario.us_id
-    							   ) 
+                     ) 
                )
             or 
-    					 (@ram_id_Usuario = 0)
-    			 )
+               (@ram_id_Usuario = 0)
+           )
 
 order by
-			us_nombre,
+      us_nombre,
       pre_grupo,
       pre_grupo1,
       pre_grupo2,

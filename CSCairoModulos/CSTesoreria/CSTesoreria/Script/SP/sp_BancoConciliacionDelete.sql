@@ -7,28 +7,28 @@ go
 
 */
 create procedure sp_BancoConciliacionDelete  (
-	@@bcoc_id    int
+  @@bcoc_id    int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete BancoConciliacionItem where bcoc_id = @@bcoc_id
-	if @@error <> 0 goto ControlError
+  delete BancoConciliacionItem where bcoc_id = @@bcoc_id
+  if @@error <> 0 goto ControlError
 
-	delete BancoConciliacionItem where bcoc_id = @@bcoc_id
-	if @@error <> 0 goto ControlError
+  delete BancoConciliacionItem where bcoc_id = @@bcoc_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la conciliacion bancaria. sp_BancoConciliacionDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la conciliacion bancaria. sp_BancoConciliacionDelete.', 16, 1)
+  rollback transaction  
 
-end				
+end        

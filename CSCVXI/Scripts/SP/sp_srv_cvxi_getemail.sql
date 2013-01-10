@@ -8,7 +8,7 @@ go
 
 create procedure sp_srv_cvxi_getemail (
 
-	@@cmie_id int
+  @@cmie_id int
 
 )
 
@@ -16,10 +16,10 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select * 
-	from ComunidadInternetMail
-	where cmie_id = @@cmie_id
+  select * 
+  from ComunidadInternetMail
+  where cmie_id = @@cmie_id
 
 end

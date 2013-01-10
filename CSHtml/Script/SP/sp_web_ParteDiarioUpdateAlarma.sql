@@ -13,31 +13,31 @@ partediario where ptd_titulo = 'Reporte de cuentas corrientes por remito (Cristi
 go
 create procedure sp_web_ParteDiarioUpdateAlarma (
   @@us_id                       int,
-	@@ptd_id 											int,
-	@@ptd_alarma									datetime,
-	@@ptd_cumplida								tinyint,
-	@@ptd_horaini                 datetime,
-  @@rtn                   			int out	
+  @@ptd_id                       int,
+  @@ptd_alarma                  datetime,
+  @@ptd_cumplida                tinyint,
+  @@ptd_horaini                 datetime,
+  @@rtn                         int out  
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   /* select tbl_id,tbl_nombrefisico from tabla where tbl_nombrefisico like '%partediario%'*/
   exec sp_HistoriaUpdate 15002, @@ptd_id, @@us_id, 1
 
-	set @@ptd_alarma									= IsNull(@@ptd_alarma,'19000101')
-	set @@ptd_cumplida								= IsNull(@@ptd_cumplida,1)
-	set @@ptd_horaini                 = IsNull(@@ptd_horaini,'19000101')
+  set @@ptd_alarma                  = IsNull(@@ptd_alarma,'19000101')
+  set @@ptd_cumplida                = IsNull(@@ptd_cumplida,1)
+  set @@ptd_horaini                 = IsNull(@@ptd_horaini,'19000101')
 
   if @@ptd_cumplida = 3 begin
 
-  	update ParteDiario set
-  													ptd_cumplida	= @@ptd_cumplida
+    update ParteDiario set
+                            ptd_cumplida  = @@ptd_cumplida
   
-  	where ptd_id = @@ptd_id
+    where ptd_id = @@ptd_id
 
   end else begin
 
@@ -45,24 +45,24 @@ begin
 
     set @ptd_alarma   = getdate() 
 
-		declare @dias int
-		set @dias = DateDiff(dd,'19000101',@@ptd_alarma)
+    declare @dias int
+    set @dias = DateDiff(dd,'19000101',@@ptd_alarma)
 
-	  if @dias > 0
-	    set @ptd_alarma = DateAdd(dd,@dias,@ptd_alarma)
+    if @dias > 0
+      set @ptd_alarma = DateAdd(dd,@dias,@ptd_alarma)
 
     set @ptd_alarma = DateAdd(hh,DatePart(hh,@@ptd_horaini),@ptd_alarma)
     set @ptd_alarma = DateAdd(n,DatePart(n,@@ptd_horaini),@ptd_alarma)
 
-  	update ParteDiario set
-  													ptd_alarma		= @ptd_alarma
+    update ParteDiario set
+                            ptd_alarma    = @ptd_alarma
   
-  	where ptd_id = @@ptd_id
+    where ptd_id = @@ptd_id
   end
 
   exec sp_web_ParteDiarioUpdateAviso @@ptd_id
 
-	set @@rtn = @@ptd_id
+  set @@rtn = @@ptd_id
 
 end
 

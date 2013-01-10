@@ -12,20 +12,20 @@ select * from cliente where cli_id = 26
 
 */
 create procedure sp_DocFacturaVentaGetAplic (
-	@@emp_id      int,
-	@@fv_id 			int,
-	@@tipo        tinyint    /* 1: Vencimientos 
-														  2: Aplicaciones Cobranzas y Notas de credito 
-															3: Aplicaciones posibles (Cobranzas y Notas de credito) 
-															4: Pendientes Items (Articulos)
-															5: Aplicaciones Pedidos y Remitos
-															6: Aplicaciones posibles (Pedidos y Remitos)
-														*/
+  @@emp_id      int,
+  @@fv_id       int,
+  @@tipo        tinyint    /* 1: Vencimientos 
+                              2: Aplicaciones Cobranzas y Notas de credito 
+                              3: Aplicaciones posibles (Cobranzas y Notas de credito) 
+                              4: Pendientes Items (Articulos)
+                              5: Aplicaciones Pedidos y Remitos
+                              6: Aplicaciones posibles (Pedidos y Remitos)
+                            */
 )
 as
 begin
 
-	exec sp_DocFacturaVentaGetAplicCliente @@emp_id, @@fv_id, @@tipo
+  exec sp_DocFacturaVentaGetAplicCliente @@emp_id, @@fv_id, @@tipo
 
 end
 

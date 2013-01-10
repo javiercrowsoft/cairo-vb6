@@ -10,18 +10,18 @@ select * from aaarbaweb..inscripcion
 
 go
 create procedure sp_web_inscripcionIsLASRA (
-	@@insc_id	int
+  @@insc_id  int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if exists(select * from aaarbaweb..Inscripcion insc where insc_id = @@insc_id and AABAinsc_lasra <> 0)
-		select 1
-	else
-		select 0
+  if exists(select * from aaarbaweb..Inscripcion insc where insc_id = @@insc_id and AABAinsc_lasra <> 0)
+    select 1
+  else
+    select 0
 
 end
 

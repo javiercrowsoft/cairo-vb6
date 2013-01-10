@@ -9,28 +9,28 @@ drop procedure [dbo].[sp_DocFacturaComprasSetEstado]
 
 go
 create procedure sp_DocFacturaComprasSetEstado (
-	@@desde       datetime = '19900101',
-	@@hasta       datetime = '21000101'
+  @@desde       datetime = '19900101',
+  @@hasta       datetime = '21000101'
 )
 as
 
 begin
 
-	declare @fc_id int
+  declare @fc_id int
 
-	declare c_compras insensitive cursor for 
-		select fc_id from facturacompra where fc_fecha between @@desde and @@hasta
+  declare c_compras insensitive cursor for 
+    select fc_id from facturacompra where fc_fecha between @@desde and @@hasta
 
-	open c_compras
+  open c_compras
 
-	fetch next from c_compras into @fc_id
-	while @@fetch_status = 0 begin
+  fetch next from c_compras into @fc_id
+  while @@fetch_status = 0 begin
 
-		exec sp_DocFacturaCompraSetEstado @fc_id
+    exec sp_DocFacturaCompraSetEstado @fc_id
 
-		fetch next from c_compras into @fc_id
+    fetch next from c_compras into @fc_id
   end
 
-	close c_compras
-	deallocate c_compras
+  close c_compras
+  deallocate c_compras
 end

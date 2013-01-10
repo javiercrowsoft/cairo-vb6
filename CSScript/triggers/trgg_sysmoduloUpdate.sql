@@ -11,7 +11,7 @@ CREATE TRIGGER [trgg_sysmoduloUpdate] ON [dbo].[SysModulo]
 FOR INSERT, UPDATE
 AS
 
-	update sysmodulo set modificado = getdate() where sysm_id in (select sysm_id from inserted)
+  update sysmodulo set modificado = getdate() where sysm_id in (select sysm_id from inserted)
 
 GO
 SET QUOTED_IDENTIFIER OFF 

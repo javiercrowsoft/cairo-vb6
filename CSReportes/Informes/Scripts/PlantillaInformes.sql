@@ -67,7 +67,7 @@ TABLA_DEL_LISTADO_15
 TBL_ID_TABLA1     Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
 TBL_ID_TABLA2     Para saber el id de la tabla a listar usen:
 TBL_ID_TABLA3
-TBL_ID_TABLA4							select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%TABLA_DEL_LISTADO%'
+TBL_ID_TABLA4              select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%TABLA_DEL_LISTADO%'
 TBL_ID_TABLA5
 TBL_ID_TABLA6
 TBL_ID_TABLA7
@@ -102,18 +102,18 @@ go
 create procedure NOMBRE_SP (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@TABLA_ID1 varchar(255),
 @@TABLA_ID2 varchar(255),
-@@TABLA_ID3	varchar(255),
-@@TABLA_ID4	varchar(255),
-@@TABLA_ID5	varchar(255),
-@@TABLA_ID6	varchar(255),
-@@TABLA_ID7	varchar(255),
-@@TABLA_ID8	varchar(255),
-@@TABLA_ID9	varchar(255),
+@@TABLA_ID3  varchar(255),
+@@TABLA_ID4  varchar(255),
+@@TABLA_ID5  varchar(255),
+@@TABLA_ID6  varchar(255),
+@@TABLA_ID7  varchar(255),
+@@TABLA_ID8  varchar(255),
+@@TABLA_ID9  varchar(255),
 @@TABLA_ID_10 varchar(255),
 @@TABLA_ID_11 varchar(255),
 @@TABLA_ID_12 varchar(255),
@@ -185,167 +185,167 @@ exec sp_GetRptId @clienteID out
 
 if @RAM_ID_TABLA1 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA1, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA1, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA1, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA1, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA1, @clienteID 
-	end else 
-		set @RAM_ID_TABLA1 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA1, @clienteID 
+  end else 
+    set @RAM_ID_TABLA1 = 0
 end
 
 if @RAM_ID_TABLA2 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA2, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA2, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA2, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA2, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA2, @clienteID 
-	end else 
-		set @RAM_ID_TABLA2 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA2, @clienteID 
+  end else 
+    set @RAM_ID_TABLA2 = 0
 end
 
 if @RAM_ID_TABLA3 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA3, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA3, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA3, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA3, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA3, @clienteID 
-	end else 
-		set @RAM_ID_TABLA3 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA3, @clienteID 
+  end else 
+    set @RAM_ID_TABLA3 = 0
 end
 
 if @RAM_ID_TABLA4 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA4, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA4, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA4, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA4, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA4, @clienteID 
-	end else 
-		set @RAM_ID_TABLA4 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA4, @clienteID 
+  end else 
+    set @RAM_ID_TABLA4 = 0
 end
 
 if @RAM_ID_TABLA5 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA5, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA5, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA5, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA5, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA5, @clienteID 
-	end else 
-		set @RAM_ID_TABLA5 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA5, @clienteID 
+  end else 
+    set @RAM_ID_TABLA5 = 0
 end
 
 if @RAM_ID_TABLA6 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA6, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA6, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA6, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA6, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA6, @clienteID 
-	end else 
-		set @RAM_ID_TABLA6 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA6, @clienteID 
+  end else 
+    set @RAM_ID_TABLA6 = 0
 end
 
 if @RAM_ID_TABLA7 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA7, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA7, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA7, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA7, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA7, @clienteID 
-	end else 
-		set @RAM_ID_TABLA7 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA7, @clienteID 
+  end else 
+    set @RAM_ID_TABLA7 = 0
 end
 
 if @RAM_ID_TABLA8 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA8, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA8, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA8, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA8, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA8, @clienteID 
-	end else 
-		set @RAM_ID_TABLA8 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA8, @clienteID 
+  end else 
+    set @RAM_ID_TABLA8 = 0
 end
 
 if @RAM_ID_TABLA9 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA9, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA9, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA9, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA9, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA9, @clienteID 
-	end else 
-		set @RAM_ID_TABLA9 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA9, @clienteID 
+  end else 
+    set @RAM_ID_TABLA9 = 0
 end
 
 if @RAM_ID_TABLA_10 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA_10, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA_10, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA_10, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA_10, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA_10, @clienteID 
-	end else 
-		set @RAM_ID_TABLA_10 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA_10, @clienteID 
+  end else 
+    set @RAM_ID_TABLA_10 = 0
 end
 
 if @RAM_ID_TABLA_11 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA_11, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA_11, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA_11, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA_11, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA_11, @clienteID 
-	end else 
-		set @RAM_ID_TABLA_11 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA_11, @clienteID 
+  end else 
+    set @RAM_ID_TABLA_11 = 0
 end
 
 if @RAM_ID_TABLA_12 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA_12, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA_12, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA_12, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA_12, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA_12, @clienteID 
-	end else 
-		set @RAM_ID_TABLA_12 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA_12, @clienteID 
+  end else 
+    set @RAM_ID_TABLA_12 = 0
 end
 
 if @RAM_ID_TABLA_13 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA_13, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA_13, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA_13, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA_13, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA_13, @clienteID 
-	end else 
-		set @RAM_ID_TABLA_13 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA_13, @clienteID 
+  end else 
+    set @RAM_ID_TABLA_13 = 0
 end
 
 if @RAM_ID_TABLA_14 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA_14, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA_14, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA_14, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA_14, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA_14, @clienteID 
-	end else 
-		set @RAM_ID_TABLA_14 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA_14, @clienteID 
+  end else 
+    set @RAM_ID_TABLA_14 = 0
 end
 
 if @RAM_ID_TABLA_15 <> 0 begin
 
-	exec sp_ArbGetGroups @RAM_ID_TABLA_15, @clienteID, @@us_id
+  exec sp_ArbGetGroups @RAM_ID_TABLA_15, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA_15, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA_15, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA_15, @clienteID 
-	end else 
-		set @RAM_ID_TABLA_15 = 0
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA_15, @clienteID 
+  end else 
+    set @RAM_ID_TABLA_15 = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -357,22 +357,22 @@ FIN PRIMERA PARTE DE ARBOLES
 
 select 
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
 TABLA_DEL_LISTADO
 
 where 
 
-				  NOMBRE_CAMPO_FECHA >= @@Fini
-			and	NOMBRE_CAMPO_FECHA <= @@Ffin 
+          NOMBRE_CAMPO_FECHA >= @@Fini
+      and  NOMBRE_CAMPO_FECHA <= @@Ffin 
 
 -- Validar usuario - empresa
-			and (
-						exists(select * from EmpresaUsuario where emp_id = documento.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = documento.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -398,198 +398,198 @@ and   (TABLA_DEL_LISTADO_15.TABLA_ID_15 = @TABLA_ID_15 or @TABLA_ID_15=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA1 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID1
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA1 = 0)
-			 )
+           (@RAM_ID_TABLA1 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA2 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID2
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA2 = 0)
-			 )
+           (@RAM_ID_TABLA2 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA3 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID3
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA3 = 0)
-			 )
+           (@RAM_ID_TABLA3 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA4 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID4
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA4 = 0)
-			 )
+           (@RAM_ID_TABLA4 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA5 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID5
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA5 = 0)
-			 )
+           (@RAM_ID_TABLA5 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA6 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID6
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA6 = 0)
-			 )
+           (@RAM_ID_TABLA6 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA7 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID7
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA7 = 0)
-			 )
+           (@RAM_ID_TABLA7 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA8 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID8
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA8 = 0)
-			 )
+           (@RAM_ID_TABLA8 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA9 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID9
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA9 = 0)
-			 )
+           (@RAM_ID_TABLA9 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA_10 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID_10
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA_10 = 0)
-			 )
+           (@RAM_ID_TABLA_10 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA_11 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID_11
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA_11 = 0)
-			 )
+           (@RAM_ID_TABLA_11 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA_12 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID_12
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA_12 = 0)
-			 )
+           (@RAM_ID_TABLA_12 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA_13 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID_13
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA_13 = 0)
-			 )
+           (@RAM_ID_TABLA_13 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA_14 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID_14
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA_14 = 0)
-			 )
+           (@RAM_ID_TABLA_14 = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA_15 -- tbl_id de Proyecto
                   and  rptarb_hojaid = TABLA_PRINCIPAL.TABLA_ID_15
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA_15 = 0)
-			 )
+           (@RAM_ID_TABLA_15 = 0)
+       )
 end
 go

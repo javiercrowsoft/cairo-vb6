@@ -13,18 +13,18 @@ select max(opk_numero) from OrdenProdKit
 */
 
 create procedure sp_DocOrdenProdKitGet (
-	@@emp_id   int,
-	@@opk_id   int,
+  @@emp_id   int,
+  @@opk_id   int,
   @@us_id    int
 )
 as
 
 begin
 
-declare @bEditable 		tinyint
-declare @editMsg   		varchar(255)
-declare @doc_id    		int
-declare @ta_Mascara 	varchar(100)
+declare @bEditable     tinyint
+declare @editMsg       varchar(255)
+declare @doc_id        int
+declare @ta_Mascara   varchar(100)
 declare @ta_Propuesto tinyint
 
 /*
@@ -36,7 +36,7 @@ declare @ta_Propuesto tinyint
 */
   select @doc_id = doc_id from OrdenProdKit where opk_id = @@opk_id
 
-	exec sp_talonarioGetPropuesto @doc_id, @ta_Mascara out, @ta_Propuesto out
+  exec sp_talonarioGetPropuesto @doc_id, @ta_Mascara out, @ta_Propuesto out
   exec sp_DocOrdenProdKitEditableGet @@emp_id, @@opk_id, @@us_id, @bEditable out, @editMsg out
 
 /*
@@ -46,19 +46,19 @@ declare @ta_Propuesto tinyint
 //                                                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
-	select 
-			OrdenProdKit.*,
+  select 
+      OrdenProdKit.*,
       suc_nombre,
       doc_nombre,
       depl_nombre,
-      @bEditable				  as editable,
+      @bEditable          as editable,
       @editMsg            as editMsg,
-      @ta_Propuesto 			as TaPropuesto,
-			@ta_Mascara					as TaMascara
-	
-	from 
-			OrdenProdKit inner join documento      on OrdenProdKit.doc_id  = documento.doc_id
-									 inner join sucursal       on OrdenProdKit.suc_id  = sucursal.suc_id
+      @ta_Propuesto       as TaPropuesto,
+      @ta_Mascara          as TaMascara
+  
+  from 
+      OrdenProdKit inner join documento      on OrdenProdKit.doc_id  = documento.doc_id
+                   inner join sucursal       on OrdenProdKit.suc_id  = sucursal.suc_id
                    inner join depositologico on OrdenProdKit.depl_id = depositologico.depl_id
 
   where opk_id = @@opk_id

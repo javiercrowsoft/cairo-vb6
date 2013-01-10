@@ -12,13 +12,13 @@ drop procedure [dbo].[sp_DepartamentoApplySecSubDpto]
 
 go
 create procedure sp_DepartamentoApplySecSubDpto (
-	@@per_id 		int
+  @@per_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   declare @dpto_id   int
   declare @n         int
@@ -48,22 +48,22 @@ begin
       or  pre_id_borrardocumentos    = @pre_id
       or  pre_id_editardocumentos    = @pre_id
 
-	create table #tmpDpto (
+  create table #tmpDpto (
                          dpto_id      int not null,
                          n            int
                         )
   set @n = 1
   insert into #tmpDpto (dpto_id,n) values(@dpto_id, @n)
 
-	while exists(select * from Departamento inner join #tmpDpto on IsNull(dpto_id_padre,0) = #tmpDpto.dpto_id where n = @n)
-	begin
+  while exists(select * from Departamento inner join #tmpDpto on IsNull(dpto_id_padre,0) = #tmpDpto.dpto_id where n = @n)
+  begin
 
     insert into #tmpDpto (dpto_id, n) 
     select d.dpto_id, @n+1 from Departamento d inner join #tmpDpto on IsNull(dpto_id_padre,0) = #tmpDpto.dpto_id where n = @n
 
     set @n=@n+1
 
-	end
+  end
 
 
   declare @pre_id_vernoticias           int
@@ -76,15 +76,15 @@ begin
   declare @pre_id_editardocumentos      int
   declare @pre_tipo                     tinyint
 
-	select 
+  select 
           @pre_id_vernoticias       = pre_id_vernoticias,
-        	@pre_id_editarnoticias    = pre_id_editarnoticias,
-        	@pre_id_vertareas         = pre_id_vertareas,
-        	@pre_id_asignartareas     = pre_id_asignartareas,
-        	@pre_id_verdocumentos     = pre_id_verdocumentos,
-        	@pre_id_agregardocumentos = pre_id_agregardocumentos,
-        	@pre_id_borrardocumentos  = pre_id_borrardocumentos,
-        	@pre_id_editardocumentos  = pre_id_editardocumentos  
+          @pre_id_editarnoticias    = pre_id_editarnoticias,
+          @pre_id_vertareas         = pre_id_vertareas,
+          @pre_id_asignartareas     = pre_id_asignartareas,
+          @pre_id_verdocumentos     = pre_id_verdocumentos,
+          @pre_id_agregardocumentos = pre_id_agregardocumentos,
+          @pre_id_borrardocumentos  = pre_id_borrardocumentos,
+          @pre_id_editardocumentos  = pre_id_editardocumentos  
 
   from Departamento where dpto_id = @dpto_id
 
@@ -136,10 +136,10 @@ begin
   close c_dpto
   deallocate c_dpto
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un guardar los permisos para el departamento. sp_DepartamentoApplySecSubDpto.', 16, 1)
+  raiserror ('Ha ocurrido un guardar los permisos para el departamento. sp_DepartamentoApplySecSubDpto.', 16, 1)
 
 end
 go

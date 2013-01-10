@@ -22,12 +22,12 @@ and opg.emp_id = 2
 
 select @saldo = sum(asi_debe)-sum(asi_haber), @debe = sum(asi_debe), @haber = sum(asi_haber) 
 from asientoitem asi  inner join asiento ast on asi.as_id = ast.as_id
-											inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
+                      inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
 where cue_id in (
-									select cue_id from cuenta 
-									where --cue_nombre like '%acree%'
-												cuec_id = 8
-								)
+                  select cue_id from cuenta 
+                  where --cue_nombre like '%acree%'
+                        cuec_id = 8
+                )
 and as_fecha between '20050101' and '20051231'
 and cico_id = 1
 and doc.emp_id = 2
@@ -35,12 +35,12 @@ and doct_id_cliente in (2,8,10,16)
 and doct_id_cliente is not null
 
 select @deuda as Deuda, 
-			 @pagos as Pagos, 
-			 @deuda-@pagos as saldo, 
-			 @deuda-@pagos+@saldo as diferencia,
-			 @saldo as 'saldo contable',
-			 @debe 	as debe,
-			 @haber as haber
+       @pagos as Pagos, 
+       @deuda-@pagos as saldo, 
+       @deuda-@pagos+@saldo as diferencia,
+       @saldo as 'saldo contable',
+       @debe   as debe,
+       @haber as haber
 
 ------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------
@@ -53,14 +53,14 @@ select @deuda as Deuda,
 
 select doct_id_cliente, doct_nombre, cue_nombre as cuenta, sum(asi_debe)-sum(asi_haber) as saldo
 from asientoitem asi  inner join asiento ast on asi.as_id = ast.as_id
-											inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
-											inner join cuenta cue on asi.cue_id = cue.cue_id
-											left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
+                      inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
+                      inner join cuenta cue on asi.cue_id = cue.cue_id
+                      left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
 where asi.cue_id in (
-									select cue_id from cuenta 
-									where --cue_nombre like '%acree%'
-												cuec_id = 8
-								)
+                  select cue_id from cuenta 
+                  where --cue_nombre like '%acree%'
+                        cuec_id = 8
+                )
 and as_fecha between '20050101' and '20051231'
 and cico_id = 1
 and doc.emp_id = 2
@@ -73,14 +73,14 @@ group by doct_id_cliente, doct_nombre, cue_nombre
 
 select cue_nombre as cuenta, sum(asi_debe)-sum(asi_haber) as saldo
 from asientoitem asi  inner join asiento ast on asi.as_id = ast.as_id
-											inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
-											inner join cuenta cue on asi.cue_id = cue.cue_id
-											left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
+                      inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
+                      inner join cuenta cue on asi.cue_id = cue.cue_id
+                      left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
 where asi.cue_id in (
-									select cue_id from cuenta 
-									where --cue_nombre like '%acree%'
-												cuec_id = 8
-								)
+                  select cue_id from cuenta 
+                  where --cue_nombre like '%acree%'
+                        cuec_id = 8
+                )
 and as_fecha between '20050101' and '20051231'
 and cico_id = 1
 and doc.emp_id = 2
@@ -101,14 +101,14 @@ group by cue_nombre
 
 select doct_id_cliente, doc_id_cliente, doct_nombre, cue_nombre as cuenta, sum(asi_debe)-sum(asi_haber) as saldo
 from asientoitem asi  inner join asiento ast on asi.as_id = ast.as_id
-											inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
-											inner join cuenta cue on asi.cue_id = cue.cue_id
-											left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
+                      inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
+                      inner join cuenta cue on asi.cue_id = cue.cue_id
+                      left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
 where asi.cue_id in (
-									select cue_id from cuenta 
-									where --cue_nombre like '%acree%'
-												cuec_id = 8
-								)
+                  select cue_id from cuenta 
+                  where --cue_nombre like '%acree%'
+                        cuec_id = 8
+                )
 and as_fecha between '20050101' and '20051231'
 and cico_id = 1
 and doc.emp_id = 2
@@ -122,15 +122,15 @@ group by doct_id_cliente, doc_id_cliente, doct_nombre, cue_nombre
 
 select as_fecha, as_numero, as_nrodoc, cue_nombre, asi_debe, asi_haber, as_descrip, us_nombre
 from asientoitem asi  inner join asiento ast on asi.as_id = ast.as_id
-											inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
-											inner join cuenta cue on asi.cue_id = cue.cue_id
-											left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
-											inner join usuario us on ast.modifico = us.us_id
+                      inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
+                      inner join cuenta cue on asi.cue_id = cue.cue_id
+                      left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
+                      inner join usuario us on ast.modifico = us.us_id
 where asi.cue_id in (
-									select cue_id from cuenta 
-									where --cue_nombre like '%acree%'
-												cuec_id = 8
-								)
+                  select cue_id from cuenta 
+                  where --cue_nombre like '%acree%'
+                        cuec_id = 8
+                )
 and as_fecha between '20050101' and '20051231'
 and cico_id = 1
 and doc.emp_id = 2
@@ -139,10 +139,10 @@ and isnull(doct_id_cliente,0) not in (2,8,10,16)
 
 select asi.cue_id, as_fecha, as_numero, as_nrodoc, cue_nombre, asi_debe, asi_haber, as_descrip, us_nombre
 from asientoitem asi  inner join asiento ast on asi.as_id = ast.as_id
-											inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
-											inner join cuenta cue on asi.cue_id = cue.cue_id
-											left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
-											inner join usuario us on ast.modifico = us.us_id
+                      inner join documento doc on isnull(ast.doc_id_cliente,ast.doc_id) = doc.doc_id
+                      inner join cuenta cue on asi.cue_id = cue.cue_id
+                      left join documentotipo doct on isnull(ast.doct_id_cliente,ast.doct_id) = doct.doct_id
+                      inner join usuario us on ast.modifico = us.us_id
 where asi.as_id = 89993
 
 

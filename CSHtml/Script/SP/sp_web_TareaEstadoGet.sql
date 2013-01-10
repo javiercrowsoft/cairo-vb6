@@ -15,17 +15,17 @@ sp_web_TareaEstadoGet 7
 
 create Procedure sp_web_TareaEstadoGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select tarest_id, 
-				 tarest_nombre as [Tarea Estado]
+  select tarest_id, 
+         tarest_nombre as [Tarea Estado]
 
-	from TareaEstado
+  from TareaEstado
 
-	order by tarest_nombre
+  order by tarest_nombre
 
 end
 go

@@ -9,55 +9,55 @@ go
 */
 
 create procedure sp_DocPresupuestoEnvioDelete (
-	@@pree_id 			int,
-	@@emp_id    		int,
-	@@us_id					int
+  @@pree_id       int,
+  @@emp_id        int,
+  @@us_id          int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if isnull(@@pree_id,0) = 0 return
+  if isnull(@@pree_id,0) = 0 return
 
-	declare @bEditable 		tinyint
-	declare @editMsg   		varchar(255)
+  declare @bEditable     tinyint
+  declare @editMsg       varchar(255)
 
-	exec sp_DocPresupuestoEnvioEditableGet		@@emp_id    	,
-																						@@pree_id 		,
-																					  @@us_id     	,
-																						@bEditable 		out,
-																						@editMsg   		out,
-																					  0							, --@@ShowMsg
-																						0  						,	--@@bNoAnulado
-																						1							  --@@bDelete
+  exec sp_DocPresupuestoEnvioEditableGet    @@emp_id      ,
+                                            @@pree_id     ,
+                                            @@us_id       ,
+                                            @bEditable     out,
+                                            @editMsg       out,
+                                            0              , --@@ShowMsg
+                                            0              ,  --@@bNoAnulado
+                                            1                --@@bDelete
 
-	if @bEditable = 0 begin
+  if @bEditable = 0 begin
 
-		set @editMsg = '@@ERROR_SP:' + @editMsg
-		raiserror (@editMsg, 16, 1)
+    set @editMsg = '@@ERROR_SP:' + @editMsg
+    raiserror (@editMsg, 16, 1)
 
-		return
-	end
+    return
+  end
 
-	begin transaction
+  begin transaction
 
-	delete PresupuestoEnvioItem where pree_id = @@pree_id
-	if @@error <> 0 goto ControlError
+  delete PresupuestoEnvioItem where pree_id = @@pree_id
+  if @@error <> 0 goto ControlError
 
-	delete PresupuestoEnvioGasto where pree_id = @@pree_id
-	if @@error <> 0 goto ControlError
+  delete PresupuestoEnvioGasto where pree_id = @@pree_id
+  if @@error <> 0 goto ControlError
 
-	delete PresupuestoEnvio where pree_id = @@pree_id
-	if @@error <> 0 goto ControlError
+  delete PresupuestoEnvio where pree_id = @@pree_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el presupuesto. sp_DocPresupuestoEnvioDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el presupuesto. sp_DocPresupuestoEnvioDelete.', 16, 1)
+  rollback transaction  
 
 end

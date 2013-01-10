@@ -16,7 +16,7 @@ frTransferenciaStockProveedor 2
 
 create procedure frTransferenciaStockProveedor (
 
-	@@stprov_id	int
+  @@stprov_id  int
 
 )as 
 
@@ -32,101 +32,101 @@ select @@st_id = st_id from StockProveedor where stprov_id = @@stprov_id
 ------------------------------------------------------------------------------------------------------------------
 -- Numeros de serie
 
-	declare c_nroseries insensitive cursor for 
+  declare c_nroseries insensitive cursor for 
 
-		-------------------------------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------------------------------
 
-						------------------------------------------------------------------------------------------------------------------
-						-- Nros de serie de No Kits
-						
-						select 
-						
-							sti_grupo,
-						  prns_codigo
-						
-						from
-						
-						  stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id= prns.prns_id
-						
-						where 
-						          sti_ingreso   <> 0 
-						      and sti.st_id     =	 @@st_id
-						      and sti.pr_id_kit is null
-						      and sti.prns_id   is not null
-						
-						union all
-						
-						------------------------------------------------------------------------------------------------------------------
-						-- Nros de serie de Kits
-						
-						select 
-						
-							sti_grupo,
-						  prns_codigo
-						
-						from
-						
-							stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id  = prns.prns_id
-						
-						where 
-						          sti_ingreso   <> 0 
-						      and sti.st_id     =	 @@st_id
-						      and sti.pr_id_kit is not null
-						      and sti.prns_id   is not null
-						
-						order by sti_grupo
+            ------------------------------------------------------------------------------------------------------------------
+            -- Nros de serie de No Kits
+            
+            select 
+            
+              sti_grupo,
+              prns_codigo
+            
+            from
+            
+              stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id= prns.prns_id
+            
+            where 
+                      sti_ingreso   <> 0 
+                  and sti.st_id     =   @@st_id
+                  and sti.pr_id_kit is null
+                  and sti.prns_id   is not null
+            
+            union all
+            
+            ------------------------------------------------------------------------------------------------------------------
+            -- Nros de serie de Kits
+            
+            select 
+            
+              sti_grupo,
+              prns_codigo
+            
+            from
+            
+              stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id  = prns.prns_id
+            
+            where 
+                      sti_ingreso   <> 0 
+                  and sti.st_id     =   @@st_id
+                  and sti.pr_id_kit is not null
+                  and sti.prns_id   is not null
+            
+            order by sti_grupo
 
-		-------------------------------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------------------------------
 
-	create table #t_series (sti_grupo 	int, 
+  create table #t_series (sti_grupo   int, 
                           prns_codigo varchar(7000)
-													)
+                          )
 
-	declare @lst_series varchar(5000)
-	set @lst_series = ''
+  declare @lst_series varchar(5000)
+  set @lst_series = ''
 
-	declare @prns_codigo 			varchar(100) 
-	declare @sti_grupo   			int
-	declare @last_sti_grupo 	int
-	set @last_sti_grupo = 0
+  declare @prns_codigo       varchar(100) 
+  declare @sti_grupo         int
+  declare @last_sti_grupo   int
+  set @last_sti_grupo = 0
 
-	open c_nroseries
+  open c_nroseries
 
-	fetch next from c_nroseries into @sti_grupo,@prns_codigo
-	while @@fetch_status=0
-	begin		
+  fetch next from c_nroseries into @sti_grupo,@prns_codigo
+  while @@fetch_status=0
+  begin    
 
-		if @last_sti_grupo <> @sti_grupo begin
+    if @last_sti_grupo <> @sti_grupo begin
 
-			if @last_sti_grupo <> 0 begin
+      if @last_sti_grupo <> 0 begin
 
-				if @lst_series <> '' set @lst_series = left(@lst_series,len(@lst_series)-1)
+        if @lst_series <> '' set @lst_series = left(@lst_series,len(@lst_series)-1)
 
-				insert into #t_series (sti_grupo, prns_codigo)
-											values	(@last_sti_grupo, @lst_series)
+        insert into #t_series (sti_grupo, prns_codigo)
+                      values  (@last_sti_grupo, @lst_series)
 
 
-			end
+      end
 
-			set @last_sti_grupo = @sti_grupo
-			set @lst_series = ''		
+      set @last_sti_grupo = @sti_grupo
+      set @lst_series = ''    
 
-		end
+    end
 
-		set @lst_series = @lst_series + @prns_codigo + ', ' 
+    set @lst_series = @lst_series + @prns_codigo + ', ' 
 
-		fetch next from c_nroseries into @sti_grupo,@prns_codigo
-	end
+    fetch next from c_nroseries into @sti_grupo,@prns_codigo
+  end
 
-	close c_nroseries
-	deallocate c_nroseries
+  close c_nroseries
+  deallocate c_nroseries
 
-	if @lst_series <> '' set @lst_series = left(@lst_series,len(@lst_series)-1)
+  if @lst_series <> '' set @lst_series = left(@lst_series,len(@lst_series)-1)
 
-	if @last_sti_grupo <> 0 begin
-		insert into #t_series (sti_grupo, prns_codigo)
-									values	(@last_sti_grupo, @lst_series)
-	end
+  if @last_sti_grupo <> 0 begin
+    insert into #t_series (sti_grupo, prns_codigo)
+                  values  (@last_sti_grupo, @lst_series)
+  end
 
 ------------------------------------------------------------------------------------------------------------------
 -- No Kits
@@ -177,8 +177,8 @@ select
   end as DocGenerador,
   sti.sti_grupo,
   min(sti_orden) as sti_orden,
-	stl_codigo,
-	stl_nrolote,
+  stl_codigo,
+  stl_nrolote,
   1 as tipo
   
 from
@@ -194,11 +194,11 @@ from
 
           left  join StockLote        stl     on sti.stl_id   = stl.stl_id  
 
-					left  join #t_series t              on sti.sti_grupo = t.sti_grupo
+          left  join #t_series t              on sti.sti_grupo = t.sti_grupo
 
 where 
           sti_ingreso   <> 0 
-      and s.st_id       =	 @@st_id
+      and s.st_id       =   @@st_id
       and sti.pr_id_kit is null
 
 group by
@@ -221,9 +221,9 @@ group by
   sti.sti_grupo,
   s.doct_id_cliente,
   s.id_cliente,
-	stl_codigo,
-	stl_nrolote,
-	t.prns_codigo
+  stl_codigo,
+  stl_nrolote,
+  t.prns_codigo
 
 ------------------------------------------------------------------------------------------------------------------
 -- Kits
@@ -276,8 +276,8 @@ select
   end as DocGenerador,
   stik_id as sti_grupo,
   min(sti_orden) as sti_orden,
-	'' as stl_codigo,
-	'' as stl_nrolote,
+  '' as stl_codigo,
+  '' as stl_nrolote,
   1 as tipo
 
 from
@@ -291,14 +291,14 @@ from
 
           inner join stockItem sti     on s.st_id       = sti.st_id
           inner join Producto prk      on sti.pr_id_kit = prk.pr_id
-        	left  join StockLote    stl  on sti.stl_id    = stl.stl_id  
+          left  join StockLote    stl  on sti.stl_id    = stl.stl_id  
 
-					left  join #t_series t       on sti.sti_grupo = t.sti_grupo
+          left  join #t_series t       on sti.sti_grupo = t.sti_grupo
 
 
 where 
           sti_ingreso   <> 0 
-      and s.st_id       =	 @@st_id
+      and s.st_id       =   @@st_id
       and sti.pr_id_kit is not null
 
 group by
@@ -323,7 +323,7 @@ group by
   prk.pr_kititems,
   s.doct_id_cliente,
   s.id_cliente,
-	t.prns_codigo
+  t.prns_codigo
 
 end
 go
@@ -337,77 +337,77 @@ go
 -- declare @@st_id int set @@st_id = 415
 -- 
 -- 
--- 	declare c_nroseries insensitive cursor for 
+--   declare c_nroseries insensitive cursor for 
 -- 
--- 		-------------------------------------------------------------------------------------------------------
+--     -------------------------------------------------------------------------------------------------------
 -- 
--- 						------------------------------------------------------------------------------------------------------------------
--- 						-- Nros de serie de No Kits
--- 						
--- 						select 
--- 						
--- 							sti_grupo,
--- 						  prns_codigo
--- 						
--- 						from
--- 						
--- 						  stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id= prns.prns_id
--- 						
--- 						where 
--- 						          sti_ingreso   <> 0 
--- 						      and sti.st_id     =	 @@st_id
--- 						      and sti.pr_id_kit is null
--- 						      and sti.prns_id   is not null
--- 						
--- 						union all
--- 						
--- 						------------------------------------------------------------------------------------------------------------------
--- 						-- Nros de serie de Kits
--- 						
--- 						select 
--- 						
--- 							sti_grupo,
--- 						  prns_codigo
--- 						
--- 						from
--- 						
--- 							stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id  = prns.prns_id
--- 						
--- 						where 
--- 						          sti_ingreso   <> 0 
--- 						      and sti.st_id     =	 @@st_id
--- 						      and sti.pr_id_kit is not null
--- 						      and sti.prns_id   is not null
--- 						
--- 						order by sti_grupo
+--             ------------------------------------------------------------------------------------------------------------------
+--             -- Nros de serie de No Kits
+--             
+--             select 
+--             
+--               sti_grupo,
+--               prns_codigo
+--             
+--             from
+--             
+--               stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id= prns.prns_id
+--             
+--             where 
+--                       sti_ingreso   <> 0 
+--                   and sti.st_id     =   @@st_id
+--                   and sti.pr_id_kit is null
+--                   and sti.prns_id   is not null
+--             
+--             union all
+--             
+--             ------------------------------------------------------------------------------------------------------------------
+--             -- Nros de serie de Kits
+--             
+--             select 
+--             
+--               sti_grupo,
+--               prns_codigo
+--             
+--             from
+--             
+--               stockItem sti inner join ProductoNumeroSerie prns on sti.prns_id  = prns.prns_id
+--             
+--             where 
+--                       sti_ingreso   <> 0 
+--                   and sti.st_id     =   @@st_id
+--                   and sti.pr_id_kit is not null
+--                   and sti.prns_id   is not null
+--             
+--             order by sti_grupo
 -- 
--- 		-------------------------------------------------------------------------------------------------------
+--     -------------------------------------------------------------------------------------------------------
 -- 
--- 	create table #t_series (sti_grupo 	int, 
+--   create table #t_series (sti_grupo   int, 
 --                           prns_codigo varchar(7000)
--- 													)
+--                           )
 -- 
--- 	declare @lst_series varchar(5000)
--- 	set @lst_series = ''
+--   declare @lst_series varchar(5000)
+--   set @lst_series = ''
 -- 
--- 	declare @prns_codigo varchar(100) 
--- 	declare @sti_grupo   int
+--   declare @prns_codigo varchar(100) 
+--   declare @sti_grupo   int
 -- 
--- 	open c_nroseries
+--   open c_nroseries
 -- 
--- 	fetch next from c_nroseries into @sti_grupo,@prns_codigo
--- 	while @@fetch_status=0
--- 	begin		
--- 		 
--- 		set @lst_series = @lst_series + @prns_codigo + ', ' 
+--   fetch next from c_nroseries into @sti_grupo,@prns_codigo
+--   while @@fetch_status=0
+--   begin    
+--      
+--     set @lst_series = @lst_series + @prns_codigo + ', ' 
 -- 
--- 		fetch next from c_nroseries into @sti_grupo,@prns_codigo
--- 	end
+--     fetch next from c_nroseries into @sti_grupo,@prns_codigo
+--   end
 -- 
--- 	close c_nroseries
--- 	deallocate c_nroseries
+--   close c_nroseries
+--   deallocate c_nroseries
 -- 
--- 	if @lst_series <> '' set @lst_series = left(@lst_series,len(@lst_series)-1)
+--   if @lst_series <> '' set @lst_series = left(@lst_series,len(@lst_series)-1)
 -- 
 -- 
 -- select @lst_series

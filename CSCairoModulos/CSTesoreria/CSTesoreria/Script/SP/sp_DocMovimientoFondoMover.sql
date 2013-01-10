@@ -12,7 +12,7 @@ sp_DocMovimientoFondoMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocMovimientoFondoMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -20,47 +20,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select mf_id from MovimientoFondo 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select mf_id from MovimientoFondo 
                                                         where mf_numero = (
-																																	select min(mf_numero) from MovimientoFondo 
+                                                                  select min(mf_numero) from MovimientoFondo 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select mf_id from MovimientoFondo 
+                                                        select mf_id from MovimientoFondo 
                                                         where mf_numero = (
-																																	select max(mf_numero) from MovimientoFondo 
+                                                                  select max(mf_numero) from MovimientoFondo 
                                                                   where doc_id = @@DocId 
-																																			and mf_numero < @@currNro 
-																																)
+                                                                      and mf_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select mf_id from MovimientoFondo 
+                                                        select mf_id from MovimientoFondo 
                                                         where mf_numero = (
-																																	select min(mf_numero) from MovimientoFondo 
+                                                                  select min(mf_numero) from MovimientoFondo 
                                                                   where doc_id = @@DocId 
                                                                       and mf_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select mf_id from MovimientoFondo 
+                                                        select mf_id from MovimientoFondo 
                                                         where mf_numero = (
-																																	select max(mf_numero) from MovimientoFondo 
+                                                                  select max(mf_numero) from MovimientoFondo 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

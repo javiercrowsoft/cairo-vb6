@@ -24,7 +24,7 @@ select dpto_id from departamentocliente where cli_id = 35641)
 
 */
 create Procedure MUR_DepartamentoCliente (
-	@@dpto_id          int,
+  @@dpto_id          int,
   @@cli_codigo_min   int,
   @@cli_codigo_max   int
 )
@@ -36,8 +36,8 @@ begin
   declare @dptocli_id int
   declare @cli_id     int
 
-	create table #tcli (cli_id int not null,cli_codigo varchar(255))
-	insert into #tcli (cli_id,cli_codigo) select cli_id,cli_codigo from cliente where isnumeric(cli_codigo)<>0
+  create table #tcli (cli_id int not null,cli_codigo varchar(255))
+  insert into #tcli (cli_id,cli_codigo) select cli_id,cli_codigo from cliente where isnumeric(cli_codigo)<>0
 
   declare c_cli insensitive cursor for 
   select cli_id from #tcli 

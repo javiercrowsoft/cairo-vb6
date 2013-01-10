@@ -17,197 +17,197 @@ select * from facturaventaitem where fv_id = 1093
 
 CREATE  procedure IC_NRT_frFacturaVentaResumido (
 
-	@@fv_id			int
+  @@fv_id      int
 
 )as 
 
 begin
 
-	select 	FacturaVenta.doct_id,
-					FacturaVenta.fv_id,
-					fv_cotizacion,
-					fv_descrip, 
-					fv_fecha,
-					sum(fvi_cantidad)					as fvi_cantidad, 
-					sum(fvi_importe)
-					/sum(fvi_cantidad)        as fvi_precio,
-					sum(fvi_importe)					as fvi_importe,
-					sum(fvi_importeOrigen)		as fvi_importeOrigen,
-					sum(fvi_ivari)						as fvi_ivari,
-					sum(fvi_ivarni)						as fvi_ivarni, 
-					cue_nombre, 
-					doc_nombre, 
-					ccos_nombre, 
-					cli_nombre, 
-					cli_razonsocial,
-					cpg_nombre, 
-					cli_cuit,
+  select   FacturaVenta.doct_id,
+          FacturaVenta.fv_id,
+          fv_cotizacion,
+          fv_descrip, 
+          fv_fecha,
+          sum(fvi_cantidad)          as fvi_cantidad, 
+          sum(fvi_importe)
+          /sum(fvi_cantidad)        as fvi_precio,
+          sum(fvi_importe)          as fvi_importe,
+          sum(fvi_importeOrigen)    as fvi_importeOrigen,
+          sum(fvi_ivari)            as fvi_ivari,
+          sum(fvi_ivarni)            as fvi_ivarni, 
+          cue_nombre, 
+          doc_nombre, 
+          ccos_nombre, 
+          cli_nombre, 
+          cli_razonsocial,
+          cpg_nombre, 
+          cli_cuit,
 
-			case cli_catfiscal
-				when 1 then 'Inscripto'
-				when 2 then 'Exento'
-				when 3 then 'No inscripto'
-				when 4 then 'Consumidor Final'
-				when 5 then 'Extranjero'
-				when 6 then 'Mono Tributo'
-				when 7 then 'Extranjero Iva'
-				when 8 then 'No responsable'
-				when 9 then 'No Responsable exento'
-				when 10 then 'No categorizado'
-				when 11 then 'Inscripto M'
+      case cli_catfiscal
+        when 1 then 'Inscripto'
+        when 2 then 'Exento'
+        when 3 then 'No inscripto'
+        when 4 then 'Consumidor Final'
+        when 5 then 'Extranjero'
+        when 6 then 'Mono Tributo'
+        when 7 then 'Extranjero Iva'
+        when 8 then 'No responsable'
+        when 9 then 'No Responsable exento'
+        when 10 then 'No categorizado'
+        when 11 then 'Inscripto M'
         else 'Sin categorizar'
-			end as cat_fisctal,
+      end as cat_fisctal,
 
-			case cli_catfiscal
-				when 1 then 'X'
-				else ''
-			end as inscripto,
+      case cli_catfiscal
+        when 1 then 'X'
+        else ''
+      end as inscripto,
 
-			case cli_catfiscal
-				when 2 then 'X'
-				else ''
-			end as exento,
+      case cli_catfiscal
+        when 2 then 'X'
+        else ''
+      end as exento,
 
-			case cli_catfiscal
-				when 3 then 'X'
-				else ''
-			end as noinscripto,
+      case cli_catfiscal
+        when 3 then 'X'
+        else ''
+      end as noinscripto,
 
-			case cli_catfiscal
-				when 4 then 'X'
-				else ''
-			end as consumidorfinal,
+      case cli_catfiscal
+        when 4 then 'X'
+        else ''
+      end as consumidorfinal,
 
-			case cli_catfiscal
-				when 5 then 'X'
-				else ''
-			end as extranjero,
+      case cli_catfiscal
+        when 5 then 'X'
+        else ''
+      end as extranjero,
 
-			case cli_catfiscal
-				when 6 then 'X'
-				else ''
-			end as monotributo,
+      case cli_catfiscal
+        when 6 then 'X'
+        else ''
+      end as monotributo,
 
-			case cli_catfiscal
-				when 7 then 'X'
-				else ''
-			end as extranjeroiva,
+      case cli_catfiscal
+        when 7 then 'X'
+        else ''
+      end as extranjeroiva,
 
-			case cli_catfiscal
-				when 8 then 'X'
-				else ''
-			end as noresponsable,
+      case cli_catfiscal
+        when 8 then 'X'
+        else ''
+      end as noresponsable,
 
-			case cli_catfiscal
-				when 9 then 'X'
-				else ''
-			end as norespexento,
+      case cli_catfiscal
+        when 9 then 'X'
+        else ''
+      end as norespexento,
 
-			case cli_catfiscal
-				when 10 then 'X'
-				else ''
-			end as nocategorizado,
+      case cli_catfiscal
+        when 10 then 'X'
+        else ''
+      end as nocategorizado,
 
-			sum(
-				case 
-					when fvi_importe <> 0 and fvi_importeorigen <> 0 then  fvi_importeorigen / fvi_importe
+      sum(
+        case 
+          when fvi_importe <> 0 and fvi_importeorigen <> 0 then  fvi_importeorigen / fvi_importe
           else  1
-      	end
-					)
-			/ sum(fvi_cantidad) as coef,
+        end
+          )
+      / sum(fvi_cantidad) as coef,
 
-			cli_calle as calle,
+      cli_calle as calle,
 
-			cli_callenumero + ' ' +
-			cli_piso + ' ' +
-			cli_depto  as direccion,
+      cli_callenumero + ' ' +
+      cli_piso + ' ' +
+      cli_depto  as direccion,
       cli_localidad + 
-			cli_codpostal 	as cli_localidad,
+      cli_codpostal   as cli_localidad,
       lgj_codigo,
       pr_nombreventa,
 
-			sum (
-				case cli_catfiscal
-					when 1 then       fvi_precio -- 'Inscripto'
-					when 2 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Exento'
-					when 3 then       fvi_precio -- 'No inscripto'
-					when 4 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Consumidor Final' sp_col facturaventaitem
-					when 5 then       fvi_precio -- 'Extranjero'
-					when 6 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Mono Tributo'
-					when 7 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Extranjero Iva'
-					when 8 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'No responsable'
-					when 9 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'No Responsable exento'
-					when 10 then      fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'No categorizado'
-	        else              fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Sin categorizar'
-				end 
-					) 
-				/
-				sum(fvi_cantidad) as precio,
+      sum (
+        case cli_catfiscal
+          when 1 then       fvi_precio -- 'Inscripto'
+          when 2 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Exento'
+          when 3 then       fvi_precio -- 'No inscripto'
+          when 4 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Consumidor Final' sp_col facturaventaitem
+          when 5 then       fvi_precio -- 'Extranjero'
+          when 6 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Mono Tributo'
+          when 7 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Extranjero Iva'
+          when 8 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'No responsable'
+          when 9 then       fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'No Responsable exento'
+          when 10 then      fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'No categorizado'
+          else              fvi_precio + (fvi_precio * fvi_ivariporc/100) -- 'Sin categorizar'
+        end 
+          ) 
+        /
+        sum(fvi_cantidad) as precio,
 
-			sum (
-				case cli_catfiscal
-					when 1 then       fvi_neto     -- 'Inscripto'
-					when 2 then       fvi_importe  -- 'Exento'
-					when 3 then       fvi_neto     -- 'No inscripto'
-					when 4 then       fvi_importe  -- 'Consumidor Final' sp_col facturaventaitem
-					when 5 then       fvi_neto     -- 'Extranjero'
-					when 6 then       fvi_importe  -- 'Mono Tributo'
-					when 7 then       fvi_importe  -- 'Extranjero Iva'
-					when 8 then       fvi_importe  -- 'No responsable'
-					when 9 then       fvi_importe  -- 'No Responsable exento'
-					when 10 then      fvi_importe  -- 'No categorizado'
-	        else              fvi_importe  -- 'Sin categorizar'
-				end 
-					) as importe,
+      sum (
+        case cli_catfiscal
+          when 1 then       fvi_neto     -- 'Inscripto'
+          when 2 then       fvi_importe  -- 'Exento'
+          when 3 then       fvi_neto     -- 'No inscripto'
+          when 4 then       fvi_importe  -- 'Consumidor Final' sp_col facturaventaitem
+          when 5 then       fvi_neto     -- 'Extranjero'
+          when 6 then       fvi_importe  -- 'Mono Tributo'
+          when 7 then       fvi_importe  -- 'Extranjero Iva'
+          when 8 then       fvi_importe  -- 'No responsable'
+          when 9 then       fvi_importe  -- 'No Responsable exento'
+          when 10 then      fvi_importe  -- 'No categorizado'
+          else              fvi_importe  -- 'Sin categorizar'
+        end 
+          ) as importe,
 
-			case cli_catfiscal
-				when 1 then       1 -- 'Inscripto'
-				when 2 then       0 -- 'Exento'
-				when 3 then       1 -- 'No inscripto'
-				when 4 then       0 -- 'Consumidor Final' sp_col facturaventaitem
-				when 5 then       1 -- 'Extranjero'
-				when 6 then       0 -- 'Mono Tributo'
-				when 7 then       0 -- 'Extranjero Iva'
-				when 8 then       0 -- 'No responsable'
-				when 9 then       0 -- 'No Responsable exento'
-				when 10 then      0 -- 'No categorizado'
+      case cli_catfiscal
+        when 1 then       1 -- 'Inscripto'
+        when 2 then       0 -- 'Exento'
+        when 3 then       1 -- 'No inscripto'
+        when 4 then       0 -- 'Consumidor Final' sp_col facturaventaitem
+        when 5 then       1 -- 'Extranjero'
+        when 6 then       0 -- 'Mono Tributo'
+        when 7 then       0 -- 'Extranjero Iva'
+        when 8 then       0 -- 'No responsable'
+        when 9 then       0 -- 'No Responsable exento'
+        when 10 then      0 -- 'No categorizado'
         else              0 -- 'Sin categorizar'
-			end as bShowIva
+      end as bShowIva
 
       
 
   from FacturaVenta inner join FacturaVentaItem on FacturaVenta.fv_id = FacturaVentaItem.fv_id
-               inner join Cuenta        on FacturaVentaItem.cue_id		= Cuenta.cue_id
+               inner join Cuenta        on FacturaVentaItem.cue_id    = Cuenta.cue_id
                inner join Documento     on FacturaVenta.doc_id        = Documento.doc_id
                inner join Cliente       on FacturaVenta.cli_id        = Cliente.cli_id
                inner join CondicionPago on FacturaVenta.cpg_id        = CondicionPago.cpg_id
                inner join Producto      on FacturaVentaItem.pr_id     = Producto.pr_id
                left join  Legajo        on FacturaVenta.lgj_id        = Legajo.lgj_id
-							 left join  CentroCosto on FacturaVentaItem.ccos_id     = CentroCosto.ccos_id
-	where FacturaVenta.fv_id = @@fv_id
+               left join  CentroCosto on FacturaVentaItem.ccos_id     = CentroCosto.ccos_id
+  where FacturaVenta.fv_id = @@fv_id
 
-	group by
-					FacturaVenta.doct_id,
-					FacturaVenta.fv_id,
-					fv_cotizacion,
-					fv_descrip, 
-					fv_fecha,
-					cue_nombre, 
-					doc_nombre, 
-					ccos_nombre, 
-					cli_nombre, 
-					cli_razonsocial,
-					cpg_nombre, 
-					cli_cuit,
-					cli_catfiscal,
-					cli_calle,
-					cli_callenumero + ' ' +
-					cli_piso + ' ' +
-					cli_depto,
-		      cli_localidad + 
-					cli_codpostal,
-		      lgj_codigo,
-      		pr_nombreventa
+  group by
+          FacturaVenta.doct_id,
+          FacturaVenta.fv_id,
+          fv_cotizacion,
+          fv_descrip, 
+          fv_fecha,
+          cue_nombre, 
+          doc_nombre, 
+          ccos_nombre, 
+          cli_nombre, 
+          cli_razonsocial,
+          cpg_nombre, 
+          cli_cuit,
+          cli_catfiscal,
+          cli_calle,
+          cli_callenumero + ' ' +
+          cli_piso + ' ' +
+          cli_depto,
+          cli_localidad + 
+          cli_codpostal,
+          lgj_codigo,
+          pr_nombreventa
 
 end
 
@@ -235,7 +235,7 @@ drop procedure [dbo].[frFacturaRemitoVentaResumen]
 go
 create procedure frFacturaRemitoVentaResumen (
 
-	@@fv_id  int
+  @@fv_id  int
 
 )as 
 begin
@@ -243,51 +243,51 @@ begin
 set nocount on
 
 select 
-		rv.rv_id        as id,
-		1               as tipo_id,
-		cli_nombre			as Cliente,
-		cli_codigo			as Codigo,
-		doct_nombre			as Tipo,
-		doc_nombre			as Documento,
-		rv_nrodoc				as Comprobante,
-		rv_fecha				as Fecha,
-		cpg_nombre			as [Condicion de Pago],
-		pr_nombreVenta  as Articulo,
-		pr_codigo				as [Codigo Articulo],
-		rvi_cantidad		as Cantidad,
-		depl_nombre     as Deposito,
-		rv_descuento1		as Descuento,
-		case	
-			when doct.doct_id = 24 then -rvi_precio 
-		else rvi_precio
-		end             as Precio,
-		case	
-			when doct.doct_id = 24 then -rvi_neto 
-		else rvi_neto
-		end             as Neto
+    rv.rv_id        as id,
+    1               as tipo_id,
+    cli_nombre      as Cliente,
+    cli_codigo      as Codigo,
+    doct_nombre      as Tipo,
+    doc_nombre      as Documento,
+    rv_nrodoc        as Comprobante,
+    rv_fecha        as Fecha,
+    cpg_nombre      as [Condicion de Pago],
+    pr_nombreVenta  as Articulo,
+    pr_codigo        as [Codigo Articulo],
+    rvi_cantidad    as Cantidad,
+    depl_nombre     as Deposito,
+    rv_descuento1    as Descuento,
+    case  
+      when doct.doct_id = 24 then -rvi_precio 
+    else rvi_precio
+    end             as Precio,
+    case  
+      when doct.doct_id = 24 then -rvi_neto 
+    else rvi_neto
+    end             as Neto
 
 from
-	remitoVenta rv inner join cliente          cli  on rv.cli_id  = cli.cli_id
-								 inner join condicionPago    cpg  on rv.cpg_id  = cpg.cpg_id
-								 inner join remitoVentaItem  rvi  on rv.rv_id   = rvi.rv_id
-								 inner join producto         pr   on rvi.pr_id  = pr.pr_id
-								 inner join documentoTipo    doct on rv.doct_id = doct.doct_id
-								 inner join documento        doc  on rv.doc_id  = doc.doc_id
+  remitoVenta rv inner join cliente          cli  on rv.cli_id  = cli.cli_id
+                 inner join condicionPago    cpg  on rv.cpg_id  = cpg.cpg_id
+                 inner join remitoVentaItem  rvi  on rv.rv_id   = rvi.rv_id
+                 inner join producto         pr   on rvi.pr_id  = pr.pr_id
+                 inner join documentoTipo    doct on rv.doct_id = doct.doct_id
+                 inner join documento        doc  on rv.doc_id  = doc.doc_id
 
 
                   inner join moneda    mon         on doc.mon_id  = mon.mon_id
                   inner join circuitocontable cico on doc.cico_id = cico.cico_id
                   inner join empresa   emp         on doc.emp_id  = emp.emp_id
 
-									left join centroCosto ccos       on rvi.ccos_id = ccos.ccos_id
-           	      left join provincia   pro        on cli.pro_id  = pro.pro_id
+                  left join centroCosto ccos       on rvi.ccos_id = ccos.ccos_id
+                   left join provincia   pro        on cli.pro_id  = pro.pro_id
                   left join stock       st         on rv.st_id    = st.st_id
-									left join depositoLogico depl		 on st.depl_id_origen = depl.depl_id
+                  left join depositoLogico depl     on st.depl_id_origen = depl.depl_id
 where 
 
-	exists(select rvfv.rvi_id from RemitoFacturaVenta rvfv 
-															inner join FacturaVentaItem fvi on rvfv.fvi_id = fvi.fvi_id
-				 where fvi.fv_id = @@fv_id and rvi_id = rvi.rvi_id)
+  exists(select rvfv.rvi_id from RemitoFacturaVenta rvfv 
+                              inner join FacturaVentaItem fvi on rvfv.fvi_id = fvi.fvi_id
+         where fvi.fv_id = @@fv_id and rvi_id = rvi.rvi_id)
 
 order by tipo_id, cliente, fecha, comprobante
 

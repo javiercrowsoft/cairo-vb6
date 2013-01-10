@@ -16,32 +16,32 @@ select pr_id,pr_nombrecompra from producto where pr_nombrecompra like '%ThinkPad
 select * from documento where doc_nombre like '%trans%'
 
 DC_CSC_STK_9998 
-											1,
-											'7',
-											35,
-											1,
-											'20051001'
+                      1,
+                      '7',
+                      35,
+                      1,
+                      '20051001'
 
 */
 
 create procedure DC_CSC_STK_9998 (
-  @@us_id    				int,
-	@@pr_id 					varchar(255),
-	@@doc_id					int,
-	@@suc_id          int,
-	@@st_fecha				datetime,
-	@@noTransferir    smallint 
+  @@us_id            int,
+  @@pr_id           varchar(255),
+  @@doc_id          int,
+  @@suc_id          int,
+  @@st_fecha        datetime,
+  @@noTransferir    smallint 
 )as 
 
 begin
 
 exec sp_DocStockCompensar 
-													  @@us_id,
-														@@pr_id,
-														@@doc_id,
-														@@suc_id,
-														@@st_fecha,
-														@@noTransferir  
+                            @@us_id,
+                            @@pr_id,
+                            @@doc_id,
+                            @@suc_id,
+                            @@st_fecha,
+                            @@noTransferir  
 
 end
 go

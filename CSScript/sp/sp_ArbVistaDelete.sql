@@ -3,7 +3,7 @@ drop procedure [dbo].[sp_ArbVistaDelete]
 
 go
 create procedure sp_ArbVistaDelete (
-	@@arbv_id     		int
+  @@arbv_id         int
 )
 as
 
@@ -11,8 +11,8 @@ set nocount on
 
 begin
 
-	delete RamaVista where arbv_id = @@arbv_id
-	delete ArbolVista where arbv_id = @@arbv_id
+  delete RamaVista where arbv_id = @@arbv_id
+  delete ArbolVista where arbv_id = @@arbv_id
 
 end
 

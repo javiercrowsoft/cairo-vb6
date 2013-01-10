@@ -4,32 +4,32 @@ drop procedure [dbo].[sp_PickingListDelete]
 go
 
 create procedure sp_PickingListDelete (
-	@@pkl_id int
+  @@pkl_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete PickingListPedidoItem where pkl_id = @@pkl_id
-	if @@error <> 0 goto ControlError
+  delete PickingListPedidoItem where pkl_id = @@pkl_id
+  if @@error <> 0 goto ControlError
 
-	delete PickingListPedido where pkl_id = @@pkl_id
-	if @@error <> 0 goto ControlError
+  delete PickingListPedido where pkl_id = @@pkl_id
+  if @@error <> 0 goto ControlError
 
-	delete PickingList where pkl_id = @@pkl_id
-	if @@error <> 0 goto ControlError
+  delete PickingList where pkl_id = @@pkl_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la lista de despacho. sp_PickingListDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la lista de despacho. sp_PickingListDelete.', 16, 1)
+  rollback transaction  
 
 
 end

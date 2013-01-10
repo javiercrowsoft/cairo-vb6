@@ -21,17 +21,17 @@ begin
 
 select 
 
-			'Marmol'  																as Articulo, 
-			convert (datetime, '20040101')            as Fecha,
-			'Pacheco Oeste'								   					as Deposito,
-			'445'																			as [Stock anterior],
-			'120'																			as Egreso,
-			'150'																			as Ingreso,
-			'50'																			as [Stock Actual],
- 			'FACT A'											   					as Documento,
-			'A-45000122'														  as Numero,
-			'Piedra Libre S.R.L.'									    as Proveedor,
-			'Factura'         											  as Comprobante
+      'Marmol'                                  as Articulo, 
+      convert (datetime, '20040101')            as Fecha,
+      'Pacheco Oeste'                             as Deposito,
+      '445'                                      as [Stock anterior],
+      '120'                                      as Egreso,
+      '150'                                      as Ingreso,
+      '50'                                      as [Stock Actual],
+       'FACT A'                                   as Documento,
+      'A-45000122'                              as Numero,
+      'Piedra Libre S.R.L.'                      as Proveedor,
+      'Factura'                                 as Comprobante
 
 
 end

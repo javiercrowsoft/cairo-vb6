@@ -11,7 +11,7 @@ go
  exec sp_ProductoBOMDelete 1
 */
 create procedure sp_ProductoBOMDelete (
-	@@pbm_id  int
+  @@pbm_id  int
 )
 as
 
@@ -27,24 +27,24 @@ begin
                where pbm_id = @@pbm_id
                  and pbmi_id = ProductoBOMItemA.pbmi_id
               )
-	if @@error <> 0 goto ControlError
+  if @@error <> 0 goto ControlError
 
   delete ProductoBOMItem where pbm_id = @@pbm_id
-	if @@error <> 0 goto ControlError
+  if @@error <> 0 goto ControlError
 
   delete ProductoBOMElaborado where pbm_id = @@pbm_id
-	if @@error <> 0 goto ControlError
+  if @@error <> 0 goto ControlError
 
   delete ProductoBOM where pbm_id = @@pbm_id
-	if @@error <> 0 goto ControlError
+  if @@error <> 0 goto ControlError
 
   commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la B.O.M.. sp_ProductoBOMDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la B.O.M.. sp_ProductoBOMDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

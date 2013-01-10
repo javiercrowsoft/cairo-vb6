@@ -3,23 +3,23 @@ drop procedure [dbo].[sp_si_getProveedor]
 GO
 
 create procedure sp_si_getProveedor (
-	@@id 				varchar(255),
-	@@bIsCuit 	smallint
+  @@id         varchar(255),
+  @@bIsCuit   smallint
 
 )as 
 begin
 
-	set nocount on
+  set nocount on
 
-	if @@bIsCuit <> 0 begin
+  if @@bIsCuit <> 0 begin
 
-		select prov_id from proveedor where replace(prov_cuit,'-','') = replace(@@id,'-','') and replace(@@id,'-','') <> ''
+    select prov_id from proveedor where replace(prov_cuit,'-','') = replace(@@id,'-','') and replace(@@id,'-','') <> ''
 
-	end else begin
+  end else begin
 
-		select prov_id from proveedor where prov_codigo = @@id and @@id <> ''
+    select prov_id from proveedor where prov_codigo = @@id and @@id <> ''
 
-	end
+  end
 
 end
 

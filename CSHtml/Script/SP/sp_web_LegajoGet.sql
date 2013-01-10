@@ -15,22 +15,22 @@ sp_web_LegajoGet 7
 
 create Procedure sp_web_LegajoGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select lgj_id, 
-				 case when lgj_titulo <> '' then lgj_titulo else lgj_codigo end as [Legajo]
+  select lgj_id, 
+         case when lgj_titulo <> '' then lgj_titulo else lgj_codigo end as [Legajo]
 
-	from Legajo
+  from Legajo
 
-	union
+  union
 
-	select 0 as lgj_id, 
-				 '(Ninguno)' as [Legajo]
+  select 0 as lgj_id, 
+         '(Ninguno)' as [Legajo]
 
-	order by Legajo
+  order by Legajo
 
 end
 go

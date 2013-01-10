@@ -12,17 +12,17 @@ sp_BancoConciliacionGet 141,'19900101 00:00:00','20061029 00:00:00',1
 
 */
 create procedure sp_BancoConciliacionGet  (
-	@@bcoc_id    		int
+  @@bcoc_id        int
 )
 as
 
 begin
 
-	select bcoc.*,
-				 cue_nombre
+  select bcoc.*,
+         cue_nombre
 
-	from BancoConciliacion bcoc inner join Cuenta cue on bcoc.cue_id = cue.cue_id
+  from BancoConciliacion bcoc inner join Cuenta cue on bcoc.cue_id = cue.cue_id
 
-	where bcoc.bcoc_id = @@bcoc_id
+  where bcoc.bcoc_id = @@bcoc_id
 
-end				
+end        

@@ -18,7 +18,7 @@ Calibradora Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 12002      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Calibradora%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Calibradora%'
 
 Para testear:
 
@@ -33,46 +33,46 @@ drop procedure [dbo].[lsCalibradora]
 go
 create procedure lsCalibradora (
 
-@@calib_id			varchar(255)
+@@calib_id      varchar(255)
 
 )as 
 
 declare @calib_id int
 declare @ram_id_calibradora int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@calib_id, @calib_id out, @ram_id_calibradora out
 
 if @ram_id_calibradora <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_calibradora, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_calibradora, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_calibradora, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_calibradora, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_calibradora = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_calibradora = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select *
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
   Calibradora
 
 where 
@@ -80,14 +80,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12002 -- tbl_id de Calibradora
                   and  rptarb_hojaid = Calibradora.calib_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_calibradora = 0)
-			 )
+           (@ram_id_calibradora = 0)
+       )

@@ -12,7 +12,7 @@ go
  exec sp_catwCopiarItems 2,'x-0001-0002405'
 */
 create procedure sp_catwCopiarItems (
-	@@idSource	  int,
+  @@idSource    int,
   @@idTarget    int,
   @@modifico    int
 )

@@ -11,7 +11,7 @@ go
 -- sp_ListaDescuentoGet 1
 
 create procedure sp_ListaDescuentoGet (
-	@@ld_id	int
+  @@ld_id  int
 )
 as
 
@@ -19,15 +19,15 @@ set nocount on
 
 begin
 
-	select 
-					ListaDescuento.*,
-					padre=l2.ld_nombre,
+  select 
+          ListaDescuento.*,
+          padre=l2.ld_nombre,
           mon_nombre
 
-	from ListaDescuento left join ListaDescuento l2 on ListaDescuento.ld_id_padre = l2.ld_id
-									 		left join moneda m       		on ListaDescuento.mon_id = m.mon_id
+  from ListaDescuento left join ListaDescuento l2 on ListaDescuento.ld_id_padre = l2.ld_id
+                       left join moneda m           on ListaDescuento.mon_id = m.mon_id
 
-	where ListaDescuento.ld_id = @@ld_id
+  where ListaDescuento.ld_id = @@ld_id
 
 
 end

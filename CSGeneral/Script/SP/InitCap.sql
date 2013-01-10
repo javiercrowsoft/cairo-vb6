@@ -9,8 +9,8 @@ select @x
 alter procedure InitCap 
 ( 
 
-	@InputString 		varchar(5000),
-	@OutputString   varchar(5000) out
+  @InputString     varchar(5000),
+  @OutputString   varchar(5000) out
 
 ) 
 AS
@@ -36,16 +36,16 @@ BEGIN
             SET @OutputString = STUFF(@OutputString, @Index, 1, UPPER(@Char))
     END
 
-		set @OutputString = replace(@OutputString,' En ', ' en ')
-		set @OutputString = replace(@OutputString,' A ', ' a ')
-		set @OutputString = replace(@OutputString,' El ', ' el ')
-		set @OutputString = replace(@OutputString,' La ', ' la ')
-		set @OutputString = replace(@OutputString,' De ', ' de ')
-		set @OutputString = replace(@OutputString,' Un ', ' un ')
-		set @OutputString = replace(@OutputString,' Una ', ' una ')
-		set @OutputString = replace(@OutputString,' Del ', ' del ')
-		set @OutputString = replace(@OutputString,' Por ', ' por ')
-		set @OutputString = replace(@OutputString,' Para ', ' para ')
+    set @OutputString = replace(@OutputString,' En ', ' en ')
+    set @OutputString = replace(@OutputString,' A ', ' a ')
+    set @OutputString = replace(@OutputString,' El ', ' el ')
+    set @OutputString = replace(@OutputString,' La ', ' la ')
+    set @OutputString = replace(@OutputString,' De ', ' de ')
+    set @OutputString = replace(@OutputString,' Un ', ' un ')
+    set @OutputString = replace(@OutputString,' Una ', ' una ')
+    set @OutputString = replace(@OutputString,' Del ', ' del ')
+    set @OutputString = replace(@OutputString,' Por ', ' por ')
+    set @OutputString = replace(@OutputString,' Para ', ' para ')
 
     SET @Index = @Index + 1
 END

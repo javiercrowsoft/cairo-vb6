@@ -14,27 +14,27 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @os_id 	int
+  declare @os_id   int
 
-	declare c_oss insensitive cursor for
+  declare c_oss insensitive cursor for
 
-		select os_id from ordenservicio order by os_id asc
+    select os_id from ordenservicio order by os_id asc
 
-	open c_oss
+  open c_oss
 
-	fetch next from c_oss into @os_id
-	while @@fetch_status=0
-	begin
+  fetch next from c_oss into @os_id
+  while @@fetch_status=0
+  begin
 
-		exec sp_DocOrdenServicioUpdateProductoSerie @os_id
+    exec sp_DocOrdenServicioUpdateProductoSerie @os_id
 
-		fetch next from c_oss into @os_id
-	end
-	
-	close c_oss
-	deallocate c_oss
+    fetch next from c_oss into @os_id
+  end
+  
+  close c_oss
+  deallocate c_oss
 
 end
 GO

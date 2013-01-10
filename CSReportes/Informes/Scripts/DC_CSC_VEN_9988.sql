@@ -8,7 +8,7 @@ drop procedure [dbo].[DC_CSC_VEN_9988]
 go
 create procedure DC_CSC_VEN_9988 (
 
-  @@us_id    		int
+  @@us_id        int
 
 )as 
 begin
@@ -17,34 +17,34 @@ begin
 
   declare @arb_id int
   declare @ram_id int
-	declare @arb_nombre varchar(255)
+  declare @arb_nombre varchar(255)
 
-	set @arb_nombre = 'Productos x Rubro'
+  set @arb_nombre = 'Productos x Rubro'
 
-	exec SP_DBGetNewId 'Arbol','arb_id',@arb_id out, 0
+  exec SP_DBGetNewId 'Arbol','arb_id',@arb_id out, 0
 
-	insert into Arbol (arb_id,arb_nombre,tbl_id,modifico)
-							values(@arb_id,@arb_nombre,30,@@us_id)
+  insert into Arbol (arb_id,arb_nombre,tbl_id,modifico)
+              values(@arb_id,@arb_nombre,30,@@us_id)
 
-	exec sp_dbgetnewid 'Rama','ram_id',@ram_id out, 0
+  exec sp_dbgetnewid 'Rama','ram_id',@ram_id out, 0
 
-	insert into Rama (arb_id, ram_id, ram_nombre, ram_id_padre, modifico) 
-						values (@arb_id, @ram_id, @arb_nombre, 0, @@us_id)
+  insert into Rama (arb_id, ram_id, ram_nombre, ram_id_padre, modifico) 
+            values (@arb_id, @ram_id, @arb_nombre, 0, @@us_id)
 
 
-  declare @ram_nombre 	varchar(500)
-	declare @rub_id       int
+  declare @ram_nombre   varchar(500)
+  declare @rub_id       int
   declare @ram_id_padre int
-  declare @orden 				int
+  declare @orden         int
 
   set @ram_id_padre = @ram_id
   set @orden = 1
 
   declare c_rama insensitive cursor for 
-		select rub_nombre, rub.rub_id 
-		from Producto pr inner join Rubro rub on pr.rub_id = rub.rub_id 
-		group by rub.rub_id, rub_nombre
-		order by rub_nombre
+    select rub_nombre, rub.rub_id 
+    from Producto pr inner join Rubro rub on pr.rub_id = rub.rub_id 
+    group by rub.rub_id, rub_nombre
+    order by rub_nombre
 
   open c_rama
 
@@ -53,7 +53,7 @@ begin
 
     set @orden = @orden + 1
 
-  	exec SP_DBGetNewId 'Rama','ram_id',@ram_id out, 0
+    exec SP_DBGetNewId 'Rama','ram_id',@ram_id out, 0
     insert into Rama (
                         ram_id,
                         ram_nombre,
@@ -75,9 +75,9 @@ begin
                         @orden
                       )
 
-  	--------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------
     declare c_hoja insensitive cursor for 
-				select pr_id from Producto
+        select pr_id from Producto
         where rub_id = @rub_id
         order by pr_nombrecompra
 
@@ -89,7 +89,7 @@ begin
     fetch next from c_hoja into @pr_id
     while @@fetch_status = 0 begin
   
-    	exec SP_DBGetNewId 'Hoja','hoja_id',@hoja_id out, 0
+      exec SP_DBGetNewId 'Hoja','hoja_id',@hoja_id out, 0
       insert into Hoja (
                           hoja_id,
                           id,
@@ -114,7 +114,7 @@ begin
   
     close c_hoja
     deallocate c_hoja
-  	--------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------
 
     fetch next from c_rama into @ram_nombre, @rub_id
   end

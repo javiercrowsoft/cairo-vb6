@@ -3,22 +3,22 @@ drop procedure [dbo].[sp_DocPedidoCompraSaveAplic]
 
 /*
 begin transaction
-	exec	sp_DocPedidoCompraSaveAplic 34
+  exec  sp_DocPedidoCompraSaveAplic 34
 rollback transaction
 
 */
 
 go
 create procedure sp_DocPedidoCompraSaveAplic (
-	@@pcTMP_id int	
+  @@pcTMP_id int  
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @pc_id 				int
+  declare @pc_id         int
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,11 +28,11 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	declare @modifico int
+  declare @modifico int
 
-	select @pc_id = pc_id, @modifico = modifico from PedidoCompraTMP where pcTMP_id = @@pcTMP_id
+  select @pc_id = pc_id, @modifico = modifico from PedidoCompraTMP where pcTMP_id = @@pcTMP_id
 
-	begin transaction
+  begin transaction
 
   declare @bSuccess      tinyint
 
@@ -44,10 +44,10 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocPedidoCpraSaveAplic @pc_id, @@pcTMP_id, 1, @bSuccess out
+  exec sp_DocPedidoCpraSaveAplic @pc_id, @@pcTMP_id, 1, @bSuccess out
 
-	-- Si fallo al guardar
-	if IsNull(@bSuccess,0) = 0 goto ControlError
+  -- Si fallo al guardar
+  if IsNull(@bSuccess,0) = 0 goto ControlError
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocPedidoCompraSetEstado @pc_id
+  exec sp_DocPedidoCompraSetEstado @pc_id
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_HistoriaUpdate 17005, @pc_id, @modifico, 6
+  exec sp_HistoriaUpdate 17005, @pc_id, @modifico, 6
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,20 +77,20 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	delete PedidoDevolucionCompraTMP where pcTMP_id = @@pcTMP_id
-	delete PedidoOrdenCompraTMP where pcTMP_id = @@pcTMP_id
-	delete PedidoCotizacionCompraTMP where pcTMP_id = @@pcTMP_id
-	delete PedidoCompraTMP where pcTMP_id = @@pcTMP_id
+  delete PedidoDevolucionCompraTMP where pcTMP_id = @@pcTMP_id
+  delete PedidoOrdenCompraTMP where pcTMP_id = @@pcTMP_id
+  delete PedidoCotizacionCompraTMP where pcTMP_id = @@pcTMP_id
+  delete PedidoCompraTMP where pcTMP_id = @@pcTMP_id
 
-	commit transaction
+  commit transaction
 
-	select @pc_id
+  select @pc_id
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al grabar la aplicación del pedido de compra. sp_DocPedidoCompraSaveAplic.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al grabar la aplicación del pedido de compra. sp_DocPedidoCompraSaveAplic.', 16, 1)
+  rollback transaction  
 
 end 
 

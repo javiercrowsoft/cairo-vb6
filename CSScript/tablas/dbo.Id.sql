@@ -3,9 +3,9 @@ drop table [dbo].[Id]
 GO
 
 CREATE TABLE [dbo].[Id] (
-	[Id_Tabla] [varchar] (50) NOT NULL ,
-	[Id_NextId] [int] NOT NULL ,
-	[Id_CampoId] [varchar] (50) NOT NULL 
+  [Id_Tabla] [varchar] (50) NOT NULL ,
+  [Id_NextId] [int] NOT NULL ,
+  [Id_CampoId] [varchar] (50) NOT NULL 
 ) ON [PRIMARY]
 GO
 

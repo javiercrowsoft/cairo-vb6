@@ -11,8 +11,8 @@ go
 -- sp_srv_cvxi_getClienteByNick  1, 'FMARQUEZ74'
 
 create procedure sp_srv_cvxi_getClienteByNick (
-	@@cmi_id		int,
-	@@nick		 	varchar(255)
+  @@cmi_id    int,
+  @@nick       varchar(255)
 )
 as
 
@@ -20,21 +20,21 @@ set nocount on
 
 begin
 
-	if @@cmi_id = 1 set @@nick = '(ml)#' + @@nick
+  if @@cmi_id = 1 set @@nick = '(ml)#' + @@nick
 
-	select  cli_nombre 			as nombre,
-				  cli_tel      		as telefono,
-					cli_email       as email,
-					cli_calle + ' ' +
-					cli_callenumero + ' ' +
-					cli_piso + ' ' +
-					cli_depto + ' (' +
-					cli_codpostal + ') ' +
-					cli_localidad		as direccion
-					
-	from Cliente
+  select  cli_nombre       as nombre,
+          cli_tel          as telefono,
+          cli_email       as email,
+          cli_calle + ' ' +
+          cli_callenumero + ' ' +
+          cli_piso + ' ' +
+          cli_depto + ' (' +
+          cli_codpostal + ') ' +
+          cli_localidad    as direccion
+          
+  from Cliente
 
-	where cli_codigocomunidad = @@nick
+  where cli_codigocomunidad = @@nick
 
 
 end

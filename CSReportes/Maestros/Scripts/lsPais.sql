@@ -18,7 +18,7 @@ Pais Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 39      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Pais%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Pais%'
 
 Para testear:
 
@@ -32,46 +32,46 @@ drop procedure [dbo].[lsPais]
 go
 create procedure lsPais (
 
-@@pa_id			varchar(255)
+@@pa_id      varchar(255)
 
 )as 
 
 declare @pa_id int
 declare @ram_id_pais int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@pa_id, @pa_id out, @ram_id_pais out
 
 if @ram_id_pais <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_pais, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_pais, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_pais, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_pais, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_pais = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_pais = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select *
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
   Pais
 
 where 
@@ -79,14 +79,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 39 -- tbl_id de Pais
                   and  rptarb_hojaid = Pais.pa_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_pais = 0)
-			 )
+           (@ram_id_pais = 0)
+       )

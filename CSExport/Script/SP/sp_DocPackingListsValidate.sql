@@ -3,7 +3,7 @@ drop procedure [dbo].[sp_DocPackingListsValidate]
 
 /*
 
-	exec	sp_DocPackingListsValidate
+  exec  sp_DocPackingListsValidate
 
 */
 
@@ -13,8 +13,8 @@ as
 
 begin
 
-	exec sp_DocPackingListsSetPendiente 
-	exec sp_DocPackingListsSetEstado
+  exec sp_DocPackingListsSetPendiente 
+  exec sp_DocPackingListsSetEstado
 end 
 
 go

@@ -15,21 +15,21 @@ create procedure sp_ProductosSaveKit as
 set nocount on
 
 begin
-	declare @pr_id int
+  declare @pr_id int
 
-	declare c_prkittosave insensitive cursor for select pr_id from producto where pr_eskit <>0
-	open c_prkittosave
+  declare c_prkittosave insensitive cursor for select pr_id from producto where pr_eskit <>0
+  open c_prkittosave
 
-	fetch next from c_prkittosave into @pr_id
-	while @@fetch_status = 0
-	begin
+  fetch next from c_prkittosave into @pr_id
+  while @@fetch_status = 0
+  begin
 
-		exec sp_ProductoSaveKit @pr_id
+    exec sp_ProductoSaveKit @pr_id
 
-		fetch next from c_prkittosave into @pr_id
-	end
-	close c_prkittosave
-	deallocate c_prkittosave
+    fetch next from c_prkittosave into @pr_id
+  end
+  close c_prkittosave
+  deallocate c_prkittosave
 end
 
 go

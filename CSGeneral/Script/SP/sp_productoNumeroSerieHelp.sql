@@ -16,79 +16,79 @@ GO
 
 */
 create procedure sp_productoNumeroSerieHelp (
-	@@emp_id          int,
+  @@emp_id          int,
   @@us_id           int,
-	@@bForAbm         tinyint,
-	@@filter 					varchar(8000)  = '',
-  @@check  					smallint 			 = 0,
+  @@bForAbm         tinyint,
+  @@filter           varchar(8000)  = '',
+  @@check            smallint        = 0,
   @@prns_id         int            = 0,
-	@@filter2         varchar(8000)  = ''
+  @@filter2         varchar(8000)  = ''
 )
 as
 begin
 
-	set nocount on
-	
-	set @@filter = replace(@@filter,'''','''''')
+  set nocount on
+  
+  set @@filter = replace(@@filter,'''','''''')
 
-	declare @sqlstmt varchar(5000)
+  declare @sqlstmt varchar(5000)
 
-	set @@filter2 = replace(@@filter2,'(pr_id','(prns.pr_id')
-	set @@filter2 = replace(@@filter2,' pr_id',' prns.pr_id')
+  set @@filter2 = replace(@@filter2,'(pr_id','(prns.pr_id')
+  set @@filter2 = replace(@@filter2,' pr_id',' prns.pr_id')
 
-	if substring(@@filter2,1,8)='pr_id = ' begin
-		set @@filter2 = 'prns.pr_id = ' + substring(@@filter2,9,len(@@filter2))
-	end
+  if substring(@@filter2,1,8)='pr_id = ' begin
+    set @@filter2 = 'prns.pr_id = ' + substring(@@filter2,9,len(@@filter2))
+  end
 
-	if @@check <> 0 begin
+  if @@check <> 0 begin
 
-		set @sqlstmt = 						'select prns_id, '
-		set @sqlstmt = @sqlstmt +        'prns_codigo as [Código], '
-		set @sqlstmt = @sqlstmt +        'pr_nombreCompra	as [Artículo] '
+    set @sqlstmt =             'select prns_id, '
+    set @sqlstmt = @sqlstmt +        'prns_codigo as [Código], '
+    set @sqlstmt = @sqlstmt +        'pr_nombreCompra  as [Artículo] '
 
-		set @sqlstmt = @sqlstmt + 'from ProductoNumeroSerie prns inner join Producto pr on prns.pr_id = pr.pr_id '
+    set @sqlstmt = @sqlstmt + 'from ProductoNumeroSerie prns inner join Producto pr on prns.pr_id = pr.pr_id '
 
-		set @sqlstmt = @sqlstmt + 'where (prns_codigo = '''+@@filter+''') '
+    set @sqlstmt = @sqlstmt + 'where (prns_codigo = '''+@@filter+''') '
 
-		if @@prns_id <> 0
-			set @sqlstmt = @sqlstmt + '	 and (prns_id = ' + convert(varchar(20),@@prns_id) + ') '
+    if @@prns_id <> 0
+      set @sqlstmt = @sqlstmt + '   and (prns_id = ' + convert(varchar(20),@@prns_id) + ') '
 
-		if @@filter2 <> '' 
-			set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
+    if @@filter2 <> '' 
+      set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
 
-	end else begin
+  end else begin
 
-		set @sqlstmt = 						'select top 300 prns_id, '
-		set @sqlstmt = @sqlstmt +        'prns_codigo  as [Código], '
-		set @sqlstmt = @sqlstmt +        'prns_codigo2 as [Código2], '
-		set @sqlstmt = @sqlstmt +        'prns_codigo3 as [Código3], '
-		set @sqlstmt = @sqlstmt +        'pr_nombreCompra	as [Artículo], '
-		set @sqlstmt = @sqlstmt +        'prns_descrip	  as [Observ.], '
-		set @sqlstmt = @sqlstmt +        ' '''+ @@filter + ''' as col_aux '
+    set @sqlstmt =             'select top 300 prns_id, '
+    set @sqlstmt = @sqlstmt +        'prns_codigo  as [Código], '
+    set @sqlstmt = @sqlstmt +        'prns_codigo2 as [Código2], '
+    set @sqlstmt = @sqlstmt +        'prns_codigo3 as [Código3], '
+    set @sqlstmt = @sqlstmt +        'pr_nombreCompra  as [Artículo], '
+    set @sqlstmt = @sqlstmt +        'prns_descrip    as [Observ.], '
+    set @sqlstmt = @sqlstmt +        ' '''+ @@filter + ''' as col_aux '
 
-		set @sqlstmt = @sqlstmt + 'from ProductoNumeroSerie prns inner join Producto pr on prns.pr_id = pr.pr_id '
-		set @sqlstmt = @sqlstmt + 'where '
+    set @sqlstmt = @sqlstmt + 'from ProductoNumeroSerie prns inner join Producto pr on prns.pr_id = pr.pr_id '
+    set @sqlstmt = @sqlstmt + 'where '
 
-		if left(@@filter,2)<>'@@' begin
+    if left(@@filter,2)<>'@@' begin
 
-			set @sqlstmt = @sqlstmt + 
-														 '(prns_codigo like ''%'+@@filter 
+      set @sqlstmt = @sqlstmt + 
+                             '(prns_codigo like ''%'+@@filter 
                             + '%'' or prns_codigo2 like ''%'+@@filter 
-														+'%'' or prns_codigo3 like ''%'+@@filter
+                            +'%'' or prns_codigo3 like ''%'+@@filter
                             +'%'' or pr_nombreCompra like ''%'+@@filter
-														+'%'' or prns_descrip like ''%'+@@filter
+                            +'%'' or prns_descrip like ''%'+@@filter
                             +'%'' or ''' + @@filter + ''' = '''') '
-		end else begin
-			set @sqlstmt = @sqlstmt + 'prns_codigo = ''' + substring(@@filter,3,len(@@filter)) + ''''
-		end
+    end else begin
+      set @sqlstmt = @sqlstmt + 'prns_codigo = ''' + substring(@@filter,3,len(@@filter)) + ''''
+    end
 
-		if @@filter2 <> '' 
-			set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
+    if @@filter2 <> '' 
+      set @sqlstmt = @sqlstmt + '  and (' + @@filter2 + ')'
 
-	end		
+  end    
 
-	exec(@sqlstmt)
-	
+  exec(@sqlstmt)
+  
 
 end
 

@@ -14,63 +14,63 @@ sp_tables '%cliente%'
 
 go
 create procedure sp_clienteDelete (
-	@@cli_id 				int,
-	@@delContacto		tinyint = 0
+  @@cli_id         int,
+  @@delContacto    tinyint = 0
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	if @@delContacto <> 0 begin
+  if @@delContacto <> 0 begin
 
-		delete Contacto where cli_id = @@cli_id
-		if @@error <> 0 goto ControlError
+    delete Contacto where cli_id = @@cli_id
+    if @@error <> 0 goto ControlError
 
-	end else begin
+  end else begin
 
-		update Contacto set cli_id = null where cli_id = @@cli_id
-		if @@error <> 0 goto ControlError
+    update Contacto set cli_id = null where cli_id = @@cli_id
+    if @@error <> 0 goto ControlError
 
-	end
+  end
 
-	delete ClienteCacheCredito where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete ClienteCacheCredito where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete ClientePercepcion where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete ClientePercepcion where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete EmpresaCliente where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete EmpresaCliente where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete ClienteCuentaGrupo where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete ClienteCuentaGrupo where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete ClienteSucursal where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete ClienteSucursal where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete ListaDescuentoCliente where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete ListaDescuentoCliente where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete ListaPrecioCliente where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete ListaPrecioCliente where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete EmpresaClienteDeuda where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete EmpresaClienteDeuda where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	delete Cliente where cli_id = @@cli_id
-	if @@error <> 0 goto ControlError
+  delete Cliente where cli_id = @@cli_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el cliente. sp_clienteDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el cliente. sp_clienteDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

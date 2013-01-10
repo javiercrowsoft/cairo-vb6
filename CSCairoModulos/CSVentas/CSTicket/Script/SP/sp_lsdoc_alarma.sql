@@ -12,7 +12,7 @@ go
 -- sp_lsdoc_alarma 1
 
 create procedure sp_lsdoc_alarma (
-	@@al_id	int
+  @@al_id  int
 )
 as
 
@@ -22,23 +22,23 @@ begin
 
 select 
 
-	al_id,
-	''                as TypeTask,
-  cli_nombre				as Cliente,
-	proy_nombre				as Proyecto,
-	rub_nombre        as [Rubro],
-	al_nombre				  as Nombre,
-	al_codigo 			  as [Código],
-	al_descrip				as [Descripción]
+  al_id,
+  ''                as TypeTask,
+  cli_nombre        as Cliente,
+  proy_nombre        as Proyecto,
+  rub_nombre        as [Rubro],
+  al_nombre          as Nombre,
+  al_codigo         as [Código],
+  al_descrip        as [Descripción]
 
 from 
 
-		Alarma al		left join proyecto proy     		on al.proy_id 	= proy.proy_id
-								left join cliente c             on al.cli_id 		= c.cli_id
-								left join rubro rub             on al.rub_id    = rub.rub_id
+    Alarma al    left join proyecto proy         on al.proy_id   = proy.proy_id
+                left join cliente c             on al.cli_id     = c.cli_id
+                left join rubro rub             on al.rub_id    = rub.rub_id
 where 
 
-		al.al_id = @@al_id 
+    al.al_id = @@al_id 
 
 end
 

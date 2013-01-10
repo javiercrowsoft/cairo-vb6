@@ -18,7 +18,7 @@ Barco Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 12004      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Barco%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Barco%'
 
 Para testear:
 
@@ -33,46 +33,46 @@ drop procedure [dbo].[lsBarco]
 go
 create procedure lsBarco (
 
-@@barc_id			varchar(255)
+@@barc_id      varchar(255)
 
 )as 
 
 declare @barc_id int
 declare @ram_id_barco int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@barc_id, @barc_id out, @ram_id_barco out
 
 if @ram_id_barco <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_barco, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_barco, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_barco, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_barco, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_barco = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_barco = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select *
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
   Barco
 
 where 
@@ -80,14 +80,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12004 -- tbl_id de Barco
                   and  rptarb_hojaid = Barco.barc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_barco = 0)
-			 )
+           (@ram_id_barco = 0)
+       )

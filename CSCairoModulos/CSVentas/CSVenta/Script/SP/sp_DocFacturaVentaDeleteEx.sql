@@ -9,11 +9,11 @@ go
 */
 
 create procedure sp_DocFacturaVentaDeleteEx (
-	@@fv_id int
+  @@fv_id int
 )
 as
 
 begin
 
-	return
+  return
 end

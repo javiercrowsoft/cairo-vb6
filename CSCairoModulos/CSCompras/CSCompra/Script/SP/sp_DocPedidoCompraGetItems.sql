@@ -16,26 +16,26 @@ sp_DocPedidoCompraGetItems 1
 
 */
 create procedure sp_DocPedidoCompraGetItems (
-	@@pc_id int
+  @@pc_id int
 )
 as
 
 begin
 
-	select 	PedidoCompraItem.*, 
-					pr_nombreCompra, 
-					tri.ti_porcentaje as iva_ri_porcentaje,
-					trni.ti_porcentaje as iva_rni_porcentaje,
+  select   PedidoCompraItem.*, 
+          pr_nombreCompra, 
+          tri.ti_porcentaje as iva_ri_porcentaje,
+          trni.ti_porcentaje as iva_rni_porcentaje,
           ccos_nombre,
           un_nombre
 
-	from 	PedidoCompraItem
-				inner join Producto 							on PedidoCompraItem.pr_id = Producto.pr_id
-        inner join Unidad 								on Producto.un_id_compra = unidad.un_id
-				left join tasaimpositiva as tri  	on producto.ti_id_ivaricompra  = tri.ti_id
-				left join tasaimpositiva as trni 	on producto.ti_id_ivarnicompra = trni.ti_id
-        left join centrocosto as ccos 		on PedidoCompraItem.ccos_id = ccos.ccos_id
-	where 
-			pc_id = @@pc_id
+  from   PedidoCompraItem
+        inner join Producto               on PedidoCompraItem.pr_id = Producto.pr_id
+        inner join Unidad                 on Producto.un_id_compra = unidad.un_id
+        left join tasaimpositiva as tri    on producto.ti_id_ivaricompra  = tri.ti_id
+        left join tasaimpositiva as trni   on producto.ti_id_ivarnicompra = trni.ti_id
+        left join centrocosto as ccos     on PedidoCompraItem.ccos_id = ccos.ccos_id
+  where 
+      pc_id = @@pc_id
 
 end

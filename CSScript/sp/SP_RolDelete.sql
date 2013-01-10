@@ -5,26 +5,26 @@ go
 
 /*
 
-	04/09/00
-	Proposito: Borrar un usuario
+  04/09/00
+  Proposito: Borrar un usuario
 
 */
 
 create procedure SP_RolDelete(
-	@@rol_id int
+  @@rol_id int
 )
 as 
 
 begin transaction
 
 Delete UsuarioRol where rol_id = @@rol_id
-	if @@error <> 0 goto error 
+  if @@error <> 0 goto error 
 
 Delete Permiso where rol_id = @@rol_id
-	if @@error <> 0 goto error 
+  if @@error <> 0 goto error 
 
 Delete Rol where rol_id = @@rol_id
-	if @@error <> 0 goto error 
+  if @@error <> 0 goto error 
 
 commit transaction
 return

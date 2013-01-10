@@ -3,24 +3,24 @@ drop procedure [dbo].[sp_DocRemitoCompraSaveAplic]
 
 /*
 begin transaction
-	exec	sp_DocRemitoCompraSaveAplic 17
+  exec  sp_DocRemitoCompraSaveAplic 17
 rollback transaction
 
 */
 
 go
 create procedure sp_DocRemitoCompraSaveAplic (
-	@@rcTMP_id int	
+  @@rcTMP_id int  
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @MsgError varchar(5000)
+  declare @MsgError varchar(5000)
 
-	declare @rc_id 				int
+  declare @rc_id         int
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,20 +30,20 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	declare @modifico int
+  declare @modifico int
 
-	select @rc_id = rc_id, @modifico = modifico from RemitoCompraTMP where rcTMP_id = @@rcTMP_id
+  select @rc_id = rc_id, @modifico = modifico from RemitoCompraTMP where rcTMP_id = @@rcTMP_id
 
-	---------------------------------
-	-- Si no hay remito no hago nada
-	--
-	if @rc_id is null begin
+  ---------------------------------
+  -- Si no hay remito no hago nada
+  --
+  if @rc_id is null begin
 
-		select @rc_id
-		return
-	end
+    select @rc_id
+    return
+  end
 
-	begin transaction
+  begin transaction
 
   declare @bSuccess      tinyint
 
@@ -55,10 +55,10 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocRemitoCpraSaveAplic @rc_id, @@rcTMP_id, 1, @bSuccess out
+  exec sp_DocRemitoCpraSaveAplic @rc_id, @@rcTMP_id, 1, @bSuccess out
 
-	-- Si fallo al guardar
-	if IsNull(@bSuccess,0) = 0 goto ControlError
+  -- Si fallo al guardar
+  if IsNull(@bSuccess,0) = 0 goto ControlError
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,11 +68,11 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocRemitoCompraSetCredito @rc_id
-	if @@error <> 0 goto ControlError
+  exec sp_DocRemitoCompraSetCredito @rc_id
+  if @@error <> 0 goto ControlError
 
-	exec sp_DocRemitoCompraSetEstado @rc_id
-	if @@error <> 0 goto ControlError
+  exec sp_DocRemitoCompraSetEstado @rc_id
+  if @@error <> 0 goto ControlError
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,28 +82,28 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-		--/////////////////////////////////////////////////////////////////////////////////////////////////
-		-- Validaciones
-		--
+    --/////////////////////////////////////////////////////////////////////////////////////////////////
+    -- Validaciones
+    --
 
-			-- ESTADO
-					exec sp_AuditoriaEstadoCheckDocRC		@rc_id,
-																							@bSuccess	out,
-																							@MsgError out
-				
-					-- Si el documento no es valido
-					if IsNull(@bSuccess,0) = 0 goto ControlError
-			
-			-- CREDITO
-					exec sp_AuditoriaCreditoCheckDocRC	@rc_id,
-																							@bSuccess	out,
-																							@MsgError out
-				
-					-- Si el documento no es valido
-					if IsNull(@bSuccess,0) = 0 goto ControlError
+      -- ESTADO
+          exec sp_AuditoriaEstadoCheckDocRC    @rc_id,
+                                              @bSuccess  out,
+                                              @MsgError out
+        
+          -- Si el documento no es valido
+          if IsNull(@bSuccess,0) = 0 goto ControlError
+      
+      -- CREDITO
+          exec sp_AuditoriaCreditoCheckDocRC  @rc_id,
+                                              @bSuccess  out,
+                                              @MsgError out
+        
+          -- Si el documento no es valido
+          if IsNull(@bSuccess,0) = 0 goto ControlError
 
-		--
-		--/////////////////////////////////////////////////////////////////////////////////////////////////
+    --
+    --/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /*
@@ -114,7 +114,7 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_HistoriaUpdate 17003, @rc_id, @modifico, 6
+  exec sp_HistoriaUpdate 17003, @rc_id, @modifico, 6
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,20 +124,20 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	delete RemitoFacturaCompraTMP where rcTMP_ID = @@rcTMP_ID
-	delete OrdenRemitoCompraTMP where rcTMP_ID = @@rcTMP_ID
+  delete RemitoFacturaCompraTMP where rcTMP_ID = @@rcTMP_ID
+  delete OrdenRemitoCompraTMP where rcTMP_ID = @@rcTMP_ID
   delete RemitoDevolucionCompraTMP where rcTMP_ID = @@rcTMP_ID
-	delete RemitoCompraTMP where rcTMP_ID = @@rcTMP_ID
+  delete RemitoCompraTMP where rcTMP_ID = @@rcTMP_ID
 
-	commit transaction
+  commit transaction
 
-	select @rc_id
+  select @rc_id
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al grabar la aplicación del remito de compra. sp_DocRemitoCompraSaveAplic.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al grabar la aplicación del remito de compra. sp_DocRemitoCompraSaveAplic.', 16, 1)
+  rollback transaction  
 
 end 
 

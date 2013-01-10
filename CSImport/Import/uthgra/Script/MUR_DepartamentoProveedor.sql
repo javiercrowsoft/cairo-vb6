@@ -14,7 +14,7 @@ go
 
 */
 create Procedure MUR_DepartamentoProveedor (
-	@@dpto_id          int,
+  @@dpto_id          int,
   @@prov_codigo_min   int,
   @@prov_codigo_max   int
 )
@@ -26,8 +26,8 @@ begin
   declare @dptoprov_id int
   declare @prov_id     int
 
-	create table #tprov (prov_id int not null, prov_codigo varchar(255))
-	insert into #tprov (prov_id,prov_codigo) select prov_id,prov_codigo from Proveedor where isnumeric(prov_codigo)<>0
+  create table #tprov (prov_id int not null, prov_codigo varchar(255))
+  insert into #tprov (prov_id,prov_codigo) select prov_id,prov_codigo from Proveedor where isnumeric(prov_codigo)<>0
 
   declare c_prov insensitive cursor for 
   select prov_id from #tprov 

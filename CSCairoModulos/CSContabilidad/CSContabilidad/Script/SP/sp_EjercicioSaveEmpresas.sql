@@ -6,56 +6,56 @@ drop procedure [dbo].[sp_EjercicioSaveEmpresas]
 go
 create procedure sp_EjercicioSaveEmpresas (
 
-	@@ejc_id 				int
+  @@ejc_id         int
 
 )as 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @@emp_id 					varchar(50)
-	declare @emp_id 					int
-	declare @ram_id_empresa   int
+  declare @@emp_id           varchar(50)
+  declare @emp_id           int
+  declare @ram_id_empresa   int
 
-	select 	@@emp_id = emp_id
+  select   @@emp_id = emp_id
 
-	from EjercicioContable
+  from EjercicioContable
 
-	where ejc_id = @@ejc_id
+  where ejc_id = @@ejc_id
 
-	declare @clienteID 				int
-	declare @IsRaiz    				tinyint
+  declare @clienteID         int
+  declare @IsRaiz            tinyint
 
-	exec sp_GetRptId @clienteID out
+  exec sp_GetRptId @clienteID out
 
-	exec sp_ArbConvertId @@emp_id, @emp_id out, @ram_id_empresa out
+  exec sp_ArbConvertId @@emp_id, @emp_id out, @ram_id_empresa out
 
-	if @ram_id_empresa <> 0 begin
-	
-	--	exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
-	
-		exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
-	  if @IsRaiz = 0 begin
-			exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
-		end else 
-			set @ram_id_empresa = 0
-	end
-	
-	delete EjercicioContableEmpresa where ejc_id = @@ejc_id
+  if @ram_id_empresa <> 0 begin
+  
+  --  exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
+  
+    exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
+    if @IsRaiz = 0 begin
+      exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
+    end else 
+      set @ram_id_empresa = 0
+  end
+  
+  delete EjercicioContableEmpresa where ejc_id = @@ejc_id
 
-	if @emp_id <> 0 begin
+  if @emp_id <> 0 begin
 
-		insert into EjercicioContableEmpresa (ejc_id, emp_id) values(@@ejc_id, @emp_id)
+    insert into EjercicioContableEmpresa (ejc_id, emp_id) values(@@ejc_id, @emp_id)
 
-	end else begin
+  end else begin
 
-		insert into EjercicioContableEmpresa (ejc_id, emp_id) 
-		select @@ejc_id, rptarb_hojaid
-		from rptArbolRamaHoja 
-		where rptarb_cliente = @clienteID 
-			and tbl_id = 1018 
+    insert into EjercicioContableEmpresa (ejc_id, emp_id) 
+    select @@ejc_id, rptarb_hojaid
+    from rptArbolRamaHoja 
+    where rptarb_cliente = @clienteID 
+      and tbl_id = 1018 
 
-	end
-	
+  end
+  
 end
 go

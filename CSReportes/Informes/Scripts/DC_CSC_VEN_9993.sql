@@ -15,16 +15,16 @@ drop procedure [dbo].[DC_CSC_VEN_9993]
 go
 create procedure DC_CSC_VEN_9993 (
 
-  @@us_id    		int,
+  @@us_id        int,
 
-  @@cli_id   				varchar(255) 
+  @@cli_id           varchar(255) 
 
 )as 
 begin
 
   set nocount on
 
-	exec lsCliente @@cli_id
+  exec lsCliente @@cli_id
 
 end
 go

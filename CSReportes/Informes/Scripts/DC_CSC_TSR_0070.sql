@@ -18,13 +18,13 @@ DC_CSC_TSR_0070
 create procedure DC_CSC_TSR_0070 (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@cue_id varchar(255),
 @@mon_id varchar(255),
-@@suc_id	varchar(255),
-@@emp_id	varchar(255)
+@@suc_id  varchar(255),
+@@emp_id  varchar(255)
 
 )as 
 begin
@@ -57,46 +57,46 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_cuenta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
-	end else 
-		set @ram_id_cuenta = 0
+    exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
+  end else 
+    set @ram_id_cuenta = 0
 end
 
 if @ram_id_moneda <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_moneda, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_moneda, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_moneda, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_moneda, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_moneda, @clienteID 
-	end else 
-		set @ram_id_moneda = 0
+    exec sp_ArbGetAllHojas @ram_id_moneda, @clienteID 
+  end else 
+    set @ram_id_moneda = 0
 end
 
 if @ram_id_sucursal <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_sucursal, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_sucursal, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_sucursal, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_sucursal, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_sucursal, @clienteID 
-	end else 
-		set @ram_id_sucursal = 0
+    exec sp_ArbGetAllHojas @ram_id_sucursal, @clienteID 
+  end else 
+    set @ram_id_sucursal = 0
 end
 
 if @ram_id_empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
-	end else 
-		set @ram_id_empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
+  end else 
+    set @ram_id_empresa = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -148,13 +148,13 @@ from
                        left  join TarjetaCredito tjc           on tjcc.tjc_id        = tjc.tjc_id
 where 
 
-				  cobz_fecha >= @@Fini
-			and	cobz_fecha <= @@Ffin 
+          cobz_fecha >= @@Fini
+      and  cobz_fecha <= @@Ffin 
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -168,56 +168,56 @@ and   (emp.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cobzi.cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cue.mon_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_moneda = 0)
-			 )
+           (@ram_id_moneda = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cobz.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_sucursal = 0)
-			 )
+           (@ram_id_sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- tbl_id de Proyecto
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_empresa = 0)
-			 )
+           (@ram_id_empresa = 0)
+       )
 
 union all
 
@@ -260,13 +260,13 @@ from
                        left  join Banco bco                    on cheq.bco_id       = bco.bco_id
 where 
 
-				  opg_fecha >= @@Fini
-			and	opg_fecha <= @@Ffin 
+          opg_fecha >= @@Fini
+      and  opg_fecha <= @@Ffin 
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -280,56 +280,56 @@ and   (emp.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- tbl_id de Proyecto
                   and  rptarb_hojaid = opgi.cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cue.mon_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_moneda = 0)
-			 )
+           (@ram_id_moneda = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 -- tbl_id de Proyecto
                   and  rptarb_hojaid = opg.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_sucursal = 0)
-			 )
+           (@ram_id_sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- tbl_id de Proyecto
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_empresa = 0)
-			 )
+           (@ram_id_empresa = 0)
+       )
 
 union all
 
@@ -365,13 +365,13 @@ from
                              inner join Empresa emp                  on doc.emp_id        = emp.emp_id
 where 
 
-				  mf_fecha >= @@Fini
-			and	mf_fecha <= @@Ffin 
+          mf_fecha >= @@Fini
+      and  mf_fecha <= @@Ffin 
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -386,56 +386,56 @@ and   (emp.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- tbl_id de Proyecto
                   and  rptarb_hojaid = mfi.cue_id_haber
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cue.mon_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_moneda = 0)
-			 )
+           (@ram_id_moneda = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 -- tbl_id de Proyecto
                   and  rptarb_hojaid = mf.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_sucursal = 0)
-			 )
+           (@ram_id_sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- tbl_id de Proyecto
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_empresa = 0)
-			 )
+           (@ram_id_empresa = 0)
+       )
 
 union all
 
@@ -471,13 +471,13 @@ from
                              inner join Empresa emp                  on doc.emp_id        = emp.emp_id
 where 
 
-				  mf_fecha >= @@Fini
-			and	mf_fecha <= @@Ffin 
+          mf_fecha >= @@Fini
+      and  mf_fecha <= @@Ffin 
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -492,56 +492,56 @@ and   (emp.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- tbl_id de Proyecto
                   and  rptarb_hojaid = mfi.cue_id_debe
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cue.mon_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_moneda = 0)
-			 )
+           (@ram_id_moneda = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 -- tbl_id de Proyecto
                   and  rptarb_hojaid = mf.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_sucursal = 0)
-			 )
+           (@ram_id_sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- tbl_id de Proyecto
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_empresa = 0)
-			 )
+           (@ram_id_empresa = 0)
+       )
 
 order by Fecha, Tipo, Moneda, Orden
 

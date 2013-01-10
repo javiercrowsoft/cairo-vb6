@@ -9,22 +9,22 @@ sp_web_GetSocio '999'
 
 go
 create procedure sp_web_GetSocio (
-	@@AABAsoc_codigo				varchar(50)
+  @@AABAsoc_codigo        varchar(50)
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select  AABAsoc_id,
-					AABAsoc_apellido,
-					AABAsoc_nombre,
-					AABAsoc_codigo
-	from
-				AABA_socio
-	where
-				AABAsoc_codigo = @@AABAsoc_codigo
+  select  AABAsoc_id,
+          AABAsoc_apellido,
+          AABAsoc_nombre,
+          AABAsoc_codigo
+  from
+        AABA_socio
+  where
+        AABAsoc_codigo = @@AABAsoc_codigo
 end
 
 go

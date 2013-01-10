@@ -16,12 +16,12 @@ go
 create procedure DC_CSC_WAU_0010 (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@us_id_usuario varchar(255),
 @@dpto_id       varchar(255),
-@@tipo  	      int,
+@@tipo          int,
 @@resumido      smallint = 1
 )as 
 
@@ -49,24 +49,24 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_usuario <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
-	end else 
-		set @ram_id_usuario = 0
+    exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
+  end else 
+    set @ram_id_usuario = 0
 end
 
 if @ram_id_departamento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
-	end else 
-		set @ram_id_departamento = 0
+    exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
+  end else 
+    set @ram_id_departamento = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -124,8 +124,8 @@ from Historia h inner join Usuario u on h.modifico = u.us_id
                 left  join Departamento d on p.dpto_id = d.dpto_id
 where 
 
-				  h.modificado >= @@Fini
-			and	h.modificado <= @@Ffin 
+          h.modificado >= @@Fini
+      and  h.modificado <= @@Ffin 
       and ((h.tbl_id + hst_operacion *1000000) = @@tipo or @@tipo = 0)
 
 /* -///////////////////////////////////////////////////////////////////////
@@ -139,30 +139,30 @@ and   (d.dpto_id = @dpto_id or @dpto_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 3 -- tbl_id de Proyecto
                   and  rptarb_hojaid = h.modifico
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_usuario = 0)
-			 )
+           (@ram_id_usuario = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1015 -- tbl_id de Proyecto
                   and  rptarb_hojaid = d.dpto_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_departamento = 0)
-			 )
+           (@ram_id_departamento = 0)
+       )
 
 group by
 
@@ -257,8 +257,8 @@ from Historia h inner join Usuario u on h.modifico = u.us_id
                 left  join Departamento d on p.dpto_id = d.dpto_id
 where 
 
-				  h.modificado >= @@Fini
-			and	h.modificado <= @@Ffin 
+          h.modificado >= @@Fini
+      and  h.modificado <= @@Ffin 
       and ((h.tbl_id + hst_operacion *1000000) = @@tipo or @@tipo = 0)
 
 /* -///////////////////////////////////////////////////////////////////////
@@ -272,30 +272,30 @@ and   (d.dpto_id = @dpto_id or @dpto_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 3 -- tbl_id de Proyecto
                   and  rptarb_hojaid = h.modifico
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_usuario = 0)
-			 )
+           (@ram_id_usuario = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1015 -- tbl_id de Proyecto
                   and  rptarb_hojaid = d.dpto_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_departamento = 0)
-			 )
+           (@ram_id_departamento = 0)
+       )
 end
 
 GO

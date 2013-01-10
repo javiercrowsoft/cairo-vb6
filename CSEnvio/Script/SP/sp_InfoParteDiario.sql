@@ -6,7 +6,7 @@ go
 
 */
 create procedure sp_InfoParteDiario (
-	@@ptd_id int
+  @@ptd_id int
 )
 as
 

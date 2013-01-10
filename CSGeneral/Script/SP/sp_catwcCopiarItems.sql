@@ -12,7 +12,7 @@ go
  exec sp_catwcCopiarItems 2,'x-0001-0002405'
 */
 create procedure sp_catwcCopiarItems (
-	@@idSource	  int,
+  @@idSource    int,
   @@idTarget    int,
   @@modifico    int
 )
@@ -23,7 +23,7 @@ set nocount on
 begin
 
   declare @catwci_id          int
-  declare @pr_id             	int
+  declare @pr_id               int
   declare @catwci_activo      tinyint
 
   declare c_items insensitive cursor for select pr_id, catwci_activo from CatalogoWebCategoriaItem where catwc_id = @@idSource

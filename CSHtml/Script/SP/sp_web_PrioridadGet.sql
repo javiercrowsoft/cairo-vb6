@@ -15,22 +15,22 @@ sp_web_PrioridadGet 7
 
 create Procedure sp_web_PrioridadGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select prio_id, 
-				 prio_nombre as [Prioridad]
+  select prio_id, 
+         prio_nombre as [Prioridad]
 
-	from Prioridad
+  from Prioridad
 
-	union
+  union
 
-	select 0 as prio_id, 
-				 '(Ninguna)' as [Prioridad]
+  select 0 as prio_id, 
+         '(Ninguna)' as [Prioridad]
 
-	order by prio_nombre
+  order by prio_nombre
 
 end
 go

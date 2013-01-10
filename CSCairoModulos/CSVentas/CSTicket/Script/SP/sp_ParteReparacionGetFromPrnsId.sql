@@ -4,13 +4,13 @@ drop procedure [dbo].[sp_ParteReparacionGetFromPrnsId]
 go
 
 create procedure sp_ParteReparacionGetFromPrnsId (
-	@@prns_id 			int
+  @@prns_id       int
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	select prp_id from ParteReparacion where prns_id = @@prns_id
+  select prp_id from ParteReparacion where prns_id = @@prns_id
 
 end

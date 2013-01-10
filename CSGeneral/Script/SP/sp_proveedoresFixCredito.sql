@@ -14,23 +14,23 @@ as
 
 begin
 
-	declare @prov_id int
+  declare @prov_id int
 
-	declare c_proveedor insensitive cursor for select prov_id from proveedor
+  declare c_proveedor insensitive cursor for select prov_id from proveedor
 
-	open c_proveedor
+  open c_proveedor
 
-	fetch next from c_proveedor into @prov_id	
-	while @@fetch_status=0
-	begin
+  fetch next from c_proveedor into @prov_id  
+  while @@fetch_status=0
+  begin
 
-		exec sp_ProveedorFixCredito @prov_id
+    exec sp_ProveedorFixCredito @prov_id
 
-		fetch next from c_proveedor into @prov_id
-	end
+    fetch next from c_proveedor into @prov_id
+  end
 
-	close c_proveedor
-	deallocate c_proveedor
+  close c_proveedor
+  deallocate c_proveedor
 
 end
 go

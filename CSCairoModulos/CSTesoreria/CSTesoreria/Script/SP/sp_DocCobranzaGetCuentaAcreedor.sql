@@ -14,32 +14,32 @@ sp_DocCobranzaGetCuentaAcreedor '1'
 */
 
 create procedure sp_DocCobranzaGetCuentaAcreedor (
-	@@strIds 					  varchar(5000)
+  @@strIds             varchar(5000)
 )
 as
 
 begin
 
-	declare @cue_acreedoresXvta int 
-	set @cue_acreedoresXvta = 8
+  declare @cue_acreedoresXvta int 
+  set @cue_acreedoresXvta = 8
 
-	declare @timeCode datetime
-	set @timeCode = getdate()
-	exec sp_strStringToTable @timeCode, @@strIds, ','
+  declare @timeCode datetime
+  set @timeCode = getdate()
+  exec sp_strStringToTable @timeCode, @@strIds, ','
 
-	select
+  select
 
-			fc_id,
+      fc_id,
       c.cue_id,
       c.cue_nombre
 
-  from AsientoItem inner join FacturaCompra 					on AsientoItem.as_id		= FacturaCompra.as_id
-									 inner join TmpStringToTable				on FacturaCompra.fc_id 	= convert(int,TmpStringToTable.tmpstr2tbl_campo)
-									 inner join Cuenta c                on AsientoItem.cue_id 	= c.cue_id
+  from AsientoItem inner join FacturaCompra           on AsientoItem.as_id    = FacturaCompra.as_id
+                   inner join TmpStringToTable        on FacturaCompra.fc_id   = convert(int,TmpStringToTable.tmpstr2tbl_campo)
+                   inner join Cuenta c                on AsientoItem.cue_id   = c.cue_id
   where 
-					asi_haber			<> 0
-		and   tmpstr2tbl_id =  @timeCode
-    and   cuec_id 			=  @cue_acreedoresXvta
+          asi_haber      <> 0
+    and   tmpstr2tbl_id =  @timeCode
+    and   cuec_id       =  @cue_acreedoresXvta
 
   group by fc_id,c.cue_id,cue_nombre
 

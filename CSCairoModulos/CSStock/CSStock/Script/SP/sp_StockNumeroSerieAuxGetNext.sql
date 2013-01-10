@@ -17,6 +17,6 @@ as
 
 begin
 
-	exec sp_StockNumeroSerieAuxGetNextCliente
+  exec sp_StockNumeroSerieAuxGetNextCliente
 
 end

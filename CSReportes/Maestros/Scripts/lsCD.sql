@@ -18,7 +18,7 @@ TABLA_DEL_LISTADO Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 TBL_ID_TABLA      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%TABLA_DEL_LISTADO%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%TABLA_DEL_LISTADO%'
 
 Para testear:
 
@@ -33,46 +33,46 @@ drop procedure [dbo].[NOMBRE_SP]
 go
 create procedure NOMBRE_SP (
 
-@@TABLA_ID			varchar(255)
+@@TABLA_ID      varchar(255)
 
 )as 
 
 declare @TABLA_ID int
 declare @RAM_ID_TABLA int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@TABLA_ID, @TABLA_ID out, @RAM_ID_TABLA out
 
 if @RAM_ID_TABLA <> 0 begin
 
-	exec sp_ArbIsRaiz @RAM_ID_TABLA, @IsRaiz out
+  exec sp_ArbIsRaiz @RAM_ID_TABLA, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @RAM_ID_TABLA, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @RAM_ID_TABLA, @clienteID
 
-	end else begin
+  end else begin
 
-		set @RAM_ID_TABLA = 0
-  	set @clienteID = 0
-	end
+    set @RAM_ID_TABLA = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select 
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
 TABLA_DEL_LISTADO
 
 where 
@@ -80,14 +80,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = TBL_ID_TABLA -- tbl_id de TABLA_DEL_LISTADO
                   and  rptarb_hojaid = TABLA_DEL_LISTADO.TABLA_ID
-							   ) 
+                 ) 
            )
         or 
-					 (@RAM_ID_TABLA = 0)
-			 )
+           (@RAM_ID_TABLA = 0)
+       )

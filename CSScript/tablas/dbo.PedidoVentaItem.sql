@@ -3,9 +3,9 @@ drop table [dbo].[PedidoVentaItem]
 GO
 
 CREATE TABLE [dbo].[PedidoVentaItem] (
-	[pvi_id] [int] NOT NULL ,
-	[pv_id] [int] NULL ,
-	[pr_id] [int] NULL 
+  [pvi_id] [int] NOT NULL ,
+  [pv_id] [int] NULL ,
+  [pr_id] [int] NULL 
 ) ON [PRIMARY]
 GO
 

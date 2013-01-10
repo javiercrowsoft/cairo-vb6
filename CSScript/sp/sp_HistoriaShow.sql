@@ -20,21 +20,21 @@ create procedure sp_HistoriaShow (
 as
 begin
 
-  select 	hst_id, 
-					hst.modificado								as Modificado,
-					us_nombre 										as Usuario,
-				 	isnull(hsto1.hsto_nombre,
-                 hsto2.hsto_nombre) 	  as Operacion,
-				 	hst_descrip 									as Observaciones
+  select   hst_id, 
+          hst.modificado                as Modificado,
+          us_nombre                     as Usuario,
+           isnull(hsto1.hsto_nombre,
+                 hsto2.hsto_nombre)     as Operacion,
+           hst_descrip                   as Observaciones
 
-	from Historia hst left join HistoriaOperacion hsto1 on hst_operacion = hsto1.hsto_id and hst.tbl_id = hsto1.tbl_id
+  from Historia hst left join HistoriaOperacion hsto1 on hst_operacion = hsto1.hsto_id and hst.tbl_id = hsto1.tbl_id
                     left join HistoriaOperacion hsto2 on hst_operacion = hsto2.hsto_id and hsto2.tbl_id = 0
-										left join Usuario us              on hst.modifico  = us.us_id
+                    left join Usuario us              on hst.modifico  = us.us_id
 
-	where hst.tbl_id = @@tbl_id
-		and id = @@id
+  where hst.tbl_id = @@tbl_id
+    and id = @@id
 
-	order by hst.modificado
+  order by hst.modificado
 
 end
 go

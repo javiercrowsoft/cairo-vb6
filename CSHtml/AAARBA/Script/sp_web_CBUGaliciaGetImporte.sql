@@ -15,20 +15,20 @@ sp_col inscripcion
 
 go
 create procedure sp_web_CBUGaliciaGetImporte (
-	@@insc_id int
+  @@insc_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	insc_importe
-	
-	from aaarbaweb..inscripcion insc 
+  select   insc_importe
+  
+  from aaarbaweb..inscripcion insc 
 
-	where insc_id = @@insc_id
-	
+  where insc_id = @@insc_id
+  
 end
 
 go

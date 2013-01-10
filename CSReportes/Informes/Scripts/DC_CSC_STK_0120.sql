@@ -36,24 +36,24 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_producto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_producto, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_producto, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_producto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_producto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_producto, @clienteID 
-	end else 
-		set @ram_id_producto = 0
+    exec sp_ArbGetAllHojas @ram_id_producto, @clienteID 
+  end else 
+    set @ram_id_producto = 0
 end
 
 if @ram_id_productoserie <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_productoserie, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_productoserie, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_productoserie, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_productoserie, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_productoserie, @clienteID 
-	end else 
-		set @ram_id_productoserie = 0
+    exec sp_ArbGetAllHojas @ram_id_productoserie, @clienteID 
+  end else 
+    set @ram_id_productoserie = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -76,16 +76,16 @@ select
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
 ProductoNumeroSerie
 
 where 
 
 
 -- TODO:EMPRESA
-			    (
-						exists(select * from EmpresaUsuario where emp_id = documento.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+          (
+            exists(select * from EmpresaUsuario where emp_id = documento.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -98,29 +98,29 @@ and   (ProductoNumeroSerie.prns_id = @prns_id or @prns_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 -- tbl_id de Proyecto
                   and  rptarb_hojaid = MovimientoStockItem.pr_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_producto = 0)
-			 )
+           (@ram_id_producto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1017 -- tbl_id de Proyecto
                   and  rptarb_hojaid = MovimientoStockItem.prns_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_productoserie = 0)
-			 )
+           (@ram_id_productoserie = 0)
+       )
 end
 go

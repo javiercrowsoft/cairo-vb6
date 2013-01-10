@@ -1,10 +1,10 @@
 select  
-	fc_id,
-	doct_id,
-	fc_fecha,
-	fc_nrodoc,
-	fc_pendiente,
-	isnull((select sum(provcc_importe) from proveedorcachecredito where id = fc.fc_id and doct_id in (1,3,7)),0)
+  fc_id,
+  doct_id,
+  fc_fecha,
+  fc_nrodoc,
+  fc_pendiente,
+  isnull((select sum(provcc_importe) from proveedorcachecredito where id = fc.fc_id and doct_id in (1,3,7)),0)
 
 from facturacompra fc
 where 

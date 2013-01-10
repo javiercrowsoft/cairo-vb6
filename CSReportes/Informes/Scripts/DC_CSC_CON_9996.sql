@@ -24,9 +24,9 @@ drop procedure [dbo].[DC_CSC_CON_9996]
 go
 create procedure DC_CSC_CON_9996 (
 
-  @@us_id    				int,
-	@@cue_id					varchar(255), 
-	@@cuec_id  				int
+  @@us_id            int,
+  @@cue_id          varchar(255), 
+  @@cuec_id          int
 
 )as 
 
@@ -53,13 +53,13 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_cuenta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cuenta, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cuenta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
-	end else 
-		set @ram_id_cuenta = 0
+    exec sp_ArbGetAllHojas @ram_id_cuenta, @clienteID 
+  end else 
+    set @ram_id_cuenta = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -71,50 +71,50 @@ FIN PRIMERA PARTE DE ARBOLES
 update cuenta set cuec_id = @@cuec_id
 
 where 
-   		(cue_id = @cue_id or @cue_id=0)
+       (cue_id = @cue_id or @cue_id=0)
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 
                   and  rptarb_hojaid = cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 
 ----------------------------------------------------------
 select 1 as aux_id,
-			 '' as Codigo,
-			 '' as Cuenta,
-			 '' as Categoria,
-			 'Las cuentas se actualizaron con exito' as Info
+       '' as Codigo,
+       '' as Cuenta,
+       '' as Categoria,
+       'Las cuentas se actualizaron con exito' as Info
 union all
 select 2 as aux_id,
-			 cue_codigo,
-			 cue_nombre,
-			 cuec_nombre,
-			 ''
+       cue_codigo,
+       cue_nombre,
+       cuec_nombre,
+       ''
 
 from Cuenta cue inner join CuentaCategoria cuec on cue.cuec_id = cuec.cuec_id
 
 where 
-   		(cue_id = @cue_id or @cue_id=0)
+       (cue_id = @cue_id or @cue_id=0)
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 
                   and  rptarb_hojaid = cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 end
 go

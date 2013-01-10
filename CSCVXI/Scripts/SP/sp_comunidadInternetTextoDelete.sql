@@ -8,29 +8,29 @@ go
 
 create procedure sp_comunidadInternetTextoDelete (
 
-	@@cmit_id int
+  @@cmit_id int
 )
 
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete ComunidadInternetTextoItem where cmit_id = @@cmit_id
-	if @@error <> 0 goto ControlError
+  delete ComunidadInternetTextoItem where cmit_id = @@cmit_id
+  if @@error <> 0 goto ControlError
 
-	delete ComunidadInternetTexto where cmit_id = @@cmit_id
-	if @@error <> 0 goto ControlError
+  delete ComunidadInternetTexto where cmit_id = @@cmit_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el texto. sp_comunidadInternetTextoDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el texto. sp_comunidadInternetTextoDelete.', 16, 1)
+  rollback transaction  
 
 end

@@ -15,21 +15,21 @@ declare @us_id int
 
 declare c_userUpdate insensitive cursor for
 
-	select us_id from deleted
+  select us_id from deleted
 
 open c_userUpdate
 
 fetch next from c_userUpdate into @us_id
 while @@fetch_status = 0
 begin
-	if @us_id = 1 begin
+  if @us_id = 1 begin
 
-		rollback transaction
-		raiserror ('El usuario Administrador no puede borrarse', 16, 11)
+    rollback transaction
+    raiserror ('El usuario Administrador no puede borrarse', 16, 11)
 
-	end
+  end
 
-	fetch next from c_userUpdate into @us_id
+  fetch next from c_userUpdate into @us_id
 end
 
 close c_userUpdate

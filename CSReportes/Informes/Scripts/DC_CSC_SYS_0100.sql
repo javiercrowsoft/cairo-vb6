@@ -17,17 +17,17 @@ create procedure DC_CSC_SYS_0100 (
 
   @@us_id          int,
 
-	@@database       varchar(255),
-	@@file           varchar(260)
+  @@database       varchar(255),
+  @@file           varchar(260)
 
 )as 
 begin
 set nocount on
 
-	BACKUP DATABASE @@database TO DISK=@@file WITH NOUNLOAD ,  NOSKIP,  INIT
+  BACKUP DATABASE @@database TO DISK=@@file WITH NOUNLOAD ,  NOSKIP,  INIT
 
-	if @@error<>0 select 1, 'No se pudo realizar el backup' as Error
-	else          select 2, 'El backup se realizo con éxito' as Resultado
+  if @@error<>0 select 1, 'No se pudo realizar el backup' as Error
+  else          select 2, 'El backup se realizo con éxito' as Resultado
 
 
 end

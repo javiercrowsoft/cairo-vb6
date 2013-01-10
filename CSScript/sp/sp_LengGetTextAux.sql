@@ -38,7 +38,7 @@ begin
   select @rtn = lengi_texto from lenguajeitem where leng_id = @leng_id and lengi_codigo = @@code
 
   -- Si no lo encuentro veo si el lenguaje tiene un lenguaje padre
-	if isnull(@rtn,'') = '' begin
+  if isnull(@rtn,'') = '' begin
 
     -- Busco el lenguaje tiene un lenguaje padre
     select @leng_id = leng_id_padre from lenguaje where leng_id = @leng_id
@@ -46,9 +46,9 @@ begin
     -- Si hay un lenguaje padre le pido que me traiga el texto
     if isnull(@leng_id ,0) <> 0 begin
 
-  		exec sp_LengGetTextAux @leng_id, @rtn out
+      exec sp_LengGetTextAux @leng_id, @rtn out
     end
-	end
-	
-	set @@rtn = @rtn
+  end
+  
+  set @@rtn = @rtn
 end

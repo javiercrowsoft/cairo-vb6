@@ -9,12 +9,12 @@ drop procedure [dbo].[sp_DocCobranzaSetCredito]
 
 go
 create procedure sp_DocCobranzaSetCredito (
-	@@cobz_id     int,
+  @@cobz_id     int,
   @@borrar     tinyint = 0
 )
 as
 
 begin
 
-	exec sp_DocCobranzaSetCreditoCairo @@cobz_id, @@borrar
+  exec sp_DocCobranzaSetCreditoCairo @@cobz_id, @@borrar
 end

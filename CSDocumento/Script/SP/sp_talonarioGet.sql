@@ -12,7 +12,7 @@ go
  exec sp_talonarioGet 2,'x-0001-0002405'
 */
 create procedure sp_talonarioGet (
-	@@ta_id	      int
+  @@ta_id        int
 )
 as
 
@@ -20,9 +20,9 @@ set nocount on
 
 begin
 
-	select Talonario.*,
-				 emp_nombre
-	from Talonario left join Empresa on Talonario.emp_id = Empresa.emp_id
+  select Talonario.*,
+         emp_nombre
+  from Talonario left join Empresa on Talonario.emp_id = Empresa.emp_id
   where ta_id = @@ta_id
 end
 

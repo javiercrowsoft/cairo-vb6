@@ -8,10 +8,10 @@ fetch next from c_anulado into @fc_id, @as_id
 while @@fetch_status=0
 begin
 
-	update facturacompra set as_id = null where fc_id = @fc_id
-	exec sp_docasientodelete @as_id
+  update facturacompra set as_id = null where fc_id = @fc_id
+  exec sp_docasientodelete @as_id
 
-	fetch next from c_anulado into @fc_id, @as_id
+  fetch next from c_anulado into @fc_id, @as_id
 end
 
 close c_anulado

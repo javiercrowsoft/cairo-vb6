@@ -16,43 +16,43 @@ GO
 
 */
 create procedure sp_ImportacionIDHelp (
-	@@emp_id          int,
+  @@emp_id          int,
   @@us_id           int,
-	@@bForAbm         tinyint,
-	@@filter 					varchar(255)  = '',
-  @@check  					smallint 			= 0,
+  @@bForAbm         tinyint,
+  @@filter           varchar(255)  = '',
+  @@check            smallint       = 0,
   @@impid_id        int           = 0,
-	@@filter2         varchar(255)  = ''
+  @@filter2         varchar(255)  = ''
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	if @@check <> 0 begin
+  if @@check <> 0 begin
 
-		select	impid_id,
-						impid_descrip   	as [Descripción],
-						impid_fecha				as [Fecha]
+    select  impid_id,
+            impid_descrip     as [Descripción],
+            impid_fecha        as [Fecha]
 
-		from ImportacionID
+    from ImportacionID
 
-		where (convert(varchar(12),impid_fecha,105) = convert(varchar(12),@@filter,105) 
-						or impid_descrip = @@filter)
-			and (impid_id = @@impid_id or @@impid_id=0)
+    where (convert(varchar(12),impid_fecha,105) = convert(varchar(12),@@filter,105) 
+            or impid_descrip = @@filter)
+      and (impid_id = @@impid_id or @@impid_id=0)
 
-	end else begin
+  end else begin
 
-			select top 50
-						 impid_id,
+      select top 50
+             impid_id,
              impid_descrip   as [Descripción],
-	           impid_fecha     as [Fecha]
+             impid_fecha     as [Fecha]
 
-			from ImportacionID 
+      from ImportacionID 
 
-			where (impid_descrip like '%'+@@filter+'%' or convert(varchar(12),impid_fecha,105) like '%'+@@filter+'%' 
+      where (impid_descrip like '%'+@@filter+'%' or convert(varchar(12),impid_fecha,105) like '%'+@@filter+'%' 
               or @@filter = '')
-	end
+  end
 
 end
 

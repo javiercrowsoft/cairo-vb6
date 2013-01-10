@@ -19,32 +19,32 @@ returns varchar(5000)
 as
 begin
 
-	declare @c 	 varchar(10)
-	declare @len int
-	declare @n   int
-	declare @rtn varchar(5000)
+  declare @c    varchar(10)
+  declare @len int
+  declare @n   int
+  declare @rtn varchar(5000)
 
-	set @rtn = ''
+  set @rtn = ''
 
-	set @len = len(@@source)
-	set @n = 1
-	while @n< @len
-	begin
+  set @len = len(@@source)
+  set @n = 1
+  while @n< @len
+  begin
 
-		set @c = substring(@@source,@n,1)
+    set @c = substring(@@source,@n,1)
 
-		if ascii(@c) = 225 set @c = 'a'--'&aacute;'
-		if ascii(@c) = 233 set @c = 'e'--'&eacute;'
-		if ascii(@c) = 237 set @c = 'i'--'&iacute;'
-		if ascii(@c) = 243 set @c = 'o'--'&oacute;'
-		if ascii(@c) = 250 set @c = 'u'--'&uacute;'
-		if ascii(@c) = 241 set @c = 'n'--'&ntilde;'
-		if ascii(@c) = 209 set @c = 'N'--'&Ntilde;'
+    if ascii(@c) = 225 set @c = 'a'--'&aacute;'
+    if ascii(@c) = 233 set @c = 'e'--'&eacute;'
+    if ascii(@c) = 237 set @c = 'i'--'&iacute;'
+    if ascii(@c) = 243 set @c = 'o'--'&oacute;'
+    if ascii(@c) = 250 set @c = 'u'--'&uacute;'
+    if ascii(@c) = 241 set @c = 'n'--'&ntilde;'
+    if ascii(@c) = 209 set @c = 'N'--'&Ntilde;'
 
-		set @rtn = @rtn + @c
+    set @rtn = @rtn + @c
 
-		set @n = @n+1
-	end
+    set @n = @n+1
+  end
   return(@rtn)
 
 end

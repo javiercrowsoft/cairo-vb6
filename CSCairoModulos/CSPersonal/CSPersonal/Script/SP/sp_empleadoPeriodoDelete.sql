@@ -6,31 +6,31 @@ go
 -- sp_empleadoPeriodoDelete 1
 
 create procedure sp_empleadoPeriodoDelete (
-	@@empe_id int
+  @@empe_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin tran
+  begin tran
 
-	delete EmpleadoHoras where empe_id = @@empe_id
-	if @@error <> 0 goto ControlError
+  delete EmpleadoHoras where empe_id = @@empe_id
+  if @@error <> 0 goto ControlError
 
-	delete EmpleadoPeriodo where empe_id = @@empe_id
-	if @@error <> 0 goto ControlError
+  delete EmpleadoPeriodo where empe_id = @@empe_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el periodo de asistencia. sp_empleadoPeriodoDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el periodo de asistencia. sp_empleadoPeriodoDelete.', 16, 1)
+  rollback transaction  
 
-	return	
+  return  
 
 end
 

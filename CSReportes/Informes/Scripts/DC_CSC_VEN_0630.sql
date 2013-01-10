@@ -14,66 +14,66 @@ GO
 
 create procedure DC_CSC_VEN_0630 (
 
-  @@us_id    		int,
-	@@Fini 		 		datetime,
-	@@Ffin 		 		datetime
+  @@us_id        int,
+  @@Fini          datetime,
+  @@Ffin          datetime
 
 )as 
 begin
 
 set nocount on
 
-	create table #t_dc_csc_ven_0630 (fecha datetime)
+  create table #t_dc_csc_ven_0630 (fecha datetime)
 
-	declare @fecha datetime
-	set @fecha = @@Fini
+  declare @fecha datetime
+  set @fecha = @@Fini
 
-	declare @dia int
-	declare @last_date int
+  declare @dia int
+  declare @last_date int
 
-	set @last_date = @@datefirst
-	set datefirst 7
+  set @last_date = @@datefirst
+  set datefirst 7
 
-	while @fecha <= @@Ffin
-	begin
+  while @fecha <= @@Ffin
+  begin
 
-		set @dia = datepart(dw, @fecha)
+    set @dia = datepart(dw, @fecha)
 
-		if @dia not in (1,7) begin
+    if @dia not in (1,7) begin
 
-			insert into #t_dc_csc_ven_0630(fecha) values(@fecha)
+      insert into #t_dc_csc_ven_0630(fecha) values(@fecha)
 
-		end
-		set @fecha = dateadd(d,1,@fecha)
+    end
+    set @fecha = dateadd(d,1,@fecha)
 
-	end
+  end
 
-	set datefirst @last_date
+  set datefirst @last_date
 
-	select  
-					cli.cli_id,
-					convert(varchar(10),t.fecha,111) 	as Fecha,
-					cli_nombre												as Cliente,
-					cli_codigo                      	as Codigo,
-					sum(case when doct_id = 7 then -fv_total else fv_total end)
-																						as Vendido,
-					sum(case when fv_id is not null then 1 else 0 end)
-																						as Facturas,
-					case when cli.cli_id is not null then 1 else 0 end as Cantidad
+  select  
+          cli.cli_id,
+          convert(varchar(10),t.fecha,111)   as Fecha,
+          cli_nombre                        as Cliente,
+          cli_codigo                        as Codigo,
+          sum(case when doct_id = 7 then -fv_total else fv_total end)
+                                            as Vendido,
+          sum(case when fv_id is not null then 1 else 0 end)
+                                            as Facturas,
+          case when cli.cli_id is not null then 1 else 0 end as Cantidad
 
-	from 	#t_dc_csc_ven_0630 t 	
-						left join Cliente cli on convert(varchar(10),t.fecha,111) = convert(varchar(10),cli.creado,111)
-						left join FacturaVenta fv on cli.cli_id = fv.cli_id and fv.est_id <> 7
+  from   #t_dc_csc_ven_0630 t   
+            left join Cliente cli on convert(varchar(10),t.fecha,111) = convert(varchar(10),cli.creado,111)
+            left join FacturaVenta fv on cli.cli_id = fv.cli_id and fv.est_id <> 7
 
-	group by
+  group by
 
-	cli.cli_id,
-	convert(varchar(10),t.fecha,111),
-	cli_nombre,
-	cli_codigo
-	
-	order by Fecha
-	
+  cli.cli_id,
+  convert(varchar(10),t.fecha,111),
+  cli_nombre,
+  cli_codigo
+  
+  order by Fecha
+  
 end
 
 GO

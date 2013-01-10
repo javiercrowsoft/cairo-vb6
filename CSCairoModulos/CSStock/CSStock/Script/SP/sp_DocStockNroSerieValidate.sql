@@ -13,7 +13,7 @@ select * from StockCache where prns_id = 5595
 
 select * from StockItem where prns_id = 91457 and depl_id = -2 
 
-											group by prns_id, depl_id 
+                      group by prns_id, depl_id 
 
 
 select * from StockItem where prns_id = 6
@@ -23,32 +23,32 @@ select * from parteprodkit
 1379
 
 -------------------------------------------------------------------------------------------
-		update ProductoNumeroSerie set pr_id_kit = si.pr_id_kit from stockItem si
-		where ProductoNumeroSerie.prns_id = si.prns_id
-			and sti_id = (	select top 1 sti_id
-											from StockItem
-											where prns_id = si.prns_id 
-												and pr_id_kit is not null
-											order by st_id desc
-										)
-			and ppk_id is not null and ProductoNumeroSerie.pr_id_kit is null
+    update ProductoNumeroSerie set pr_id_kit = si.pr_id_kit from stockItem si
+    where ProductoNumeroSerie.prns_id = si.prns_id
+      and sti_id = (  select top 1 sti_id
+                      from StockItem
+                      where prns_id = si.prns_id 
+                        and pr_id_kit is not null
+                      order by st_id desc
+                    )
+      and ppk_id is not null and ProductoNumeroSerie.pr_id_kit is null
 -------------------------------------------------------------------------------------------
 
 */
 
 go
 create procedure sp_DocStockNroSerieValidate (
-	@@pr_id 		int = 0,
-	@@prns_id 	int = 0,
-	@@bDeleteSinMovimientos tinyint = 0
+  @@pr_id     int = 0,
+  @@prns_id   int = 0,
+  @@bDeleteSinMovimientos tinyint = 0
 )
 as
 
 begin
 
-	declare @MsgError  					varchar(5000) set @MsgError = ''
+  declare @MsgError            varchar(5000) set @MsgError = ''
 
-	set nocount on
+  set nocount on
 
   -- Actualiza el deposito segun la tabla stock cache
   --
@@ -63,22 +63,22 @@ begin
   --
   declare c_ns insensitive cursor for 
   select prns_id from ProductoNumeroSerie where (pr_id = @@pr_id or @@pr_id = 0)
-																						and (prns_id = @@prns_id or @@prns_id = 0)
+                                            and (prns_id = @@prns_id or @@prns_id = 0)
   open c_ns
 
   fetch next from c_ns into @prns_id
   while @@fetch_status=0
   begin
 
-		set @pr_id_kit = null
+    set @pr_id_kit = null
 
-		select top 1 @pr_id_kit = pr_id_kit 
-		from StockItem 
-		where prns_id = @prns_id 
-			and pr_id_kit is not null
-		order by st_id desc
+    select top 1 @pr_id_kit = pr_id_kit 
+    from StockItem 
+    where prns_id = @prns_id 
+      and pr_id_kit is not null
+    order by st_id desc
 
-		update ProductoNumeroSerie set pr_id_kit = @pr_id_kit where prns_id = @prns_id
+    update ProductoNumeroSerie set pr_id_kit = @pr_id_kit where prns_id = @prns_id
 
     fetch next from c_ns into @prns_id
   end
@@ -88,7 +88,7 @@ begin
 
   declare c_ns insensitive cursor for 
   select prns_id,pr_id_kit from ProductoNumeroSerie where (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
-																											and (prns_id = @@prns_id or @@prns_id = 0)
+                                                      and (prns_id = @@prns_id or @@prns_id = 0)
 
   open c_ns
 
@@ -96,7 +96,7 @@ begin
   while @@fetch_status=0
   begin
 
-		set @depl_id = null
+    set @depl_id = null
 
     select @pr_id_kit = IsNull(@pr_id_kit,0)
 
@@ -119,10 +119,10 @@ begin
         order by si.st_id desc
       end
 
-			if @depl_id is not null begin
+      if @depl_id is not null begin
 
-	      update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id
-			end
+        update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id
+      end
 
     end else begin
 
@@ -134,53 +134,53 @@ begin
         -- Si el numero de serie no existe en produccion y si existen en tercero, es por que lo
         -- compre y lo vendi y como al comprarlo entra por -3 y al venderlo sale por -3
         -- en -3 tengo cero, pero esta bien, asi que lo dejo en el deposito de terceros
-				-- Excepto cuando es un kit ya que en este caso estoy produciendolo y por ende
-				-- sale de -2 cuando lo armo y vuelve a -2 cuando lo desarmo y queda -2 en cero
-				-- (-2 es produccion :)
-				-- es decir que si lo tengo en produccion y en tercero y en ambos en cero
-			  -- lo dejo en el ultimo deposito que lo movio
+        -- Excepto cuando es un kit ya que en este caso estoy produciendolo y por ende
+        -- sale de -2 cuando lo armo y vuelve a -2 cuando lo desarmo y queda -2 en cero
+        -- (-2 es produccion :)
+        -- es decir que si lo tengo en produccion y en tercero y en ambos en cero
+        -- lo dejo en el ultimo deposito que lo movio
         --
         if not exists(select * from StockItem 
-											where prns_id = @prns_id 
-												and depl_id = -2 
-												and IsNull(pr_id_kit,0) = @pr_id_kit 
-											group by prns_id, depl_id 
-											having sum(sti_ingreso)-sum(sti_salida)>0
-										) 
-					and
+                      where prns_id = @prns_id 
+                        and depl_id = -2 
+                        and IsNull(pr_id_kit,0) = @pr_id_kit 
+                      group by prns_id, depl_id 
+                      having sum(sti_ingreso)-sum(sti_salida)>0
+                    ) 
+          and
                exists(select * from StockItem where prns_id = @prns_id and depl_id = -3)
-				begin
+        begin
 
-					select top 1 @depl_id = depl_id from StockItem
-					where prns_id = @prns_id 
-						and sti_ingreso > 0
-						and depl_id in (-2,-3)
-					order by sti_id desc
-					
-					if @depl_id is not null begin
+          select top 1 @depl_id = depl_id from StockItem
+          where prns_id = @prns_id 
+            and sti_ingreso > 0
+            and depl_id in (-2,-3)
+          order by sti_id desc
+          
+          if @depl_id is not null begin
 
-	          update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id  
-					end
+            update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id  
+          end
 
         end else
 
-					if @depl_id is not null begin
-	
-						update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id  
+          if @depl_id is not null begin
+  
+            update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id  
 
-					end else begin
+          end else begin
 
-						select top 1 @depl_id = depl_id from StockItem 
-						where prns_id = @prns_id 
-							and sti_ingreso > 0
-							and depl_id in (-2,-3)
-						order by sti_id desc
-						
-						if @depl_id is not null begin
-	
-		          update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id  
-						end
-					end
+            select top 1 @depl_id = depl_id from StockItem 
+            where prns_id = @prns_id 
+              and sti_ingreso > 0
+              and depl_id in (-2,-3)
+            order by sti_id desc
+            
+            if @depl_id is not null begin
+  
+              update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id  
+            end
+          end
       end
     end
 
@@ -201,44 +201,44 @@ begin
                       where not exists (select * from StockItem si inner join StockItemKit sk on si.stik_id = sk.stik_id
                                         where si.pr_id      = ps.pr_id 
                                           and sk.pr_id      = ps.pr_id_kit
-																					and si.prns_id    = ps.prns_id
+                                          and si.prns_id    = ps.prns_id
                                           )
                         and pr_id_kit is not null
                    )
   and pr_id_kit is not null
-	and (prns_id = @@prns_id or @@prns_id = 0)
-	and (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
+  and (prns_id = @@prns_id or @@prns_id = 0)
+  and (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
 
   -- Desvincula los numeros de serie que estan con partes que no los mencionan
   --
   update ProductoNumeroSerie set ppk_id = null 
   where not exists (
                       select prns_id from StockItem si inner join ParteProdKit ppk on si.st_id = ppk.st_id1
-											where prns_id = ProductoNumeroSerie.prns_id
+                      where prns_id = ProductoNumeroSerie.prns_id
                    )
   and ppk_id is not null
-	and (prns_id = @@prns_id or @@prns_id = 0)
-	and (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
+  and (prns_id = @@prns_id or @@prns_id = 0)
+  and (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
 
 
-	if @@bDeleteSinMovimientos <> 0 begin
+  if @@bDeleteSinMovimientos <> 0 begin
 
-	  delete ProductoNumeroSerie 
-		where not exists(select prns_id from StockItem where prns_id = ProductoNumeroSerie.prns_id)
-			and (prns_id = @@prns_id or @@prns_id = 0)
-			and (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
+    delete ProductoNumeroSerie 
+    where not exists(select prns_id from StockItem where prns_id = ProductoNumeroSerie.prns_id)
+      and (prns_id = @@prns_id or @@prns_id = 0)
+      and (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
 
-	end
+  end
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	set @MsgError = 'Ha ocurrido un error al validar los numeros de serie. sp_DocStockNroSerieValidate. ' + IsNull(@MsgError,'')
-	raiserror (@MsgError, 16, 1)
+  set @MsgError = 'Ha ocurrido un error al validar los numeros de serie. sp_DocStockNroSerieValidate. ' + IsNull(@MsgError,'')
+  raiserror (@MsgError, 16, 1)
 
-	if @@trancount > 0 begin
-		rollback transaction	
+  if @@trancount > 0 begin
+    rollback transaction  
   end
 end

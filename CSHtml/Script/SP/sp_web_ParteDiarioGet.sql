@@ -10,29 +10,29 @@ drop procedure [dbo].[sp_web_ParteDiarioGet]
 go
 create procedure sp_web_ParteDiarioGet (
 
-	@@us_id int
+  @@us_id int
 
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	exec sp_web_ParteDiarioGetEx 
-																0,
-																0,
+  exec sp_web_ParteDiarioGetEx 
                                 0,
-																0,
-																0,
-																0,
-																0,
-																0,
-															  0,
-															  0,
-																'20000101',
-																'21000101',
-																@@us_id
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                '20000101',
+                                '21000101',
+                                @@us_id
 
 end
 go

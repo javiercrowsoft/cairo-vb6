@@ -3,42 +3,42 @@ drop procedure [dbo].[sp_DocFacturaVentaSetPendiente]
 
 /*
 
-	exec	sp_DocFacturaVentaSetPendiente 38
+  exec  sp_DocFacturaVentaSetPendiente 38
 
 */
 
 go
 create procedure sp_DocFacturaVentaSetPendiente (
-	@@fv_id 			int,
+  @@fv_id       int,
   @@bSuccess    tinyint = 0 out
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	set @@bSuccess = 0
+  set @@bSuccess = 0
 
-	declare @fv_pendiente decimal(18,6)
+  declare @fv_pendiente decimal(18,6)
 
-	begin transaction
+  begin transaction
 
-	select @fv_pendiente = sum(fvd_pendiente) from FacturaVentaDeuda where fv_id = @@fv_id
-	set @fv_pendiente = IsNull(@fv_pendiente,0)
+  select @fv_pendiente = sum(fvd_pendiente) from FacturaVentaDeuda where fv_id = @@fv_id
+  set @fv_pendiente = IsNull(@fv_pendiente,0)
 
-	update FacturaVenta set fv_pendiente = round(@fv_pendiente,2) where fv_id = @@fv_id
-	if @@error <> 0 goto ControlError
+  update FacturaVenta set fv_pendiente = round(@fv_pendiente,2) where fv_id = @@fv_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	set @@bSuccess = 1
+  set @@bSuccess = 1
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al actualizar el pendiente de la factura de venta. sp_DocFacturaVentaSetPendiente.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al actualizar el pendiente de la factura de venta. sp_DocFacturaVentaSetPendiente.', 16, 1)
+  rollback transaction  
 
 end 
 

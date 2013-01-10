@@ -4,13 +4,13 @@ drop procedure [dbo].[sp_LegajoGet]
 go
 
 create procedure sp_LegajoGet (
-	@@lgj_id int
+  @@lgj_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select  legajo.*, 
           cli_nombre, 

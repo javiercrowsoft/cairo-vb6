@@ -5,7 +5,7 @@ drop procedure [dbo].[SP_SecGetUsuarioXRol]
 go
 
 create procedure SP_SecGetUsuarioXRol(
-	@@rol_id int
+  @@rol_id int
 )
 as 
 

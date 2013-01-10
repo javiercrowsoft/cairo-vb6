@@ -8,9 +8,9 @@ go
 
 create procedure sp_srv_cvxi_getTextos (
 
-	@@cmi_id            int,
-	@@cmia_id           int,
-	@@idm_id            int
+  @@cmi_id            int,
+  @@cmia_id           int,
+  @@idm_id            int
 
 )
 
@@ -18,12 +18,12 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select * 
-	from ComunidadInternetTexto
-	where (cmi_id  is null or cmi_id  = @@cmi_id)
-		and (cmia_id is null or cmia_id = @@cmia_id)
-		and (idm_id  is null or idm_id  = @@idm_id)
+  select * 
+  from ComunidadInternetTexto
+  where (cmi_id  is null or cmi_id  = @@cmi_id)
+    and (cmia_id is null or cmia_id = @@cmia_id)
+    and (idm_id  is null or idm_id  = @@idm_id)
 
 end

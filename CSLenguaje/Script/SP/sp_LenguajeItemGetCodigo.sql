@@ -14,22 +14,22 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	create table #t_lenguajeItem (lengi_codigo int not null)
+  create table #t_lenguajeItem (lengi_codigo int not null)
 
-	if exists (select * from LenguajeItem where isnumeric(lengi_codigo) <> 0)
-	begin
+  if exists (select * from LenguajeItem where isnumeric(lengi_codigo) <> 0)
+  begin
 
-		insert into #t_lenguajeItem (lengi_codigo) select lengi_codigo from LenguajeItem where isnumeric(lengi_codigo) <> 0
+    insert into #t_lenguajeItem (lengi_codigo) select lengi_codigo from LenguajeItem where isnumeric(lengi_codigo) <> 0
 
-		select max(lengi_codigo)+1 from #t_lenguajeItem		
+    select max(lengi_codigo)+1 from #t_lenguajeItem    
 
-	end else begin
+  end else begin
 
-		select 1001
+    select 1001
 
-	end
+  end
 
 
 end

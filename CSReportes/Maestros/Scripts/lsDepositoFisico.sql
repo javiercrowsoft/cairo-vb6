@@ -12,60 +12,60 @@ drop procedure [dbo].[lsDepositoFisico]
 go
 create procedure lsDepositoFisico (
 
-@@depf_id			varchar(255)
+@@depf_id      varchar(255)
 
 )as 
 
 declare @depf_id int
 declare @ram_id_depositoFisico int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@depf_id, @depf_id out, @ram_id_depositoFisico out
 
 if @ram_id_depositoFisico <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_depositoFisico, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_depositoFisico, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_depositoFisico, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_depositoFisico, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_depositoFisico = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_depositoFisico = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select 
 
-	DepositoFisico.*
+  DepositoFisico.*
 
 from 
 
-	DepositoFisico
+  DepositoFisico
 
 where 
       (DepositoFisico.depf_id = @depf_id or @depf_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 10 -- tbl_id de Proyecto
                   and  rptarb_hojaid = DepositoFisico.depf_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_depositoFisico = 0)
-			 )
+           (@ram_id_depositoFisico = 0)
+       )

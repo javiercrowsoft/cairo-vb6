@@ -14,21 +14,21 @@ sp_MovimientoCajaGetItems 5
 go
 create procedure sp_MovimientoCajaGetItems (
 
-	@@mcj_id	int
+  @@mcj_id  int
 
 )as 
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	mcji.*,
-					cue_nombre,
-					mon_nombre
+  select   mcji.*,
+          cue_nombre,
+          mon_nombre
 
-	from MovimientoCajaItem	mcji inner join Cuenta cue on mcji.cue_id_trabajo = cue.cue_id
-								  						 left  join Moneda mon on mcji.mon_id = mon.mon_id
-	where mcj_id = @@mcj_id
+  from MovimientoCajaItem  mcji inner join Cuenta cue on mcji.cue_id_trabajo = cue.cue_id
+                               left  join Moneda mon on mcji.mon_id = mon.mon_id
+  where mcj_id = @@mcj_id
 
 end
 go

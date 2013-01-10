@@ -9,31 +9,31 @@ sp_LiquidacionEmpleadoGetValorHora 3, '20070101'
 */
 
 create procedure sp_LiquidacionEmpleadoGetValorHora (
-	@@em_id 		int,
-	@@fecha     datetime
+  @@em_id     int,
+  @@fecha     datetime
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @sind_id int
-	declare @sindco_id int
-	declare @sindca_id int
+  declare @sind_id int
+  declare @sindco_id int
+  declare @sindca_id int
 
-	select  @sind_id = sind_id,
-					@sindco_id = sindco_id,
-					@sindca_id = sindca_id  
-	from Empleado 
-	where em_id = @@em_id
+  select  @sind_id = sind_id,
+          @sindco_id = sindco_id,
+          @sindca_id = sindca_id  
+  from Empleado 
+  where em_id = @@em_id
 
-	select sindcc_importe 
-	from SindicatoConvenioCategoria	
-	where sindca_id = @sindca_id 
-		and sind_id = @sind_id 
-		and sindco_id = @sindco_id
-		and @@fecha between sindcc_desde and sindcc_hasta
+  select sindcc_importe 
+  from SindicatoConvenioCategoria  
+  where sindca_id = @sindca_id 
+    and sind_id = @sind_id 
+    and sindco_id = @sindco_id
+    and @@fecha between sindcc_desde and sindcc_hasta
 end
 
 go

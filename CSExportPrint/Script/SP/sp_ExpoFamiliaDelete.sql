@@ -14,29 +14,29 @@ sp_tables '%cliente%'
 
 go
 create procedure sp_ExpoFamiliaDelete (
-	@@efm_id 		int
+  @@efm_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	update producto set efm_id = null where efm_id = @@efm_id
-	if @@error <> 0 goto ControlError
+  update producto set efm_id = null where efm_id = @@efm_id
+  if @@error <> 0 goto ControlError
 
-	delete ExpoFamilia where efm_id = @@efm_id
-	if @@error <> 0 goto ControlError
+  delete ExpoFamilia where efm_id = @@efm_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la familia de exportación. sp_ExpoFamiliaDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la familia de exportación. sp_ExpoFamiliaDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

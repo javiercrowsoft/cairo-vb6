@@ -19,22 +19,22 @@ begin
 
   set nocount on
 
-	declare @dpto_id int
+  declare @dpto_id int
 
-	declare c_dpto insensitive cursor for select dpto_id from departamento where dpto_nombre like '%compra%' or dpto_nombre like '%pago%'
-	open c_dpto
+  declare c_dpto insensitive cursor for select dpto_id from departamento where dpto_nombre like '%compra%' or dpto_nombre like '%pago%'
+  open c_dpto
 
-	fetch next from c_dpto into @dpto_id	
-	while @@fetch_status = 0
-	begin
+  fetch next from c_dpto into @dpto_id  
+  while @@fetch_status = 0
+  begin
 
-		exec MUR_DepartamentoProveedor @dpto_id, 0, 99999999
+    exec MUR_DepartamentoProveedor @dpto_id, 0, 99999999
 
-		fetch next from c_dpto into @dpto_id
-	end
+    fetch next from c_dpto into @dpto_id
+  end
 
-	close c_dpto
-	deallocate c_dpto
+  close c_dpto
+  deallocate c_dpto
 
 end
 

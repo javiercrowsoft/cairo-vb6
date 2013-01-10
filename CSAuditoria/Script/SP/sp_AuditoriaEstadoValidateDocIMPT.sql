@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaEstadoValidateDocIMPT (
 
-	@@impt_id     int,
-	@@aud_id 			int
+  @@impt_id     int,
+  @@aud_id       int
 
 )
 as

@@ -10,17 +10,17 @@ select * from aaarbaweb..inscripcion
 
 go
 create procedure sp_web_inscripcionTieneAcomp (
-	@@insc_id	int
+  @@insc_id  int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select AABAinsc_acompannantes from aaarbaweb..Inscripcion insc 
-	where insc_id = @@insc_id 
-		and AABAinsc_acompannantes > 0
+  select AABAinsc_acompannantes from aaarbaweb..Inscripcion insc 
+  where insc_id = @@insc_id 
+    and AABAinsc_acompannantes > 0
 
 end
 

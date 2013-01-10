@@ -7,22 +7,22 @@ drop procedure [dbo].[sp_FeriadoDelete ]
 
 go
 create procedure sp_FeriadoDelete  (
-	@@fe_id 		int
+  @@fe_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	create table #t_docs (id int, fecha datetime, cle_id int, tipo tinyint)
+  create table #t_docs (id int, fecha datetime, cle_id int, tipo tinyint)
 
-	exec sp_FeriadoFillTableAux @@fe_id
+  exec sp_FeriadoFillTableAux @@fe_id
 
-	delete feriadoitem  where fe_id = @@fe_id
-	delete feriado 			where fe_id = @@fe_id
+  delete feriadoitem  where fe_id = @@fe_id
+  delete feriado       where fe_id = @@fe_id
 
-	exec sp_DocFeriadoUpdate @@fe_id
+  exec sp_DocFeriadoUpdate @@fe_id
 
 end
 

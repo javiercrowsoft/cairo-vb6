@@ -4,23 +4,23 @@ drop procedure [dbo].[sp_LiquidacionPlantillaGetitems]
 go
 
 create procedure sp_LiquidacionPlantillaGetitems (
-	@@liqp_id 		int
+  @@liqp_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	liqpi.*,
-					em_apellido + ', ' + em_nombre as em_nombre,
-					liqf_nombre,
-					'Legajo: ' + em_legajo + ' DNI: ' + em_dni as Legajo
+  select   liqpi.*,
+          em_apellido + ', ' + em_nombre as em_nombre,
+          liqf_nombre,
+          'Legajo: ' + em_legajo + ' DNI: ' + em_dni as Legajo
 
-	from LiquidacionPlantillaItem liqpi left join Empleado em on liqpi.em_id = em.em_id
-																			left join LiquidacionFormula liqf on liqpi.liqf_id = liqf.liqf_id
-	where liqpi.liqp_id = @@liqp_id
-					
+  from LiquidacionPlantillaItem liqpi left join Empleado em on liqpi.em_id = em.em_id
+                                      left join LiquidacionFormula liqf on liqpi.liqf_id = liqf.liqf_id
+  where liqpi.liqp_id = @@liqp_id
+          
 
 end
 

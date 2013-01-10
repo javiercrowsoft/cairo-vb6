@@ -9,15 +9,15 @@ drop procedure [dbo].[sp_DocFacturaVentaSetEstadoCliente]
 
 go
 create procedure sp_DocFacturaVentaSetEstadoCliente (
-	@@fv_id 			int,
+  @@fv_id       int,
   @@est_id      int = 0 out 
 )
 as
 
 begin
 
-	-- Nada que hacer
-	declare @dummy tinyint
+  -- Nada que hacer
+  declare @dummy tinyint
 
 end
 GO

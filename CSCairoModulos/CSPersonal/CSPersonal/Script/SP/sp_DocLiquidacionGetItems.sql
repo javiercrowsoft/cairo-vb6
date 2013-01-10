@@ -4,21 +4,21 @@ drop procedure [dbo].[sp_DocLiquidacionGetItems]
 go
 
 create procedure sp_DocLiquidacionGetItems (
-	@@liq_id 		int
+  @@liq_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	liqi.*,
-					em_apellido + ', ' + em_nombre as em_nombre
+  select   liqi.*,
+          em_apellido + ', ' + em_nombre as em_nombre
 
-	from LiquidacionItem liqi left join Empleado em on liqi.em_id = em.em_id
+  from LiquidacionItem liqi left join Empleado em on liqi.em_id = em.em_id
 
-	where liqi.liq_id = @@liq_id
-					
+  where liqi.liq_id = @@liq_id
+          
 
 end
 

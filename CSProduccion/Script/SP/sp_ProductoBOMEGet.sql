@@ -9,13 +9,13 @@ drop procedure [dbo].[sp_ProductoBOMEGet]
 
 go
 create procedure sp_ProductoBOMEGet (
-	@@pbm_id 		int
+  @@pbm_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select 
       pbme.*,

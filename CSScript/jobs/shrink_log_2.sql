@@ -1,6 +1,6 @@
 declare @db         sysname, 
-				@sqlstmt		varchar(5000),
-				@log_size   decimal(15,2)
+        @sqlstmt    varchar(5000),
+        @log_size   decimal(15,2)
 
 select  @db = db_name()
 
@@ -22,9 +22,9 @@ from    #loginfo
 
 if @log_size < 90 begin
 
-	set @sqlstmt = 'ALTER DATABASE '+@db+' MODIFY FILE (NAME = Cairo_Log, SIZE = 100MB)'
+  set @sqlstmt = 'ALTER DATABASE '+@db+' MODIFY FILE (NAME = Cairo_Log, SIZE = 100MB)'
 
-	exec(@sqlstmt)
+  exec(@sqlstmt)
 
 end
 

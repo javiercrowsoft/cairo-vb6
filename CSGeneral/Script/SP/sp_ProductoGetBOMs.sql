@@ -12,13 +12,13 @@ drop procedure [dbo].[sp_ProductoGetBOMs]
 
 go
 create procedure sp_ProductoGetBOMs (
-	@@pr_id 		int
+  @@pr_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select 
          pbm_id,

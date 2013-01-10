@@ -17,7 +17,7 @@ Alsa Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 11000      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Alsa%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Alsa%'
 
 Para testear:
 
@@ -30,36 +30,36 @@ drop procedure [dbo].[lsAlsa]
 go
 create procedure lsAlsa (
 
-@@alsa_id			varchar(255)
+@@alsa_id      varchar(255)
 
 )as 
 
 declare @alsa_id int
 declare @ram_id_alsa int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@alsa_id, @alsa_id out, @ram_id_alsa out
 
 if @ram_id_alsa <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_alsa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_alsa, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_alsa, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_alsa, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_alsa = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_alsa = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
@@ -88,7 +88,7 @@ select alsa.*,
       
        colm_codigo
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
@@ -99,14 +99,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 11000 -- tbl_id de Alsa
                   and  rptarb_hojaid = Alsa.alsa_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_alsa = 0)
-			 )
+           (@ram_id_alsa = 0)
+       )

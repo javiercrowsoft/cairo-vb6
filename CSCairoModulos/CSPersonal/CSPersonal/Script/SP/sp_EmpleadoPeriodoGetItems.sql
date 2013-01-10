@@ -6,62 +6,62 @@ go
 -- sp_EmpleadoPeriodoGetItems 1
 
 create procedure sp_EmpleadoPeriodoGetItems (
-	@@empe_id int
+  @@empe_id int
 )
 as
 
 begin
 
-	create table #t_horas	( east_id 			int, 
-													east_nombre 	varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AI NOT NULL, 
-													east_codigo 	varchar(15) COLLATE SQL_Latin1_General_CP1_CI_AI NOT NULL,
-													east_codigo2	decimal(18,6)
-												)
+  create table #t_horas  ( east_id       int, 
+                          east_nombre   varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AI NOT NULL, 
+                          east_codigo   varchar(15) COLLATE SQL_Latin1_General_CP1_CI_AI NOT NULL,
+                          east_codigo2  decimal(18,6)
+                        )
 
-	exec sp_EmpleadoAsistenciaTipoHelpTbl
+  exec sp_EmpleadoAsistenciaTipoHelpTbl
 
-	select 	emh.emh_id			as emh_id,
-					emh.ccos_id			as ccos_id,
-					emh.east_id 		as east_id,
-					emh.em_id				as em_id,
-					emh.emh_desde		as emh_desde,
-					emh.emh_fecha		as emh_fecha,
-					emh.emh_hasta		as emh_hasta,
-					emh.empe_id			as empe_id,
-					em_apellido + ', ' + em_nombre 
-													as em_nombre,
-					ccos_nombre			as ccos_nombre,
-					east_codigo			as east_codigo
+  select   emh.emh_id      as emh_id,
+          emh.ccos_id      as ccos_id,
+          emh.east_id     as east_id,
+          emh.em_id        as em_id,
+          emh.emh_desde    as emh_desde,
+          emh.emh_fecha    as emh_fecha,
+          emh.emh_hasta    as emh_hasta,
+          emh.empe_id      as empe_id,
+          em_apellido + ', ' + em_nombre 
+                          as em_nombre,
+          ccos_nombre      as ccos_nombre,
+          east_codigo      as east_codigo
 
-	from EmpleadoHoras emh inner join Empleado em on emh.em_id = em.em_id
-												 inner join EmpleadoAsistenciaTipo east on emh.east_id = east.east_id
-												 left  join CentroCosto ccos on emh.ccos_id = ccos.ccos_id
+  from EmpleadoHoras emh inner join Empleado em on emh.em_id = em.em_id
+                         inner join EmpleadoAsistenciaTipo east on emh.east_id = east.east_id
+                         left  join CentroCosto ccos on emh.ccos_id = ccos.ccos_id
 
-	where empe_id = @@empe_id
+  where empe_id = @@empe_id
 
-	union all
+  union all
 
-	select 	emh.emh_id			as emh_id,
-					emh.ccos_id			as ccos_id,
-					t.east_id 			as east_id,
-					emh.em_id				as em_id,
-					emh.emh_desde		as emh_desde,
-					emh.emh_fecha		as emh_fecha,
-					emh.emh_hasta		as emh_hasta,
-					emh.empe_id			as empe_id,
-					em_apellido + ', ' + em_nombre 
-													as em_nombre,
-					ccos_nombre			as ccos_nombre,
-					east_nombre			as east_codigo
+  select   emh.emh_id      as emh_id,
+          emh.ccos_id      as ccos_id,
+          t.east_id       as east_id,
+          emh.em_id        as em_id,
+          emh.emh_desde    as emh_desde,
+          emh.emh_fecha    as emh_fecha,
+          emh.emh_hasta    as emh_hasta,
+          emh.empe_id      as empe_id,
+          em_apellido + ', ' + em_nombre 
+                          as em_nombre,
+          ccos_nombre      as ccos_nombre,
+          east_nombre      as east_codigo
 
-	from EmpleadoHoras emh inner join Empleado em on emh.em_id = em.em_id
-												 left  join #t_horas t on emh.emh_horas = t.east_codigo2
-												 left  join CentroCosto ccos on emh.ccos_id = ccos.ccos_id
+  from EmpleadoHoras emh inner join Empleado em on emh.em_id = em.em_id
+                         left  join #t_horas t on emh.emh_horas = t.east_codigo2
+                         left  join CentroCosto ccos on emh.ccos_id = ccos.ccos_id
 
-	where empe_id = @@empe_id
-		and emh.east_id is null
+  where empe_id = @@empe_id
+    and emh.east_id is null
 
-	order by em_nombre, emh.em_id, ccos_nombre, emh.ccos_id, emh_fecha
+  order by em_nombre, emh.em_id, ccos_nombre, emh.ccos_id, emh_fecha
 
 end
 

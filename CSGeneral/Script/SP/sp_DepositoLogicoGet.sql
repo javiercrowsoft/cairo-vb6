@@ -12,26 +12,26 @@ drop procedure [dbo].[sp_DepositoLogicoGet]
 
 go
 create procedure sp_DepositoLogicoGet (
-	@@depl_id 		int
+  @@depl_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select depl.*,
-				 depf_nombre,
+  select depl.*,
+         depf_nombre,
          emp_nombre,
-				 cli_nombre,
-				 prov_nombre
+         cli_nombre,
+         prov_nombre
 
-	from depositologico depl inner join depositofisico depf on depl.depf_id = depf.depf_id
-													 left  join empresa emp         on depl.emp_id  = emp.emp_id
-													 left  join cliente cli         on depl.cli_id  = cli.cli_id
-													 left  join proveedor prov      on depl.prov_id = prov.prov_id
+  from depositologico depl inner join depositofisico depf on depl.depf_id = depf.depf_id
+                           left  join empresa emp         on depl.emp_id  = emp.emp_id
+                           left  join cliente cli         on depl.cli_id  = cli.cli_id
+                           left  join proveedor prov      on depl.prov_id = prov.prov_id
 
-	where depl_id = @@depl_id
+  where depl_id = @@depl_id
 
 end
 

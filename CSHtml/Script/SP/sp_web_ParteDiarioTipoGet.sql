@@ -18,12 +18,12 @@ create Procedure sp_web_ParteDiarioTipoGet
 as
 begin
 
-	select ptdt_id, 
-				 ptdt_nombre as [Tipo]
+  select ptdt_id, 
+         ptdt_nombre as [Tipo]
 
-	from ParteDiarioTipo
+  from ParteDiarioTipo
 
-	order by ptdt_nombre
+  order by ptdt_nombre
 
 end
 go

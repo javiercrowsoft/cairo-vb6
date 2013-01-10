@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaEstadoValidateDocDBCO (
 
-	@@dbco_id     int,
-	@@aud_id 			int
+  @@dbco_id     int,
+  @@aud_id       int
 
 )
 as

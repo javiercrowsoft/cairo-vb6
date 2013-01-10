@@ -15,7 +15,7 @@ declare @per_id int
 
 declare c_permiso insensitive cursor for
 
-	select per_id from deleted
+  select per_id from deleted
 
 open c_permiso
 
@@ -25,7 +25,7 @@ begin
 
   delete Permiso where per_id_padre = @per_id
 
-	fetch next from c_permiso into @per_id
+  fetch next from c_permiso into @per_id
 end
 
 close c_permiso

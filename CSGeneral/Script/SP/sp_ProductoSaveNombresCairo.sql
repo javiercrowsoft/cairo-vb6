@@ -18,8 +18,8 @@ go
 -- Cartucho HP Negro Carga Completa Orignial Toner Laser
 
 create procedure sp_ProductoSaveNombresCairo (
-	@@us_id int,
-	@@pr_id	int
+  @@us_id int,
+  @@pr_id  int
 )
 as
 
@@ -27,64 +27,64 @@ set nocount on
 
 begin
 
-	set @@us_id = @@us_id*-1
+  set @@us_id = @@us_id*-1
 
-	declare @sqlstmt 							varchar(5000)
-	declare @param                varchar(255)
-	declare @param_tipo           tinyint
-	declare @inf_id  							int
-	declare @rpt_id_nombrecompra 	int
-	declare @rpt_id_nombreventa 	int
-	declare @rpt_id_nombrefactura	int
-	declare @rpt_id_nombreweb 		int
-	declare @rpt_id_nombreimg 	  int
-	declare @rpt_id_nombreimgalt  int
+  declare @sqlstmt               varchar(5000)
+  declare @param                varchar(255)
+  declare @param_tipo           tinyint
+  declare @inf_id                int
+  declare @rpt_id_nombrecompra   int
+  declare @rpt_id_nombreventa   int
+  declare @rpt_id_nombrefactura  int
+  declare @rpt_id_nombreweb     int
+  declare @rpt_id_nombreimg     int
+  declare @rpt_id_nombreimgalt  int
 
-	select 
-					@rpt_id_nombrecompra 	= rpt_id_nombrecompra,
-					@rpt_id_nombreventa 	= rpt_id_nombreventa,
-					@rpt_id_nombrefactura = rpt_id_nombrefactura,
-					@rpt_id_nombreweb 		= rpt_id_nombreweb,
-					@rpt_id_nombreimg 		= rpt_id_nombreimg,
-					@rpt_id_nombreimgalt 	= rpt_id_nombreimgalt
+  select 
+          @rpt_id_nombrecompra   = rpt_id_nombrecompra,
+          @rpt_id_nombreventa   = rpt_id_nombreventa,
+          @rpt_id_nombrefactura = rpt_id_nombrefactura,
+          @rpt_id_nombreweb     = rpt_id_nombreweb,
+          @rpt_id_nombreimg     = rpt_id_nombreimg,
+          @rpt_id_nombreimgalt   = rpt_id_nombreimgalt
 
-	from Producto where pr_id = @@pr_id
+  from Producto where pr_id = @@pr_id
 
-	if @rpt_id_nombrecompra is not null begin
+  if @rpt_id_nombrecompra is not null begin
 
-		exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombrecompra
+    exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombrecompra
 
-	end
+  end
 
-	if @rpt_id_nombreventa is not null begin
+  if @rpt_id_nombreventa is not null begin
 
-		exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreventa
+    exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreventa
 
-	end
+  end
 
-	if @rpt_id_nombrefactura is not null begin
+  if @rpt_id_nombrefactura is not null begin
 
-		exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombrefactura
+    exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombrefactura
 
-	end
+  end
 
-	if @rpt_id_nombreweb is not null begin
+  if @rpt_id_nombreweb is not null begin
 
-		exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreweb
+    exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreweb
 
-	end
+  end
 
-	if @rpt_id_nombreimg is not null begin
+  if @rpt_id_nombreimg is not null begin
 
-		exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreimg
+    exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreimg
 
-	end
+  end
 
-	if @rpt_id_nombreimgalt is not null begin
+  if @rpt_id_nombreimgalt is not null begin
 
-		exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreimgalt
+    exec sp_ProductoSaveNombresAux @@us_id, @@pr_id, @rpt_id_nombreimgalt
 
-	end
+  end
 
 end
 

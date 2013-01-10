@@ -16,25 +16,25 @@ create procedure sp_DocDespachoImpCalculoDelete (
 )as 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete DespachoImpCalculoItem where dic_id = @@dic_id
-	if @@error <> 0 goto ControlError
+  delete DespachoImpCalculoItem where dic_id = @@dic_id
+  if @@error <> 0 goto ControlError
 
-	delete DespachoImpCalculoPosicionArancel where dic_id = @@dic_id
-	if @@error <> 0 goto ControlError
+  delete DespachoImpCalculoPosicionArancel where dic_id = @@dic_id
+  if @@error <> 0 goto ControlError
 
-	delete DespachoImpCalculo where dic_id = @@dic_id
-	if @@error <> 0 goto ControlError
+  delete DespachoImpCalculo where dic_id = @@dic_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el calculo de coeficiente de costos del despacho de importación. sp_DocDespachoImpCalculoDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el calculo de coeficiente de costos del despacho de importación. sp_DocDespachoImpCalculoDelete.', 16, 1)
+  rollback transaction  
 
 end

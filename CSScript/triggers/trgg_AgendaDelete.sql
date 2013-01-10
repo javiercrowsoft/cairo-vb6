@@ -15,21 +15,21 @@ declare @agn_id int
 
 declare c_userUpdate insensitive cursor for
 
-	select agn_id from deleted
+  select agn_id from deleted
 
 open c_userUpdate
 
 fetch next from c_userUpdate into @agn_id
 while @@fetch_status = 0
 begin
-	if @agn_id = 1 begin
+  if @agn_id = 1 begin
 
-		rollback transaction
-		raiserror ('la agenda Publica no puede borrarse', 16, 11)
+    rollback transaction
+    raiserror ('la agenda Publica no puede borrarse', 16, 11)
 
-	end
+  end
 
-	fetch next from c_userUpdate into @agn_id
+  fetch next from c_userUpdate into @agn_id
 end
 
 close c_userUpdate

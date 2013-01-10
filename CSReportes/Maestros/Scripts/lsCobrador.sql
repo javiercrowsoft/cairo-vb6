@@ -18,7 +18,7 @@ Cobrador Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 25      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Cobrador%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Cobrador%'
 
 Para testear:
 
@@ -33,36 +33,36 @@ drop procedure [dbo].[lsCobrador]
 go
 create procedure lsCobrador (
 
-@@cob_id			varchar(255)
+@@cob_id      varchar(255)
 
 )as 
 
 declare @cob_id int
 declare @ram_id_cobrador int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@cob_id, @cob_id out, @ram_id_cobrador out
 
 if @ram_id_cobrador <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_cobrador, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cobrador, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_cobrador, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_cobrador, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_cobrador = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_cobrador = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
@@ -80,14 +80,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 25 -- tbl_id de Cobrador
                   and  rptarb_hojaid = Cobrador.cob_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cobrador = 0)
-			 )
+           (@ram_id_cobrador = 0)
+       )

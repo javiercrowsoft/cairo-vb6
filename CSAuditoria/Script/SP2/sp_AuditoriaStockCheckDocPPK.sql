@@ -9,10 +9,10 @@ go
 
 create procedure sp_AuditoriaStockCheckDocPPK (
 
-	@@ppk_id      int,
+  @@ppk_id      int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out, 
-	@@bDesarme    tinyint
+  @@bErrorMsg   varchar(5000) out, 
+  @@bDesarme    tinyint
 )
 as
 
@@ -20,23 +20,23 @@ begin
 
   set nocount on
 
-	declare @st_id1 int
-	declare @st_id2 int
+  declare @st_id1 int
+  declare @st_id2 int
 
-	select @st_id1 = st_id1, @st_id2 = st_id2 from ParteProdKit where ppk_id = @@ppk_id
+  select @st_id1 = st_id1, @st_id2 = st_id2 from ParteProdKit where ppk_id = @@ppk_id
 
 -- VALIDAR
 
-	if @@bDesarme = 0 begin
+  if @@bDesarme = 0 begin
 
- 		exec sp_AuditoriaStockCheckDocPPK2 @@ppk_id, @st_id1, @@bSuccess out , @@bErrorMsg out, 0
+     exec sp_AuditoriaStockCheckDocPPK2 @@ppk_id, @st_id1, @@bSuccess out , @@bErrorMsg out, 0
 
-	end else begin
+  end else begin
 
-		--exec sp_AuditoriaStockCheckDocPPK2 @@ppk_id, @st_id2, @@bSuccess out , @@bErrorMsg out, 1
-		set @@bSuccess = 1
+    --exec sp_AuditoriaStockCheckDocPPK2 @@ppk_id, @st_id2, @@bSuccess out , @@bErrorMsg out, 1
+    set @@bSuccess = 1
 
-	end
+  end
 
 end
 go

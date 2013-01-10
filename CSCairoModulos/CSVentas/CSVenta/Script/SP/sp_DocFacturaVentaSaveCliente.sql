@@ -4,10 +4,10 @@ drop procedure [dbo].[sp_DocFacturaVentaSaveCliente]
 go
 
 create procedure sp_DocFacturaVentaSaveCliente (
-	@fv_id     		int,
-	@@fvTMP_ID		int,
+  @fv_id         int,
+  @@fvTMP_ID    int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out
+  @@bErrorMsg   varchar(5000) out
 )
 as
 
@@ -15,7 +15,7 @@ begin
 
   set nocount on
 
-	set @@bSuccess = 1
+  set @@bSuccess = 1
 
 end
 GO

@@ -3,14 +3,14 @@ drop procedure [dbo].[SP_ArbBorrarRama]
 
 go
 /*
-	creado:		15/05/2000
-	Proposito:	Devuelve toda la decendencia de una rama incluyendo a la misma rama
+  creado:    15/05/2000
+  Proposito:  Devuelve toda la decendencia de una rama incluyendo a la misma rama
 
-	insert into exec:	- SP_ArbBorrarRama
+  insert into exec:  - SP_ArbBorrarRama
 
 */
 create procedure SP_ArbBorrarRama (
-	@@ram_id int
+  @@ram_id int
 )
 as
 
@@ -48,10 +48,10 @@ if @@error <> 0 goto ControlError
 
 -- si era una raiz borro el arbol
 if @arb_id is not null 
-	delete Arbol where arb_id = @arb_id
+  delete Arbol where arb_id = @arb_id
 else
--- sino, tengo que actualizar el orden de los que estaban bajo esta rama	
-	update rama set ram_orden = ram_orden -1 where ram_id_padre = @ram_id_padre and ram_orden < @ram_orden
+-- sino, tengo que actualizar el orden de los que estaban bajo esta rama  
+  update rama set ram_orden = ram_orden -1 where ram_id_padre = @ram_id_padre and ram_orden < @ram_orden
 
 if @@error <> 0 goto ControlError
 
@@ -62,6 +62,6 @@ ControlError:
 rollback transaction
 
 raiserror ('No se pude borrar la rama',
-	
-	   16, 1)
+  
+     16, 1)
 

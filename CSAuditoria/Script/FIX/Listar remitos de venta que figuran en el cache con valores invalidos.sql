@@ -1,10 +1,10 @@
 select  
-	rv_id,
-	doct_id,
-	rv_fecha,
-	rv_nrodoc,
-	rv_pendiente,
-	isnull((select sum(clicc_importe) from clientecachecredito where id = rv.rv_id and doct_id in (3,24)),0)
+  rv_id,
+  doct_id,
+  rv_fecha,
+  rv_nrodoc,
+  rv_pendiente,
+  isnull((select sum(clicc_importe) from clientecachecredito where id = rv.rv_id and doct_id in (3,24)),0)
 
 from remitoventa rv
 where 

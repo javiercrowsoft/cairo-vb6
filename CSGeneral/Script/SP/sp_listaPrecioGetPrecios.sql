@@ -11,9 +11,9 @@ go
 -- sp_listaPrecioGetPrecios 2
 
 create procedure sp_listaPrecioGetPrecios (
-	@@lp_id				int,
-	@@lp_tipo 		tinyint,
-  @@pr_nombre		varchar(255)
+  @@lp_id        int,
+  @@lp_tipo     tinyint,
+  @@pr_nombre    varchar(255)
 )
 as
 
@@ -21,7 +21,7 @@ set nocount on
 
 begin
 
-	exec sp_listaPrecioGetPreciosCliente @@lp_id, @@lp_tipo, @@pr_nombre
+  exec sp_listaPrecioGetPreciosCliente @@lp_id, @@lp_tipo, @@pr_nombre
 
 end
 

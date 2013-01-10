@@ -15,18 +15,18 @@ declare @us_id int
 
 declare c_userUpdate insensitive cursor for
 
-	select us_id from inserted
+  select us_id from inserted
 
 open c_userUpdate
 
 fetch next from c_userUpdate into @us_id
 while @@fetch_status = 0
 begin
- 	if @us_id = 1 begin
- 		update usuario set us_nombre = 'Administrador' where us_id = 1
- 	end
+   if @us_id = 1 begin
+     update usuario set us_nombre = 'Administrador' where us_id = 1
+   end
 
-	fetch next from c_userUpdate into @us_id
+  fetch next from c_userUpdate into @us_id
 end
 
 close c_userUpdate

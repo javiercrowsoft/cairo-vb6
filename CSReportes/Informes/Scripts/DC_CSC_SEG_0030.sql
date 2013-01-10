@@ -46,35 +46,35 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_departamento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
-	end else 
-		set @ram_id_departamento = 0
+    exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
+  end else 
+    set @ram_id_departamento = 0
 end
 
 if @ram_id_usuario <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
-	end else 
-		set @ram_id_Usuario = 0
+    exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
+  end else 
+    set @ram_id_Usuario = 0
 end
 
 if @ram_id_persona <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_persona, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_persona, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_persona, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_persona, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_persona, @clienteID 
-	end else 
-		set @ram_id_persona = 0
+    exec sp_ArbGetAllHojas @ram_id_persona, @clienteID 
+  end else 
+    set @ram_id_persona = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -139,43 +139,43 @@ and   (u.us_id = @us_id or @us_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1015 -- tbl_id de Proyecto
                   and  rptarb_hojaid = dus.dpto_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_departamento = 0)
-			 )
+           (@ram_id_departamento = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 3 -- tbl_id de Proyecto
                   and  rptarb_hojaid = dus.us_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_usuario = 0)
-			 )
+           (@ram_id_usuario = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1019 -- tbl_id de Proyecto
                   and  rptarb_hojaid = p.prs_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_usuario = 0)
-			 )
+           (@ram_id_usuario = 0)
+       )
 
 order by prs_apellido, prs_nombre, us_nombre
 

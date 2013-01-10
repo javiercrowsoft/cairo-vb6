@@ -12,7 +12,7 @@ sp_DocPermisoEmbarqueMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocPermisoEmbarqueMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -20,47 +20,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select pemb_id from PermisoEmbarque 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select pemb_id from PermisoEmbarque 
                                                         where pemb_numero = (
-																																	select min(pemb_numero) from PermisoEmbarque 
+                                                                  select min(pemb_numero) from PermisoEmbarque 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select pemb_id from PermisoEmbarque 
+                                                        select pemb_id from PermisoEmbarque 
                                                         where pemb_numero = (
-																																	select max(pemb_numero) from PermisoEmbarque 
+                                                                  select max(pemb_numero) from PermisoEmbarque 
                                                                   where doc_id = @@DocId 
-																																			and pemb_numero < @@currNro 
-																																)
+                                                                      and pemb_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select pemb_id from PermisoEmbarque 
+                                                        select pemb_id from PermisoEmbarque 
                                                         where pemb_numero = (
-																																	select min(pemb_numero) from PermisoEmbarque 
+                                                                  select min(pemb_numero) from PermisoEmbarque 
                                                                   where doc_id = @@DocId 
                                                                       and pemb_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select pemb_id from PermisoEmbarque 
+                                                        select pemb_id from PermisoEmbarque 
                                                         where pemb_numero = (
-																																	select max(pemb_numero) from PermisoEmbarque 
+                                                                  select max(pemb_numero) from PermisoEmbarque 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

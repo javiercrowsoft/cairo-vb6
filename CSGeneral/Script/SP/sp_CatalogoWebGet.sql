@@ -11,7 +11,7 @@ go
 -- sp_CatalogoWebGet 3
 
 create procedure sp_CatalogoWebGet (
-	@@catw_id	int
+  @@catw_id  int
 )
 as
 
@@ -19,12 +19,12 @@ set nocount on
 
 begin
 
-	select 
-					CatalogoWeb.*
+  select 
+          CatalogoWeb.*
 
-	from CatalogoWeb 
+  from CatalogoWeb 
 
-	where CatalogoWeb.catw_id = @@catw_id 
+  where CatalogoWeb.catw_id = @@catw_id 
 
 
 end

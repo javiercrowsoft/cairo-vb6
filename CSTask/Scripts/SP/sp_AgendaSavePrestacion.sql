@@ -16,7 +16,7 @@ drop procedure [dbo].[sp_AgendaSavePrestacion]
 
 go
 create procedure sp_AgendaSavePrestacion (
-	@@agn_id 		int
+  @@agn_id     int
 )
 as
 

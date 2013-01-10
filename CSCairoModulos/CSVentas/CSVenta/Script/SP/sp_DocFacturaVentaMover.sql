@@ -24,7 +24,7 @@ sp_DocFacturaVentaMover 104,1,64
 
 go
 create procedure sp_DocFacturaVentaMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -32,47 +32,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select fv_id from FacturaVenta 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select fv_id from FacturaVenta 
                                                         where fv_numero = (
-																																	select min(fv_numero) from FacturaVenta 
+                                                                  select min(fv_numero) from FacturaVenta 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select fv_id from FacturaVenta 
+                                                        select fv_id from FacturaVenta 
                                                         where fv_numero = (
-																																	select max(fv_numero) from FacturaVenta 
+                                                                  select max(fv_numero) from FacturaVenta 
                                                                   where doc_id = @@DocId 
-																																			and fv_numero < @@currNro 
-																																)
+                                                                      and fv_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select fv_id from FacturaVenta 
+                                                        select fv_id from FacturaVenta 
                                                         where fv_numero = (
-																																	select min(fv_numero) from FacturaVenta 
+                                                                  select min(fv_numero) from FacturaVenta 
                                                                   where doc_id = @@DocId 
                                                                       and fv_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select fv_id from FacturaVenta 
+                                                        select fv_id from FacturaVenta 
                                                         where fv_numero = (
-																																	select max(fv_numero) from FacturaVenta 
+                                                                  select max(fv_numero) from FacturaVenta 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

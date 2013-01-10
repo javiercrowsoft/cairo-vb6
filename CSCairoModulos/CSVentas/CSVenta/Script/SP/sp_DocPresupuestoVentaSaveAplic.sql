@@ -3,24 +3,24 @@ drop procedure [dbo].[sp_DocPresupuestoVentaSaveAplic]
 
 /*
 begin transaction
-	exec	sp_DocPresupuestoVentaSaveAplic 17
+  exec  sp_DocPresupuestoVentaSaveAplic 17
 rollback transaction
 
 */
 
 go
 create procedure sp_DocPresupuestoVentaSaveAplic (
-	@@prvTMP_id int	
+  @@prvTMP_id int  
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @MsgError varchar(5000)
+  declare @MsgError varchar(5000)
 
-	declare @prv_id 				int
+  declare @prv_id         int
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,20 +30,20 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	declare @modifico int
+  declare @modifico int
 
-	select @prv_id = prv_id, @modifico = modifico from PresupuestoVentaTMP where prvTMP_id = @@prvTMP_id
+  select @prv_id = prv_id, @modifico = modifico from PresupuestoVentaTMP where prvTMP_id = @@prvTMP_id
 
-	---------------------------------
-	-- Si no hay Presupuesto no hago nada
-	--
-	if @prv_id is null begin
+  ---------------------------------
+  -- Si no hay Presupuesto no hago nada
+  --
+  if @prv_id is null begin
 
-		select @prv_id
-		return
-	end
+    select @prv_id
+    return
+  end
 
-	begin transaction
+  begin transaction
 
   declare @bSuccess      tinyint
 
@@ -55,10 +55,10 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocPresupuestoVtaSaveAplic @prv_id, @@prvTMP_id, 1, @bSuccess out
+  exec sp_DocPresupuestoVtaSaveAplic @prv_id, @@prvTMP_id, 1, @bSuccess out
 
-	-- Si fallo al guardar
-	if IsNull(@bSuccess,0) = 0 goto ControlError
+  -- Si fallo al guardar
+  if IsNull(@bSuccess,0) = 0 goto ControlError
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,8 +68,8 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocPresupuestoVentaSetEstado @prv_id
-	if @@error <> 0 goto ControlError
+  exec sp_DocPresupuestoVentaSetEstado @prv_id
+  if @@error <> 0 goto ControlError
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,20 +79,20 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-		--/////////////////////////////////////////////////////////////////////////////////////////////////
-		-- Validaciones
-		--
+    --/////////////////////////////////////////////////////////////////////////////////////////////////
+    -- Validaciones
+    --
 
-			-- ESTADO
-					exec sp_AuditoriaEstadoCheckDocPRV	@prv_id,
-																							@bSuccess	out,
-																							@MsgError out
-				
-					-- Si el documento no es valido
-					if IsNull(@bSuccess,0) = 0 goto ControlError
-			
-		--
-		--/////////////////////////////////////////////////////////////////////////////////////////////////
+      -- ESTADO
+          exec sp_AuditoriaEstadoCheckDocPRV  @prv_id,
+                                              @bSuccess  out,
+                                              @MsgError out
+        
+          -- Si el documento no es valido
+          if IsNull(@bSuccess,0) = 0 goto ControlError
+      
+    --
+    --/////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,7 +102,7 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_HistoriaUpdate 16004, @prv_id, @modifico, 6
+  exec sp_HistoriaUpdate 16004, @prv_id, @modifico, 6
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,22 +112,22 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	delete PresupuestoDevolucionVentaTMP where prvTMP_id = @@prvTMP_id
-	delete PresupuestoPedidoVentaTMP where prvTMP_id = @@prvTMP_id
-	delete PresupuestoVentaTMP where prvTMP_id = @@prvTMP_id
+  delete PresupuestoDevolucionVentaTMP where prvTMP_id = @@prvTMP_id
+  delete PresupuestoPedidoVentaTMP where prvTMP_id = @@prvTMP_id
+  delete PresupuestoVentaTMP where prvTMP_id = @@prvTMP_id
 
-	commit transaction
+  commit transaction
 
-	select @prv_id
+  select @prv_id
 
-	return
+  return
 ControlError:
 
-	set @MsgError = 'Ha ocurrido un error al grabar la aplicación del presupuesto de venta. sp_DocPresupuestoVentaSaveAplic. ' + IsNull(@MsgError,'')
-	raiserror (@MsgError, 16, 1)
+  set @MsgError = 'Ha ocurrido un error al grabar la aplicación del presupuesto de venta. sp_DocPresupuestoVentaSaveAplic. ' + IsNull(@MsgError,'')
+  raiserror (@MsgError, 16, 1)
 
-	if @@trancount > 0 begin
-		rollback transaction	
+  if @@trancount > 0 begin
+    rollback transaction  
   end
 
 end 

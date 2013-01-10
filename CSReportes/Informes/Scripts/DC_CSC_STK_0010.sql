@@ -21,19 +21,19 @@ begin
 
 select 
 
-			'piedra caliza'	  												as Articulo, 
-			'Pacheco Sur'									            as Deposito,
- 			'45000'												   					as Cantidad,
-			'cajones'												 					as Unidad,
-			'1.500'																	  as Importe,
-			'1.20'      		    									    as [Importe unitario],
-			'DISCRIMINADOR1'													as Discriminador1,
-			'DISCRIMINADOR2'													as Discriminador2,
-			'5800'																		as [Punto de Reposicion],
-			'350'			         											  as [Stock Minimo],
-			'700'			         											  as [Stock Maximo],
-			'PicaPiedra Zuli S.A.' 									  as Proveedor,
-			'C-4.23' 		      											  as [Lugar Fisico]
+      'piedra caliza'                            as Articulo, 
+      'Pacheco Sur'                              as Deposito,
+       '45000'                                     as Cantidad,
+      'cajones'                                   as Unidad,
+      '1.500'                                    as Importe,
+      '1.20'                                    as [Importe unitario],
+      'DISCRIMINADOR1'                          as Discriminador1,
+      'DISCRIMINADOR2'                          as Discriminador2,
+      '5800'                                    as [Punto de Reposicion],
+      '350'                                       as [Stock Minimo],
+      '700'                                       as [Stock Maximo],
+      'PicaPiedra Zuli S.A.'                     as Proveedor,
+      'C-4.23'                                   as [Lugar Fisico]
 
 end
 go

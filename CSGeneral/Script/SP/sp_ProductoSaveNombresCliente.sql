@@ -18,8 +18,8 @@ go
 -- Cartucho HP Negro Carga Completa Orignial Toner Laser
 
 create procedure sp_ProductoSaveNombresCliente (
-	@@us_id int,
-	@@pr_id	int
+  @@us_id int,
+  @@pr_id  int
 )
 as
 
@@ -27,7 +27,7 @@ set nocount on
 
 begin
 
-	exec sp_ProductoSaveNombresCairo @@us_id, @@pr_id
+  exec sp_ProductoSaveNombresCairo @@us_id, @@pr_id
 
 end
 

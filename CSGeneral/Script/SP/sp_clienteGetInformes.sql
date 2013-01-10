@@ -12,28 +12,28 @@ drop procedure [dbo].[sp_clienteGetInformes]
 
 go
 create procedure sp_clienteGetInformes (
-	@@cli_id 		int
+  @@cli_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @us_id int
+  declare @us_id int
 
-	select @us_id = us_id from cliente where cli_id = @@cli_id
+  select @us_id = us_id from cliente where cli_id = @@cli_id
 
-	select 
-					per_id,
-					inf_id,
-					inf_nombre,
-					inf_codigo,
-					inf.pre_id
+  select 
+          per_id,
+          inf_id,
+          inf_nombre,
+          inf_codigo,
+          inf.pre_id
 
-	from informe inf inner join permiso per on inf.pre_id = per.pre_id
+  from informe inf inner join permiso per on inf.pre_id = per.pre_id
 
-	where us_id = @us_id
+  where us_id = @us_id
 
 end
 

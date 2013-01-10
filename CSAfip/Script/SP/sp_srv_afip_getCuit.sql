@@ -10,23 +10,23 @@ sp_srv_afip_getCuit 1
 go
 create procedure sp_srv_afip_getCuit(
 
-	@@safipc_id			int
+  @@safipc_id      int
 
 ) as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select
+  select
 
-			safipc_pendiente		as pendiente,
-			safipc_success 			as success,
-      safipc_error   			as error
+      safipc_pendiente    as pendiente,
+      safipc_success       as success,
+      safipc_error         as error
 
-	from SRV_AfipCuit
+  from SRV_AfipCuit
 
-	where safipc_id = @@safipc_id
+  where safipc_id = @@safipc_id
 
 end
 

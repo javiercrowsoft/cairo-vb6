@@ -2,15 +2,15 @@
 
 sp_lsdoc_Garantias 
 
-										1,
-										'20000101',
-										'20100101',
-										'20100101',
-										'0',
-										'0',
-										'',
-										'',
-										''
+                    1,
+                    '20000101',
+                    '20100101',
+                    '20100101',
+                    '0',
+                    '0',
+                    '',
+                    '',
+                    ''
 
 select * from rama where ram_nombre like 'el nombre de alguna rama de algun arbol de la tabla a listar'
 
@@ -22,14 +22,14 @@ GO
 create procedure sp_lsdoc_Garantias (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
-	@@Fvto 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
+  @@Fvto      datetime,
 
 @@prov_id varchar(255),
 @@mon_id  varchar(255),
-@@codigo  			varchar(255),
-@@nropoliza  		varchar(255),
+@@codigo        varchar(255),
+@@nropoliza      varchar(255),
 @@codigoaduana  varchar(255)
 
 )as 
@@ -56,24 +56,24 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_proveedor <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_proveedor, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_proveedor, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_proveedor, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_proveedor, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_proveedor, @clienteID 
-	end else 
-		set @ram_id_proveedor = 0
+    exec sp_ArbGetAllHojas @ram_id_proveedor, @clienteID 
+  end else 
+    set @ram_id_proveedor = 0
 end
 
 if @ram_id_moneda <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_moneda, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_moneda, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_moneda, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_moneda, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_moneda, @clienteID 
-	end else 
-		set @ram_id_moneda = 0
+    exec sp_ArbGetAllHojas @ram_id_moneda, @clienteID 
+  end else 
+    set @ram_id_moneda = 0
 end
 
 
@@ -86,34 +86,34 @@ FIN PRIMERA PARTE DE ARBOLES
 
 select 
 
-				gar_id,							
-  			''									    as [TypeTask],
-				gar_codigo							as [Codigo],
-				gar_nropoliza						as [Nro. Poliza],
-				gar_codigoaduana				as [Codigo Aduana],
-				gar_fecha								as [Fecha],
-				gar_fechainicio					as [Fecha Inicio],
-				gar_fechavto						as [Fecha Vto.],
-				gar_monto								as [Monto],
-				gar_cuota								as [Cuota],
-				gar_diavtocuota					as [Dia Vto. Cuota],
-				prov_nombre							as [Aseguradora],
-				mon_nombre							as [Moneda],
-				us_nombre								as [Modifico],
-				Garantia.creado					as [Creado],
-				Garantia.modificado			as [Modificado],
-				gar_descrip							as [Observaciones]
+        gar_id,              
+        ''                      as [TypeTask],
+        gar_codigo              as [Codigo],
+        gar_nropoliza            as [Nro. Poliza],
+        gar_codigoaduana        as [Codigo Aduana],
+        gar_fecha                as [Fecha],
+        gar_fechainicio          as [Fecha Inicio],
+        gar_fechavto            as [Fecha Vto.],
+        gar_monto                as [Monto],
+        gar_cuota                as [Cuota],
+        gar_diavtocuota          as [Dia Vto. Cuota],
+        prov_nombre              as [Aseguradora],
+        mon_nombre              as [Moneda],
+        us_nombre                as [Modifico],
+        Garantia.creado          as [Creado],
+        Garantia.modificado      as [Modificado],
+        gar_descrip              as [Observaciones]
 
 from 
 
-			Garantia inner join Proveedor on Garantia.prov_id = Proveedor.prov_id
+      Garantia inner join Proveedor on Garantia.prov_id = Proveedor.prov_id
                inner join Moneda    on Garantia.mon_id = Moneda.mon_id
                inner join Usuario   on Garantia.modifico = Usuario.us_id
 
 where 
 
-				  gar_fecha >= @@Fini
-			and	gar_fecha <= @@Ffin 
+          gar_fecha >= @@Fini
+      and  gar_fecha <= @@Ffin 
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -122,35 +122,35 @@ INICIO SEGUNDA PARTE DE ARBOLES
 /////////////////////////////////////////////////////////////////////// */
 
 and   (Proveedor.prov_id = @prov_id or @prov_id=0)
-and   (Moneda.mon_id 		 = @mon_id or @mon_id=0)
-and   (gar_codigo 			like @@codigo or @@codigo = '')
-and   (gar_nropoliza 		like @@nropoliza or @@nropoliza = '')
+and   (Moneda.mon_id      = @mon_id or @mon_id=0)
+and   (gar_codigo       like @@codigo or @@codigo = '')
+and   (gar_nropoliza     like @@nropoliza or @@nropoliza = '')
 and   (gar_codigoaduana like @@codigoaduana or @@codigoaduana = '')
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 29 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Garantia.prov_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_proveedor = 0)
-			 )
+           (@ram_id_proveedor = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 12 -- tbl_id de Proyecto
                   and  rptarb_hojaid = Garantia.mon_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_moneda = 0)
-			 )
+           (@ram_id_moneda = 0)
+       )
 
 GO

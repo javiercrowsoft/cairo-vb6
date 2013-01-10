@@ -8,35 +8,35 @@ drop procedure [dbo].[sp_web_PadronSocioUpdateEstado]
 GO
 
 create procedure sp_web_PadronSocioUpdateEstado (
-	@@est_id_cont   int,
-	@@est_id_sec    int,
-  @@pad_id				int,
-  @@us_id				  int
+  @@est_id_cont   int,
+  @@est_id_sec    int,
+  @@pad_id        int,
+  @@us_id          int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if @@est_id_cont <> 0 update aaarbaweb..PadronSocio 
-															set est_id_cont 				= @@est_id_cont,
-																	us_id_contaduria  	= @@us_id,
-																	modificado_sag_cont	= getdate()
-															where pad_id = @@pad_id
+  if @@est_id_cont <> 0 update aaarbaweb..PadronSocio 
+                              set est_id_cont         = @@est_id_cont,
+                                  us_id_contaduria    = @@us_id,
+                                  modificado_sag_cont  = getdate()
+                              where pad_id = @@pad_id
 
-	if @@est_id_sec  <> 0 update aaarbaweb..PadronSocio 
-															set est_id_sec  				= @@est_id_sec,
-																	us_id_secretaria  	= @@us_id,
-																	modificado_sag_sec	= getdate()
-															where pad_id = @@pad_id
+  if @@est_id_sec  <> 0 update aaarbaweb..PadronSocio 
+                              set est_id_sec          = @@est_id_sec,
+                                  us_id_secretaria    = @@us_id,
+                                  modificado_sag_sec  = getdate()
+                              where pad_id = @@pad_id
 
-	if exists(select * from aaarbaweb..PadronSocio where est_id_cont = 5 and est_id_sec = 5 and pad_id = @@pad_id)
-	begin
+  if exists(select * from aaarbaweb..PadronSocio where est_id_cont = 5 and est_id_sec = 5 and pad_id = @@pad_id)
+  begin
 
-		update aaarbaweb..PadronSocio set est_id = 5 where pad_id = @@pad_id
+    update aaarbaweb..PadronSocio set est_id = 5 where pad_id = @@pad_id
 
-	end
+  end
 
 end
 

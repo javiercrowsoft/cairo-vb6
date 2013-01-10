@@ -20,21 +20,21 @@ select pv_id from PresupuestoEnvio where XX_numero = 57
 */
 
 create procedure sp_DocPresupuestoEnvioGet (
-	@@emp_id   int,
-	@@pree_id  int,
+  @@emp_id   int,
+  @@pree_id  int,
   @@us_id    int
 )
 as
 
 begin
 
-declare @bEditable 		tinyint
-declare @editMsg   		varchar(255)
-declare @doc_id    		int
-declare @ta_Mascara 	varchar(100)
+declare @bEditable     tinyint
+declare @editMsg       varchar(255)
+declare @doc_id        int
+declare @ta_Mascara   varchar(100)
 declare @ta_Propuesto tinyint
 
-declare @bIvari		tinyint
+declare @bIvari    tinyint
 declare @bIvarni  tinyint
 declare @cli_id   int
 
@@ -47,8 +47,8 @@ declare @cli_id   int
 */
   select @cli_id = cli_id, @doc_id = doc_id from PresupuestoEnvio where pree_id = @@pree_id
 
-	exec sp_talonarioGetPropuesto @doc_id, @ta_Mascara out, @ta_Propuesto out, @cli_id, 0
-	exec sp_clienteGetIva @cli_id, @bIvari out, @bIvarni out, 0
+  exec sp_talonarioGetPropuesto @doc_id, @ta_Mascara out, @ta_Propuesto out, @cli_id, 0
+  exec sp_clienteGetIva @cli_id, @bIvari out, @bIvarni out, 0
   exec sp_DocPresupuestoEnvioEditableGet @@emp_id, @@pree_id, @@us_id, @bEditable out, @editMsg out
 
 /*
@@ -58,27 +58,27 @@ declare @cli_id   int
 //                                                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
-	select 
-			PresupuestoEnvio.*,
-	    cli_nombre,
-	    cpg_nombre,
-	    est_nombre,
-	    ccos_nombre,
+  select 
+      PresupuestoEnvio.*,
+      cli_nombre,
+      cpg_nombre,
+      est_nombre,
+      ccos_nombre,
       suc_nombre,
       doc_nombre,
       ven_nombre,
       @bIvari             as bIvaRi,
       @bIvarni            as bIvaRni,
-      @bEditable					as editable,
-      @editMsg						as editMsg,
-      @ta_Propuesto 			as TaPropuesto,
-			@ta_Mascara					as TaMascara
-	
-	from 
-			PresupuestoEnvio inner join documento      on PresupuestoEnvio.doc_id  = documento.doc_id
+      @bEditable          as editable,
+      @editMsg            as editMsg,
+      @ta_Propuesto       as TaPropuesto,
+      @ta_Mascara          as TaMascara
+  
+  from 
+      PresupuestoEnvio inner join documento      on PresupuestoEnvio.doc_id  = documento.doc_id
                    inner join condicionpago      on PresupuestoEnvio.cpg_id  = condicionpago.cpg_id
-									 inner join estado             on PresupuestoEnvio.est_id  = estado.est_id
-									 inner join sucursal           on PresupuestoEnvio.suc_id  = sucursal.suc_id
+                   inner join estado             on PresupuestoEnvio.est_id  = estado.est_id
+                   inner join sucursal           on PresupuestoEnvio.suc_id  = sucursal.suc_id
                    inner join cliente            on PresupuestoEnvio.cli_id  = cliente.cli_id
                    left join centrocosto         on PresupuestoEnvio.ccos_id = centrocosto.ccos_id
                    left join vendedor            on PresupuestoEnvio.ven_id  = vendedor.ven_id

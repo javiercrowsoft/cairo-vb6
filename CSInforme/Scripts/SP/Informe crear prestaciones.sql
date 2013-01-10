@@ -12,14 +12,14 @@ fetch next from c_inf into @inf_id,@inf_nombre, @inf_modulo
 while @@fetch_status=0
 begin
 
-	exec sp_dbgetnewid2 'Prestacion', 'pre_id', @min, @max, @pre_id out, 0
+  exec sp_dbgetnewid2 'Prestacion', 'pre_id', @min, @max, @pre_id out, 0
 
-	insert Prestacion (pre_id,pre_nombre,pre_grupo,pre_grupo1,activo)
-  						values(@pre_id,@inf_nombre,'Informes',@inf_modulo,1)
+  insert Prestacion (pre_id,pre_nombre,pre_grupo,pre_grupo1,activo)
+              values(@pre_id,@inf_nombre,'Informes',@inf_modulo,1)
 
-	update informe set pre_id = @pre_id where inf_id = @inf_id
+  update informe set pre_id = @pre_id where inf_id = @inf_id
 
-	fetch next from c_inf into @inf_id,@inf_nombre, @inf_modulo
+  fetch next from c_inf into @inf_id,@inf_nombre, @inf_modulo
 end
 close c_inf
 deallocate c_inf

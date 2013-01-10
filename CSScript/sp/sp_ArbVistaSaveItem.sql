@@ -3,9 +3,9 @@ drop procedure [dbo].[sp_ArbVistaSaveItem]
 
 go
 create procedure sp_ArbVistaSaveItem (
-	@@arbv_id     		int,
-	@@ram_id					int,
-	@@ramv_estado			tinyint
+  @@arbv_id         int,
+  @@ram_id          int,
+  @@ramv_estado      tinyint
 )
 as
 
@@ -13,12 +13,12 @@ set nocount on
 
 begin
 
-	declare @ramv_id int
+  declare @ramv_id int
 
-	exec sp_dbgetnewid 'RamaVista', 'ramv_id', @ramv_id out, 0
+  exec sp_dbgetnewid 'RamaVista', 'ramv_id', @ramv_id out, 0
 
-	insert into RamaVista (arbv_id, ramv_id, ram_id, ramv_estado)
-							values    (@@arbv_id, @ramv_id, @@ram_id, @@ramv_estado)
+  insert into RamaVista (arbv_id, ramv_id, ram_id, ramv_estado)
+              values    (@@arbv_id, @ramv_id, @@ram_id, @@ramv_estado)
 
 end
 

@@ -3,12 +3,12 @@ drop table [dbo].[Configuracion]
 GO
 
 CREATE TABLE [dbo].[Configuracion] (
-	[cfg_grupo] [varchar] (60) NOT NULL ,
-	[cfg_aspecto] [varchar] (60) NOT NULL ,
-	[cfg_valor] [varchar] (5000) NOT NULL ,
-	[creado] [datetime] NOT NULL ,
-	[modificado] [datetime] NOT NULL ,
-	[modifico] [int] NOT NULL 
+  [cfg_grupo] [varchar] (60) NOT NULL ,
+  [cfg_aspecto] [varchar] (60) NOT NULL ,
+  [cfg_valor] [varchar] (5000) NOT NULL ,
+  [creado] [datetime] NOT NULL ,
+  [modificado] [datetime] NOT NULL ,
+  [modifico] [int] NOT NULL 
 ) ON [PRIMARY]
 GO
 

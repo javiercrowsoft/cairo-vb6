@@ -11,9 +11,9 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	delete hoja where ram_id in(select ram_id from rama where ram_id_padre = ram_id and ram_id <> 0)
-	delete rama where ram_id_padre = ram_id and ram_id <> 0
+  delete hoja where ram_id in(select ram_id from rama where ram_id_padre = ram_id and ram_id <> 0)
+  delete rama where ram_id_padre = ram_id and ram_id <> 0
 
 end

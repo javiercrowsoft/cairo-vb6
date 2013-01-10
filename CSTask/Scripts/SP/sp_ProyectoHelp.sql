@@ -8,96 +8,96 @@ SET ANSI_NULLS ON
 GO
 /*
 
-	sp_proyectohelp 1,1,0, '',-1,0,'cli_id = 39'
+  sp_proyectohelp 1,1,0, '',-1,0,'cli_id = 39'
 
 */
 create procedure sp_ProyectoHelp (
-	@@emp_id          int,
+  @@emp_id          int,
   @@us_id           int,
-	@@bForAbm         tinyint,
-	@@filter 					varchar(255)  = '',
-  @@check  					smallint 			= 0,
-  @@proy_id         int						= 0,
+  @@bForAbm         tinyint,
+  @@filter           varchar(255)  = '',
+  @@check            smallint       = 0,
+  @@proy_id         int            = 0,
   @@filteraux       varchar(255)  = ''
 )
 as
 begin
 
-	set nocount on
-	
-	set @@filter = replace(@@filter,'''','''''')
+  set nocount on
+  
+  set @@filter = replace(@@filter,'''','''''')
 
-		declare @sqlstmt varchar(8000)
+    declare @sqlstmt varchar(8000)
 
-		if @@check <> 0 begin
+    if @@check <> 0 begin
 
-			set @sqlstmt = 
+      set @sqlstmt = 
 
-		 'select	proy_id,
-							proy_nombre				as [Nombre],
-							proy_codigo   		as [Codigo]
-	
-			from Proyecto
-	
-			where (proy_nombre = '''+convert(varchar(255),@@filter)+''' or proy_codigo = '''+convert(varchar(255),@@filter)+''')
-		    and activo <> 0 ' 
+     'select  proy_id,
+              proy_nombre        as [Nombre],
+              proy_codigo       as [Codigo]
+  
+      from Proyecto
+  
+      where (proy_nombre = '''+convert(varchar(255),@@filter)+''' or proy_codigo = '''+convert(varchar(255),@@filter)+''')
+        and activo <> 0 ' 
 
-			if @@proy_id <> 0 begin
-				set @sqlstmt = @sqlstmt + ' and proy_id = ' + convert(varchar(255),@@proy_id) + ' '
-			end
+      if @@proy_id <> 0 begin
+        set @sqlstmt = @sqlstmt + ' and proy_id = ' + convert(varchar(255),@@proy_id) + ' '
+      end
 
-			set @sqlstmt = @sqlstmt +
+      set @sqlstmt = @sqlstmt +
 
-			 'and (			'+convert(varchar(255),@@bForAbm)+' <> 0 
-							or (exists (select * from Permiso 
-                          where (	 	 pre_id_addTarea   	= pre_id
-																	or pre_id_editTarea		= pre_id
-																	or pre_id_editTareaP	= pre_id
-																	or pre_id_editTareaD	= pre_id
-																	or pre_id_addHora			= pre_id
-																	or pre_id_editHora		= pre_id
-																)
-														and (		 us_id  = '+convert(varchar(255),@@us_id)+' 
-																	or exists(select * from usuariorol where rol_id = Permiso.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
-																)
+       'and (      '+convert(varchar(255),@@bForAbm)+' <> 0 
+              or (exists (select * from Permiso 
+                          where (      pre_id_addTarea     = pre_id
+                                  or pre_id_editTarea    = pre_id
+                                  or pre_id_editTareaP  = pre_id
+                                  or pre_id_editTareaD  = pre_id
+                                  or pre_id_addHora      = pre_id
+                                  or pre_id_editHora    = pre_id
+                                )
+                            and (     us_id  = '+convert(varchar(255),@@us_id)+' 
+                                  or exists(select * from usuariorol where rol_id = Permiso.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
+                                )
                          )
-									)
-						)'
-	
-		end else begin
+                  )
+            )'
+  
+    end else begin
 
-				set @sqlstmt = 
-	
-			 'select top 50
-							proy_id,
-							proy_nombre				as [Nombre],
-							proy_codigo   		as [Codigo]
-	
-				from Proyecto
-		
-					where (proy_codigo like ''%'+convert(varchar(255),@@filter)+'%'' or proy_nombre like ''%'+convert(varchar(255),@@filter)+'%'' 
-	                or '''+convert(varchar(255),@@filter)+''' = '''')
-					and (			'+convert(varchar(255),@@bForAbm)+' <> 0 
-								or (exists (select * from Permiso 
-	                          where (	 	 pre_id_addTarea 			= pre_id
-																		or pre_id_editTarea			= pre_id
-																		or pre_id_editTareaP		= pre_id
-																		or pre_id_editTareaD		= pre_id
-																		or pre_id_addHora				= pre_id
-																		or pre_id_editHora			= pre_id
-																	)
-															and (		 us_id  = '+convert(varchar(255),@@us_id)+'
-																		or exists(select * from usuariorol where rol_id = Permiso.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
-																	)
-	                         )
-										)
-							)'
+        set @sqlstmt = 
+  
+       'select top 50
+              proy_id,
+              proy_nombre        as [Nombre],
+              proy_codigo       as [Codigo]
+  
+        from Proyecto
+    
+          where (proy_codigo like ''%'+convert(varchar(255),@@filter)+'%'' or proy_nombre like ''%'+convert(varchar(255),@@filter)+'%'' 
+                  or '''+convert(varchar(255),@@filter)+''' = '''')
+          and (      '+convert(varchar(255),@@bForAbm)+' <> 0 
+                or (exists (select * from Permiso 
+                            where (      pre_id_addTarea       = pre_id
+                                    or pre_id_editTarea      = pre_id
+                                    or pre_id_editTareaP    = pre_id
+                                    or pre_id_editTareaD    = pre_id
+                                    or pre_id_addHora        = pre_id
+                                    or pre_id_editHora      = pre_id
+                                  )
+                              and (     us_id  = '+convert(varchar(255),@@us_id)+'
+                                    or exists(select * from usuariorol where rol_id = Permiso.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
+                                  )
+                           )
+                    )
+              )'
 
-		end
+    end
 
-		if @@filteraux <> '' set @sqlstmt = @sqlstmt + ' and (' + @@filteraux + ')'
+    if @@filteraux <> '' set @sqlstmt = @sqlstmt + ' and (' + @@filteraux + ')'
 
-		exec(@sqlstmt)
+    exec(@sqlstmt)
 
 end
 

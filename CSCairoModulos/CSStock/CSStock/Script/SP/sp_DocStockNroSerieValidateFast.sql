@@ -11,16 +11,16 @@ sp_DocStockNroSerieValidateFast '657',0
 
 go
 create procedure sp_DocStockNroSerieValidateFast (
-	@@pr_id 		int = 0,
-	@@prns_id 	int = 0
+  @@pr_id     int = 0,
+  @@prns_id   int = 0
 )
 as
 
 begin
 
-	declare @MsgError  					varchar(5000) set @MsgError = ''
+  declare @MsgError            varchar(5000) set @MsgError = ''
 
-	set nocount on
+  set nocount on
 
   -- Actualiza el deposito segun la tabla stock cache
   --
@@ -32,7 +32,7 @@ begin
 
   declare c_ns insensitive cursor for 
   select prns_id,pr_id_kit from ProductoNumeroSerie where (pr_id = @@pr_id or pr_id_kit = @@pr_id or @@pr_id = 0)
-																											and (prns_id = @@prns_id or @@prns_id = 0)
+                                                      and (prns_id = @@prns_id or @@prns_id = 0)
 
   open c_ns
 
@@ -40,7 +40,7 @@ begin
   while @@fetch_status=0
   begin
 
-		set @depl_id = null
+    set @depl_id = null
 
     select @pr_id_kit = IsNull(@pr_id_kit,0)
 
@@ -63,10 +63,10 @@ begin
         order by si.st_id desc
       end
 
-			if @depl_id is not null begin
+      if @depl_id is not null begin
 
-	      update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id
-			end
+        update ProductoNumeroSerie set depl_id = @depl_id where prns_id = @prns_id
+      end
 
     end
 
@@ -76,13 +76,13 @@ begin
   close c_ns
   deallocate c_ns
 
-	return
+  return
 ControlError:
 
-	set @MsgError = 'Ha ocurrido un error al validar los numeros de serie. sp_DocStockNroSerieValidateFast. ' + IsNull(@MsgError,'')
-	raiserror (@MsgError, 16, 1)
+  set @MsgError = 'Ha ocurrido un error al validar los numeros de serie. sp_DocStockNroSerieValidateFast. ' + IsNull(@MsgError,'')
+  raiserror (@MsgError, 16, 1)
 
-	if @@trancount > 0 begin
-		rollback transaction	
+  if @@trancount > 0 begin
+    rollback transaction  
   end
 end

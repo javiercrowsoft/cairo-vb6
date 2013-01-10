@@ -18,7 +18,7 @@ Cliente Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 28      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Cliente%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Cliente%'
 
 Para testear:
 
@@ -35,69 +35,69 @@ drop procedure [dbo].[lsCliente]
 go
 create procedure lsCliente (
 
-@@cli_id			varchar(255)
+@@cli_id      varchar(255)
 
 )as 
 Begin
   declare @cli_id int
   declare @ram_id_cliente int
 
-  declare @clienteID 	int
-  declare @IsRaiz 		tinyint
+  declare @clienteID   int
+  declare @IsRaiz     tinyint
 
   exec sp_ArbConvertId @@cli_id, @cli_id out, @ram_id_cliente out
 
   if @ram_id_cliente <> 0 begin
 
-	  exec sp_ArbIsRaiz @ram_id_cliente, @IsRaiz out
+    exec sp_ArbIsRaiz @ram_id_cliente, @IsRaiz out
 
     if @IsRaiz = 0 begin
 
-		  exec sp_GetRptId @clienteID out
-		  exec sp_ArbGetAllHojas @ram_id_cliente, @clienteID
+      exec sp_GetRptId @clienteID out
+      exec sp_ArbGetAllHojas @ram_id_cliente, @clienteID
 
-	  end else begin
+    end else begin
 
-		  set @ram_id_cliente = 0
-  	  set @clienteID = 0
-	  end
+      set @ram_id_cliente = 0
+      set @clienteID = 0
+    end
 
   end else begin
 
-	  set @clienteID = 0
+    set @clienteID = 0
 
   end
 
   select 
-	  cliente.*,
+    cliente.*,
     cli_calle + ' ' + cli_callenumero as  direccion,
-	  pro_nombre,
+    pro_nombre,
     pa_nombre,
-		cpg_nombre
+    cpg_nombre
 
   from 
 
-	  Cliente left join Provincia on 	cliente.pro_id = provincia.pro_id  
+    Cliente left join Provincia on   cliente.pro_id = provincia.pro_id  
             left join Pais      on  provincia.pa_id = pais.pa_id
-						left join CondicionPago cpg on Cliente.cpg_id = cpg.cpg_id
+            left join CondicionPago cpg on Cliente.cpg_id = cpg.cpg_id
   where 
-  	
+    
       (Cliente.cli_id = @cli_id or @cli_id=0)
     
 
   -- Arboles
   and   (
-					  (exists(select rptarb_hojaid 
+            (exists(select rptarb_hojaid 
                     from rptArbolRamaHoja 
                     where
                          rptarb_cliente = @clienteID
                     and  tbl_id = 28 -- tbl_id de Proyecto
                     and  rptarb_hojaid = Cliente.cli_id
-							     ) 
+                   ) 
              )
           or 
-					   (@ram_id_cliente = 0)
-			   )
+             (@ram_id_cliente = 0)
+         )
 
   order by cliente.cli_nombre
 end

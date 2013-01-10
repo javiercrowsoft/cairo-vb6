@@ -15,7 +15,7 @@ declare @tar_id int
 
 declare c_tareaUpdate insensitive cursor for
 
-	select tar_id from deleted
+  select tar_id from deleted
 
 open c_tareaUpdate
 
@@ -23,13 +23,13 @@ fetch next from c_tareaUpdate into @tar_id
 while @@fetch_status = 0
 begin
 
-	if exists(select * from ParteDiario where tar_id = @tar_id) begin
+  if exists(select * from ParteDiario where tar_id = @tar_id) begin
 
-		delete ParteDiario where tar_id = @tar_id
+    delete ParteDiario where tar_id = @tar_id
 
-	end
+  end
 
-	fetch next from c_tareaUpdate into @tar_id
+  fetch next from c_tareaUpdate into @tar_id
 end
 
 close c_tareaUpdate

@@ -10,20 +10,20 @@ drop procedure [dbo].[sp_ProveedorValidateCuit]
 
 go
 create procedure sp_ProveedorValidateCuit (
-	@@Cuit			varchar(20)
+  @@Cuit      varchar(20)
 )as 
 
 begin
 
-	if substring(@@cuit,1,2) = '55' or substring(@@cuit,1,2) = '50'
-	begin
+  if substring(@@cuit,1,2) = '55' or substring(@@cuit,1,2) = '50'
+  begin
 
-	  select prov_razonsocial, prov_id from proveedor where 1=2
-	end else begin
+    select prov_razonsocial, prov_id from proveedor where 1=2
+  end else begin
 
-	  select prov_razonsocial, prov_id from proveedor where prov_cuit=@@Cuit
+    select prov_razonsocial, prov_id from proveedor where prov_cuit=@@Cuit
 
-	end
+  end
 
 end
 go

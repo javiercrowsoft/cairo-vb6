@@ -11,7 +11,7 @@ go
 -- sp_ProductoGetLeyendas  3
 
 create procedure sp_ProductoGetLeyendas  (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -20,12 +20,12 @@ set nocount on
 begin
 
 
-	select 
-					prl.*
+  select 
+          prl.*
 
-	from ProductoLeyenda prl
+  from ProductoLeyenda prl
 
-	where prl.pr_id = @@pr_id
+  where prl.pr_id = @@pr_id
 
 
 end

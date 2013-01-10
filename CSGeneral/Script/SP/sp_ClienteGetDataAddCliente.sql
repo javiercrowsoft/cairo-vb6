@@ -13,7 +13,7 @@ go
 */
 
 create procedure sp_ClienteGetDataAddCliente (
-	@@cli_id	int
+  @@cli_id  int
 )
 as
 
@@ -21,7 +21,7 @@ set nocount on
 
 begin
 
-	exec sp_ClienteGetDataAddCairo @@cli_id
+  exec sp_ClienteGetDataAddCairo @@cli_id
 
 end
 

@@ -41,21 +41,21 @@ select 47710.812396-47039.360000
 
 exec sp_infoClienteSaldo 2,1,2
 
-select 						cli_deudapedido				,
-									cli_deudaremito				,
-									cli_deudapackinglist	,
-									cli_deudamanifiesto		,
-									cli_deudactacte				,
-									cli_deudadoc					,
-									cli_deudatotal				
+select             cli_deudapedido        ,
+                  cli_deudaremito        ,
+                  cli_deudapackinglist  ,
+                  cli_deudamanifiesto    ,
+                  cli_deudactacte        ,
+                  cli_deudadoc          ,
+                  cli_deudatotal        
 from cliente where cli_id = 2
 
-select 5905.890840	+216816.650000	+270433.370840
+select 5905.890840  +216816.650000  +270433.370840
 
-select 	cobz.cobz_id, 
-			 	cobz_pendiente, 
-				abs(sum(isnull(fvcobz_importe,0))-cobz_total),
-				abs(abs(cobz_pendiente) - abs(sum(isnull(fvcobz_importe,0))-cobz_total))
+select   cobz.cobz_id, 
+         cobz_pendiente, 
+        abs(sum(isnull(fvcobz_importe,0))-cobz_total),
+        abs(abs(cobz_pendiente) - abs(sum(isnull(fvcobz_importe,0))-cobz_total))
 
 from cobranza cobz left join facturaventacobranza fvc on fvc.cobz_id = cobz.cobz_id
 group by cobz.cobz_id, cobz_pendiente, cobz_total
@@ -65,17 +65,17 @@ having abs(abs(cobz_pendiente) - abs(sum(isnull(fvcobz_importe,0))-cobz_total)) 
 select cobz_fecha,cobz_descrip,cobz_id,cobz_pendiente,clicc_importe,abs(isnull(clicc_importe,0) - cobz_pendiente) 
 from cobranza cobz left join clientecachecredito cc on cobz.doct_id = cc.doct_id and cobz.cobz_id = cc.id
 where abs(cobz_pendiente) > 0.01 and est_id <> 7 
-	and cc.id is null
+  and cc.id is null
 
 select fv_fecha,fv_descrip,fv_id,fv_pendiente,clicc_importe,abs(isnull(clicc_importe,0) - fv_pendiente) 
 from facturaventa fv left join clientecachecredito cc on fv.doct_id = cc.doct_id and fv.fv_id = cc.id
 where abs(fv_pendiente)> 0.01 and est_id <> 7 
-	and cc.id is null
+  and cc.id is null
 
 select sum(fv_pendiente)
 from facturaventa fv left join clientecachecredito cc on fv.doct_id = cc.doct_id and fv.fv_id = cc.id
 where abs(fv_pendiente)> 0.01 and est_id <> 7 
-	and cc.id is null
-	and fv.cli_id = 2
+  and cc.id is null
+  and fv.cli_id = 2
 
 select sum(clicc_importe) from clientecachecredito where cli_id = 2 and clicc_importe < 0 and doct_id in (7,9)

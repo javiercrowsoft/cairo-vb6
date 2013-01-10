@@ -3,8 +3,8 @@ drop table [dbo].[RemitoCompraitem]
 GO
 
 CREATE TABLE [dbo].[RemitoCompraitem] (
-	[rci_id] [int] NOT NULL ,
-	[pr_id] [int] NULL 
+  [rci_id] [int] NOT NULL ,
+  [pr_id] [int] NULL 
 ) ON [PRIMARY]
 GO
 

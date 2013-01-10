@@ -3,7 +3,7 @@ drop procedure [dbo].[SP_ArbGetRamas]
 
 go
 create procedure sp_ArbGetRamas (
-	@@arb_id int
+  @@arb_id int
 )
 as
 

@@ -18,41 +18,41 @@ select * from ordenpago where doct_id = 16
 go
 create procedure DC_CSC_TSR_9996 (
 
-  @@us_id    		int,
+  @@us_id        int,
 
-	@@numero      int,
-	@@doc_id      int
+  @@numero      int,
+  @@doc_id      int
 
 )as 
 begin
 
   set nocount on
 
-	declare @as_id int
-	declare @opg_id int
+  declare @as_id int
+  declare @opg_id int
 
-	if not exists(select * from Documento where doc_id = @@doc_id and doct_id = 16) begin
+  if not exists(select * from Documento where doc_id = @@doc_id and doct_id = 16) begin
 
-		select 1 as aux_id, 'El documento no es valido' as Infor, '' as dummy_col
-		return
+    select 1 as aux_id, 'El documento no es valido' as Infor, '' as dummy_col
+    return
 
-	end
+  end
 
-	select @opg_id = opg_id, @as_id = as_id from OrdenPago where opg_numero = @@numero
+  select @opg_id = opg_id, @as_id = as_id from OrdenPago where opg_numero = @@numero
 
-	if @opg_id is not null begin
+  if @opg_id is not null begin
 
-		if @as_id is not null
-			update Asiento set doc_id_cliente = @@doc_id where as_id = @as_id
+    if @as_id is not null
+      update Asiento set doc_id_cliente = @@doc_id where as_id = @as_id
 
-		update OrdenPago set doc_id = @@doc_id where opg_id = @opg_id
-		select 1 as aux_id, 'La orden de pago fue modificada' as Infor, '' as dummy_col
+    update OrdenPago set doc_id = @@doc_id where opg_id = @opg_id
+    select 1 as aux_id, 'La orden de pago fue modificada' as Infor, '' as dummy_col
 
-	end else begin
+  end else begin
 
-		select 1 as aux_id, 'No existe una orden de pago con el numero ' + convert(varchar, @@numero) as Infor, '' as dummy_col
+    select 1 as aux_id, 'No existe una orden de pago con el numero ' + convert(varchar, @@numero) as Infor, '' as dummy_col
 
-	end
+  end
 end
 go
  

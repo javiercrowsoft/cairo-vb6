@@ -17,7 +17,7 @@ sp_DocPresupuestoEnvioFirmar 17,8
 */
 
 create procedure sp_DocPresupuestoEnvioFirmar (
-	@@pree_id int,
+  @@pree_id int,
   @@us_id int
 )
 as
@@ -25,15 +25,15 @@ as
 begin
 
   -- Si esta firmado le quita la firma
-	if exists(select pree_firmado from PresupuestoEnvio where pree_id = @@pree_id and pree_firmado <> 0)
-		update PresupuestoEnvio set pree_firmado = 0 where pree_id = @@pree_id
-	-- Sino lo firma
-	else
-		update PresupuestoEnvio set pree_firmado = @@us_id where pree_id = @@pree_id
+  if exists(select pree_firmado from PresupuestoEnvio where pree_id = @@pree_id and pree_firmado <> 0)
+    update PresupuestoEnvio set pree_firmado = 0 where pree_id = @@pree_id
+  -- Sino lo firma
+  else
+    update PresupuestoEnvio set pree_firmado = @@us_id where pree_id = @@pree_id
 
-	exec sp_DocPresupuestoEnvioSetEstado @@pree_id
+  exec sp_DocPresupuestoEnvioSetEstado @@pree_id
 
-	select PresupuestoEnvio.est_id,est_nombre 
-	from PresupuestoEnvio inner join Estado on PresupuestoEnvio.est_id = Estado.est_id
-	where pree_id = @@pree_id
+  select PresupuestoEnvio.est_id,est_nombre 
+  from PresupuestoEnvio inner join Estado on PresupuestoEnvio.est_id = Estado.est_id
+  where pree_id = @@pree_id
 end

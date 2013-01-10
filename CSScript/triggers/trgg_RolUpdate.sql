@@ -15,18 +15,18 @@ declare @rol_id int
 
 declare c_rolUpdate insensitive cursor for
 
-	select rol_id from inserted
+  select rol_id from inserted
 
 open c_rolUpdate
 
 fetch next from c_rolUpdate into @rol_id
 while @@fetch_status = 0
 begin
-	if @rol_id = 1 begin
-		update rol set rol_nombre = 'Administrador' where rol_id = 1
-	end
+  if @rol_id = 1 begin
+    update rol set rol_nombre = 'Administrador' where rol_id = 1
+  end
 
-	fetch next from c_rolUpdate into @rol_id
+  fetch next from c_rolUpdate into @rol_id
 end
 
 close c_rolUpdate

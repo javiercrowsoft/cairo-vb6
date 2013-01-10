@@ -9,55 +9,55 @@ go
 */
 
 create procedure sp_DocOrdenCompraDelete (
-	@@oc_id 				int,
-	@@emp_id    		int,
-	@@us_id					int
+  @@oc_id         int,
+  @@emp_id        int,
+  @@us_id          int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if isnull(@@oc_id,0) = 0 return
+  if isnull(@@oc_id,0) = 0 return
 
-	declare @bEditable 		tinyint
-	declare @editMsg   		varchar(255)
+  declare @bEditable     tinyint
+  declare @editMsg       varchar(255)
 
-	exec sp_DocOrdenCompraEditableGet		@@emp_id    	,
-																			@@oc_id 			,
-																		  @@us_id     	,
-																			@bEditable 		out,
-																			@editMsg   		out,
-																		  0							, --@@ShowMsg
-																			0  						,	--@@bNoAnulado
-																			1							  --@@bDelete
+  exec sp_DocOrdenCompraEditableGet    @@emp_id      ,
+                                      @@oc_id       ,
+                                      @@us_id       ,
+                                      @bEditable     out,
+                                      @editMsg       out,
+                                      0              , --@@ShowMsg
+                                      0              ,  --@@bNoAnulado
+                                      1                --@@bDelete
 
-	if @bEditable = 0 begin
+  if @bEditable = 0 begin
 
-		set @editMsg = '@@ERROR_SP:' + @editMsg
-		raiserror (@editMsg, 16, 1)
+    set @editMsg = '@@ERROR_SP:' + @editMsg
+    raiserror (@editMsg, 16, 1)
 
-		return
-	end
+    return
+  end
 
-	begin transaction
+  begin transaction
 
-	exec sp_DocOrdenCompraSetCredito @@oc_id,1
-	if @@error <> 0 goto ControlError
+  exec sp_DocOrdenCompraSetCredito @@oc_id,1
+  if @@error <> 0 goto ControlError
 
-	delete OrdenCompraItem where oc_id = @@oc_id
-	if @@error <> 0 goto ControlError
+  delete OrdenCompraItem where oc_id = @@oc_id
+  if @@error <> 0 goto ControlError
 
-	delete OrdenCompra where oc_id = @@oc_id
-	if @@error <> 0 goto ControlError
+  delete OrdenCompra where oc_id = @@oc_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el Orden de compra. sp_DocOrdenCompraDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el Orden de compra. sp_DocOrdenCompraDelete.', 16, 1)
+  rollback transaction  
 
 end

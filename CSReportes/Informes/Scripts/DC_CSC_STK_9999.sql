@@ -18,23 +18,23 @@ go
 create procedure DC_CSC_STK_9999 (
 
   @@us_id          int,
-	@@pr_id          varchar(5000) = 0,
+  @@pr_id          varchar(5000) = 0,
   @@prns_codigo    varchar(5000) = '',
-	@@depl_id        varchar(255)  = '0',
-	@@soloenempresa  smallint = 0
+  @@depl_id        varchar(255)  = '0',
+  @@soloenempresa  smallint = 0
 )as 
 begin
 set nocount on
 
 -- exec sp_docstockcachecreate
 
-declare @pr_id     	int
-declare @prns_id   	int
-declare @depl_id 		int
+declare @pr_id       int
+declare @prns_id     int
+declare @depl_id     int
 
 declare @ram_id_DepositoLogico int
 declare @ram_id_Producto int
-		
+    
 declare @clienteID int
 declare @IsRaiz    tinyint
 
@@ -45,82 +45,82 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_Producto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Producto, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Producto, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID 
-	end else 
-		set @ram_id_Producto = 0
+    exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID 
+  end else 
+    set @ram_id_Producto = 0
 end
 
 if @ram_id_DepositoLogico <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_DepositoLogico, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_DepositoLogico, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_DepositoLogico, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_DepositoLogico, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_DepositoLogico, @clienteID 
-	end else 
-		set @ram_id_DepositoLogico = 0
+    exec sp_ArbGetAllHojas @ram_id_DepositoLogico, @clienteID 
+  end else 
+    set @ram_id_DepositoLogico = 0
 end
 
 ----------------------------------------------------------------------------------------
 
 if @@prns_codigo <> '' begin
 
-	declare @codigo datetime set @codigo = getdate()
-	declare @nro    varchar(255)
-	declare @prefix varchar(255)
+  declare @codigo datetime set @codigo = getdate()
+  declare @nro    varchar(255)
+  declare @prefix varchar(255)
 
 
-	if charindex('***',@@prns_codigo,1)<>0 begin
+  if charindex('***',@@prns_codigo,1)<>0 begin
 
-		declare @n int
-		declare @i int
+    declare @n int
+    declare @i int
 
-		declare @n1 int set @n1 = charindex('***',@@prns_codigo,1)
-		declare @n2 int set @n2 = charindex('***',@@prns_codigo,@n1+3)
+    declare @n1 int set @n1 = charindex('***',@@prns_codigo,1)
+    declare @n2 int set @n2 = charindex('***',@@prns_codigo,@n1+3)
 
-		set @prefix = substring(@@prns_codigo,1,@n1-1)
+    set @prefix = substring(@@prns_codigo,1,@n1-1)
 
-		set @i = substring(@@prns_codigo, 
-												@n1+3,
-												@n2-@n1-3)
-		set @n = substring(@@prns_codigo, @n2+3,100)
+    set @i = substring(@@prns_codigo, 
+                        @n1+3,
+                        @n2-@n1-3)
+    set @n = substring(@@prns_codigo, @n2+3,100)
 
-		while @i < @n begin
+    while @i < @n begin
 
-			set @nro = @prefix + convert(varchar,@i)
-	
-			insert into TmpStringToTable (tmpstr2tbl_id, tmpstr2tbl_campo) values (@codigo, @nro)
+      set @nro = @prefix + convert(varchar,@i)
+  
+      insert into TmpStringToTable (tmpstr2tbl_id, tmpstr2tbl_campo) values (@codigo, @nro)
 
-			set @i = @i+1
-		end		
+      set @i = @i+1
+    end    
 
-	end else begin
-	  
-	  exec sp_strStringToTable @codigo, @@prns_codigo, ','
+  end else begin
+    
+    exec sp_strStringToTable @codigo, @@prns_codigo, ','
 
-	end
+  end
 
   declare c_prns_pr insensitive cursor for 
     select distinct pr_id,prns_id from ProductoNumeroSerie 
     where prns_codigo in (select tmpstr2tbl_campo from TmpStringToTable where tmpstr2tbl_id = @codigo)
-			-- Arboles
-				and (pr_id = @pr_id or pr_id_kit = @pr_id or @pr_id = 0)
-				and	(
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 30
-			                  and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
-										   ) 
-			           )
-			        or 
-								 (@ram_id_Producto = 0)
-						 )
+      -- Arboles
+        and (pr_id = @pr_id or pr_id_kit = @pr_id or @pr_id = 0)
+        and  (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 30
+                        and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
+                       ) 
+                 )
+              or 
+                 (@ram_id_Producto = 0)
+             )
   
   open c_prns_pr
   
@@ -167,160 +167,160 @@ if @@prns_codigo <> '' begin
 
 end else begin
 
-	if @@pr_id <> '0' or @@depl_id <> '0' begin
+  if @@pr_id <> '0' or @@depl_id <> '0' begin
 
-		--///////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+    --///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 
-		  declare c_pr insensitive cursor for 
-	    select distinct pr_id from ProductoNumeroSerie prns
-			-- Arboles
-			where (pr_id = @pr_id or pr_id_kit = @pr_id or @pr_id = 0)
-				and (depl_id = @depl_id or @depl_id=0)
+      declare c_pr insensitive cursor for 
+      select distinct pr_id from ProductoNumeroSerie prns
+      -- Arboles
+      where (pr_id = @pr_id or pr_id_kit = @pr_id or @pr_id = 0)
+        and (depl_id = @depl_id or @depl_id=0)
 
-				and	(
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 30
-			                  and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
-										   ) 
-			           )
-			        or 
-								 (@ram_id_Producto = 0)
-						 )
-				
-				and (
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 11 
-			                  and  rptarb_hojaid = depl_id
-										   ) 
-			           )
-			        or 
-								 (@ram_id_DepositoLogico = 0)
-						 )
+        and  (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 30
+                        and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
+                       ) 
+                 )
+              or 
+                 (@ram_id_Producto = 0)
+             )
+        
+        and (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 11 
+                        and  rptarb_hojaid = depl_id
+                       ) 
+                 )
+              or 
+                 (@ram_id_DepositoLogico = 0)
+             )
 
-				and (     @@soloenempresa = 0
-							or  exists(
-													select prns_id
-													from StockItem 
-													where depl_id not in (-2,-3) 
-														and prns_id = prns.prns_id
-													group by prns_id 
-													having sum(sti_ingreso-sti_salida) <> 0
-												)
-						)
+        and (     @@soloenempresa = 0
+              or  exists(
+                          select prns_id
+                          from StockItem 
+                          where depl_id not in (-2,-3) 
+                            and prns_id = prns.prns_id
+                          group by prns_id 
+                          having sum(sti_ingreso-sti_salida) <> 0
+                        )
+            )
 
-		  
-		  open c_pr
-		  
-		  fetch next from c_pr into @pr_id
-		  while @@fetch_status = 0
-		  begin
-		  
-		    exec sp_DocStockNroSerieValidate @pr_id
-		    fetch next from c_pr into @pr_id
-		  end
-		  
-		  close c_pr
-		  deallocate c_pr
-		  
-		  declare c_prns insensitive cursor for 
+      
+      open c_pr
+      
+      fetch next from c_pr into @pr_id
+      while @@fetch_status = 0
+      begin
+      
+        exec sp_DocStockNroSerieValidate @pr_id
+        fetch next from c_pr into @pr_id
+      end
+      
+      close c_pr
+      deallocate c_pr
+      
+      declare c_prns insensitive cursor for 
       select prns_id from ProductoNumeroSerie
-			-- Arboles
-			where (pr_id = @pr_id or pr_id_kit = @pr_id or @pr_id = 0)
-				and (depl_id = @depl_id or @depl_id=0)
+      -- Arboles
+      where (pr_id = @pr_id or pr_id_kit = @pr_id or @pr_id = 0)
+        and (depl_id = @depl_id or @depl_id=0)
 
-				and	(
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 30
-			                  and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
-										   ) 
-			           )
-			        or 
-								 (@ram_id_Producto = 0)
-						 )
+        and  (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 30
+                        and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
+                       ) 
+                 )
+              or 
+                 (@ram_id_Producto = 0)
+             )
 
-				and (
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 11 
-			                  and  rptarb_hojaid = depl_id
-										   ) 
-			           )
-			        or 
-								 (@ram_id_DepositoLogico = 0)
-						 )
-		  
-		  open c_prns
-		  
-		  fetch next from c_prns into @prns_id
-		  while @@fetch_status = 0
-		  begin
-		  
-		    exec sp_StockNroSerieClienteProveedor @prns_id
-		    fetch next from c_prns into @prns_id
-		  end
-		  
-		  close c_prns
-		  deallocate c_prns
-		
-		  select 1, '' as Tipo, 'Se valido el stock para los siguientes productos y depositos'  as Resultado, ' '
-		  union
-		  select pr_id, 'Producto' as Tipo, pr_nombrecompra  as Resultado, ' '
-		  from Producto
-			where (pr_id = @pr_id or @pr_id = 0)
-				and	(
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 30
-			                  and  (rptarb_hojaid = pr_id)
-										   ) 
-			           )
-			        or 
-								 (@ram_id_Producto = 0)
-						 )
+        and (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 11 
+                        and  rptarb_hojaid = depl_id
+                       ) 
+                 )
+              or 
+                 (@ram_id_DepositoLogico = 0)
+             )
+      
+      open c_prns
+      
+      fetch next from c_prns into @prns_id
+      while @@fetch_status = 0
+      begin
+      
+        exec sp_StockNroSerieClienteProveedor @prns_id
+        fetch next from c_prns into @prns_id
+      end
+      
+      close c_prns
+      deallocate c_prns
+    
+      select 1, '' as Tipo, 'Se valido el stock para los siguientes productos y depositos'  as Resultado, ' '
+      union
+      select pr_id, 'Producto' as Tipo, pr_nombrecompra  as Resultado, ' '
+      from Producto
+      where (pr_id = @pr_id or @pr_id = 0)
+        and  (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 30
+                        and  (rptarb_hojaid = pr_id)
+                       ) 
+                 )
+              or 
+                 (@ram_id_Producto = 0)
+             )
 
-			union all
+      union all
 
-		  select depl_id, 'Deposito' as Tipo, depl_nombre as Resultado, ' '
-			from DepositoLogico
-			where (depl_id = @depl_id or @depl_id=0)
-				and (
-								(exists(select rptarb_hojaid 
-			                  from rptArbolRamaHoja 
-			                  where
-			                       rptarb_cliente = @clienteID
-			                  and  tbl_id = 11 
-			                  and  rptarb_hojaid = depl_id
-										   ) 
-			           )
-			        or 
-								 (@ram_id_DepositoLogico = 0)
-						 )
+      select depl_id, 'Deposito' as Tipo, depl_nombre as Resultado, ' '
+      from DepositoLogico
+      where (depl_id = @depl_id or @depl_id=0)
+        and (
+                (exists(select rptarb_hojaid 
+                        from rptArbolRamaHoja 
+                        where
+                             rptarb_cliente = @clienteID
+                        and  tbl_id = 11 
+                        and  rptarb_hojaid = depl_id
+                       ) 
+                 )
+              or 
+                 (@ram_id_DepositoLogico = 0)
+             )
 
-		  order by 1
-		
-		--///////////////////////////////////////////////////////////////////////////////////////////////////////////
+      order by 1
+    
+    --///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	end else begin
+  end else begin
 
-	  exec sp_DocStockNroSerieValidate
-	  exec sp_StockNroSerieClienteProveedor
-	
-	  select 1, 'Se valido el Stock para todos los productos y todos los numeros de serie' as Resultado
-	end
+    exec sp_DocStockNroSerieValidate
+    exec sp_StockNroSerieClienteProveedor
+  
+    select 1, 'Se valido el Stock para todos los productos y todos los numeros de serie' as Resultado
+  end
 end
 
 

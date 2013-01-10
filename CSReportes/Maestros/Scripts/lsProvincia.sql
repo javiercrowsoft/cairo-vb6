@@ -18,7 +18,7 @@ Provincia Reemplazar por el nombre de la tabla a listar ejemplo Proyecto
 6      Reemplazar por el tbl_id de la tabla a listar ejemplo 2005 para la tabla proyecto. 
                   Para saber el id de la tabla a listar usen:
 
-												select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Provincia%'
+                        select tbl_id,tbl_nombrefisico,tbl_nombre from tabla where tbl_nombrefisico like '%Provincia%'
 
 Para testear:
 
@@ -33,46 +33,46 @@ drop procedure [dbo].[lsProvincia]
 go
 create procedure lsProvincia (
 
-@@pro_id			varchar(255)
+@@pro_id      varchar(255)
 
 )as 
 
 declare @pro_id int
 declare @ram_id_provincia int
 
-declare @clienteID 	int
-declare @IsRaiz 		tinyint
+declare @clienteID   int
+declare @IsRaiz     tinyint
 
 exec sp_ArbConvertId @@pro_id, @pro_id out, @ram_id_provincia out
 
 if @ram_id_provincia <> 0 begin
 
-	exec sp_ArbIsRaiz @ram_id_provincia, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_provincia, @IsRaiz out
 
   if @IsRaiz = 0 begin
 
-		exec sp_GetRptId @clienteID out
-		exec sp_ArbGetAllHojas @ram_id_provincia, @clienteID
+    exec sp_GetRptId @clienteID out
+    exec sp_ArbGetAllHojas @ram_id_provincia, @clienteID
 
-	end else begin
+  end else begin
 
-		set @ram_id_provincia = 0
-  	set @clienteID = 0
-	end
+    set @ram_id_provincia = 0
+    set @clienteID = 0
+  end
 
 end else begin
 
-	set @clienteID = 0
+  set @clienteID = 0
 
 end
 
 select *
 
--- Listado de columnas que corresponda	
+-- Listado de columnas que corresponda  
 
 from 
 
--- Listado de tablas que corresponda	
+-- Listado de tablas que corresponda  
 Provincia
 
 where 
@@ -80,14 +80,14 @@ where
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 6 -- tbl_id de Provincia
                   and  rptarb_hojaid = Provincia.pro_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_provincia = 0)
-			 )
+           (@ram_id_provincia = 0)
+       )

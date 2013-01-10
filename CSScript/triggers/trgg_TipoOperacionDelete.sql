@@ -15,21 +15,21 @@ declare @to_id int
 
 declare c_topUpdate insensitive cursor for
 
-	select to_id from deleted
+  select to_id from deleted
 
 open c_topUpdate
 
 fetch next from c_topUpdate into @to_id
 while @@fetch_status = 0
 begin
-	if @to_id = 1 begin
+  if @to_id = 1 begin
 
-		rollback transaction
-		raiserror ('El tipo de operación Comercial no puede borrarse', 16, 11)
+    rollback transaction
+    raiserror ('El tipo de operación Comercial no puede borrarse', 16, 11)
 
-	end
+  end
 
-	fetch next from c_topUpdate into @to_id
+  fetch next from c_topUpdate into @to_id
 end
 
 close c_topUpdate

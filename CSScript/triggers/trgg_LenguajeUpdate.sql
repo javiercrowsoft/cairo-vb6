@@ -15,18 +15,18 @@ declare @leng_id int
 
 declare c_lengUpdate insensitive cursor for
 
-	select leng_id from inserted
+  select leng_id from inserted
 
 open c_lengUpdate
 
 fetch next from c_lengUpdate into @leng_id
 while @@fetch_status = 0
 begin
- 	if @leng_id = 1 begin
- 		update Lenguaje set leng_nombre = 'Castellano' where leng_id = 1
- 	end
+   if @leng_id = 1 begin
+     update Lenguaje set leng_nombre = 'Castellano' where leng_id = 1
+   end
 
-	fetch next from c_lengUpdate into @leng_id
+  fetch next from c_lengUpdate into @leng_id
 end
 
 close c_lengUpdate

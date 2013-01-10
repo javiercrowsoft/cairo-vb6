@@ -15,22 +15,22 @@ sp_web_ContactosGet 7
 
 create Procedure sp_web_ContactosGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select cont_id, 
-				 cont_nombre as [Contacto]
+  select cont_id, 
+         cont_nombre as [Contacto]
 
-	from Contacto
+  from Contacto
 
-	union
+  union
 
-	select 0 as cont_id, 
-				 '(Ninguno)' as [Contacto]
+  select 0 as cont_id, 
+         '(Ninguno)' as [Contacto]
 
-	order by cont_nombre
+  order by cont_nombre
 
 end
 go

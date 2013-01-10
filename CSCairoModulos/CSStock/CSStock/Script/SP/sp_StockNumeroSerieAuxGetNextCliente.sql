@@ -17,6 +17,6 @@ as
 
 begin
 
-	exec sp_StockNumeroSerieAuxGetNextCairo
+  exec sp_StockNumeroSerieAuxGetNextCairo
 
 end

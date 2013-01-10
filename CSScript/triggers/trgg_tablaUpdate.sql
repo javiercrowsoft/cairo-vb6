@@ -11,7 +11,7 @@ CREATE TRIGGER [trgg_tablaUpdate] ON [dbo].[Tabla]
 FOR INSERT, UPDATE
 AS
 
-	update tabla set modificado = getdate() where tbl_id in (select tbl_id from inserted)
+  update tabla set modificado = getdate() where tbl_id in (select tbl_id from inserted)
 
 GO
 SET QUOTED_IDENTIFIER OFF 

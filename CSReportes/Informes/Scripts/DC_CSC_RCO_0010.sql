@@ -10,15 +10,15 @@ go
 create procedure DC_CSC_RCO_0010 (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@prov_id varchar(255),
 @@est_id varchar(255),
-@@ccos_id	varchar(255),
-@@suc_id	varchar(255),
-@@doc_id	varchar(255),
-@@cpg_id	varchar(255), -- TODO:EMPRESA
+@@ccos_id  varchar(255),
+@@suc_id  varchar(255),
+@@doc_id  varchar(255),
+@@cpg_id  varchar(255), -- TODO:EMPRESA
 @@emp_id  varchar(255)
 
 )as 
@@ -32,8 +32,8 @@ begin
                           @@prov_id ,
                           @@est_id ,
                           @@ccos_id,
-                          @@suc_id	,
-                          @@doc_id	,
+                          @@suc_id  ,
+                          @@doc_id  ,
                           @@cpg_id  ,
                           @@emp_id
 

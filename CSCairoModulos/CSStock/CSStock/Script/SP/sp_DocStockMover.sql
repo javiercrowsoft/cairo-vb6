@@ -14,7 +14,7 @@ sp_DocStockMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocStockMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -22,47 +22,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select st_id from Stock 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select st_id from Stock 
                                                         where st_numero = (
-																																	select min(st_numero) from Stock 
+                                                                  select min(st_numero) from Stock 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select st_id from Stock 
+                                                        select st_id from Stock 
                                                         where st_numero = (
-																																	select max(st_numero) from Stock 
+                                                                  select max(st_numero) from Stock 
                                                                   where doc_id = @@DocId 
-																																			and st_numero < @@currNro 
-																																)
+                                                                      and st_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select st_id from Stock 
+                                                        select st_id from Stock 
                                                         where st_numero = (
-																																	select min(st_numero) from Stock 
+                                                                  select min(st_numero) from Stock 
                                                                   where doc_id = @@DocId 
                                                                       and st_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select st_id from Stock 
+                                                        select st_id from Stock 
                                                         where st_numero = (
-																																	select max(st_numero) from Stock 
+                                                                  select max(st_numero) from Stock 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

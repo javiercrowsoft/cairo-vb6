@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaEstadoValidateDocDCUP (
 
-	@@dcup_id     int,
-	@@aud_id 			int
+  @@dcup_id     int,
+  @@aud_id       int
 
 )
 as

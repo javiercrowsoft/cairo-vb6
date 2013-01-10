@@ -18,20 +18,20 @@ begin
 set nocount on
 
 
-	select inf.inf_id,
-				 inf_codigo,
-				 inf_nombre,
-				 isnull(count(infp.inf_id),0) inf_param_count
+  select inf.inf_id,
+         inf_codigo,
+         inf_nombre,
+         isnull(count(infp.inf_id),0) inf_param_count
 
-	from informe inf left join informeparametro infp on inf.inf_id = infp.inf_id
+  from informe inf left join informeparametro infp on inf.inf_id = infp.inf_id
 
-	where inf_reporte <> ''
+  where inf_reporte <> ''
 
-	group by 
-		inf.inf_id, 
-		inf_codigo,
-		inf_nombre
+  group by 
+    inf.inf_id, 
+    inf_codigo,
+    inf_nombre
 
-	order by inf_codigo
+  order by inf_codigo
 
 end

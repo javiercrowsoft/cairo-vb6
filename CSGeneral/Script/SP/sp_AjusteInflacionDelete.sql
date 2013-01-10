@@ -14,29 +14,29 @@ sp_tables '%cliente%'
 
 go
 create procedure sp_AjusteInflacionDelete (
-	@@aje_id 				int
+  @@aje_id         int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete AjusteInflacionItem where aje_id = @@aje_id
-	if @@error <> 0 goto ControlError
+  delete AjusteInflacionItem where aje_id = @@aje_id
+  if @@error <> 0 goto ControlError
 
-	delete AjusteInflacion where aje_id = @@aje_id
-	if @@error <> 0 goto ControlError
+  delete AjusteInflacion where aje_id = @@aje_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el esquema de ajuste por inflación. sp_AjusteInflacionDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el esquema de ajuste por inflación. sp_AjusteInflacionDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

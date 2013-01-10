@@ -16,7 +16,7 @@ drop procedure [dbo].[sp_DocumentoSavePrestacion]
 
 go
 create procedure sp_DocumentoSavePrestacion (
-	@@doc_id 		int
+  @@doc_id     int
 )
 as
 

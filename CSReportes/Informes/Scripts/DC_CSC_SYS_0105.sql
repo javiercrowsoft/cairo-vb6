@@ -17,13 +17,13 @@ create procedure DC_CSC_SYS_0105 (
 
   @@us_id          int,
 
-	@@size					 smallint
+  @@size           smallint
 
 )as 
 begin
 set nocount on
 
-	exec sp_force_shrink_log @target_size_MB=100
+  exec sp_force_shrink_log @target_size_MB=100
 
 end
 go

@@ -22,7 +22,7 @@ sp_DocOrdenCompraMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocOrdenCompraMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -30,47 +30,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select oc_id from OrdenCompra 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select oc_id from OrdenCompra 
                                                         where oc_numero = (
-																																	select min(oc_numero) from OrdenCompra 
+                                                                  select min(oc_numero) from OrdenCompra 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select oc_id from OrdenCompra 
+                                                        select oc_id from OrdenCompra 
                                                         where oc_numero = (
-																																	select max(oc_numero) from OrdenCompra 
+                                                                  select max(oc_numero) from OrdenCompra 
                                                                   where doc_id = @@DocId 
-																																			and oc_numero < @@currNro 
-																																)
+                                                                      and oc_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select oc_id from OrdenCompra 
+                                                        select oc_id from OrdenCompra 
                                                         where oc_numero = (
-																																	select min(oc_numero) from OrdenCompra 
+                                                                  select min(oc_numero) from OrdenCompra 
                                                                   where doc_id = @@DocId 
                                                                       and oc_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select oc_id from OrdenCompra 
+                                                        select oc_id from OrdenCompra 
                                                         where oc_numero = (
-																																	select max(oc_numero) from OrdenCompra 
+                                                                  select max(oc_numero) from OrdenCompra 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

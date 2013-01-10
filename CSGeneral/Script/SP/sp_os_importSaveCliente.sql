@@ -13,15 +13,15 @@ rollback transaction
 
 go
 create procedure sp_os_importSaveCliente (
-	@@rvTMP_id 			int,
-	@@bSuccess      tinyint out,
-	@@MsgError      varchar(255) out
+  @@rvTMP_id       int,
+  @@bSuccess      tinyint out,
+  @@MsgError      varchar(255) out
 )
 as
 
 begin
 
-	set @@bSuccess = 1
-	set @@MsgError = ''
+  set @@bSuccess = 1
+  set @@MsgError = ''
 
 end

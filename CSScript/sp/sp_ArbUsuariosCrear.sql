@@ -21,7 +21,7 @@ create Procedure sp_ArbUsuariosCrear
 as
 begin
 
-	set nocount on
+  set nocount on
   declare @arb_id int
   declare @ram_id int
   declare @dpto_id int
@@ -44,7 +44,7 @@ begin
 
   set @ram_id = null
   
-	exec SP_DBGetNewId 'Arbol','arb_id',@arb_id out,0
+  exec SP_DBGetNewId 'Arbol','arb_id',@arb_id out,0
 
   insert into  Arbol (
                           arb_id,
@@ -63,7 +63,7 @@ begin
                       1
                      )
 
-	exec SP_DBGetNewId 'Rama','ram_id',@ram_id out,0
+  exec SP_DBGetNewId 'Rama','ram_id',@ram_id out,0
 
   insert into Rama (
                       ram_id,
@@ -85,7 +85,7 @@ begin
                     )
 
   declare c_rama insensitive cursor for select Persona.dpto_id, dpto_nombre from usuario inner join persona on usuario.prs_id = persona.prs_id inner join departamento on persona.dpto_id = departamento.dpto_id
-																				group by Persona.dpto_id, dpto_nombre order by dpto_nombre
+                                        group by Persona.dpto_id, dpto_nombre order by dpto_nombre
   open c_rama
 
   declare @ram_nombre varchar(255)
@@ -102,7 +102,7 @@ begin
 
     set @orden = @orden + 1
 
-  	exec SP_DBGetNewId 'Rama','ram_id',@ram_id out,0
+    exec SP_DBGetNewId 'Rama','ram_id',@ram_id out,0
     insert into Rama (
                         ram_id,
                         ram_nombre,
@@ -141,7 +141,7 @@ begin
             
                 if @us_id <> '' begin
     
-                	exec SP_DBGetNewId 'Hoja','hoja_id',@hoja_id out,0
+                  exec SP_DBGetNewId 'Hoja','hoja_id',@hoja_id out,0
                   insert into Hoja (
                                       hoja_id,
                                       id,

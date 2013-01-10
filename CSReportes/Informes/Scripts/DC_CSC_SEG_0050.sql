@@ -37,24 +37,24 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_departamento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
-	end else 
-		set @ram_id_departamento = 0
+    exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
+  end else 
+    set @ram_id_departamento = 0
 end
 
 if @ram_id_proveedor <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_proveedor, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_proveedor, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_proveedor, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_proveedor, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_proveedor, @clienteID 
-	end else 
-		set @ram_id_Proveedor = 0
+    exec sp_ArbGetAllHojas @ram_id_proveedor, @clienteID 
+  end else 
+    set @ram_id_Proveedor = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ select
 from 
 
     DepartamentoProveedor dprov inner join Departamento d on dprov.dpto_id = d.dpto_id
-                             		inner join Proveedor    c on dprov.prov_id = c.prov_id   
+                                 inner join Proveedor    c on dprov.prov_id = c.prov_id   
 
 where 
 
@@ -89,29 +89,29 @@ and   (c.prov_id = @prov_id or @prov_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1015 -- tbl_id de Proyecto
                   and  rptarb_hojaid = dprov.dpto_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_departamento = 0)
-			 )
+           (@ram_id_departamento = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 28 -- tbl_id de Proyecto
                   and  rptarb_hojaid = dprov.prov_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_proveedor = 0)
-			 )
+           (@ram_id_proveedor = 0)
+       )
 
 GO

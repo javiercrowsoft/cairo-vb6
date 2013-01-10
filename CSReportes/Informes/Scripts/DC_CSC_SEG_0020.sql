@@ -28,13 +28,13 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_Rol <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Rol, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Rol, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Rol, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Rol, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Rol, @clienteID 
-	end else 
-		set @ram_id_Rol = 0
+    exec sp_ArbGetAllHojas @ram_id_Rol, @clienteID 
+  end else 
+    set @ram_id_Rol = 0
 end
 /*- ///////////////////////////////////////////////////////////////////////
 
@@ -65,22 +65,22 @@ FIN PRIMERA PARTE DE ARBOLES
           (rol.rol_id = @rol_id or @rol_id=0)
     
     and   (
-    					(exists(select rptarb_hojaid 
+              (exists(select rptarb_hojaid 
                       from rptArbolRamaHoja 
                       where
                            rptarb_cliente = @clienteID
                       and  tbl_id = 2 
                       and  rptarb_hojaid = rol.rol_id
-    							   ) 
+                     ) 
                )
             or 
-    					 (@ram_id_Rol = 0)
-    			 )
+               (@ram_id_Rol = 0)
+           )
 
 union all
 
   select 
-		  2 as grupo,
+      2 as grupo,
       'Usuarios'       as Tipo,
       rol_nombre       as Rol,
       us_nombre        as Usuario,
@@ -101,21 +101,21 @@ union all
           (r.rol_id = @rol_id or @rol_id=0)
     
     and   (
-    					(exists(select rptarb_hojaid 
+              (exists(select rptarb_hojaid 
                       from rptArbolRamaHoja 
                       where
                            rptarb_cliente = @clienteID
                       and  tbl_id = 2 
                       and  rptarb_hojaid = r.rol_id
-    							   ) 
+                     ) 
                )
             or 
-    					 (@ram_id_Rol = 0)
-    			 )
+               (@ram_id_Rol = 0)
+           )
 
 order by
-			grupo,
-			rol_nombre,
+      grupo,
+      rol_nombre,
       pre_grupo,
       pre_grupo1,
       pre_grupo2,

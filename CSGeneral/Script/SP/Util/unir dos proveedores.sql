@@ -50,11 +50,11 @@ update ProductoNumeroSerieHistoria set prov_id = @@new_prov where prov_id = @@ol
 exec sp_proveedordelete @@old_prov
 
 update proveedor set 
-									prov_deudaorden 				=0,
-									prov_deudaremito				=0,
-									prov_deudactacte				=0,
-									prov_deudadoc						=0,
-									prov_deudatotal					=0
+                  prov_deudaorden         =0,
+                  prov_deudaremito        =0,
+                  prov_deudactacte        =0,
+                  prov_deudadoc            =0,
+                  prov_deudatotal          =0
 
 delete empresaproveedordeuda
 

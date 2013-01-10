@@ -15,29 +15,29 @@ sp_chequeGetData 1
 
 */
 create procedure sp_chequeGetData (
-	@@cheq_id int
+  @@cheq_id int
 )
 as
 
 begin
 
-	select 
-						bco_nombre, 
-						cue_nombre, 
-						cli_nombre,
-						cle_nombre,
-						cheque.bco_id, 
-						cheque.cue_id, 
-						cheq_importe, 
-						cheq_importeorigen,
+  select 
+            bco_nombre, 
+            cue_nombre, 
+            cli_nombre,
+            cle_nombre,
+            cheque.bco_id, 
+            cheque.cue_id, 
+            cheq_importe, 
+            cheq_importeorigen,
             cheq_fechavto,
             cheq_fechacobro
-	from 
-				cheque 		inner join banco 			on cheque.bco_id = banco.bco_id
-                  inner join cuenta 		on cheque.cue_id = cuenta.cue_id
-									left  join cliente    on cheque.cli_id = cliente.cli_id
-									left  join clearing   on cheque.cle_id = clearing.cle_id
+  from 
+        cheque     inner join banco       on cheque.bco_id = banco.bco_id
+                  inner join cuenta     on cheque.cue_id = cuenta.cue_id
+                  left  join cliente    on cheque.cli_id = cliente.cli_id
+                  left  join clearing   on cheque.cle_id = clearing.cle_id
 
-	where cheq_id = @@cheq_id
+  where cheq_id = @@cheq_id
 
 end

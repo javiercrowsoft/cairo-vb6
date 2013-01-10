@@ -28,9 +28,9 @@ INICIO PRIMERA PARTE DE ARBOLES
 /////////////////////////////////////////////////////////////////////// */
 
 declare @us_id_usuario  int
-declare @emp_id 				int
-declare @us_id					int
-declare @empus_id				int
+declare @emp_id         int
+declare @us_id          int
+declare @empus_id        int
 
 declare @ram_id_usuario int
 declare @ram_id_empresa int
@@ -45,24 +45,24 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_usuario <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_usuario, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_usuario, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
-	end else 
-		set @ram_id_usuario = 0
+    exec sp_ArbGetAllHojas @ram_id_usuario, @clienteID 
+  end else 
+    set @ram_id_usuario = 0
 end
 
 if @ram_id_empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
-	end else 
-		set @ram_id_empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
+  end else 
+    set @ram_id_empresa = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -73,75 +73,75 @@ FIN PRIMERA PARTE DE ARBOLES
 
 declare c_usemp insensitive cursor for
 
-	select 
-	
-		u.us_id,
-		e.emp_id
-	
-	from usuario u, empresa e
-	
-	where 
-	
-	/* -///////////////////////////////////////////////////////////////////////
-	
-	INICIO SEGUNDA PARTE DE ARBOLES
-	
-	/////////////////////////////////////////////////////////////////////// */
-	
-		    (u.us_id 	= @us_id_usuario 	or @us_id_usuario=0)
-	and   (e.emp_id = @emp_id 				or @emp_id=0)
-	
-	
-	-- Arboles
-	
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 3 
-	                  and  rptarb_hojaid = u.us_id
-								   ) 
-	           )
-	        or 
-						 (@ram_id_usuario = 0)
-				 )
-	
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 1018
-	                  and  rptarb_hojaid = e.emp_id
-								   ) 
-	           )
-	        or 
-						 (@ram_id_empresa = 0)
-				 )
+  select 
+  
+    u.us_id,
+    e.emp_id
+  
+  from usuario u, empresa e
+  
+  where 
+  
+  /* -///////////////////////////////////////////////////////////////////////
+  
+  INICIO SEGUNDA PARTE DE ARBOLES
+  
+  /////////////////////////////////////////////////////////////////////// */
+  
+        (u.us_id   = @us_id_usuario   or @us_id_usuario=0)
+  and   (e.emp_id = @emp_id         or @emp_id=0)
+  
+  
+  -- Arboles
+  
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 3 
+                    and  rptarb_hojaid = u.us_id
+                   ) 
+             )
+          or 
+             (@ram_id_usuario = 0)
+         )
+  
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 1018
+                    and  rptarb_hojaid = e.emp_id
+                   ) 
+             )
+          or 
+             (@ram_id_empresa = 0)
+         )
 
-	open c_usemp
+  open c_usemp
 
-	fetch next from c_usemp into @us_id, @emp_id
-	while @@fetch_status = 0
-	begin
+  fetch next from c_usemp into @us_id, @emp_id
+  while @@fetch_status = 0
+  begin
 
-		if not exists (select * from empresausuario where emp_id = @emp_id and us_id = @us_id) begin
+    if not exists (select * from empresausuario where emp_id = @emp_id and us_id = @us_id) begin
 
-			exec sp_dbgetnewid 'EmpresaUsuario', 'empus_id', @empus_id out, 0
+      exec sp_dbgetnewid 'EmpresaUsuario', 'empus_id', @empus_id out, 0
 
-			insert into EmpresaUsuario (empus_id, emp_id, us_id, modifico) 
-													 values(@empus_id, @emp_id, @us_id, @@us_id)
+      insert into EmpresaUsuario (empus_id, emp_id, us_id, modifico) 
+                           values(@empus_id, @emp_id, @us_id, @@us_id)
 
-		end
+    end
 
-		fetch next from c_usemp into @us_id, @emp_id
-	end
+    fetch next from c_usemp into @us_id, @emp_id
+  end
 
-	close c_usemp
-	deallocate c_usemp
+  close c_usemp
+  deallocate c_usemp
 
-	select 1, 'El proceso termino con éxito' as Info
+  select 1, 'El proceso termino con éxito' as Info
 
 GO
 SET QUOTED_IDENTIFIER OFF 

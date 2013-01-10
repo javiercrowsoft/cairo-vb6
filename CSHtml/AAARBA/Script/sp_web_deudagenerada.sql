@@ -17,23 +17,23 @@ go
 create procedure sp_web_deudaGenerada (
   @@proveedor     int,
   @@empresa       int,
-	@@concepto 			int
+  @@concepto       int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if exists(select * from cuenta_corriente_asociados 
-						where concepto 					= @@concepto 
-							and asociado   				= @@proveedor 
-							and empresa         	= @@empresa
-							and tipo_comprobante	= 44)
+  if exists(select * from cuenta_corriente_asociados 
+            where concepto           = @@concepto 
+              and asociado           = @@proveedor 
+              and empresa           = @@empresa
+              and tipo_comprobante  = 44)
 
-			select -1
-	else
-			select 0
+      select -1
+  else
+      select 0
 end
 
 go

@@ -9,12 +9,12 @@ GO
 
 /*
 DC_CSC_STK_0400 
-											1,
-											'20200101',
-											'0',
-											'0',
-											'0',
-											'0'
+                      1,
+                      '20200101',
+                      '0',
+                      '0',
+                      '0',
+                      '0'
 select * from rama where ram_nombre like '%dvd%'
 select pr_id,pr_nombrecompra from producto where pr_nombrecompra like '%lumen%'
 select * from tabla where tbl_nombrefisico like '%produ%'
@@ -23,15 +23,15 @@ select * from tabla where tbl_nombrefisico like '%produ%'
 create procedure DC_CSC_STK_0400 (
 
   @@us_id    int,
-	@@Ffin 		 datetime,
+  @@Ffin      datetime,
 
-@@pr_id 				varchar(255),
-@@depl_id 			varchar(255),
-@@depf_id				varchar(255),
-@@suc_id				varchar(255), 
-@@emp_id  			varchar(255),
-@@bStockCero		smallint,
-@@bResumido			smallint
+@@pr_id         varchar(255),
+@@depl_id       varchar(255),
+@@depf_id        varchar(255),
+@@suc_id        varchar(255), 
+@@emp_id        varchar(255),
+@@bStockCero    smallint,
+@@bResumido      smallint
 
 )as 
 
@@ -66,58 +66,58 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_Producto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Producto, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Producto, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID 
-	end else 
-		set @ram_id_Producto = 0
+    exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID 
+  end else 
+    set @ram_id_Producto = 0
 end
 
 if @ram_id_DepositoLogico <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_DepositoLogico, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_DepositoLogico, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_DepositoLogico, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_DepositoLogico, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_DepositoLogico, @clienteID 
-	end else 
-		set @ram_id_DepositoLogico = 0
+    exec sp_ArbGetAllHojas @ram_id_DepositoLogico, @clienteID 
+  end else 
+    set @ram_id_DepositoLogico = 0
 end
 
 if @ram_id_DepositoFisico <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_DepositoFisico, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_DepositoFisico, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_DepositoFisico, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_DepositoFisico, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_DepositoFisico, @clienteID 
-	end else 
-		set @ram_id_DepositoFisico = 0
+    exec sp_ArbGetAllHojas @ram_id_DepositoFisico, @clienteID 
+  end else 
+    set @ram_id_DepositoFisico = 0
 end
 
 if @ram_id_Sucursal <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Sucursal, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Sucursal, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Sucursal, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Sucursal, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Sucursal, @clienteID 
-	end else 
-		set @ram_id_Sucursal = 0
+    exec sp_ArbGetAllHojas @ram_id_Sucursal, @clienteID 
+  end else 
+    set @ram_id_Sucursal = 0
 end
 
 
 if @ram_id_Empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
-	end else 
-		set @ram_id_Empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
+  end else 
+    set @ram_id_Empresa = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -128,36 +128,36 @@ FIN PRIMERA PARTE DE ARBOLES
 
 
 select 
-				0,
-				pr_nombrecompra           as [Articulo Compra],
-				pr_nombreventa            as [Articulo Venta],
-				pr_reposicion             as [Punto de Reposición],
-				pr_stockminimo            as [Sotck Minimo],
-				pr_stockmaximo            as [Stock Maximo],
-				un_nombre									as [Unidad],
-				sum(sti_ingreso)
-				- sum(sti_salida)         as [Cantidad],
+        0,
+        pr_nombrecompra           as [Articulo Compra],
+        pr_nombreventa            as [Articulo Venta],
+        pr_reposicion             as [Punto de Reposición],
+        pr_stockminimo            as [Sotck Minimo],
+        pr_stockmaximo            as [Stock Maximo],
+        un_nombre                  as [Unidad],
+        sum(sti_ingreso)
+        - sum(sti_salida)         as [Cantidad],
 
-				pr_reposicion-(sum(sti_ingreso) - sum(sti_salida))
-																	as [Cant. a Comprar]
+        pr_reposicion-(sum(sti_ingreso) - sum(sti_salida))
+                                  as [Cant. a Comprar]
 from
 
-			Stock 	inner join StockItem sti							on Stock.st_id 		= sti.st_id
-							inner join DepositoLogico d 					on sti.depl_id 		= d.depl_id  
-							inner join Producto p                 on sti.pr_id 			= p.pr_id
+      Stock   inner join StockItem sti              on Stock.st_id     = sti.st_id
+              inner join DepositoLogico d           on sti.depl_id     = d.depl_id  
+              inner join Producto p                 on sti.pr_id       = p.pr_id
               inner join Unidad u                   on p.un_id_stock  = u.un_id
               inner join Documento doc              on stock.doc_id   = doc.doc_id
 
 where 
 
-					st_fecha <= @@Ffin 
+          st_fecha <= @@Ffin 
 
 -- TODO: Parametrizar
 
---			and (sti.pr_id_kit is null or sti.pr_id = sti.pr_id_kit)
+--      and (sti.pr_id_kit is null or sti.pr_id = sti.pr_id_kit)
 
 -- Discrimino depositos internos
-			and (d.depl_id <> -2 and d.depl_id <> -3)
+      and (d.depl_id <> -2 and d.depl_id <> -3)
 
 -- WARNNING: Se considero que no es util filtrar por permisos de empresa a los usuarios
 --           ya que en los casos de uso lo normal es que sin importar si el usuario puede
@@ -166,9 +166,9 @@ where
 --           generados en empresas donde el usuario no tiene acceso, pero que afectaron el
 --           el deposito consultado por el usuario.
 --
--- 			and (
--- 						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
--- 					)
+--       and (
+--             exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+--           )
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -184,80 +184,80 @@ and   (doc.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 
                   and  rptarb_hojaid = sti.pr_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Producto = 0)
-			 )
+           (@ram_id_Producto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 11 
                   and  rptarb_hojaid = sti.depl_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_DepositoLogico = 0)
-			 )
+           (@ram_id_DepositoLogico = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 10 
                   and  rptarb_hojaid = d.depf_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_DepositoFisico = 0)
-			 )
+           (@ram_id_DepositoFisico = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 
                   and  rptarb_hojaid = Stock.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Sucursal = 0)
-			 )
+           (@ram_id_Sucursal = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
-group by 		
-				pr_nombrecompra,
-				pr_nombreventa,
-				pr_reposicion,
-				pr_stockminimo,
-				pr_stockmaximo,
-				un_nombre
+           (@ram_id_Empresa = 0)
+       )
+group by     
+        pr_nombrecompra,
+        pr_nombreventa,
+        pr_reposicion,
+        pr_stockminimo,
+        pr_stockmaximo,
+        un_nombre
 
 having
 
-		  (abs(sum(sti_ingreso) - sum(sti_salida)) > 0.01 or	@@bStockCero <> 0)
-	and (sum(sti_ingreso) - sum(sti_salida)) < pr_reposicion
+      (abs(sum(sti_ingreso) - sum(sti_salida)) > 0.01 or  @@bStockCero <> 0)
+  and (sum(sti_ingreso) - sum(sti_salida)) < pr_reposicion
 
 GO

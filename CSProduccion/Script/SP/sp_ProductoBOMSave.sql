@@ -15,7 +15,7 @@ sp_ProductoBOMSave  4
 */
 
 create procedure sp_ProductoBOMSave (
-	@@pbm_id	int
+  @@pbm_id  int
 )
 as
 
@@ -25,40 +25,40 @@ begin
 
   set nocount on
 
-	if exists (select * from ProductoBOMItem pbmi
+  if exists (select * from ProductoBOMItem pbmi
              where not exists(select * from ProductoBOMItemA pbma 
                               where pbma.pbmi_id = pbmi.pbmi_id
-														)
-							 and pbmi.pr_id is null
-							 and pbmi.pbm_id = @@pbm_id
-						)
-	begin
+                            )
+               and pbmi.pr_id is null
+               and pbmi.pbm_id = @@pbm_id
+            )
+  begin
 
-		update ProductoBOM set activo = 0 where pbm_id = @@pbm_id
+    update ProductoBOM set activo = 0 where pbm_id = @@pbm_id
 
-		select 1, 'Esta B.O.M. quedará inactiva por que contiene insumos sin producto definido.' +
+    select 1, 'Esta B.O.M. quedará inactiva por que contiene insumos sin producto definido.' +
               ' Para activarla debe indicar al menos un producto para cada insumo.'
 
-	end else begin
+  end else begin
 
 
-		if not exists (select * from ProductoBOMElaborado pbme
-	             where pbme.pbm_id = @@pbm_id
-							)
-		begin
-	
-			update ProductoBOM set activo = 0 where pbm_id = @@pbm_id
-	
-			select 1, 'Esta B.O.M. quedará inactiva por que no contiene elaborados.' +
-	              ' Para activarla debe indicar al menos un elaborado.'
-	
-		end else begin
+    if not exists (select * from ProductoBOMElaborado pbme
+               where pbme.pbm_id = @@pbm_id
+              )
+    begin
+  
+      update ProductoBOM set activo = 0 where pbm_id = @@pbm_id
+  
+      select 1, 'Esta B.O.M. quedará inactiva por que no contiene elaborados.' +
+                ' Para activarla debe indicar al menos un elaborado.'
+  
+    end else begin
 
-			select 1, ''
+      select 1, ''
 
-		end
+    end
 
-	end
+  end
 
 /*
     Reglas a cumplir:

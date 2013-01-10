@@ -15,23 +15,23 @@ sp_col inscripcion
 
 go
 create procedure sp_web_InscripcionLabGet (
-	@@insc_id int
+  @@insc_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	insc_id, 
-					insc_numero, 
-					insc_fecha,
-					aabalab_nombre
-	
-	from aaarbaweb..inscripcion insc left join aaba_laboratorio l on insc.aabalab_id = l.aabalab_id
+  select   insc_id, 
+          insc_numero, 
+          insc_fecha,
+          aabalab_nombre
+  
+  from aaarbaweb..inscripcion insc left join aaba_laboratorio l on insc.aabalab_id = l.aabalab_id
 
-	where insc_id = @@insc_id
-	
+  where insc_id = @@insc_id
+  
 end
 
 go

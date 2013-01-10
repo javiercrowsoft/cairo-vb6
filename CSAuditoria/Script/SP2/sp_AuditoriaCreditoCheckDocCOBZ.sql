@@ -8,15 +8,15 @@ drop procedure [dbo].[sp_AuditoriaCreditoCheckDocCOBZ]
 go
 
 create procedure sp_AuditoriaCreditoCheckDocCOBZ (
-	@@cobz_id   	int,
+  @@cobz_id     int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out
+  @@bErrorMsg   varchar(5000) out
 )
 as
 
 begin
 
-	exec sp_AuditoriaCreditoCheckDocCOBZCliente @@cobz_id, @@bSuccess out, @@bErrorMsg out
+  exec sp_AuditoriaCreditoCheckDocCOBZCliente @@cobz_id, @@bSuccess out, @@bErrorMsg out
 
 end
 GO

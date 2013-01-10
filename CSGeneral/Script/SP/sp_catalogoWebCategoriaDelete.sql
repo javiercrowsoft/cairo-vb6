@@ -9,29 +9,29 @@ drop procedure [dbo].[sp_CatalogoWebCategoriaDelete]
 
 go
 create procedure sp_CatalogoWebCategoriaDelete (
-	@@catwc_id int
+  @@catwc_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete CatalogoWebCategoriaItem where catwc_id = @@catwc_id
-	if @@error <> 0 goto ControlError
+  delete CatalogoWebCategoriaItem where catwc_id = @@catwc_id
+  if @@error <> 0 goto ControlError
 
-	delete CatalogoWebCategoria where catwc_id = @@catwc_id
-	if @@error <> 0 goto ControlError
+  delete CatalogoWebCategoria where catwc_id = @@catwc_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la categoria del catalogo web. sp_CatalogoWebCategoriaDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la categoria del catalogo web. sp_CatalogoWebCategoriaDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

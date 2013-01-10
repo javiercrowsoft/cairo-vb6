@@ -48,24 +48,24 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_departamento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_departamento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_departamento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
-	end else 
-		set @ram_id_departamento = 0
+    exec sp_ArbGetAllHojas @ram_id_departamento, @clienteID 
+  end else 
+    set @ram_id_departamento = 0
 end
 
 if @ram_id_cliente <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_cliente, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_cliente, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_cliente, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_cliente, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_cliente, @clienteID 
-	end else 
-		set @ram_id_cliente = 0
+    exec sp_ArbGetAllHojas @ram_id_cliente, @clienteID 
+  end else 
+    set @ram_id_cliente = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -100,29 +100,29 @@ and   (c.cli_id = @cli_id or @cli_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1015 -- tbl_id de Proyecto
                   and  rptarb_hojaid = dcli.dpto_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_departamento = 0)
-			 )
+           (@ram_id_departamento = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 28 -- tbl_id de Proyecto
                   and  rptarb_hojaid = dcli.cli_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cliente = 0)
-			 )
+           (@ram_id_cliente = 0)
+       )
 
 GO

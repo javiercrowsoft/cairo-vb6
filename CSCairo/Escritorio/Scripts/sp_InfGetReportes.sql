@@ -10,27 +10,27 @@ GO
 
 -- sp_InfGetReportes 0
 create procedure sp_InfGetReportes (
-	@@us_id int
+  @@us_id int
 )
 as
 begin
-	set nocount on
+  set nocount on
 
-	select 
-			inf_id,
-			inf_nombre,
-			inf_codigo,
-			inf_descrip,
-			inf_storedprocedure,
-			inf_reporte,
-			inf_presentaciondefault,
-			inf_modulo,
-			inf_tipo,
-			inf_propietario,
-			creado,
-			modificado,
-			modifico,
-			activo
+  select 
+      inf_id,
+      inf_nombre,
+      inf_codigo,
+      inf_descrip,
+      inf_storedprocedure,
+      inf_reporte,
+      inf_presentaciondefault,
+      inf_modulo,
+      inf_tipo,
+      inf_propietario,
+      creado,
+      modificado,
+      modifico,
+      activo
   from informe
 
 end

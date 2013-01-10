@@ -1,7 +1,7 @@
 select fc_id, 
-			 fc_total, 
-				isnull((select sum(fcd_importe) from facturacompradeuda where fc_id = fc.fc_id),0)
-			 +isnull((select sum(fcp_importe) from facturacomprapago  where fc_id = fc.fc_id),0)
+       fc_total, 
+        isnull((select sum(fcd_importe) from facturacompradeuda where fc_id = fc.fc_id),0)
+       +isnull((select sum(fcp_importe) from facturacomprapago  where fc_id = fc.fc_id),0)
 
 from facturacompra fc
 
@@ -15,5 +15,5 @@ fc_id, fc_total
 having 
 
 abs(fc_total-(
-				isnull((select sum(fcd_importe) from facturacompradeuda where fc_id = fc.fc_id),0)
-			 +isnull((select sum(fcp_importe) from facturacomprapago  where fc_id = fc.fc_id),0)))>0.01
+        isnull((select sum(fcd_importe) from facturacompradeuda where fc_id = fc.fc_id),0)
+       +isnull((select sum(fcp_importe) from facturacomprapago  where fc_id = fc.fc_id),0)))>0.01

@@ -12,7 +12,7 @@ sp_DocLiquidacionMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocLiquidacionMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -20,47 +20,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select liq_id from Liquidacion 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select liq_id from Liquidacion 
                                                         where liq_numero = (
-																																	select min(liq_numero) from Liquidacion 
+                                                                  select min(liq_numero) from Liquidacion 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select liq_id from Liquidacion 
+                                                        select liq_id from Liquidacion 
                                                         where liq_numero = (
-																																	select max(liq_numero) from Liquidacion 
+                                                                  select max(liq_numero) from Liquidacion 
                                                                   where doc_id = @@DocId 
-																																			and liq_numero < @@currNro 
-																																)
+                                                                      and liq_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select liq_id from Liquidacion 
+                                                        select liq_id from Liquidacion 
                                                         where liq_numero = (
-																																	select min(liq_numero) from Liquidacion 
+                                                                  select min(liq_numero) from Liquidacion 
                                                                   where doc_id = @@DocId 
                                                                       and liq_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select liq_id from Liquidacion 
+                                                        select liq_id from Liquidacion 
                                                         where liq_numero = (
-																																	select max(liq_numero) from Liquidacion 
+                                                                  select max(liq_numero) from Liquidacion 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

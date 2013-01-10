@@ -10,7 +10,7 @@ frPackingListTitles 5,1
 go
 create procedure frPackingListTitles (
 
-	@@pklst_id	int,
+  @@pklst_id  int,
   @@idm_id    int
 
 )as 
@@ -43,127 +43,127 @@ create table #header(
 
 insert into #header
 
-	select 
+  select 
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo 01'
-					)																							 as titulo01,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo 01'
+          )                                               as titulo01,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo 02'
-					)																							 as titulo02,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo 02'
+          )                                               as titulo02,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo 03'
-					)																							 as titulo03,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo 03'
+          )                                               as titulo03,
 
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Unidades'
-					)																							 as UnidadesT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Unidades'
+          )                                               as UnidadesT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo CajaNro'
-					)																							 as CajaNroT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo CajaNro'
+          )                                               as CajaNroT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Cant. x Caja'
-					)																							 as CantXCajaT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Cant. x Caja'
+          )                                               as CantXCajaT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Producto'
-					)																							 as Producto,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Producto'
+          )                                               as Producto,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Grupo'
-					)																							 as GrupoT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Grupo'
+          )                                               as GrupoT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Partida'
-					)																							 as PartidaT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Partida'
+          )                                               as PartidaT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Peso Neto'
-					)																							 as PesoNetoT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Peso Neto'
+          )                                               as PesoNetoT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Peso Bruto'
-					)																							 as PesoBrutoT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Peso Bruto'
+          )                                               as PesoBrutoT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Marcas'
-					)																							 as MarcasT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Marcas'
+          )                                               as MarcasT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Volumen'
-					)																							 as VolumenT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Volumen'
+          )                                               as VolumenT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Volumen Total'
-					)																							 as VolumenTotalT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Volumen Total'
+          )                                               as VolumenTotalT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Total'
-					)																							 as TotalT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Total'
+          )                                               as TotalT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Medidas'
-					)																							 as MedidasT,
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Medidas'
+          )                                               as MedidasT,
 
 --//////////////////////////////////////////////////////////////////////////////////////////////
-					(select MURpklst_texto 
-					 from MUR_PackingList
-					 where 	pklst_id = @@pklst_id and idm_id = @@idm_id 
-							and	MURpklst_codigo = '(pk)Titulo Volumen Exterior'
-					)																							 as VolumenExtT
+          (select MURpklst_texto 
+           from MUR_PackingList
+           where   pklst_id = @@pklst_id and idm_id = @@idm_id 
+              and  MURpklst_codigo = '(pk)Titulo Volumen Exterior'
+          )                                               as VolumenExtT
 
   select * from #header
 

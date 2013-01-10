@@ -10,7 +10,7 @@ sp_DocRemitoVentaGetOrdenItemsCliente '11'
 */
 
 create procedure sp_DocRemitoVentaGetOrdenItemsCliente (
-	@@strIds varchar(5000)
+  @@strIds varchar(5000)
 )
 as
 
@@ -18,7 +18,7 @@ begin
 
   set nocount on
 
-	exec sp_DocRemitoVentaGetOrdenItemsCairo @@strIds
+  exec sp_DocRemitoVentaGetOrdenItemsCairo @@strIds
 
 end
 go

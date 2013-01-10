@@ -10,7 +10,7 @@ go
 */
 
 create procedure sp_DocEsCobranzaPorCajero (
-	@@fv_id    		int
+  @@fv_id        int
 )
 as
 
@@ -18,19 +18,19 @@ set nocount on
 
 begin
 
-	-- Antes que nada valido que este el centro de costo
-	--
-	declare @cfg_valor varchar(5000) 
+  -- Antes que nada valido que este el centro de costo
+  --
+  declare @cfg_valor varchar(5000) 
 
-	exec sp_Cfg_GetValor  'Ventas-General',
-											  'Concentrar Cobranzas en Cajero',
-											  @cfg_valor out,
-											  0
+  exec sp_Cfg_GetValor  'Ventas-General',
+                        'Concentrar Cobranzas en Cajero',
+                        @cfg_valor out,
+                        0
   set @cfg_valor = IsNull(@cfg_valor,0)
-	if convert(int,@cfg_valor) <> 0 
-		select 1
-	else
-		select 0
+  if convert(int,@cfg_valor) <> 0 
+    select 1
+  else
+    select 0
 end
 
 go

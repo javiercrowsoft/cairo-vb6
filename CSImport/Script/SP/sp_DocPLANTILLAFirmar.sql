@@ -17,7 +17,7 @@ sp_DocNOMBRE_DOCFirmar 17,8
 */
 
 create procedure sp_DocNOMBRE_DOCFirmar (
-	PARAM_ID int,
+  PARAM_ID int,
   @@us_id int
 )
 as
@@ -25,15 +25,15 @@ as
 begin
 
   -- Si esta firmado le quita la firma
-	if exists(select CAMPO_FIRMADO from NOMBRE_TABLA where CAMPO_ID = PARAM_ID and CAMPO_FIRMADO <> 0)
-		update NOMBRE_TABLA set CAMPO_FIRMADO = 0 where CAMPO_ID = PARAM_ID
-	-- Sino lo firma
-	else
-		update NOMBRE_TABLA set CAMPO_FIRMADO = @@us_id where CAMPO_ID = PARAM_ID
+  if exists(select CAMPO_FIRMADO from NOMBRE_TABLA where CAMPO_ID = PARAM_ID and CAMPO_FIRMADO <> 0)
+    update NOMBRE_TABLA set CAMPO_FIRMADO = 0 where CAMPO_ID = PARAM_ID
+  -- Sino lo firma
+  else
+    update NOMBRE_TABLA set CAMPO_FIRMADO = @@us_id where CAMPO_ID = PARAM_ID
 
-	exec sp_DocNOMBRE_DOCSetEstado PARAM_ID
+  exec sp_DocNOMBRE_DOCSetEstado PARAM_ID
 
-	select NOMBRE_TABLA.est_id,est_nombre 
-	from NOMBRE_TABLA inner join Estado on NOMBRE_TABLA.est_id = Estado.est_id
-	where CAMPO_ID = PARAM_ID
+  select NOMBRE_TABLA.est_id,est_nombre 
+  from NOMBRE_TABLA inner join Estado on NOMBRE_TABLA.est_id = Estado.est_id
+  where CAMPO_ID = PARAM_ID
 end

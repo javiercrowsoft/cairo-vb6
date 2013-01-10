@@ -7,34 +7,34 @@ drop procedure [dbo].[sp_GridViewSaveFormula]
 
 go
 create procedure sp_GridViewSaveFormula (
-	@@grdv_id 				 int,
-	@@grdvf_columna    varchar(255),
-	@@grdvf_formula    tinyint,
-	@@grdvf_indice     tinyint
+  @@grdv_id          int,
+  @@grdvf_columna    varchar(255),
+  @@grdvf_formula    tinyint,
+  @@grdvf_indice     tinyint
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	declare @grdvf_id int
+  declare @grdvf_id int
 
-	exec sp_dbgetnewid 'GridViewFormula', 'grdvf_id', @grdvf_id out, 0
-			 
-	insert into GridViewFormula (grdv_id, grdvf_id, grdvf_columna, grdvf_formula, grdvf_indice) 
-										values    (@@grdv_id, @grdvf_id, @@grdvf_columna, @@grdvf_formula, @@grdvf_indice)
-	if @@error <> 0 goto ControlError
+  exec sp_dbgetnewid 'GridViewFormula', 'grdvf_id', @grdvf_id out, 0
+       
+  insert into GridViewFormula (grdv_id, grdvf_id, grdvf_columna, grdvf_formula, grdvf_indice) 
+                    values    (@@grdv_id, @grdvf_id, @@grdvf_columna, @@grdvf_formula, @@grdvf_indice)
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al grabar la formula. sp_GridViewSaveFormula.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al grabar la formula. sp_GridViewSaveFormula.', 16, 1)
+  rollback transaction  
 
 end
 go

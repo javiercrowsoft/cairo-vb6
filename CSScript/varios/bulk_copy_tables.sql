@@ -8,9 +8,9 @@ fetch next from c_t into @table
 while @@fetch_status = 0
 begin
 
-		print 'ALTER TABLE ' + @table + ' DISABLE TRIGGER ALL;'
+    print 'ALTER TABLE ' + @table + ' DISABLE TRIGGER ALL;'
 
-		fetch next from c_t into @table
+    fetch next from c_t into @table
 end
 
 close c_t
@@ -21,9 +21,9 @@ fetch next from c_t into @table
 while @@fetch_status = 0
 begin
 
-		exec sp_CreateDataLoadScript @table
+    exec sp_CreateDataLoadScript @table
 
-		fetch next from c_t into @table
+    fetch next from c_t into @table
 end
 
 close c_t
@@ -34,9 +34,9 @@ fetch next from c_t into @table
 while @@fetch_status = 0
 begin
 
-		print 'ALTER TABLE ' + @table + ' ENABLE TRIGGER ALL;'
+    print 'ALTER TABLE ' + @table + ' ENABLE TRIGGER ALL;'
 
-		fetch next from c_t into @table
+    fetch next from c_t into @table
 end
 
 close c_t

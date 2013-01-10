@@ -34,9 +34,9 @@ begin
 
   declare c_prns_prov insensitive cursor for
   select prns_id from ProductoNumeroSerie ps
-	where (prns_id = @@prns_id or @@prns_id = 0)
-		and (depl_id not in (-2,-3))
-		and exists(select * from StockItem where prns_id = ps.prns_id group by prns_id having count(*)>2)
+  where (prns_id = @@prns_id or @@prns_id = 0)
+    and (depl_id not in (-2,-3))
+    and exists(select * from StockItem where prns_id = ps.prns_id group by prns_id having count(*)>2)
 
   
   open c_prns_prov
@@ -53,8 +53,8 @@ begin
 
     select @st_id = st_id from StockItem where prns_id = @prns_id and sti_salida > 0 and depl_id = -3
                                   /*
-                                  2	Factura de Compra	
-                                  4	Remito de Compra	
+                                  2  Factura de Compra  
+                                  4  Remito de Compra  
                                   */
     select @prov_id = case doct_id_cliente
             when 2 then (select prov_id from FacturaCompra where fc_id = id_cliente)
@@ -97,8 +97,8 @@ begin
 
     select top 1 @st_id = st_id from StockItem where prns_id = @prns_id and sti_ingreso > 0 and depl_id = -3 order by st_id desc
                                   /*
-                                  1	Factura de Venta	
-                                  3	Remito de Venta	
+                                  1  Factura de Venta  
+                                  3  Remito de Venta  
                                   */
     select @cli_id = case doct_id_cliente
             when 1 then (select cli_id from FacturaVenta where fv_id = id_cliente)

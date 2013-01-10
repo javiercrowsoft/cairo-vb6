@@ -3,12 +3,12 @@ drop table [dbo].[Unidad]
 GO
 
 CREATE TABLE [dbo].[Unidad] (
-	[un_id] [int] NOT NULL ,
-	[un_nombre] [varchar] (30) NOT NULL ,
-	[un_alias] [varchar] (20) NULL ,
-	[creado] [datetime] NOT NULL ,
-	[modificado] [datetime] NOT NULL ,
-	[modifico] [int] NOT NULL 
+  [un_id] [int] NOT NULL ,
+  [un_nombre] [varchar] (30) NOT NULL ,
+  [un_alias] [varchar] (20) NULL ,
+  [creado] [datetime] NOT NULL ,
+  [modificado] [datetime] NOT NULL ,
+  [modifico] [int] NOT NULL 
 )
 GO
 

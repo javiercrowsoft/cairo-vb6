@@ -12,13 +12,13 @@ drop procedure [dbo].[sp_ProductoGetKits]
 
 go
 create procedure sp_ProductoGetKits (
-	@@pr_id 		int
+  @@pr_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select 
          prfk_id,

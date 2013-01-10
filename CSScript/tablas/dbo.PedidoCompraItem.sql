@@ -3,12 +3,12 @@ drop table [dbo].[PedidoCompraItem]
 GO
 
 CREATE TABLE [dbo].[PedidoCompraItem] (
-	[pci_id] [int] NOT NULL ,
-	[pc_id] [int] NULL ,
-	[creado] [datetime] NOT NULL ,
-	[modificado] [datetime] NOT NULL ,
-	[modifico] [int] NULL ,
-	[pr_id] [int] NULL 
+  [pci_id] [int] NOT NULL ,
+  [pc_id] [int] NULL ,
+  [creado] [datetime] NOT NULL ,
+  [modificado] [datetime] NOT NULL ,
+  [modifico] [int] NULL ,
+  [pr_id] [int] NULL 
 ) ON [PRIMARY]
 GO
 

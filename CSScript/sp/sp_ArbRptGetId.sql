@@ -17,7 +17,7 @@ sp_ArbRptGetId '20030101','20030403',41087
 
 */
 create Procedure sp_ArbRptGetId(
-  @@ram_id 		int 
+  @@ram_id     int 
 )
 as
 begin

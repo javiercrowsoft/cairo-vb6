@@ -9,21 +9,21 @@ sp_DocFacturaVentaGetPercepciones 1
 
 */
 create procedure sp_DocFacturaVentaGetPercepciones (
-	@@fv_id int
+  @@fv_id int
 )
 as
 
 begin
 
-	select 	FacturaVentaPercepcion.*, 
-					perc_nombre, 
+  select   FacturaVentaPercepcion.*, 
+          perc_nombre, 
           ccos_nombre
 
-	from 	FacturaVentaPercepcion
-				inner join Percepcion 						on FacturaVentaPercepcion.perc_id = Percepcion.perc_id
-        left join centrocosto as ccos 		on FacturaVentaPercepcion.ccos_id = ccos.ccos_id
-	where 
-			fv_id = @@fv_id
+  from   FacturaVentaPercepcion
+        inner join Percepcion             on FacturaVentaPercepcion.perc_id = Percepcion.perc_id
+        left join centrocosto as ccos     on FacturaVentaPercepcion.ccos_id = ccos.ccos_id
+  where 
+      fv_id = @@fv_id
 
-	order by fvperc_orden
+  order by fvperc_orden
 end

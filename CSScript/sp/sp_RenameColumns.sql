@@ -5,8 +5,8 @@ GO
 
 -- sp_RenameColumns 'descripcion','descrip'
 create procedure sp_RenameColumns(
-	@@toSearch		varchar(255),
-        @@ReplaceWith		varchar(255)
+  @@toSearch    varchar(255),
+        @@ReplaceWith    varchar(255)
 )
 as
 
@@ -22,15 +22,15 @@ open c_cols
 fetch next from c_cols into @column ,@table
 while @@fetch_status = 0 begin
 
-	set @NewName = replace(@column,@@toSearch,@@ReplaceWith)
+  set @NewName = replace(@column,@@toSearch,@@ReplaceWith)
 
-	set @sqlstmt = 'sp_rename ' + '''' + @table +'.[' + @column + ']' + '''' + ',' 
+  set @sqlstmt = 'sp_rename ' + '''' + @table +'.[' + @column + ']' + '''' + ',' 
                                     + '''' + @NewName + '''' + ','
                                     + '''COLUMN'''
-	print (@sqlstmt)
-	exec (@sqlstmt)
+  print (@sqlstmt)
+  exec (@sqlstmt)
 
-	fetch next from c_cols into @column, @table
+  fetch next from c_cols into @column, @table
 end
 
 close c_cols

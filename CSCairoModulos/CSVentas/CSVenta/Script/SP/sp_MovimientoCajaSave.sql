@@ -19,71 +19,71 @@ create procedure sp_MovimientoCajaSave (
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @mcj_nrodoc 	varchar(255)
-	declare @cj_id 				int
-	declare @mcj_tipo 		int	
+  declare @mcj_nrodoc   varchar(255)
+  declare @cj_id         int
+  declare @mcj_tipo     int  
 
-	select 	@cj_id 			= cj_id, 
-					@mcj_nrodoc = mcj_nrodoc,
-					@mcj_tipo 	= mcj_tipo
+  select   @cj_id       = cj_id, 
+          @mcj_nrodoc = mcj_nrodoc,
+          @mcj_tipo   = mcj_tipo
 
-	from MovimientoCaja where mcj_id = @@mcj_id
+  from MovimientoCaja where mcj_id = @@mcj_id
 
-	if @mcj_nrodoc = '' begin
+  if @mcj_nrodoc = '' begin
 
-		select @mcj_nrodoc = max(convert(int,mcj_nrodoc)) 
-		from MovimientoCaja 
-		where cj_id = @cj_id
-			and isnumeric(mcj_nrodoc)<>0
-	
-		if @mcj_nrodoc is null set @mcj_nrodoc = '1'
-		else 									 set @mcj_nrodoc = convert(int,@mcj_nrodoc)+1
-	
-		set @mcj_nrodoc = right('00000000'+@mcj_nrodoc,8)
+    select @mcj_nrodoc = max(convert(int,mcj_nrodoc)) 
+    from MovimientoCaja 
+    where cj_id = @cj_id
+      and isnumeric(mcj_nrodoc)<>0
+  
+    if @mcj_nrodoc is null set @mcj_nrodoc = '1'
+    else                    set @mcj_nrodoc = convert(int,@mcj_nrodoc)+1
+  
+    set @mcj_nrodoc = right('00000000'+@mcj_nrodoc,8)
 
-	end
+  end
 
-	update MovimientoCaja 
-		set mcj_numero = mcj_id, 
-				mcj_nrodoc = @mcj_nrodoc 
-	where mcj_id = @@mcj_id
+  update MovimientoCaja 
+    set mcj_numero = mcj_id, 
+        mcj_nrodoc = @mcj_nrodoc 
+  where mcj_id = @@mcj_id
 
-	--/////////////////////////////////////////////////////////////////////////////////////////
-	-- Asiento
-	--
+  --/////////////////////////////////////////////////////////////////////////////////////////
+  -- Asiento
+  --
 
-	-- Cuando se abre una caja se guarda el asiento de movimiento 
-	-- de cuentas de fondos a cuentas de trabajo
-	--
-	if @mcj_tipo = 1 begin
+  -- Cuando se abre una caja se guarda el asiento de movimiento 
+  -- de cuentas de fondos a cuentas de trabajo
+  --
+  if @mcj_tipo = 1 begin
 
-		-- Tiene que ser el ultimo movimiento de esta caja
-		--
-		declare @last_mcj_id int
+    -- Tiene que ser el ultimo movimiento de esta caja
+    --
+    declare @last_mcj_id int
 
-		select @last_mcj_id = max(mcj_id) from MovimientoCaja where cj_id = @cj_id
-	
-		if @last_mcj_id = @@mcj_id begin
+    select @last_mcj_id = max(mcj_id) from MovimientoCaja where cj_id = @cj_id
+  
+    if @last_mcj_id = @@mcj_id begin
 
-			declare @bError smallint
-		
-			exec sp_MovimientoCajaSaveAsiento @@mcj_id, 1, @bError out
-		
-			if @bError <> 0 begin
-		
-				select 0 as success
-				return
-			end
+      declare @bError smallint
+    
+      exec sp_MovimientoCajaSaveAsiento @@mcj_id, 1, @bError out
+    
+      if @bError <> 0 begin
+    
+        select 0 as success
+        return
+      end
 
-		end
+    end
 
-	end
+  end
 
-	--/////////////////////////////////////////////////////////////////////////////////////////
+  --/////////////////////////////////////////////////////////////////////////////////////////
 
-	select 1 as success
-	
+  select 1 as success
+  
 end
 go

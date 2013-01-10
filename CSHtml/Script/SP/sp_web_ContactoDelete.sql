@@ -12,8 +12,8 @@ drop procedure [dbo].[sp_web_ContactoDelete]
 go
 create procedure sp_web_ContactoDelete (
   @@us_id     int,
-	@@cont_id 	int,
-  @@rtn     	int out
+  @@cont_id   int,
+  @@rtn       int out
 
 )
 as
@@ -25,9 +25,9 @@ begin
   select @cont_nombre = cont_nombre from contacto where cont_id = @@cont_id
   exec sp_HistoriaUpdate 2001, @@cont_id, @@us_id, 3, @cont_nombre
 
-	set nocount on
-	delete Contacto where cont_id = @@cont_id 
+  set nocount on
+  delete Contacto where cont_id = @@cont_id 
 
-	set @@rtn = 1
+  set @@rtn = 1
 
 end

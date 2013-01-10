@@ -1,8 +1,8 @@
-declare @@cue_id_find 		int
+declare @@cue_id_find     int
 declare @@cue_id_replace  int
 
-set @@cue_id_find  			=129
-set @@cue_id_replace 		=129
+set @@cue_id_find        =129
+set @@cue_id_replace     =129
 
 begin tran
 
@@ -41,14 +41,14 @@ update TarjetaCredito set cue_id_presentado = @@cue_id_replace where cue_id_pres
 update TarjetaCredito set cue_id_rechazo = @@cue_id_replace where cue_id_rechazo = @@cue_id_find if @@error <> 0 goto Error 
 update FacturaCompraOtro set cue_id = @@cue_id_replace where cue_id = @@cue_id_find if @@error <> 0 goto Error 
 
-	commit tran
+  commit tran
 
-	select 'Update exitoso'
+  select 'Update exitoso'
 
-	goto Fin
+  goto Fin
 Error:
 
-	select 'Hubo errores'
-	rollback tran
+  select 'Hubo errores'
+  rollback tran
 
 Fin:

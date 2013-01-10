@@ -9,19 +9,19 @@ drop procedure [dbo].[sp_ProductoGetFromCodigoBarra ]
 
 go
 create procedure sp_ProductoGetFromCodigoBarra  (
-	@@pr_codigobarra 		varchar(255)
+  @@pr_codigobarra     varchar(255)
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select pr_id, pr_nombrecompra, pr_nombreventa 
+  select pr_id, pr_nombrecompra, pr_nombreventa 
 
-	from Producto pr
+  from Producto pr
 
-	where pr_codigobarra = @@pr_codigobarra
+  where pr_codigobarra = @@pr_codigobarra
 
 end
 go

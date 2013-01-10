@@ -17,11 +17,11 @@ begin
 set nocount on
 
 select 
-		inf.*,
-		us_nombre
+    inf.*,
+    us_nombre
 from 
-		informe inf inner join reporte rpt on inf.inf_id = rpt.inf_id
-								inner join usuario us  on rpt.us_id  = us.us_id
+    informe inf inner join reporte rpt on inf.inf_id = rpt.inf_id
+                inner join usuario us  on rpt.us_id  = us.us_id
 
 end
 

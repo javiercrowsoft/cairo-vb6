@@ -14,31 +14,31 @@ go
 -- select * from ARBA_Deudores where arbad_cuit in (select replace(prov_cuit, '-','') from proveedor)
 
 create procedure sp_DocOrdenPagoProveedorShowMessagess (
-	@@prov_id     int,
-	@@emp_id      int
+  @@prov_id     int,
+  @@emp_id      int
 )
 as
 
 begin
 
-	declare @cuit varchar(50)
+  declare @cuit varchar(50)
 
-	select @cuit = replace(prov_cuit, '-', '') from Proveedor where prov_id = @@prov_id
+  select @cuit = replace(prov_cuit, '-', '') from Proveedor where prov_id = @@prov_id
 
-	if exists(select * from ARBA_Deudores where arbad_cuit = @cuit) 
-		select 'Este proveedor figura en el padron de deduores de ARBA con los siguientes datos:'
+  if exists(select * from ARBA_Deudores where arbad_cuit = @cuit) 
+    select 'Este proveedor figura en el padron de deduores de ARBA con los siguientes datos:'
 
-						+ char(10) + char(13)
-						+ 'Fecha: ' + arbad_archivo
-						+ char(10) + char(13)
-						+ 'Saldo: ' + convert(varchar,convert(decimal(18,2),arbad_deuda))
+            + char(10) + char(13)
+            + 'Fecha: ' + arbad_archivo
+            + char(10) + char(13)
+            + 'Saldo: ' + convert(varchar,convert(decimal(18,2),arbad_deuda))
 
-		from ARBA_Deudores
+    from ARBA_Deudores
 
-		where arbad_cuit = @cuit
+    where arbad_cuit = @cuit
 
-	else
+  else
 
-		select '' where 1=2
+    select '' where 1=2
 
 end

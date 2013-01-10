@@ -14,21 +14,21 @@ fetch next from c into @ram_id
 while @@fetch_status = 0
 begin
 
-	set @i=0
+  set @i=0
 
-	open c2
-	fetch next from c into @ram_id2
+  open c2
+  fetch next from c into @ram_id2
 
-	while @@fetch_status = 0
-	begin
-		update rama set ram_orden = @i where ram_id = @ram_id2
-		set @i = @i +1		
+  while @@fetch_status = 0
+  begin
+    update rama set ram_orden = @i where ram_id = @ram_id2
+    set @i = @i +1    
 
-		fetch next from c into @ram_id2
-	end
-	close c2	
+    fetch next from c into @ram_id2
+  end
+  close c2  
 
-	fetch next from c into @ram_id	
+  fetch next from c into @ram_id  
 end
 
 deallocate c

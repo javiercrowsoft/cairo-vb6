@@ -15,18 +15,18 @@ declare @tarest_id int
 
 declare c_tarestUpdate insensitive cursor for
 
-	select tarest_id from inserted
+  select tarest_id from inserted
 
 open c_tarestUpdate
 
 fetch next from c_tarestUpdate into @tarest_id
 while @@fetch_status = 0
 begin
- 	if @tarest_id = 1 begin
- 		update TareaEstado set tarest_nombre = 'Pendiente' where tarest_id = 1
- 	end
+   if @tarest_id = 1 begin
+     update TareaEstado set tarest_nombre = 'Pendiente' where tarest_id = 1
+   end
 
-	fetch next from c_tarestUpdate into @tarest_id
+  fetch next from c_tarestUpdate into @tarest_id
 end
 
 close c_tarestUpdate

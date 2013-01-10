@@ -12,7 +12,7 @@ DECLARE @@RETURNINFO varchar(255)
 BEGIN
    WAITFOR DELAY @@DELAYLENGTH
    /*
-	 SELECT @@RETURNINFO = 'A total time of ' + 
+   SELECT @@RETURNINFO = 'A total time of ' + 
                   SUBSTRING(@@DELAYLENGTH, 1, 3) +
                   ' hours, ' +
                   SUBSTRING(@@DELAYLENGTH, 5, 2) + 
@@ -21,6 +21,6 @@ BEGIN
                   ' seconds, ' +
                   'has elapsed! Your time is up.'
    PRINT @@RETURNINFO
-	 */
+   */
 END
 GO

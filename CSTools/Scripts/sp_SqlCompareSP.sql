@@ -12,22 +12,22 @@ GO
 
 */
 create procedure sp_SqlCompareSP (
-	@@base			varchar(255)        
+  @@base      varchar(255)        
 )
 as
 begin
-	set nocount on
+  set nocount on
 
-	declare @sqlstmt varchar(8000)
+  declare @sqlstmt varchar(8000)
 
-	set @sqlstmt = 'select p.name,p.crdate,p2.name,p2.crdate ' +
-									'from sysobjects p left join '+@@base+'..sysobjects p2 ' +
-									'on p.name = p2.name and p.xtype = ''P'' and p2.xtype = ''P'' ' +
-									'where p.crdate > isnull(p2.crdate,''19000101'')' +
-									'and p.xtype = ''P'' ' +
-									'order by p.crdate,p.name'
+  set @sqlstmt = 'select p.name,p.crdate,p2.name,p2.crdate ' +
+                  'from sysobjects p left join '+@@base+'..sysobjects p2 ' +
+                  'on p.name = p2.name and p.xtype = ''P'' and p2.xtype = ''P'' ' +
+                  'where p.crdate > isnull(p2.crdate,''19000101'')' +
+                  'and p.xtype = ''P'' ' +
+                  'order by p.crdate,p.name'
 
-	exec(@sqlstmt)
+  exec(@sqlstmt)
 
 end
 

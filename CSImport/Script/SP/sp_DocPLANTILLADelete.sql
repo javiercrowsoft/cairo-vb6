@@ -14,31 +14,31 @@ TEXTO_ERROR                  reemplazar por el texto de error ej. el pedido de v
 */
 
 create procedure sp_DocNOMBRE_DOCDelete (
-	PARAM_ID int
+  PARAM_ID int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	exec sp_DocNOMBRE_DOCSetCredito PARAM_ID,1
-	if @@error <> 0 goto ControlError
+  exec sp_DocNOMBRE_DOCSetCredito PARAM_ID,1
+  if @@error <> 0 goto ControlError
 
-	delete NOMBRE_TABLAItem where CAMPO_ID = PARAM_ID
-	if @@error <> 0 goto ControlError
+  delete NOMBRE_TABLAItem where CAMPO_ID = PARAM_ID
+  if @@error <> 0 goto ControlError
 
-	delete NOMBRE_TABLA where CAMPO_ID = PARAM_ID
-	if @@error <> 0 goto ControlError
+  delete NOMBRE_TABLA where CAMPO_ID = PARAM_ID
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar TEXTO_ERROR. sp_DocNOMBRE_DOCDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar TEXTO_ERROR. sp_DocNOMBRE_DOCDelete.', 16, 1)
+  rollback transaction  
 
 end

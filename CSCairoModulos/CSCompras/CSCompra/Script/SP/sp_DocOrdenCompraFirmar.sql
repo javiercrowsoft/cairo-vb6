@@ -16,33 +16,33 @@ sp_DocOrdenCompraFirmar 17,8
 */
 
 create procedure sp_DocOrdenCompraFirmar (
-	@@oc_id int,
+  @@oc_id int,
   @@us_id int
 )
 as
 
 begin
 
-	declare @bFirmar tinyint
+  declare @bFirmar tinyint
 
   -- Si esta firmado le quita la firma
-	if exists(select oc_firmado from OrdenCompra where oc_id = @@oc_id and oc_firmado <> 0)
-	begin
-		update OrdenCompra set oc_firmado = 0 where oc_id = @@oc_id
-		set @bFirmar = 1
-	-- Sino lo firma
-	end else begin
-		update OrdenCompra set oc_firmado = @@us_id where oc_id = @@oc_id
-		set @bFirmar = 0
-	end
+  if exists(select oc_firmado from OrdenCompra where oc_id = @@oc_id and oc_firmado <> 0)
+  begin
+    update OrdenCompra set oc_firmado = 0 where oc_id = @@oc_id
+    set @bFirmar = 1
+  -- Sino lo firma
+  end else begin
+    update OrdenCompra set oc_firmado = @@us_id where oc_id = @@oc_id
+    set @bFirmar = 0
+  end
 
-	exec sp_DocOrdenCompraSetEstado @@oc_id
+  exec sp_DocOrdenCompraSetEstado @@oc_id
 
-	select OrdenCompra.est_id,est_nombre 
-	from OrdenCompra inner join Estado on OrdenCompra.est_id = Estado.est_id
-	where oc_id = @@oc_id
+  select OrdenCompra.est_id,est_nombre 
+  from OrdenCompra inner join Estado on OrdenCompra.est_id = Estado.est_id
+  where oc_id = @@oc_id
 
-	if @bFirmar <> 0 	exec sp_HistoriaUpdate 17004, @@oc_id, @@us_id, 9
-	else           		exec sp_HistoriaUpdate 17004, @@oc_id, @@us_id, 10
+  if @bFirmar <> 0   exec sp_HistoriaUpdate 17004, @@oc_id, @@us_id, 9
+  else               exec sp_HistoriaUpdate 17004, @@oc_id, @@us_id, 10
 
 end

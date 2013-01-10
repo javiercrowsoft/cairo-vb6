@@ -7,29 +7,29 @@ drop procedure [dbo].[sp_retencionDelete]
 
 go
 create procedure sp_retencionDelete (
-	@@ret_id 				int
+  @@ret_id         int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete RetencionItem where ret_id = @@ret_id
-	if @@error <> 0 goto ControlError
+  delete RetencionItem where ret_id = @@ret_id
+  if @@error <> 0 goto ControlError
 
-	delete Retencion where ret_id = @@ret_id
-	if @@error <> 0 goto ControlError
+  delete Retencion where ret_id = @@ret_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la retencion. sp_retencionDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la retencion. sp_retencionDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

@@ -14,8 +14,8 @@ drop procedure [dbo].[DC_CSC_ENV_0020]
 
 go
 create procedure DC_CSC_ENV_0020 (
-	@@us_id       int,
-	@@lgj_id			int
+  @@us_id       int,
+  @@lgj_id      int
 )as 
 
 begin

@@ -9,8 +9,8 @@ go
 
 create procedure sp_AuditoriaStockValidateDocRS (
 
-	@@rs_id       int,
-	@@aud_id 			int
+  @@rs_id       int,
+  @@aud_id       int
 
 )
 as
@@ -19,12 +19,12 @@ begin
 
   set nocount on
 
-	declare @st_id1 int
-	declare @st_id2 int
+  declare @st_id1 int
+  declare @st_id2 int
 
-	select @st_id1 = st_id1, @st_id2 = st_id2 from RecuentoStock where rs_id = @@rs_id
+  select @st_id1 = st_id1, @st_id2 = st_id2 from RecuentoStock where rs_id = @@rs_id
 
-	exec sp_AuditoriaStockValidateDocRS2 @@rs_id, @@aud_id, @st_id1
-	exec sp_AuditoriaStockValidateDocRS2 @@rs_id, @@aud_id, @st_id2
+  exec sp_AuditoriaStockValidateDocRS2 @@rs_id, @@aud_id, @st_id1
+  exec sp_AuditoriaStockValidateDocRS2 @@rs_id, @@aud_id, @st_id2
 end
 go

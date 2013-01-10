@@ -3,9 +3,9 @@ drop table [dbo].[OrdenCompraItem]
 GO
 
 CREATE TABLE [dbo].[OrdenCompraItem] (
-	[oci_id] [int] NOT NULL ,
-	[oc_id] [int] NOT NULL ,
-	[pr_id] [int] NOT NULL 
+  [oci_id] [int] NOT NULL ,
+  [oc_id] [int] NOT NULL ,
+  [pr_id] [int] NOT NULL 
 ) ON [PRIMARY]
 GO
 

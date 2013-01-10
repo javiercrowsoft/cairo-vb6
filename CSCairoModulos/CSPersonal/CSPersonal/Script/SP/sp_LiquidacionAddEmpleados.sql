@@ -12,62 +12,62 @@ sp_LiquidacionAddEmpleados '0',3,0
 
 */
 create procedure sp_LiquidacionAddEmpleados (
-	@@em_id  varchar(255)
+  @@em_id  varchar(255)
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	----------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
 
-	declare @em_id int
-	declare @ram_id_Empleado int
-	
-	declare @clienteID int
-	declare @IsRaiz    tinyint
-	
-	exec sp_ArbConvertId @@em_id, 			@em_id out, 			@ram_id_Empleado out
-	
-	exec sp_GetRptId @clienteID out
+  declare @em_id int
+  declare @ram_id_Empleado int
+  
+  declare @clienteID int
+  declare @IsRaiz    tinyint
+  
+  exec sp_ArbConvertId @@em_id,       @em_id out,       @ram_id_Empleado out
+  
+  exec sp_GetRptId @clienteID out
 
-	if @ram_id_Empleado <> 0 begin
-	
-		-- exec sp_ArbGetGroups @ram_id_Empleado, @clienteID, @@us_id
-	
-		exec sp_ArbIsRaiz @ram_id_Empleado, @IsRaiz out
-	  if @IsRaiz = 0 begin
-			exec sp_ArbGetAllHojas @ram_id_Empleado, @clienteID 
-		end else 
-			set @ram_id_Empleado = 0
-	end
+  if @ram_id_Empleado <> 0 begin
+  
+    -- exec sp_ArbGetGroups @ram_id_Empleado, @clienteID, @@us_id
+  
+    exec sp_ArbIsRaiz @ram_id_Empleado, @IsRaiz out
+    if @IsRaiz = 0 begin
+      exec sp_ArbGetAllHojas @ram_id_Empleado, @clienteID 
+    end else 
+      set @ram_id_Empleado = 0
+  end
 
-	----------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
 
 
-	----------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
 
-	select 	distinct 
-					em.em_id,
-					em_apellido + ', ' + em_nombre as em_nombre
+  select   distinct 
+          em.em_id,
+          em_apellido + ', ' + em_nombre as em_nombre
 
-	from Empleado em 
+  from Empleado em 
 
-	where (em.em_id = @em_id or @em_id = 0)
-		and (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 35005
-	                  and  rptarb_hojaid = em.em_id
-								   ) 
-	           )
-	        or 
-						 (@ram_id_Empleado = 0)
-				 )
+  where (em.em_id = @em_id or @em_id = 0)
+    and (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 35005
+                    and  rptarb_hojaid = em.em_id
+                   ) 
+             )
+          or 
+             (@ram_id_Empleado = 0)
+         )
 
-	order by 2
+  order by 2
 
 end
 

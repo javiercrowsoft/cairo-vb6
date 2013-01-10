@@ -12,10 +12,10 @@ sp_srv_cvxi_articulocheckstock 1, 'HORA230','UPS Atomlux 500 220v 5 salidas c/so
 
 create procedure sp_srv_cvxi_articulocheckstock (
 
-	@@cmi_id           	 int,
-	@@articuloid		 		 varchar(255),
-	@@articulo           varchar(1000),
-	@@disponible 	       decimal(18,6)
+  @@cmi_id              int,
+  @@articuloid          varchar(255),
+  @@articulo           varchar(1000),
+  @@disponible          decimal(18,6)
 
 )
 
@@ -23,59 +23,59 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @pr_id int
+  declare @pr_id int
 
-	select @pr_id = min(pr_id)
-	from ComunidadInternetProducto
-	where cmipr_codigo = @@articuloid
-			and cmi_id = @@cmi_id
+  select @pr_id = min(pr_id)
+  from ComunidadInternetProducto
+  where cmipr_codigo = @@articuloid
+      and cmi_id = @@cmi_id
 
-	if @pr_id is null begin
+  if @pr_id is null begin
 
-		select @pr_id = min(pr_id)
-		from ProductoComunidadInternet
-		where prcmi_codigo = @@articuloid
-			and cmi_id = @@cmi_id
+    select @pr_id = min(pr_id)
+    from ProductoComunidadInternet
+    where prcmi_codigo = @@articuloid
+      and cmi_id = @@cmi_id
 
-	end
+  end
 
-	if @pr_id is not null begin
+  if @pr_id is not null begin
 
-		declare @depl_id int
-	
-		select @depl_id = depl_id
-		from ComunidadInternet
-		where cmi_id = @@cmi_id
-	
-		if @depl_id is not null begin
-	
-			declare @reposicion decimal(18,6)
+    declare @depl_id int
+  
+    select @depl_id = depl_id
+    from ComunidadInternet
+    where cmi_id = @@cmi_id
+  
+    if @depl_id is not null begin
+  
+      declare @reposicion decimal(18,6)
 
-			select @reposicion = prdepl_reposicion  
-			from ProductoDepositoLogico 
-			where pr_id = @pr_id 
-				and depl_id = @depl_id 
+      select @reposicion = prdepl_reposicion  
+      from ProductoDepositoLogico 
+      where pr_id = @pr_id 
+        and depl_id = @depl_id 
 
-			if @reposicion >= @@disponible begin
+      if @reposicion >= @@disponible begin
 
-				select '<table><tr><td colspan=2>El articulo <b>' + @@articuloid + '</b> ha alcanzado su punto de reposición<br/>' 
-							 + '<tr><td colspan=2>' + @@articulo
-							 + '<tr><td>Reposicion: </td><td align="right">' + convert(varchar,convert(decimal(18,2),@reposicion))
-							 + '</td></tr><tr><td>Disponible: </td><td align="right">' + convert(varchar,convert(decimal(18,2),@@disponible))
-							 + '</td></tr></table><br />'
-								as msg
+        select '<table><tr><td colspan=2>El articulo <b>' + @@articuloid + '</b> ha alcanzado su punto de reposición<br/>' 
+               + '<tr><td colspan=2>' + @@articulo
+               + '<tr><td>Reposicion: </td><td align="right">' + convert(varchar,convert(decimal(18,2),@reposicion))
+               + '</td></tr><tr><td>Disponible: </td><td align="right">' + convert(varchar,convert(decimal(18,2),@@disponible))
+               + '</td></tr></table><br />'
+                as msg
 
-			end
-	
-		end
+      end
+  
+    end
 
-	end else begin
+  end else begin
 
-		select '<p><font color=red>El articulo <b>' + @@articuloid + '</b> aun no esta vinculado a un producto del sistema</font></p>' as msg
+    select '<p><font color=red>El articulo <b>' + @@articuloid + '</b> aun no esta vinculado a un producto del sistema</font></p>' as msg
 
-	end
+  end
 
 end
 

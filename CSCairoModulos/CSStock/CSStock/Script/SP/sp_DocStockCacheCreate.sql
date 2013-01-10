@@ -11,59 +11,59 @@ select * from stockcache
 
 go
 create procedure sp_DocStockCacheCreate (
-	@@pr_id int = 0,
+  @@pr_id int = 0,
   @@st_id int = 0
 )
 as
 
 begin
 
-	declare @MsgError  					varchar(5000) set @MsgError = ''
+  declare @MsgError            varchar(5000) set @MsgError = ''
 
-	set nocount on
+  set nocount on
 
   if @@st_id <> 0 begin
 
-  	begin transaction
+    begin transaction
   
-  	delete StockCache where exists(select pr_id from StockItem where st_id = @@st_id and pr_id = StockCache.pr_id)
+    delete StockCache where exists(select pr_id from StockItem where st_id = @@st_id and pr_id = StockCache.pr_id)
 
-  	insert into StockCache(
-  													stc_cantidad,
-  													pr_id,
-  													depl_id,
-  													prns_id,
-  													pr_id_kit,
-														stl_id
-  												)
-  								select
-  													sum(sti_ingreso) - sum(sti_salida),
-  													s.pr_id,
-  													depl_id,
-  													prns_id,
-  													isnull(k.pr_id,pr_id_kit),
-														s.stl_id
-  								from StockItem s left join StockItemKit k on s.stik_id = k.stik_id
-  								where s.st_id = @@st_id
-  									and (depl_id <> -2 and depl_id <> -3) -- Los depositos internos no importan
-  								group by
-  													s.pr_id,
-  													depl_id,
-  													prns_id,
-  													isnull(k.pr_id,pr_id_kit),
-														s.stl_id
+    insert into StockCache(
+                            stc_cantidad,
+                            pr_id,
+                            depl_id,
+                            prns_id,
+                            pr_id_kit,
+                            stl_id
+                          )
+                  select
+                            sum(sti_ingreso) - sum(sti_salida),
+                            s.pr_id,
+                            depl_id,
+                            prns_id,
+                            isnull(k.pr_id,pr_id_kit),
+                            s.stl_id
+                  from StockItem s left join StockItemKit k on s.stik_id = k.stik_id
+                  where s.st_id = @@st_id
+                    and (depl_id <> -2 and depl_id <> -3) -- Los depositos internos no importan
+                  group by
+                            s.pr_id,
+                            depl_id,
+                            prns_id,
+                            isnull(k.pr_id,pr_id_kit),
+                            s.stl_id
     commit transaction
 
   end
-	
+  
 
-	return
+  return
 ControlError:
 
-	set @MsgError = 'Ha ocurrido un error al crear el cache de stock. sp_DocStockCacheCreate. ' + IsNull(@MsgError,'')
-	raiserror (@MsgError, 16, 1)
+  set @MsgError = 'Ha ocurrido un error al crear el cache de stock. sp_DocStockCacheCreate. ' + IsNull(@MsgError,'')
+  raiserror (@MsgError, 16, 1)
 
-	if @@trancount > 0 begin
-		rollback transaction	
+  if @@trancount > 0 begin
+    rollback transaction  
   end
 end

@@ -10,25 +10,25 @@ sp_docStockClienteget 47
 sp_lsdoc_StocksCliente
 
   7,
-	'20030101',
-	'20050101',
-		'0',
-		'0',
-		'0',
-		'0'
+  '20030101',
+  '20050101',
+    '0',
+    '0',
+    '0',
+    '0'
 
 */
 
 create procedure sp_lsdoc_StocksCliente (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@cli_id  varchar(255),
-@@suc_id	varchar(255),
-@@doc_id	varchar(255),
-@@emp_id	varchar(255)
+@@suc_id  varchar(255),
+@@doc_id  varchar(255),
+@@emp_id  varchar(255)
 )as 
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -59,46 +59,46 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_Cliente <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Cliente, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Cliente, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Cliente, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Cliente, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Cliente, @clienteID 
-	end else 
-		set @ram_id_Cliente = 0
+    exec sp_ArbGetAllHojas @ram_id_Cliente, @clienteID 
+  end else 
+    set @ram_id_Cliente = 0
 end
 
 if @ram_id_Sucursal <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Sucursal, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Sucursal, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Sucursal, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Sucursal, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Sucursal, @clienteID 
-	end else 
-		set @ram_id_Sucursal = 0
+    exec sp_ArbGetAllHojas @ram_id_Sucursal, @clienteID 
+  end else 
+    set @ram_id_Sucursal = 0
 end
 
 if @ram_id_Documento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Documento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Documento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Documento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Documento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Documento, @clienteID 
-	end else 
-		set @ram_id_Documento = 0
+    exec sp_ArbGetAllHojas @ram_id_Documento, @clienteID 
+  end else 
+    set @ram_id_Documento = 0
 end
 
 if @ram_id_empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
-	end else 
-		set @ram_id_empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_empresa, @clienteID 
+  end else 
+    set @ram_id_empresa = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -110,31 +110,31 @@ FIN PRIMERA PARTE DE ARBOLES
 
 
 select 
-			stcli_id,
-			''									  as [TypeTask],
-			stcli_numero          as [Número],
-			stcli_nrodoc					as [Comprobante],
-			cli_nombre            as [Cliente],
-      doc_nombre					  as [Documento],
-			stcli_fecha					  as [Fecha],
+      stcli_id,
+      ''                    as [TypeTask],
+      stcli_numero          as [Número],
+      stcli_nrodoc          as [Comprobante],
+      cli_nombre            as [Cliente],
+      doc_nombre            as [Documento],
+      stcli_fecha            as [Fecha],
 
-      suc_nombre					  as [Sucursal],
-			emp_nombre            as [Empresa],
+      suc_nombre            as [Sucursal],
+      emp_nombre            as [Empresa],
 
-			StockCliente.Creado,
-			StockCliente.Modificado,
-			us_nombre             as [Modifico],
-			stcli_descrip				  as [Observaciones]
+      StockCliente.Creado,
+      StockCliente.Modificado,
+      us_nombre             as [Modifico],
+      stcli_descrip          as [Observaciones]
 from 
-			StockCliente   inner join documento     on StockCliente.doc_id   = documento.doc_id
-										 inner join empresa       on documento.emp_id      = empresa.emp_id
-										 inner join sucursal      on StockCliente.suc_id   = sucursal.suc_id
-	                   inner join cliente       on StockCliente.cli_id   = cliente.cli_id
-	                   inner join usuario       on StockCliente.modifico = usuario.us_id
+      StockCliente   inner join documento     on StockCliente.doc_id   = documento.doc_id
+                     inner join empresa       on documento.emp_id      = empresa.emp_id
+                     inner join sucursal      on StockCliente.suc_id   = sucursal.suc_id
+                     inner join cliente       on StockCliente.cli_id   = cliente.cli_id
+                     inner join usuario       on StockCliente.modifico = usuario.us_id
 where 
 
-				  @@Fini <= stcli_fecha
-			and	@@Ffin >= stcli_fecha 		
+          @@Fini <= stcli_fecha
+      and  @@Ffin >= stcli_fecha     
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -149,57 +149,57 @@ and   (Empresa.emp_id = @emp_id or @emp_id=0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 28 
                   and  rptarb_hojaid = Cliente.cli_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Cliente = 0)
-			 )
+           (@ram_id_Cliente = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1007 
                   and  rptarb_hojaid = Sucursal.suc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Sucursal = 0)
-			 )
+           (@ram_id_Sucursal = 0)
+       )
 
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 4001 
                   and  rptarb_hojaid = Documento.doc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Documento = 0)
-			 )
+           (@ram_id_Documento = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 
                   and  rptarb_hojaid = Empresa.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_empresa = 0)
-			 )
+           (@ram_id_empresa = 0)
+       )
 
-	order by stcli_fecha
+  order by stcli_fecha
 go

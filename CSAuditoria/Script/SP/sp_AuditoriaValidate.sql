@@ -31,45 +31,45 @@ begin
 
   set nocount on
 
-	declare @aud_id 			int
-	declare @aud_fecha    datetime
+  declare @aud_id       int
+  declare @aud_fecha    datetime
 
-	select @aud_fecha = aud_fecha from Auditoria where aud_id = (select max(aud_id) from Auditoria where aud_fin > '19000101')
+  select @aud_fecha = aud_fecha from Auditoria where aud_id = (select max(aud_id) from Auditoria where aud_fin > '19000101')
 
-	set @aud_fecha = IsNull(@aud_fecha, '19000101')
+  set @aud_fecha = IsNull(@aud_fecha, '19000101')
 
-	exec sp_dbgetnewid 'Auditoria','aud_id', @aud_id out,0
-	if @@error <> 0 goto ControlError	
+  exec sp_dbgetnewid 'Auditoria','aud_id', @aud_id out,0
+  if @@error <> 0 goto ControlError  
 
-	insert into Auditoria (aud_id) values (@aud_id)
+  insert into Auditoria (aud_id) values (@aud_id)
 
-	-- 1 - Control de documentos que mueven stock	
+  -- 1 - Control de documentos que mueven stock  
 
-	exec sp_AuditoriaStockValidate @aud_id, @aud_fecha
+  exec sp_AuditoriaStockValidate @aud_id, @aud_fecha
 /*
-	-- 2 - Control de vencimientos FC y FV
-	
-	exec sp_AuditoriaVtoValidate @aud_id, @aud_fecha
-	
-	-- 3 - Control de estado y pendientes
+  -- 2 - Control de vencimientos FC y FV
+  
+  exec sp_AuditoriaVtoValidate @aud_id, @aud_fecha
+  
+  -- 3 - Control de estado y pendientes
 
-	exec sp_AuditoriaEstadoValidate @aud_id, @aud_fecha
-	
-	-- 4 - Control de cache de credito
+  exec sp_AuditoriaEstadoValidate @aud_id, @aud_fecha
+  
+  -- 4 - Control de cache de credito
 
-	exec sp_AuditoriaCreditoValidate @aud_id, @aud_fecha
-	
-	-- 5 - Control de fechas fuera de rango (anteriores a 2003 o posteriores a GetDate())
+  exec sp_AuditoriaCreditoValidate @aud_id, @aud_fecha
+  
+  -- 5 - Control de fechas fuera de rango (anteriores a 2003 o posteriores a GetDate())
 
---	exec sp_AuditoriaFechasValidate @aud_id, @aud_fecha
+--  exec sp_AuditoriaFechasValidate @aud_id, @aud_fecha
 
-	-- 6 - Control de totales en items y headers
+  -- 6 - Control de totales en items y headers
 
-	exec sp_AuditoriaTotalesValidate @aud_id, @aud_fecha
+  exec sp_AuditoriaTotalesValidate @aud_id, @aud_fecha
 */
-	-- Fin del proceso
+  -- Fin del proceso
 
-	update Auditoria set aud_fin = getdate() where aud_id = @aud_id
+  update Auditoria set aud_fin = getdate() where aud_id = @aud_id
 
 ControlError:
 

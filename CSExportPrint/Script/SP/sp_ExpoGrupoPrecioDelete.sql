@@ -14,35 +14,35 @@ sp_tables '%cliente%'
 
 go
 create procedure sp_ExpoGrupoPrecioDelete (
-	@@egp_id 		int
+  @@egp_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete ExpoGrupoPrecioIdioma where egp_id = @@egp_id
-	if @@error <> 0 goto ControlError
+  delete ExpoGrupoPrecioIdioma where egp_id = @@egp_id
+  if @@error <> 0 goto ControlError
 
-	delete ExpoGrupoPrecioPosAran where egp_id = @@egp_id
-	if @@error <> 0 goto ControlError
+  delete ExpoGrupoPrecioPosAran where egp_id = @@egp_id
+  if @@error <> 0 goto ControlError
 
-	update producto set egp_id = null where egp_id = @@egp_id
-	if @@error <> 0 goto ControlError
+  update producto set egp_id = null where egp_id = @@egp_id
+  if @@error <> 0 goto ControlError
 
-	delete ExpoGrupoPrecio where egp_id = @@egp_id
-	if @@error <> 0 goto ControlError
+  delete ExpoGrupoPrecio where egp_id = @@egp_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el grupo de precios de exportación. sp_ExpoGrupoPrecioDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el grupo de precios de exportación. sp_ExpoGrupoPrecioDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

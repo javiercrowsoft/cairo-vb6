@@ -17,13 +17,13 @@ create procedure DC_CSC_STK_0240 (
 begin
 set nocount on
 
-	select 	pr_id,
-					'['+substring(pr_codigobarra,2,10)+']' as [Codigo Homologación], 
-					pr_nombrecompra 							 as Producto
-	
-	from producto where pr_codigobarra<>''
-	
-	order by 2
+  select   pr_id,
+          '['+substring(pr_codigobarra,2,10)+']' as [Codigo Homologación], 
+          pr_nombrecompra                as Producto
+  
+  from producto where pr_codigobarra<>''
+  
+  order by 2
 
 end
 GO

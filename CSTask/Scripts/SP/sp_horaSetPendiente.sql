@@ -12,25 +12,25 @@ drop procedure [dbo].[sp_horaSetPendiente]
 
 go
 create procedure sp_horaSetPendiente (
-	@@hora_id 		int,
+  @@hora_id     int,
   @@bSuccess    tinyint = 0 out
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @hora_pendiente decimal(18,6)
-	declare @aplicado 			decimal(18,6)
+  declare @hora_pendiente decimal(18,6)
+  declare @aplicado       decimal(18,6)
 
-	select @hora_pendiente = hora_horas + convert(decimal(18,6),hora_minutos)/60
-	from hora where hora_id = @@hora_id
-	
-	select @aplicado = sum(horafv_cantidad) from HoraFacturaVenta where hora_id = @@hora_id
+  select @hora_pendiente = hora_horas + convert(decimal(18,6),hora_minutos)/60
+  from hora where hora_id = @@hora_id
+  
+  select @aplicado = sum(horafv_cantidad) from HoraFacturaVenta where hora_id = @@hora_id
 
-	update hora set hora_pendiente = @hora_pendiente - IsNull(@aplicado,0) where hora_id = @@hora_id
-	set @@bSuccess = 1
+  update hora set hora_pendiente = @hora_pendiente - IsNull(@aplicado,0) where hora_id = @@hora_id
+  set @@bSuccess = 1
 
 end
 go

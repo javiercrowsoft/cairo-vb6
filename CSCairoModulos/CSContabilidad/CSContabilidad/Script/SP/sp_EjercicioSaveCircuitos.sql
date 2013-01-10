@@ -6,56 +6,56 @@ drop procedure [dbo].[sp_EjercicioSaveCircuitos]
 go
 create procedure sp_EjercicioSaveCircuitos (
 
-	@@ejc_id 				int
+  @@ejc_id         int
 
 )as 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @@cico_id									varchar(50)
-	declare @cico_id									int
-	declare @ram_id_circuitocontable 	int
+  declare @@cico_id                  varchar(50)
+  declare @cico_id                  int
+  declare @ram_id_circuitocontable   int
 
-	select 	@@cico_id = cico_id
+  select   @@cico_id = cico_id
 
-	from EjercicioContable
+  from EjercicioContable
 
-	where ejc_id = @@ejc_id
+  where ejc_id = @@ejc_id
 
-	declare @clienteID 				int	
-	declare @IsRaiz    				tinyint
+  declare @clienteID         int  
+  declare @IsRaiz            tinyint
 
-	exec sp_GetRptId @clienteID out
+  exec sp_GetRptId @clienteID out
 
-	exec sp_ArbConvertId @@cico_id, @cico_id out, @ram_id_circuitocontable out
-	
-	if @ram_id_circuitocontable <> 0 begin
-	
-	--	exec sp_ArbGetGroups @ram_id_circuitocontable, @clienteID, @@us_id
-	
-		exec sp_ArbIsRaiz @ram_id_circuitocontable, @IsRaiz out
-	  if @IsRaiz = 0 begin
-			exec sp_ArbGetAllHojas @ram_id_circuitocontable, @clienteID 
-		end else 
-			set @ram_id_circuitocontable = 0
-	end
+  exec sp_ArbConvertId @@cico_id, @cico_id out, @ram_id_circuitocontable out
+  
+  if @ram_id_circuitocontable <> 0 begin
+  
+  --  exec sp_ArbGetGroups @ram_id_circuitocontable, @clienteID, @@us_id
+  
+    exec sp_ArbIsRaiz @ram_id_circuitocontable, @IsRaiz out
+    if @IsRaiz = 0 begin
+      exec sp_ArbGetAllHojas @ram_id_circuitocontable, @clienteID 
+    end else 
+      set @ram_id_circuitocontable = 0
+  end
 
-	delete EjercicioContableCircuitoContable where ejc_id = @@ejc_id
+  delete EjercicioContableCircuitoContable where ejc_id = @@ejc_id
 
-	if @cico_id <> 0 begin
+  if @cico_id <> 0 begin
 
-		insert into EjercicioContableCircuitoContable (ejc_id, cico_id) values(@@ejc_id, @cico_id)
+    insert into EjercicioContableCircuitoContable (ejc_id, cico_id) values(@@ejc_id, @cico_id)
 
-	end else begin
+  end else begin
 
-		insert into EjercicioContableCircuitoContable (ejc_id, cico_id) 
-		select @@ejc_id, rptarb_hojaid
-		from rptArbolRamaHoja 
-		where rptarb_cliente = @clienteID 
-			and tbl_id = 1016 
+    insert into EjercicioContableCircuitoContable (ejc_id, cico_id) 
+    select @@ejc_id, rptarb_hojaid
+    from rptArbolRamaHoja 
+    where rptarb_cliente = @clienteID 
+      and tbl_id = 1016 
 
-	end
-	
+  end
+  
 end
 go

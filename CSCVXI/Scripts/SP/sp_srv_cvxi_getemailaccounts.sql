@@ -4,13 +4,13 @@ drop procedure [dbo].[sp_srv_cvxi_getemailaccounts]
 go
 /*
 
-	update producto set modificado = getdate() where exists (select * from CatalogoWebItem where pr_id = producto.pr_id and catw_id = 3)
+  update producto set modificado = getdate() where exists (select * from CatalogoWebItem where pr_id = producto.pr_id and catw_id = 3)
 
-	update producto set modificado = getdate() where pr_codigo = 'q2612a'
+  update producto set modificado = getdate() where pr_codigo = 'q2612a'
 
-	select pr_activoweb from producto where pr_codigo = '08668'
+  select pr_activoweb from producto where pr_codigo = '08668'
 
-	exec sp_srv_cvxi_getemailaccounts 3
+  exec sp_srv_cvxi_getemailaccounts 3
 
 sp_srv_cvxi_getemailaccounts 3
 
@@ -22,8 +22,8 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select * from ComunidadInternetEmailAccount
+  select * from ComunidadInternetEmailAccount
 
 end

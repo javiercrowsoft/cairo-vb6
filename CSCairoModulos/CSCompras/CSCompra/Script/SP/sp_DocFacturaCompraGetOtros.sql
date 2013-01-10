@@ -9,21 +9,21 @@ sp_DocFacturaCompraGetOtros 1
 
 */
 create procedure sp_DocFacturaCompraGetOtros (
-	@@fc_id int
+  @@fc_id int
 )
 as
 
 begin
 
-	select 	FacturaCompraOtro.*, 
-					cue_nombre, 
+  select   FacturaCompraOtro.*, 
+          cue_nombre, 
           ccos_nombre
 
-	from 	FacturaCompraOtro
-				inner join Cuenta   							on FacturaCompraOtro.cue_id = Cuenta.cue_id
-        left join centrocosto as ccos 		on FacturaCompraOtro.ccos_id = ccos.ccos_id
-	where 
-			fc_id = @@fc_id
+  from   FacturaCompraOtro
+        inner join Cuenta                 on FacturaCompraOtro.cue_id = Cuenta.cue_id
+        left join centrocosto as ccos     on FacturaCompraOtro.ccos_id = ccos.ccos_id
+  where 
+      fc_id = @@fc_id
 
-	order by fcot_orden
+  order by fcot_orden
 end

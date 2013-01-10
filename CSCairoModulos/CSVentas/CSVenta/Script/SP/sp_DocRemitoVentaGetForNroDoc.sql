@@ -7,19 +7,19 @@ sp_DocRemitoVentaGetForNroDoc '454545',1
 */
 
 create procedure sp_DocRemitoVentaGetForNroDoc (
-	@@rv_nrodoc		varchar(50),
+  @@rv_nrodoc    varchar(50),
   @@emp_id      int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select rv_nrodoc,cli_nombre,doc_nombre,rv_fecha 
-	from RemitoVenta rv inner join cliente cli 	 on rv.cli_id = cli.cli_id
-											inner join documento doc on rv.doc_id = doc.doc_id
+  select rv_nrodoc,cli_nombre,doc_nombre,rv_fecha 
+  from RemitoVenta rv inner join cliente cli    on rv.cli_id = cli.cli_id
+                      inner join documento doc on rv.doc_id = doc.doc_id
 
-	where rv_nrodoc = @@rv_nrodoc and rv.emp_id = @@emp_id
+  where rv_nrodoc = @@rv_nrodoc and rv.emp_id = @@emp_id
 
 end

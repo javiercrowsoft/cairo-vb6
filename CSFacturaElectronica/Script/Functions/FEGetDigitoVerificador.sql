@@ -56,50 +56,50 @@ begin
     012345678905
 */
 
-	declare @sumImpar int
-	declare @sumPar int
-	declare @n int
+  declare @sumImpar int
+  declare @sumPar int
+  declare @n int
 
-	set @sumImpar = 0
-	set @sumPar = 0
+  set @sumImpar = 0
+  set @sumPar = 0
 
-	set @n = 1
+  set @n = 1
 
-	--Etapa 1: Comenzar desde la izquierda, sumar todos los caracteres ubicados en las posiciones impares.
+  --Etapa 1: Comenzar desde la izquierda, sumar todos los caracteres ubicados en las posiciones impares.
 
-	while @n <= len(@@codigo_barra)
-	begin
+  while @n <= len(@@codigo_barra)
+  begin
 
-		set @sumImpar = @sumImpar + convert(int,substring(@@codigo_barra,@n,1))
+    set @sumImpar = @sumImpar + convert(int,substring(@@codigo_barra,@n,1))
 
-		set @n = @n + 2
-	end
+    set @n = @n + 2
+  end
 
-	--Etapa 2: Multiplicar la suma obtenida en la etapa 1 por el número 3.
+  --Etapa 2: Multiplicar la suma obtenida en la etapa 1 por el número 3.
 
-	set @sumImpar = @sumImpar * 3
+  set @sumImpar = @sumImpar * 3
 
-	--Etapa 3: Comenzar desde la izquierda, sumar todos los caracteres que están ubicados en las posiciones pares.
+  --Etapa 3: Comenzar desde la izquierda, sumar todos los caracteres que están ubicados en las posiciones pares.
 
-	set @n = 2
+  set @n = 2
 
-	while @n <= len(@@codigo_barra)
-	begin
+  while @n <= len(@@codigo_barra)
+  begin
 
-		set @sumPar = @sumPar + convert(int,substring(@@codigo_barra,@n,1))
+    set @sumPar = @sumPar + convert(int,substring(@@codigo_barra,@n,1))
 
-		set @n = @n + 2
-	end
+    set @n = @n + 2
+  end
 
-	--Etapa 4: Sumar los resultados obtenidos en las etapas 2 y 3.
+  --Etapa 4: Sumar los resultados obtenidos en las etapas 2 y 3.
 
-	set @n = @sumImpar + @sumPar
+  set @n = @sumImpar + @sumPar
 
-	set @n = 10 - (@n % 10)
+  set @n = 10 - (@n % 10)
 
-	--Etapa 5: Buscar el menor número que sumado al resultado obtenido en la etapa 4 dé un número múltiplo de 10. Este será el valor del dígito verificador del módulo 10.
+  --Etapa 5: Buscar el menor número que sumado al resultado obtenido en la etapa 4 dé un número múltiplo de 10. Este será el valor del dígito verificador del módulo 10.
 
-	return @n
+  return @n
 
 end
 

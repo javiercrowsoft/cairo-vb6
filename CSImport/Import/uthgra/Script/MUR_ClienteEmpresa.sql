@@ -19,34 +19,34 @@ begin
 
   set nocount on
 
-	declare @cli_id 			int
-	declare @emp_id 			int
-	declare @empcli_id    int
+  declare @cli_id       int
+  declare @emp_id       int
+  declare @empcli_id    int
 
-	set @emp_id = 1
+  set @emp_id = 1
 
-	declare c_cli insensitive cursor for 
-	select cli_id from cliente where not exists(select cli_id from EmpresaCliente where cli_id = cliente.cli_id)
-	
-	open c_cli
+  declare c_cli insensitive cursor for 
+  select cli_id from cliente where not exists(select cli_id from EmpresaCliente where cli_id = cliente.cli_id)
+  
+  open c_cli
 
-	fetch next from c_cli into @cli_id
-	while @@fetch_status = 0
-	begin
+  fetch next from c_cli into @cli_id
+  while @@fetch_status = 0
+  begin
 
     exec sp_dbgetnewid 'EmpresaCliente','empcli_id',@empcli_id out, 0
     insert into EmpresaCliente (empcli_id, cli_id, emp_id, modifico)
                               values(@empcli_id, @cli_id, @emp_id, 1)
 
-		fetch next from c_cli into @cli_id
-	end
+    fetch next from c_cli into @cli_id
+  end
 
-	close c_cli
-	deallocate c_cli
+  close c_cli
+  deallocate c_cli
 
-	update cliente set cli_nombre ='vacio' where cli_nombre = ''
+  update cliente set cli_nombre ='vacio' where cli_nombre = ''
 
-	exec MUR_ClienteCreateTree
+  exec MUR_ClienteCreateTree
 
 end
 

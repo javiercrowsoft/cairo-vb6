@@ -11,7 +11,7 @@ go
 -- sp_ProductoGetCMI  3
 
 create procedure sp_ProductoGetCMI  (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -20,14 +20,14 @@ set nocount on
 begin
 
 
-	select 
-					prcmi.*,
-					cmi_nombre
+  select 
+          prcmi.*,
+          cmi_nombre
 
-	from ProductoComunidadInternet prcmi 
-					inner join ComunidadInternet cmi on prcmi.cmi_id = cmi.cmi_id
+  from ProductoComunidadInternet prcmi 
+          inner join ComunidadInternet cmi on prcmi.cmi_id = cmi.cmi_id
 
-	where prcmi.pr_id = @@pr_id
+  where prcmi.pr_id = @@pr_id
 
 
 end

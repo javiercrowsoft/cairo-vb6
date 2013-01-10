@@ -1,10 +1,10 @@
 select  
-	fv_id,
-	doct_id,
-	fv_fecha,
-	fv_nrodoc,
-	fv_pendiente,
-	isnull((select sum(clicc_importe) from clientecachecredito where id = fv.fv_id and doct_id in (1,3,7)),0)
+  fv_id,
+  doct_id,
+  fv_fecha,
+  fv_nrodoc,
+  fv_pendiente,
+  isnull((select sum(clicc_importe) from clientecachecredito where id = fv.fv_id and doct_id in (1,3,7)),0)
 
 from facturaventa fv
 where 

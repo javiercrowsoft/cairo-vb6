@@ -12,7 +12,7 @@ drop procedure [dbo].[sp_DepartamentoGet]
 
 go
 create procedure sp_DepartamentoGet (
-	@@dpto_id 		int
+  @@dpto_id     int
 )
 as
 

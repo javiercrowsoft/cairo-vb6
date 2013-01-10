@@ -15,21 +15,21 @@ declare @ti_id int
 
 declare c_tiUpdate insensitive cursor for
 
-	select ti_id from inserted
+  select ti_id from inserted
 
 open c_tiUpdate
 
 fetch next from c_tiUpdate into @ti_id
 while @@fetch_status = 0
 begin
-	if @ti_id = -1 begin
-		update TasaImpositiva set ti_nombre = 'Auxiliar Responsable No Inscripto Ventas', ti_codigo = 'auxrniv' where ti_id = -1
-	end
-	if @ti_id = -2 begin
-		update TasaImpositiva set ti_nombre = 'Auxiliar Responsable No Inscripto Compras', ti_codigo = 'auxrnic' where ti_id = -2
-	end
+  if @ti_id = -1 begin
+    update TasaImpositiva set ti_nombre = 'Auxiliar Responsable No Inscripto Ventas', ti_codigo = 'auxrniv' where ti_id = -1
+  end
+  if @ti_id = -2 begin
+    update TasaImpositiva set ti_nombre = 'Auxiliar Responsable No Inscripto Compras', ti_codigo = 'auxrnic' where ti_id = -2
+  end
 
-	fetch next from c_tiUpdate into @ti_id
+  fetch next from c_tiUpdate into @ti_id
 end
 
 close c_tiUpdate

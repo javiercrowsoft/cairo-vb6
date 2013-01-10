@@ -12,8 +12,8 @@ drop procedure [dbo].[sp_clienteGetIva]
 
 go
 create procedure sp_clienteGetIva (
-	@@cli_id 		int,
-  @@bIvari		smallint = 0 out,
+  @@cli_id     int,
+  @@bIvari    smallint = 0 out,
   @@bIvarni   smallint = 0 out,
   @@bSelect   smallint = 1 
 )
@@ -21,7 +21,7 @@ as
 
 begin
 
-	set nocount on
+  set nocount on
   declare @tipoIva        smallint
   declare @cli_catfiscal  int
 
@@ -29,47 +29,47 @@ begin
   declare @bIvaRni        smallint  set @bIvaRni = -2
   declare @bSinIva        smallint  set @bSinIva = -3
 
-	select
+  select
          @tipoIva         = case cli_catfiscal
-															when 1  then @bIva       --'Inscripto'
-															when 2  then @bIva       -- FALTA VERIFICAR QUE SEA ASI --'Exento'
-															when 3  then @bIvaRni    --'No inscripto'
-															when 4  then @bIva       --'Consumidor Final'
-															when 5  then @bSinIva    --'Extranjero'
-															when 6  then @bIva       --'Mono Tributo'
-															when 7  then @bIva       --'Extranjero Iva'
-															when 8  then @bIva       --'No responsable'
-															when 9  then @bIva       -- FALTA VERIFICAR QUE SEA ASI --'No Responsable exento'
-															when 10 then @bIvaRni    --'No categorizado'
-															when 11 then @bIva       --'InscriptoM'
-											        else         0           --'Sin categorizar'
-													 end,
+                              when 1  then @bIva       --'Inscripto'
+                              when 2  then @bIva       -- FALTA VERIFICAR QUE SEA ASI --'Exento'
+                              when 3  then @bIvaRni    --'No inscripto'
+                              when 4  then @bIva       --'Consumidor Final'
+                              when 5  then @bSinIva    --'Extranjero'
+                              when 6  then @bIva       --'Mono Tributo'
+                              when 7  then @bIva       --'Extranjero Iva'
+                              when 8  then @bIva       --'No responsable'
+                              when 9  then @bIva       -- FALTA VERIFICAR QUE SEA ASI --'No Responsable exento'
+                              when 10 then @bIvaRni    --'No categorizado'
+                              when 11 then @bIva       --'InscriptoM'
+                              else         0           --'Sin categorizar'
+                           end,
         @cli_catfiscal    = cli_catfiscal
 
-	from Cliente
+  from Cliente
   where cli_id = @@cli_id
 
-	set @tipoIva = IsNull(@tipoIva,@bSinIva)
+  set @tipoIva = IsNull(@tipoIva,@bSinIva)
 
-	if @tipoIva = @bIva begin
-		set @bIva     = 1
+  if @tipoIva = @bIva begin
+    set @bIva     = 1
     set @bIvaRni  = 0
   end else begin
-		if @tipoIva = @bIvaRni begin
-			set @bIva     = 1
-	    set @bIvaRni  = 1
+    if @tipoIva = @bIvaRni begin
+      set @bIva     = 1
+      set @bIvaRni  = 1
     end else begin
-			if @tipoIva = @bSinIva begin
-				set @bIva     = 0
-		    set @bIvaRni  = 0
+      if @tipoIva = @bSinIva begin
+        set @bIva     = 0
+        set @bIvaRni  = 0
       end
     end
-	end
+  end
 
-	set @@bIvaRi  = @bIva
-	set @@bIvaRni = @bIvaRni
+  set @@bIvaRi  = @bIva
+  set @@bIvaRni = @bIvaRni
 
-	if @@bSelect <> 0 select @bIva as bIva, @bIvaRni as bIvaRni, @cli_catfiscal as cli_catfiscal
+  if @@bSelect <> 0 select @bIva as bIva, @bIvaRni as bIvaRni, @cli_catfiscal as cli_catfiscal
 
 end
 

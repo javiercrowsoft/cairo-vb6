@@ -20,66 +20,66 @@ sp_lsdoc_CAISs '@20030604,#@20030605,20-05392402-7#@20030620,20-06786179-6#@2003
 
 */
 create procedure sp_lsdoc_CAISs (
-  @@cuits	varchar(5000)
+  @@cuits  varchar(5000)
 )
 as
 
 set nocount on
 
 begin
-	create table #tmpCuits(
+  create table #tmpCuits(
 
-	  desde datetime,
-		cuit varchar (25) COLLATE SQL_Latin1_General_CP1_CI_AI NULL,
+    desde datetime,
+    cuit varchar (25) COLLATE SQL_Latin1_General_CP1_CI_AI NULL,
     nrodoc varchar (25) COLLATE SQL_Latin1_General_CP1_CI_AI NULL
-	)
+  )
 
-	declare @sqlstmt varchar(8000)
+  declare @sqlstmt varchar(8000)
 
   declare @n int
   declare @x int
-	declare @c varchar
+  declare @c varchar
 
-	set @x=0
-	while len(@@cuits)>0 begin
-		set @x = @x + 1
-	  set @sqlstmt = substring(@@cuits,1,2000)
-		set @c = substring(@sqlstmt,len(@sqlstmt),1)
+  set @x=0
+  while len(@@cuits)>0 begin
+    set @x = @x + 1
+    set @sqlstmt = substring(@@cuits,1,2000)
+    set @c = substring(@sqlstmt,len(@sqlstmt),1)
     set @n = 0
 
-		while @c <> '#' begin
-	    set @n = @n +1
-			set @c = substring(@sqlstmt,len(@sqlstmt)-@n,1)
-		end
+    while @c <> '#' begin
+      set @n = @n +1
+      set @c = substring(@sqlstmt,len(@sqlstmt)-@n,1)
+    end
 
-		set @sqlstmt = substring(@sqlstmt,1,len(@sqlstmt)-@n)
-		set @@cuits = substring(@@cuits,len(@sqlstmt)+1,len(@@cuits))
+    set @sqlstmt = substring(@sqlstmt,1,len(@sqlstmt)-@n)
+    set @@cuits = substring(@@cuits,len(@sqlstmt)+1,len(@@cuits))
 
-	  set @sqlstmt = replace(@sqlstmt,',', ''',''')
-	  set @sqlstmt = replace(@sqlstmt,'#', ''')'+char(10)+char(13))
-	  set @sqlstmt = replace(@sqlstmt,'@', 'insert #tmpCuits values(''') 
+    set @sqlstmt = replace(@sqlstmt,',', ''',''')
+    set @sqlstmt = replace(@sqlstmt,'#', ''')'+char(10)+char(13))
+    set @sqlstmt = replace(@sqlstmt,'@', 'insert #tmpCuits values(''') 
 
-		execute (@sqlstmt)
-		if @x >5 return
-	end
+    execute (@sqlstmt)
+    if @x >5 return
+  end
 
-	select proveedor.prov_id,
-				 TypeTask  = '',
-				 Nombre = prov_nombre,
+  select proveedor.prov_id,
+         TypeTask  = '',
+         Nombre = prov_nombre,
          CUIT   = proveedor.prov_cuit,
          Fecha  = max(#tmpCuits.desde),
          Comprobante = nrodoc,
          Cargado = 0,
          dummy=''
 
-	from proveedor, #tmpCuits, proveedorcai
+  from proveedor, #tmpCuits, proveedorcai
 
-	where proveedor.prov_cuit = #tmpCuits.cuit
+  where proveedor.prov_cuit = #tmpCuits.cuit
         and proveedor.prov_id *= proveedorcai.prov_id
 
-	group by proveedor.prov_id, proveedor.prov_nombre, proveedor.prov_cuit,nrodoc having max(isnull(provc_fechavto,'19900101'))<max(desde)
+  group by proveedor.prov_id, proveedor.prov_nombre, proveedor.prov_cuit,nrodoc having max(isnull(provc_fechavto,'19900101'))<max(desde)
 
-	order by Comprobante 
+  order by Comprobante 
 
 end
 GO

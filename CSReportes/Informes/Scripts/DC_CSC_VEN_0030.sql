@@ -7,10 +7,10 @@ drop procedure [dbo].[DC_CSC_VEN_0030]
 
 /*
 DC_CSC_VEN_0030 1,
-								'20010101',
-								'20100101',
-								'0',
-								'0',
+                '20010101',
+                '20100101',
+                '0',
+                '0',
                 '1'
 */
 
@@ -18,13 +18,13 @@ go
 create procedure DC_CSC_VEN_0030(
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
-	@@cico_id  				varchar(255),
-	@@pr_id 	 				varchar(255),
-  @@doc_id	 				varchar(255),
-  @@emp_id   				varchar(255)
+  @@cico_id          varchar(255),
+  @@pr_id            varchar(255),
+  @@doc_id           varchar(255),
+  @@emp_id           varchar(255)
 
 ) 
 
@@ -40,69 +40,69 @@ INICIO PRIMERA PARTE DE ARBOLES
 
 /////////////////////////////////////////////////////////////////////// */
 
-declare @pr_id 				int
-declare @emp_id   		int 
-declare @cico_id  		int
-declare @doc_id   		int
+declare @pr_id         int
+declare @emp_id       int 
+declare @cico_id      int
+declare @doc_id       int
 
-declare @ram_id_producto 				 int
-declare @ram_id_Empresa   			 int 
+declare @ram_id_producto          int
+declare @ram_id_Empresa          int 
 declare @ram_id_circuitoContable int
 declare @ram_id_documento        int
 
 declare @clienteID int
 declare @IsRaiz    tinyint
 
-exec sp_ArbConvertId @@pr_id, 			 @pr_id out, 				@ram_id_producto out
-exec sp_ArbConvertId @@doc_id,  		 @doc_id out,  			@ram_id_documento out
-exec sp_ArbConvertId @@emp_id, 			 @emp_id out, 			@ram_id_Empresa out 
-exec sp_ArbConvertId @@cico_id, 		 @cico_id out, 			@ram_id_circuitoContable out
+exec sp_ArbConvertId @@pr_id,        @pr_id out,         @ram_id_producto out
+exec sp_ArbConvertId @@doc_id,       @doc_id out,        @ram_id_documento out
+exec sp_ArbConvertId @@emp_id,        @emp_id out,       @ram_id_Empresa out 
+exec sp_ArbConvertId @@cico_id,      @cico_id out,       @ram_id_circuitoContable out
 
 exec sp_GetRptId @clienteID out
 
 if @ram_id_producto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_producto, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_producto, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_producto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_producto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_producto, @clienteID 
-	end else 
-		set @ram_id_producto = 0
+    exec sp_ArbGetAllHojas @ram_id_producto, @clienteID 
+  end else 
+    set @ram_id_producto = 0
 end
 
 
 if @ram_id_Empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
-	end else 
-		set @ram_id_Empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
+  end else 
+    set @ram_id_Empresa = 0
 end
 
 if @ram_id_circuitoContable <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_circuitoContable, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_circuitoContable, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_circuitoContable, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_circuitoContable, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_circuitoContable, @clienteID 
-	end else 
-		set @ram_id_circuitoContable = 0
+    exec sp_ArbGetAllHojas @ram_id_circuitoContable, @clienteID 
+  end else 
+    set @ram_id_circuitoContable = 0
 end
 
 if @ram_id_documento <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_documento, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_documento, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_documento, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_documento, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_documento, @clienteID 
-	end else 
-		set @ram_id_documento = 0
+    exec sp_ArbGetAllHojas @ram_id_documento, @clienteID 
+  end else 
+    set @ram_id_documento = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -115,318 +115,318 @@ FIN PRIMERA PARTE DE ARBOLES
 -- Entre fechas
 
 select 
-			1                                         as Orden,
-			pr_nombrecompra													  as producto,
+      1                                         as Orden,
+      pr_nombrecompra                            as producto,
 
-			sum(case doc.doct_id
+      sum(case doc.doct_id
         when 7  then -(fvi_neto
-														- (fvi_neto * fv_descuento1 / 100)
-														- (
-																(
-																	fvi_neto - (fvi_neto * fv_descuento1 / 100)
-																) * fv_descuento2 / 100
-															)
-													)
+                            - (fvi_neto * fv_descuento1 / 100)
+                            - (
+                                (
+                                  fvi_neto - (fvi_neto * fv_descuento1 / 100)
+                                ) * fv_descuento2 / 100
+                              )
+                          )
         else          (fvi_neto
-														- (fvi_neto * fv_descuento1 / 100)
-														- (
-																(
-																	fvi_neto - (fvi_neto * fv_descuento1 / 100)
-																) * fv_descuento2 / 100
-															)
-													)
+                            - (fvi_neto * fv_descuento1 / 100)
+                            - (
+                                (
+                                  fvi_neto - (fvi_neto * fv_descuento1 / 100)
+                                ) * fv_descuento2 / 100
+                              )
+                          )
       end
-					)  				             			  				as [ventas neto],
+          )                                       as [ventas neto],
 
-			sum(case doc.doct_id
+      sum(case doc.doct_id
         when 7  then -(fvi_importe
-														- (fvi_importe * fv_descuento1 / 100)
-														- (
-																(
-																	fvi_importe - (fvi_importe * fv_descuento1 / 100)
-																) * fv_descuento2 / 100
-															)
-													)
+                            - (fvi_importe * fv_descuento1 / 100)
+                            - (
+                                (
+                                  fvi_importe - (fvi_importe * fv_descuento1 / 100)
+                                ) * fv_descuento2 / 100
+                              )
+                          )
         else          (fvi_importe
-														- (fvi_importe * fv_descuento1 / 100)
-														- (
-																(
-																	fvi_importe - (fvi_importe * fv_descuento1 / 100)
-																) * fv_descuento2 / 100
-															)
-													)
+                            - (fvi_importe * fv_descuento1 / 100)
+                            - (
+                                (
+                                  fvi_importe - (fvi_importe * fv_descuento1 / 100)
+                                ) * fv_descuento2 / 100
+                              )
+                          )
       end
-					)  				             			  				as ventas,
+          )                                       as ventas,
 
-			0                                         as [compras neto],
-			0                           			  			as compras,
+      0                                         as [compras neto],
+      0                                         as compras,
 
-			sum(case doc.doct_id
+      sum(case doc.doct_id
         when 7  then -((fvi_ivari+fvi_ivarni)
-														- ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
-														- (
-																(
-																	(fvi_ivari+fvi_ivarni) - ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
-																) * fv_descuento2 / 100
-															)
-													)
+                            - ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
+                            - (
+                                (
+                                  (fvi_ivari+fvi_ivarni) - ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
+                                ) * fv_descuento2 / 100
+                              )
+                          )
         else         ((fvi_ivari+fvi_ivarni)
-														- ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
-														- (
-																(
-																	(fvi_ivari+fvi_ivarni) - ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
-																) * fv_descuento2 / 100
-															)
-												)
-			end
-					)	 														  			as ivaventas,
+                            - ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
+                            - (
+                                (
+                                  (fvi_ivari+fvi_ivarni) - ((fvi_ivari+fvi_ivarni) * fv_descuento1 / 100)
+                                ) * fv_descuento2 / 100
+                              )
+                        )
+      end
+          )                                       as ivaventas,
 
-			0                               	  			as ivacompras,
-	  	sum(case doc.doct_id
-	        	when 7  then -fvi_cantidad
-	        	else          fvi_cantidad
-	      	end
-					)			                         				as [cant. ventas],
-			0									                        as [cant. compras]
+      0                                         as ivacompras,
+      sum(case doc.doct_id
+            when 7  then -fvi_cantidad
+            else          fvi_cantidad
+          end
+          )                                       as [cant. ventas],
+      0                                          as [cant. compras]
 
 from
 
-			Producto pr inner join FacturaVentaItem fvi		 on pr.pr_id 		 = fvi.pr_id
-									inner join FacturaVenta fv     		 on fvi.fv_id  	 = fv.fv_id
+      Producto pr inner join FacturaVentaItem fvi     on pr.pr_id      = fvi.pr_id
+                  inner join FacturaVenta fv          on fvi.fv_id     = fv.fv_id
                   inner join Documento doc           on fv.doc_id    = doc.doc_id
                   inner join Empresa emp             on doc.emp_id   = emp.emp_id 
 where 
 
-				  fv_fecha >= @@Fini
-			and	fv_fecha <= @@Ffin
+          fv_fecha >= @@Fini
+      and  fv_fecha <= @@Ffin
 
-			and fv.est_id <> 7 -- Todas menos anuladas
+      and fv.est_id <> 7 -- Todas menos anuladas
 
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 /* -///////////////////////////////////////////////////////////////////////
 
 INICIO SEGUNDA PARTE DE ARBOLES
 
 /////////////////////////////////////////////////////////////////////// */
 
-and   (fv.doc_id 		= @doc_id 	or @doc_id	=0)
-and   (pr.pr_id 		= @pr_id 		or @pr_id=0)
-and   (doc.cico_id 	= @cico_id  or @cico_id=0)
-and   (emp.emp_id 	= @emp_id 	or @emp_id=0) 
+and   (fv.doc_id     = @doc_id   or @doc_id  =0)
+and   (pr.pr_id     = @pr_id     or @pr_id=0)
+and   (doc.cico_id   = @cico_id  or @cico_id=0)
+and   (emp.emp_id   = @emp_id   or @emp_id=0) 
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 
                   and  rptarb_hojaid = fvi.pr_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_producto = 0)
-			 )
+           (@ram_id_producto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1016 
                   and  rptarb_hojaid = doc.cico_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_circuitoContable = 0)
-			 )
+           (@ram_id_circuitoContable = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
+           (@ram_id_Empresa = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 4001 
                   and  rptarb_hojaid = fv.doc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_documento = 0)
-			 )
+           (@ram_id_documento = 0)
+       )
 
 group by pr_nombrecompra
 
 union all
 
 select 
-			2                                         as Orden,
-			pr_nombrecompra													  as producto,
-			0							                            as [ventas neto],
-			0                									  			as ventas,
+      2                                         as Orden,
+      pr_nombrecompra                            as producto,
+      0                                          as [ventas neto],
+      0                                          as ventas,
 
-			sum(case doc.doct_id
+      sum(case doc.doct_id
         when 8  then -(fci_neto
-														- (fci_neto * fc_descuento1 / 100)
-														- (
-																(
-																	fci_neto - (fci_neto * fc_descuento1 / 100)
-																) * fc_descuento2 / 100
-															)
-													)
+                            - (fci_neto * fc_descuento1 / 100)
+                            - (
+                                (
+                                  fci_neto - (fci_neto * fc_descuento1 / 100)
+                                ) * fc_descuento2 / 100
+                              )
+                          )
         else          (fci_neto
-														- (fci_neto * fc_descuento1 / 100)
-														- (
-																(
-																	fci_neto - (fci_neto * fc_descuento1 / 100)
-																) * fc_descuento2 / 100
-															)
-													)
+                            - (fci_neto * fc_descuento1 / 100)
+                            - (
+                                (
+                                  fci_neto - (fci_neto * fc_descuento1 / 100)
+                                ) * fc_descuento2 / 100
+                              )
+                          )
       end
-					)  				             			  				as [compras neto],
+          )                                       as [compras neto],
 
-			sum(case doc.doct_id
+      sum(case doc.doct_id
         when 8  then -(fci_importe
-														- (fci_importe * fc_descuento1 / 100)
-														- (
-																(
-																	fci_importe - (fci_importe * fc_descuento1 / 100)
-																) * fc_descuento2 / 100
-															)
-													)
+                            - (fci_importe * fc_descuento1 / 100)
+                            - (
+                                (
+                                  fci_importe - (fci_importe * fc_descuento1 / 100)
+                                ) * fc_descuento2 / 100
+                              )
+                          )
         else          (fci_importe
-														- (fci_importe * fc_descuento1 / 100)
-														- (
-																(
-																	fci_importe - (fci_importe * fc_descuento1 / 100)
-																) * fc_descuento2 / 100
-															)
-													)
+                            - (fci_importe * fc_descuento1 / 100)
+                            - (
+                                (
+                                  fci_importe - (fci_importe * fc_descuento1 / 100)
+                                ) * fc_descuento2 / 100
+                              )
+                          )
       end
-					)  				             			  				as compras,
+          )                                       as compras,
 
-			0                              		  			as ivaventas,
+      0                                          as ivaventas,
 
-			sum(case doc.doct_id
+      sum(case doc.doct_id
         when 8  then -((fci_ivari+fci_ivarni)
-														- ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
-														- (
-																(
-																	(fci_ivari+fci_ivarni) - ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
-																) * fc_descuento2 / 100
-															)
-													)
+                            - ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
+                            - (
+                                (
+                                  (fci_ivari+fci_ivarni) - ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
+                                ) * fc_descuento2 / 100
+                              )
+                          )
         else         ((fci_ivari+fci_ivarni)
-														- ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
-														- (
-																(
-																	(fci_ivari+fci_ivarni) - ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
-																) * fc_descuento2 / 100
-															)
-												)
-			end
-					)	 														  			as ivacompras,
+                            - ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
+                            - (
+                                (
+                                  (fci_ivari+fci_ivarni) - ((fci_ivari+fci_ivarni) * fc_descuento1 / 100)
+                                ) * fc_descuento2 / 100
+                              )
+                        )
+      end
+          )                                       as ivacompras,
 
-			0                                         as [cant. ventas],
-	  	sum(case doc.doct_id
-	        	when 8  then -(fci_cantidad)
-	        	else          fci_cantidad
-	      	end
-					)							                        as [cant. compras]
+      0                                         as [cant. ventas],
+      sum(case doc.doct_id
+            when 8  then -(fci_cantidad)
+            else          fci_cantidad
+          end
+          )                                      as [cant. compras]
 
 from
 
-			Producto pr inner join FacturaCompraItem fci	 on pr.pr_id   = fci.pr_id
-									inner join FacturaCompra fc     	 on fci.fc_id  = fc.fc_id
+      Producto pr inner join FacturaCompraItem fci   on pr.pr_id   = fci.pr_id
+                  inner join FacturaCompra fc        on fci.fc_id  = fc.fc_id
                   inner join Documento doc           on fc.doc_id  = doc.doc_id
                   inner join Empresa emp             on doc.emp_id = emp.emp_id 
 where 
 
-				  fc_fecha >= @@Fini
-			and	fc_fecha <= @@Ffin
+          fc_fecha >= @@Fini
+      and  fc_fecha <= @@Ffin
 
-			and fc.est_id <> 7 -- Todas menos anuladas
+      and fc.est_id <> 7 -- Todas menos anuladas
 
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
 /* -///////////////////////////////////////////////////////////////////////
 
 INICIO SEGUNDA PARTE DE ARBOLES
 
 /////////////////////////////////////////////////////////////////////// */
 
-and   (pr.pr_id 		= @pr_id 		or @pr_id=0)
-and   (fc.doc_id 		= @doc_id 	or @doc_id	=0)
-and   (doc.cico_id 	= @cico_id  or @cico_id=0)
-and   (emp.emp_id 	= @emp_id 	or @emp_id=0) 
+and   (pr.pr_id     = @pr_id     or @pr_id=0)
+and   (fc.doc_id     = @doc_id   or @doc_id  =0)
+and   (doc.cico_id   = @cico_id  or @cico_id=0)
+and   (emp.emp_id   = @emp_id   or @emp_id=0) 
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 
                   and  rptarb_hojaid = fci.pr_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_producto = 0)
-			 )
+           (@ram_id_producto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1016 
                   and  rptarb_hojaid = doc.cico_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_circuitoContable = 0)
-			 )
+           (@ram_id_circuitoContable = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
+           (@ram_id_Empresa = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 4001 
                   and  rptarb_hojaid = fc.doc_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_documento = 0)
-			 )
+           (@ram_id_documento = 0)
+       )
 
 group by pr_nombrecompra
 

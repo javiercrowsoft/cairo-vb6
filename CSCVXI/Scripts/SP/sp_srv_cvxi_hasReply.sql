@@ -11,10 +11,10 @@ go
 -- sp_srv_cvxi_hasReply  3
 
 create procedure sp_srv_cvxi_hasReply (
-	@@cmie_id 				int,
-	@@cmi_id					int,
-	@@cmia_id					int,
-	@@idm_id					int
+  @@cmie_id         int,
+  @@cmi_id          int,
+  @@cmia_id          int,
+  @@idm_id          int
 )
 as
 
@@ -22,22 +22,22 @@ set nocount on
 
 begin
 
-	if exists(select * 
-						from ComunidadInternetRespuesta 
-						where cmie_id = @@cmie_id 
-							and (cmi_id = @@cmi_id or @@cmi_id = 0)
-							and (cmia_id = @@cmia_id or @@cmia_id = 0) 
-							and (idm_id = @@idm_id or @@idm_id = 0) 
-					)
-	begin
+  if exists(select * 
+            from ComunidadInternetRespuesta 
+            where cmie_id = @@cmie_id 
+              and (cmi_id = @@cmi_id or @@cmi_id = 0)
+              and (cmia_id = @@cmia_id or @@cmia_id = 0) 
+              and (idm_id = @@idm_id or @@idm_id = 0) 
+          )
+  begin
 
-		select 1 as result
+    select 1 as result
 
-	end else begin
+  end else begin
 
-		select 0 as result
+    select 0 as result
 
-	end
+  end
 
 end
 

@@ -8,28 +8,28 @@ SET ANSI_NULLS ON
 GO
 /*
 
-	select * from StockLote stl 
-	where not exists(select stl_id from StockItem where stl_id = stl.stl_id)
-	
-	select * from StockLote
-	where not exists(select stl_id from StockItem where stl_id = StockLote.stl_id)
-		and not exists(select stl_id from StockCache where stl_id = StockLote.stl_id)
+  select * from StockLote stl 
+  where not exists(select stl_id from StockItem where stl_id = stl.stl_id)
+  
+  select * from StockLote
+  where not exists(select stl_id from StockItem where stl_id = StockLote.stl_id)
+    and not exists(select stl_id from StockCache where stl_id = StockLote.stl_id)
 
 */
 create procedure sp_StockLoteValidate
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	delete StockCache where stl_id in (
-	select stl_id from StockLote stl 
-	where not exists(select stl_id from StockItem where stl_id = stl.stl_id)
-	)
-	and stc_cantidad = 0
-	
-	delete StockLote
-	where not exists(select stl_id from StockItem where stl_id = StockLote.stl_id)
-		and not exists(select stl_id from StockCache where stl_id = StockLote.stl_id)
+  delete StockCache where stl_id in (
+  select stl_id from StockLote stl 
+  where not exists(select stl_id from StockItem where stl_id = stl.stl_id)
+  )
+  and stc_cantidad = 0
+  
+  delete StockLote
+  where not exists(select stl_id from StockItem where stl_id = StockLote.stl_id)
+    and not exists(select stl_id from StockCache where stl_id = StockLote.stl_id)
 end
 GO

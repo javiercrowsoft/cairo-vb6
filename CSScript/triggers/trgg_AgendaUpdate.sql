@@ -15,18 +15,18 @@ declare @agn_id int
 
 declare c_userUpdate insensitive cursor for
 
-	select agn_id from inserted
+  select agn_id from inserted
 
 open c_userUpdate
 
 fetch next from c_userUpdate into @agn_id
 while @@fetch_status = 0
 begin
-	if @agn_id = 1 begin
-		update Agenda set agn_nombre = 'Publica', agn_codigo = 'Publica' where agn_id = 1
-	end
+  if @agn_id = 1 begin
+    update Agenda set agn_nombre = 'Publica', agn_codigo = 'Publica' where agn_id = 1
+  end
 
-	fetch next from c_userUpdate into @agn_id
+  fetch next from c_userUpdate into @agn_id
 end
 
 close c_userUpdate

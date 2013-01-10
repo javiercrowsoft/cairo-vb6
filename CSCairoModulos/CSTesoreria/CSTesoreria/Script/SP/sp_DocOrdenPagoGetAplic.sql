@@ -21,8 +21,8 @@ sp_columns FacturaCompraOrdenPago
 
 */
 create procedure sp_DocOrdenPagoGetAplic (
-	@@emp_id      int,
-	@@opg_id 			int
+  @@emp_id      int,
+  @@opg_id       int
 )
 as
 begin

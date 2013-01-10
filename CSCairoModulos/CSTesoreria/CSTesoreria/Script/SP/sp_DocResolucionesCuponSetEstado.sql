@@ -9,28 +9,28 @@ drop procedure [dbo].[sp_DocResolucionCuponesSetEstado]
 
 go
 create procedure sp_DocResolucionCuponesSetEstado (
-	@@desde       datetime = '19900101',
-	@@hasta       datetime = '21000101'
+  @@desde       datetime = '19900101',
+  @@hasta       datetime = '21000101'
 )
 as
 
 begin
 
-	declare @rcup_id int
+  declare @rcup_id int
 
-	declare c_DepBcos insensitive cursor for 
-		select rcup_id from ResolucionCupon where rcup_fecha between @@desde and @@hasta
+  declare c_DepBcos insensitive cursor for 
+    select rcup_id from ResolucionCupon where rcup_fecha between @@desde and @@hasta
 
-	open c_DepBcos
+  open c_DepBcos
 
-	fetch next from c_DepBcos into @rcup_id
-	while @@fetch_status = 0 begin
+  fetch next from c_DepBcos into @rcup_id
+  while @@fetch_status = 0 begin
 
-		exec sp_DocResolucionCuponSetEstado @rcup_id
+    exec sp_DocResolucionCuponSetEstado @rcup_id
 
-		fetch next from c_DepBcos into @rcup_id
+    fetch next from c_DepBcos into @rcup_id
   end
 
-	close c_DepBcos
-	deallocate c_DepBcos
+  close c_DepBcos
+  deallocate c_DepBcos
 end

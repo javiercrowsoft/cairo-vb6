@@ -15,31 +15,31 @@ sp_col inscripcion
 
 go
 create procedure sp_web_CBUGaliciaGetInsc2 (
-	@@idRegistro varchar(255)
+  @@idRegistro varchar(255)
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	insc_id, 
-					insc_numero, 
-					insc_fecha,
-					insc_apellido, 
-					insc_nombre, 
-					insc_asociacion,
-					insc_socio,
-					insc_socioLASFAR,
-					insc_documento,
-					insc_tipodocumento,
-					AABAinsc_nroCBU,
-					insc_importe
-	
-	from aaarbaweb..inscripcion insc 
+  select   insc_id, 
+          insc_numero, 
+          insc_fecha,
+          insc_apellido, 
+          insc_nombre, 
+          insc_asociacion,
+          insc_socio,
+          insc_socioLASFAR,
+          insc_documento,
+          insc_tipodocumento,
+          AABAinsc_nroCBU,
+          insc_importe
+  
+  from aaarbaweb..inscripcion insc 
 
-	where ('C2005*'+insc_numero) = @@idRegistro
-	
+  where ('C2005*'+insc_numero) = @@idRegistro
+  
 end
 
 go

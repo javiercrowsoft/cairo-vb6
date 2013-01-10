@@ -15,7 +15,7 @@ sp_productoGetClientes 7
 
 create procedure sp_productoGetClientes
 (
-	@@pr_id   int
+  @@pr_id   int
 )
 as
 begin

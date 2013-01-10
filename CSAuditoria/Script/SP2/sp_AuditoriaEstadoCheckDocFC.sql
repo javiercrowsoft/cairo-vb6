@@ -9,9 +9,9 @@ go
 
 create procedure sp_AuditoriaEstadoCheckDocFC (
 
-	@@fc_id       int,
+  @@fc_id       int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out
+  @@bErrorMsg   varchar(5000) out
 )
 as
 
@@ -19,68 +19,68 @@ begin
 
   set nocount on
 
-	declare @bError tinyint
+  declare @bError tinyint
 
-	set @bError     = 0
-	set @@bSuccess 	= 0
-	set @@bErrorMsg = '@@ERROR_SP:'
+  set @bError     = 0
+  set @@bSuccess   = 0
+  set @@bErrorMsg = '@@ERROR_SP:'
 
-	declare @doct_id      int
-	declare @fc_nrodoc 		varchar(50) 
-	declare @fc_numero 		varchar(50) 
-	declare @est_id       int
+  declare @doct_id      int
+  declare @fc_nrodoc     varchar(50) 
+  declare @fc_numero     varchar(50) 
+  declare @est_id       int
 
-	select 
-						@doct_id 		= doct_id,
-						@fc_nrodoc  = fc_nrodoc,
-						@fc_numero  = convert(varchar,fc_numero),
-						@est_id     = est_id
+  select 
+            @doct_id     = doct_id,
+            @fc_nrodoc  = fc_nrodoc,
+            @fc_numero  = convert(varchar,fc_numero),
+            @est_id     = est_id
 
-	from FacturaCompra where fc_id = @@fc_id
+  from FacturaCompra where fc_id = @@fc_id
 
-	if exists(select * from FacturaCompraItem fci
-						where (fci_pendiente + (		IsNull(
-																					(select sum(rcfc_cantidad) from RemitoFacturaCompra 
-																					 where fci_id = fci.fci_id),0)
-																		) 
-																 + (		IsNull(
-																					(select sum(ocfc_cantidad) from OrdenFacturaCompra 
-																					 where fci_id = fci.fci_id),0)
-																		) 
-									) <> fci_cantidadaremitir
+  if exists(select * from FacturaCompraItem fci
+            where (fci_pendiente + (    IsNull(
+                                          (select sum(rcfc_cantidad) from RemitoFacturaCompra 
+                                           where fci_id = fci.fci_id),0)
+                                    ) 
+                                 + (    IsNull(
+                                          (select sum(ocfc_cantidad) from OrdenFacturaCompra 
+                                           where fci_id = fci.fci_id),0)
+                                    ) 
+                  ) <> fci_cantidadaremitir
 
-							and fc_id = @@fc_id
-						)
-	begin
+              and fc_id = @@fc_id
+            )
+  begin
 
-			set @bError = 1
-			set @@bErrorMsg = @@bErrorMsg + 'El pendiente de los items de esta factura no coincide con la suma de sus aplicaciones' + char(10)
+      set @bError = 1
+      set @@bErrorMsg = @@bErrorMsg + 'El pendiente de los items de esta factura no coincide con la suma de sus aplicaciones' + char(10)
 
-	end
+  end
 
-	if 		@est_id <> 7 
-		and @est_id <> 5 
-		and @est_id <> 4 begin
+  if     @est_id <> 7 
+    and @est_id <> 5 
+    and @est_id <> 4 begin
 
-		declare @fc_pendiente	decimal(18,6)
+    declare @fc_pendiente  decimal(18,6)
 
-	  select 
-						@fc_pendiente		= fc_pendiente
+    select 
+            @fc_pendiente    = fc_pendiente
 
-		from FacturaCompra where fc_id = @@fc_id
+    from FacturaCompra where fc_id = @@fc_id
 
-		if @fc_pendiente = 0 begin
+    if @fc_pendiente = 0 begin
 
-				set @bError = 1
-				set @@bErrorMsg = @@bErrorMsg + 'La factura no tiene vencimientos pendientes y su estado no es finalizado, o anulado, o pendiente de firma' + char(10)
+        set @bError = 1
+        set @@bErrorMsg = @@bErrorMsg + 'La factura no tiene vencimientos pendientes y su estado no es finalizado, o anulado, o pendiente de firma' + char(10)
 
-		end
+    end
 
-	end
+  end
 
-	-- No hubo errores asi que todo bien
-	--
-	if @bError = 0 set @@bSuccess = 1
+  -- No hubo errores asi que todo bien
+  --
+  if @bError = 0 set @@bSuccess = 1
 
 end
 GO

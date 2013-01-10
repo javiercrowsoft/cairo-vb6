@@ -10,28 +10,28 @@ drop procedure [dbo].[sp_web_ParteDiarioChangeEstado]
 go
 create procedure sp_web_ParteDiarioChangeEstado (
   @@us_id         int,
-	@@ptd_id        int,
-	@@ptd_cumplida  tinyint,
-	@@tarest_id     int,
-	@@rtn						int out
+  @@ptd_id        int,
+  @@ptd_cumplida  tinyint,
+  @@tarest_id     int,
+  @@rtn            int out
 
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   /* select tbl_id,tbl_nombrefisico from tabla where tbl_nombrefisico like '%%'*/
   exec sp_HistoriaUpdate 15002, @@ptd_id, @@us_id, 5
 
-	update ParteDiario set
+  update ParteDiario set
 
-															ptd_cumplida = @@ptd_cumplida,
+                              ptd_cumplida = @@ptd_cumplida,
                               tarest_id    = @@tarest_id
 
 
-	where ptd_id = @@ptd_id
+  where ptd_id = @@ptd_id
 
-	set @@rtn = 1
+  set @@rtn = 1
 end

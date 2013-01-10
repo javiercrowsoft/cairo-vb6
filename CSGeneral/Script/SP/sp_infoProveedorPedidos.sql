@@ -9,21 +9,21 @@ sp_infoProveedorPedidos 1,1,39
 
 go
 create procedure sp_infoProveedorPedidos (
-	@@us_id         int,
-	@@emp_id        int,
-	@@prov_id       int,
-	@@info_aux      varchar(255) = ''
+  @@us_id         int,
+  @@emp_id        int,
+  @@prov_id       int,
+  @@info_aux      varchar(255) = ''
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	exec sp_infoProveedorPedidos2 @@us_id,
-																@@emp_id,
-																@@prov_id,
-																@@info_aux
+  exec sp_infoProveedorPedidos2 @@us_id,
+                                @@emp_id,
+                                @@prov_id,
+                                @@info_aux
 
 end
 go

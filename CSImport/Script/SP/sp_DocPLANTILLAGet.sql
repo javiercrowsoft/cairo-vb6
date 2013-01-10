@@ -20,7 +20,7 @@ select pv_id from NOMBRE_TABLA where XX_numero = 57
 */
 
 create procedure sp_DocNOMBRE_DOCGet (
-	PARAM_ID int,
+  PARAM_ID int,
   @@us_id int
 )
 as
@@ -32,28 +32,28 @@ declare @editMsg   varchar(255)
 
   exec sp_DocNOMBRE_DOCEditableGet PARAM_ID, @@us_id, @bEditable out, @editMsg out
 
-	select 
-			NOMBRE_TABLA.*,
-	    CAMPO_TABLA_CLIENTE_PROVEEDOR_PROVEEDORnombre,
-	    lp_nombre,
-	    ld_nombre,
-	    cpg_nombre,
-	    est_nombre,
-	    ccos_nombre,
+  select 
+      NOMBRE_TABLA.*,
+      CAMPO_TABLA_CLIENTE_PROVEEDOR_PROVEEDORnombre,
+      lp_nombre,
+      ld_nombre,
+      cpg_nombre,
+      est_nombre,
+      ccos_nombre,
       suc_nombre,
       doc_nombre,
       editable = @bEditable,
       editMsg = @editMsg
-	
-	from 
-			NOMBRE_TABLA inner join documento      on NOMBRE_TABLA.doc_id  = documento.doc_id
+  
+  from 
+      NOMBRE_TABLA inner join documento      on NOMBRE_TABLA.doc_id  = documento.doc_id
                    inner join condicionpago  on NOMBRE_TABLA.cpg_id  = condicionpago.cpg_id
-									 inner join estado         on NOMBRE_TABLA.est_id  = estado.est_id
-									 inner join sucursal       on NOMBRE_TABLA.suc_id  = sucursal.suc_id
+                   inner join estado         on NOMBRE_TABLA.est_id  = estado.est_id
+                   inner join sucursal       on NOMBRE_TABLA.suc_id  = sucursal.suc_id
                    inner join TABLA_CLIENTE_PROVEEDOR        on NOMBRE_TABLA.CAMPO_TABLA_CLIENTE_PROVEEDOR_PROVEEDORid  = TABLA_CLIENTE_PROVEEDOR.CAMPO_TABLA_CLIENTE_PROVEEDOR_PROVEEDORid
                    left join centrocosto     on NOMBRE_TABLA.ccos_id = centrocosto.ccos_id
                    left join listaprecio     on NOMBRE_TABLA.lp_id   = listaprecio.lp_id
-									 left join listadescuento  on NOMBRE_TABLA.ld_id   = listadescuento.ld_id
+                   left join listadescuento  on NOMBRE_TABLA.ld_id   = listadescuento.ld_id
 
   where CAMPO_ID = PARAM_ID
 

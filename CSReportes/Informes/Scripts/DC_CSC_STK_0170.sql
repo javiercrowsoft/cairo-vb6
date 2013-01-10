@@ -9,9 +9,9 @@ GO
 
 /*
 DC_CSC_STK_0170 
-											1,
-											'20070101',
-											'0','0','0'
+                      1,
+                      '20070101',
+                      '0','0','0'
 
 select * from rama where ram_nombre like '%dvd%'
 select pr_id,pr_nombrecompra from producto where pr_nombrecompra like '%lumen%'
@@ -21,10 +21,10 @@ select * from tabla where tbl_nombrefisico like '%produ%'
 create procedure DC_CSC_STK_0170 (
 
   @@us_id    int,
-	@@Ffin 		 datetime,
+  @@Ffin      datetime,
 
-	@@pr_id 		varchar(255),
-	@@depl_id 	varchar(255),
+  @@pr_id     varchar(255),
+  @@depl_id   varchar(255),
   @@stl_id    varchar(255)
 
 )as 
@@ -56,35 +56,35 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_Producto <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Producto, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Producto, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Producto, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID 
-	end else 
-		set @ram_id_Producto = 0
+    exec sp_ArbGetAllHojas @ram_id_Producto, @clienteID 
+  end else 
+    set @ram_id_Producto = 0
 end
 
 if @ram_id_DepositoLogico <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_DepositoLogico, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_DepositoLogico, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_DepositoLogico, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_DepositoLogico, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_DepositoLogico, @clienteID 
-	end else 
-		set @ram_id_DepositoLogico = 0
+    exec sp_ArbGetAllHojas @ram_id_DepositoLogico, @clienteID 
+  end else 
+    set @ram_id_DepositoLogico = 0
 end
 
 if @ram_id_stocklote <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_stocklote, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_stocklote, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_stocklote, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_stocklote, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_stocklote, @clienteID 
-	end else 
-		set @ram_id_stocklote = 0
+    exec sp_ArbGetAllHojas @ram_id_stocklote, @clienteID 
+  end else 
+    set @ram_id_stocklote = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -98,17 +98,17 @@ declare c_stk insensitive cursor for
 
 select distinct
 
-				stl_id
+        stl_id
 
 from
 
-			StockItem
+      StockItem
 
 where 
 
 
 -- Discrimino depositos internos
-			(depl_id <> -2 and depl_id <> -3)
+      (depl_id <> -2 and depl_id <> -3)
 
 /* -///////////////////////////////////////////////////////////////////////
 
@@ -116,52 +116,52 @@ INICIO SEGUNDA PARTE DE ARBOLES
 
 /////////////////////////////////////////////////////////////////////// */
 
-and   (pr_id 			= @pr_id 		or @pr_id		=0)
-and   (depl_id 		= @depl_id 	or @depl_id	=0)
-and   (stl_id 		= @stl_id 	or @stl_id	=0)
+and   (pr_id       = @pr_id     or @pr_id    =0)
+and   (depl_id     = @depl_id   or @depl_id  =0)
+and   (stl_id     = @stl_id   or @stl_id  =0)
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 
                   and  rptarb_hojaid = pr_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Producto = 0)
-			 )
+           (@ram_id_Producto = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 11 
                   and  rptarb_hojaid = depl_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_DepositoLogico = 0)
-			 )
+           (@ram_id_DepositoLogico = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 30 
                   and  (rptarb_hojaid = pr_id or rptarb_hojaid = pr_id_kit)
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_producto = 0)
-			 )
+           (@ram_id_producto = 0)
+       )
 
-group by 		
-				stl_id,depl_id
+group by     
+        stl_id,depl_id
 
 having sum(sti_ingreso)-sum(sti_salida)>0
 
@@ -176,39 +176,39 @@ fetch next from c_stk into @stl_id
 while @@fetch_status = 0
 begin
 
-	insert into #stock_stl (stl_id, depl_id, cantidad) 
+  insert into #stock_stl (stl_id, depl_id, cantidad) 
 
-	select @stl_id, depl_id, sum(sti_ingreso)-sum(sti_salida)
-	from StockItem
-	where stl_id = @stl_id
-		and depl_id <> -2 
-		and depl_id <> -3
-	group by depl_id
+  select @stl_id, depl_id, sum(sti_ingreso)-sum(sti_salida)
+  from StockItem
+  where stl_id = @stl_id
+    and depl_id <> -2 
+    and depl_id <> -3
+  group by depl_id
 
-	fetch next from c_stk into @stl_id
+  fetch next from c_stk into @stl_id
 end
 
 close c_stk
 deallocate c_stk
 
 select 
-				s.stl_id,
-				pr_nombrecompra                   		as [Artículo],
-				stl.stl_codigo												as [Lote de Stock],
-				stl.stl_nroLote                       as Numero,
-				stl.stl_fecha                         as Fecha,
-				stl.stl_fechaVto											as Vencimiento,
-				stlp.stl_nroLote                  		as [Lote Padre],
-				pa_nombre                             as Pais,
-				depl.depl_nombre											as Deposito,
-				un_codigo                             as Unidad,
-				cantidad															as Cantidad,
-				stl.stl_descrip												as Observaciones
+        s.stl_id,
+        pr_nombrecompra                       as [Artículo],
+        stl.stl_codigo                        as [Lote de Stock],
+        stl.stl_nroLote                       as Numero,
+        stl.stl_fecha                         as Fecha,
+        stl.stl_fechaVto                      as Vencimiento,
+        stlp.stl_nroLote                      as [Lote Padre],
+        pa_nombre                             as Pais,
+        depl.depl_nombre                      as Deposito,
+        un_codigo                             as Unidad,
+        cantidad                              as Cantidad,
+        stl.stl_descrip                        as Observaciones
 from
-			#stock_stl s 	inner join depositologico depl 				on s.depl_id 				= depl.depl_id
-										inner join stocklote stl 							on s.stl_id 				= stl.stl_id
-										inner join producto pr                on stl.pr_id        = pr.pr_id
-										inner join unidad un                  on pr.un_id_stock   = un.un_id
-										left join stocklote stlp              on stl.stl_id_padre = stlp.stl_id
-										left join pais pa                     on stl.pa_id        = pa.pa_id
+      #stock_stl s   inner join depositologico depl         on s.depl_id         = depl.depl_id
+                    inner join stocklote stl               on s.stl_id         = stl.stl_id
+                    inner join producto pr                on stl.pr_id        = pr.pr_id
+                    inner join unidad un                  on pr.un_id_stock   = un.un_id
+                    left join stocklote stlp              on stl.stl_id_padre = stlp.stl_id
+                    left join pais pa                     on stl.pa_id        = pa.pa_id
 GO

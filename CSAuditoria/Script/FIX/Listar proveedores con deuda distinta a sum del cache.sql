@@ -1,24 +1,24 @@
 select 
 
-	prov_id,
-	prov_nombre,
-	prov_codigo,
+  prov_id,
+  prov_nombre,
+  prov_codigo,
 
-		prov_deudaorden
-	+	prov_deudaremito
-	+	prov_deudactacte,
-	(select sum(case doct_id when 16 then -provcc_importe else provcc_importe end) from proveedorCacheCredito where prov_id = prov.prov_id)
+    prov_deudaorden
+  +  prov_deudaremito
+  +  prov_deudactacte,
+  (select sum(case doct_id when 16 then -provcc_importe else provcc_importe end) from proveedorCacheCredito where prov_id = prov.prov_id)
 
 from
 
-	proveedor prov
+  proveedor prov
 
 where 
 
 
-		prov_deudaorden
-	+	prov_deudaremito
-	+	prov_deudactacte
+    prov_deudaorden
+  +  prov_deudaremito
+  +  prov_deudactacte
 
 <>
 

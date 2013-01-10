@@ -13,58 +13,58 @@ sp_web_InscripcionGetAux '4376320',8,341,341,0,0,1,null
 
 go
 create procedure sp_web_InscripcionGetAux (
-	@@nroDoc    varchar(255),
-	@@tipoDoc   tinyint,
-  @@socio   	varchar(255),
-  @@sociol   	varchar(255),
-	@@chkAerea 	tinyint,
-	@@chkInfo		tinyint,
-	@@chkLasra	tinyint,
+  @@nroDoc    varchar(255),
+  @@tipoDoc   tinyint,
+  @@socio     varchar(255),
+  @@sociol     varchar(255),
+  @@chkAerea   tinyint,
+  @@chkInfo    tinyint,
+  @@chkLasra  tinyint,
   @@insc_id   int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @insc_id_padre 		int
-	declare @insc_numero 			varchar(255)
-	declare @error_message    varchar(5000)
-	declare @success          tinyint
+  declare @insc_id_padre     int
+  declare @insc_numero       varchar(255)
+  declare @error_message    varchar(5000)
+  declare @success          tinyint
 
-	set @error_message 	= ''
-	set @success 				= 1
+  set @error_message   = ''
+  set @success         = 1
 
-	if @@insc_id is not null begin
-		select @insc_id_padre = insc_id_padre from aaarbaweb..inscripcion where insc_id = @@insc_id
+  if @@insc_id is not null begin
+    select @insc_id_padre = insc_id_padre from aaarbaweb..inscripcion where insc_id = @@insc_id
 
-	end else begin
+  end else begin
 
-		if @insc_id_padre is null begin
-			select @insc_id_padre = insc_id from aaarbaweb..inscripcion 
-			where (
-								(			insc_documento 			= @@nroDoc 
-									and	insc_tipodocumento	= @@tipoDoc 
-								)
-							or	(insc_socio				= @@socio 	and @@socio 	<> '')
-							or	(insc_socioLASFAR	= @@sociol	and @@sociol 	<> '')
-						)
-					and
-							insc_id_padre is null 
-		end
-	end
+    if @insc_id_padre is null begin
+      select @insc_id_padre = insc_id from aaarbaweb..inscripcion 
+      where (
+                (      insc_documento       = @@nroDoc 
+                  and  insc_tipodocumento  = @@tipoDoc 
+                )
+              or  (insc_socio        = @@socio   and @@socio   <> '')
+              or  (insc_socioLASFAR  = @@sociol  and @@sociol   <> '')
+            )
+          and
+              insc_id_padre is null 
+    end
+  end
 
-	if @insc_id_padre is not null begin
+  if @insc_id_padre is not null begin
 
-		exec sp_web_InscripcionGet @insc_id_padre
+    exec sp_web_InscripcionGet @insc_id_padre
 
-	end else begin
+  end else begin
 
-		-- Aproposito devuelvo un recordset vacio
-		--
-		select * from aaarbaweb..inscripcion where 1=2
-	end
+    -- Aproposito devuelvo un recordset vacio
+    --
+    select * from aaarbaweb..inscripcion where 1=2
+  end
 end
 
 go

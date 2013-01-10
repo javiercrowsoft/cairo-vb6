@@ -12,37 +12,37 @@ drop procedure [dbo].[sp_clienteCopyListaPrecio]
 
 go
 create procedure sp_clienteCopyListaPrecio (
-	@@from_id 		int,
-	@@to_id				int,
-	@@us_id				int
+  @@from_id     int,
+  @@to_id        int,
+  @@us_id        int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @lpcli_id int
-	declare @lp_id    int
+  declare @lpcli_id int
+  declare @lp_id    int
 
-	declare c_lpcli insensitive cursor for select lp_id from ListaPrecioCliente where cli_id = @@from_id
+  declare c_lpcli insensitive cursor for select lp_id from ListaPrecioCliente where cli_id = @@from_id
 
-	open c_lpcli
+  open c_lpcli
 
-	fetch next from c_lpcli into @lp_id
-	while @@fetch_status=0
-	begin
+  fetch next from c_lpcli into @lp_id
+  while @@fetch_status=0
+  begin
 
-		exec sp_dbgetnewid 'ListaPrecioCliente', 'lpcli_id', @lpcli_id out, 0
+    exec sp_dbgetnewid 'ListaPrecioCliente', 'lpcli_id', @lpcli_id out, 0
 
-		insert into ListaPrecioCliente(lpcli_id, lp_id, cli_id, modifico) 
-														values(@lpcli_id, @lp_id, @@to_id, @@us_id)
+    insert into ListaPrecioCliente(lpcli_id, lp_id, cli_id, modifico) 
+                            values(@lpcli_id, @lp_id, @@to_id, @@us_id)
  
-		fetch next from c_lpcli into @lp_id
-	end
+    fetch next from c_lpcli into @lp_id
+  end
 
-	close c_lpcli
-	deallocate c_lpcli
+  close c_lpcli
+  deallocate c_lpcli
 
 end
 

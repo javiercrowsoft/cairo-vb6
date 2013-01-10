@@ -12,55 +12,55 @@ GO
 
 */
 create procedure sp_TareaEstadoHelp (
-	@@emp_id          int,
+  @@emp_id          int,
   @@us_id           int,
-	@@bForAbm         tinyint,
-	@@filter 					varchar(255)  = '',
-  @@check  					smallint 			= 0,
-  @@tarest_id       int						= 0,
+  @@bForAbm         tinyint,
+  @@filter           varchar(255)  = '',
+  @@check            smallint       = 0,
+  @@tarest_id       int            = 0,
   @@filteraux       varchar(255)  = ''
 )
 as
 begin
 
-	set nocount on
+  set nocount on
 
-	set @@filter = replace(@@filter,'''','''''')
-	
-	if @@filteraux <> '' begin
-		set @@filteraux = 'inner join ProyectoTareaEstado proy on t.tarest_id = proy.tarest_id and proy.proy_id = ' + @@filteraux
-	end
+  set @@filter = replace(@@filter,'''','''''')
+  
+  if @@filteraux <> '' begin
+    set @@filteraux = 'inner join ProyectoTareaEstado proy on t.tarest_id = proy.tarest_id and proy.proy_id = ' + @@filteraux
+  end
 
-	declare @sqlstmt varchar(8000)
+  declare @sqlstmt varchar(8000)
 
-	if @@check <> 0 begin
+  if @@check <> 0 begin
 
-		set @sqlstmt = 
+    set @sqlstmt = 
 
-	 'select	t.tarest_id,
-						tarest_nombre				as [Nombre],
-						tarest_codigo   		as [Codigo]
+   'select  t.tarest_id,
+            tarest_nombre        as [Nombre],
+            tarest_codigo       as [Codigo]
 
-		from TareaEstado t ' + @@filteraux + '
-		where (tarest_nombre = '''+convert(varchar(255),@@filter)+''' or tarest_codigo = '''+convert(varchar(255),@@filter)+''')
-	    and t.activo <> 0'
+    from TareaEstado t ' + @@filteraux + '
+    where (tarest_nombre = '''+convert(varchar(255),@@filter)+''' or tarest_codigo = '''+convert(varchar(255),@@filter)+''')
+      and t.activo <> 0'
 
-	end else begin
+  end else begin
 
-			set @sqlstmt = 
+      set @sqlstmt = 
 
-		 'select top 50
-						 t.tarest_id,
-						 tarest_nombre			 as [Nombre],
-						 tarest_codigo   	   as [Codigo]
+     'select top 50
+             t.tarest_id,
+             tarest_nombre       as [Nombre],
+             tarest_codigo        as [Codigo]
 
-			from TareaEstado t '+ @@filteraux + '
-				where (tarest_codigo like ''%'+convert(varchar(255),@@filter)+'%'' or tarest_nombre like ''%'+convert(varchar(255),@@filter)+'%'' 
+      from TareaEstado t '+ @@filteraux + '
+        where (tarest_codigo like ''%'+convert(varchar(255),@@filter)+'%'' or tarest_nombre like ''%'+convert(varchar(255),@@filter)+'%'' 
                 or '''+convert(varchar(255),@@filter)+''' = '''')
-				and ('+convert(varchar(255),@@bForAbm)+' <> 0 or t.activo <> 0)'
-	end
+        and ('+convert(varchar(255),@@bForAbm)+' <> 0 or t.activo <> 0)'
+  end
 
-	exec(@sqlstmt)
+  exec(@sqlstmt)
 
 end
 

@@ -7,28 +7,28 @@ drop procedure [dbo].[sp_GridViewDelete]
 
 go
 create procedure sp_GridViewDelete (
-	@@grdv_id 		int
+  @@grdv_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
-			 
-	exec sp_GridViewDeleteItems @@grdv_id
+  begin transaction
+       
+  exec sp_GridViewDeleteItems @@grdv_id
 
-	delete GridView where grdv_id = @@grdv_id
-	if @@error <> 0 goto ControlError
+  delete GridView where grdv_id = @@grdv_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la vista. sp_GridViewDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la vista. sp_GridViewDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

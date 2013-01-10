@@ -11,21 +11,21 @@ exec sp_DocFacturaCompraGetOrdenes 4,2
 */
 
 create procedure sp_DocFacturaCompraGetOrdenes (
-	@@emp_id					int,
-	@@prov_id 				int,
+  @@emp_id          int,
+  @@prov_id         int,
   @@mon_id          int
 )
 as
 
 begin
 
-declare @doct_Orden 		int set @doct_Orden 		= 35
+declare @doct_Orden     int set @doct_Orden     = 35
 
-	select 
+  select 
 
-				oc.oc_id,
-				d.doc_nombre,
-				oc_numero,
+        oc.oc_id,
+        d.doc_nombre,
+        oc_numero,
         oc_nrodoc,
         oc_fecha,
         oc_total,
@@ -33,18 +33,18 @@ declare @doct_Orden 		int set @doct_Orden 		= 35
         oc_descrip
 
   from OrdenCompra oc inner join Documento d on oc.doc_id = d.doc_id
-											inner join Moneda m on d.mon_id = m.mon_id
-	where 
-					oc.prov_id  = @@prov_id
-		and   oc.est_id   <> 7 -- Anulado
-		and		oc.doct_id  = @doct_Orden
-    and   d.mon_id 	  = @@mon_id
-		and   d.emp_id    = @@emp_id
+                      inner join Moneda m on d.mon_id = m.mon_id
+  where 
+          oc.prov_id  = @@prov_id
+    and   oc.est_id   <> 7 -- Anulado
+    and    oc.doct_id  = @doct_Orden
+    and   d.mon_id     = @@mon_id
+    and   d.emp_id    = @@emp_id
     and   exists(select oci_id from OrdenCompraItem where oc_id = oc.oc_id and oci_pendientefac > 0)
 
-	order by 
+  order by 
 
-				oc_nrodoc,
-				oc_fecha
+        oc_nrodoc,
+        oc_fecha
 end
 go

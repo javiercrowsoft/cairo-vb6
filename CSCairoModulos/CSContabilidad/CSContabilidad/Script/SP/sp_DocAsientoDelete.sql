@@ -9,57 +9,57 @@ drop procedure [dbo].[sp_DocAsientoDelete]
 
 go
 create procedure sp_DocAsientoDelete (
-	@@as_id 					int,
-	@@emp_id    			int,
-	@@us_id						int,
-	@@bNoCheckAccess  tinyint = 0
+  @@as_id           int,
+  @@emp_id          int,
+  @@us_id            int,
+  @@bNoCheckAccess  tinyint = 0
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if isnull(@@as_id,0) = 0 return
+  if isnull(@@as_id,0) = 0 return
 
-	if @@bNoCheckAccess = 0 begin
+  if @@bNoCheckAccess = 0 begin
 
-		declare @bEditable 		tinyint
-		declare @editMsg   		varchar(255)
-	
-		exec sp_DocAsientoEditableGet		@@emp_id    	,
-																		@@as_id 			,
-																	  @@us_id     	,
-																		@bEditable 		out,
-																		@editMsg   		out,
-																	  0							, --@@ShowMsg
-																		0  						,	--@@bNoAnulado
-																		1							  --@@bDelete
-	
-		if @bEditable = 0 begin
-	
-			set @editMsg = '@@ERROR_SP:' + @editMsg
-			raiserror (@editMsg, 16, 1)
-	
-			return
-		end
+    declare @bEditable     tinyint
+    declare @editMsg       varchar(255)
+  
+    exec sp_DocAsientoEditableGet    @@emp_id      ,
+                                    @@as_id       ,
+                                    @@us_id       ,
+                                    @bEditable     out,
+                                    @editMsg       out,
+                                    0              , --@@ShowMsg
+                                    0              ,  --@@bNoAnulado
+                                    1                --@@bDelete
+  
+    if @bEditable = 0 begin
+  
+      set @editMsg = '@@ERROR_SP:' + @editMsg
+      raiserror (@editMsg, 16, 1)
+  
+      return
+    end
 
-	end
+  end
 
-	begin transaction
+  begin transaction
 
-	delete AsientoItem where as_id = @@as_id
-	if @@error <> 0 goto ControlError
+  delete AsientoItem where as_id = @@as_id
+  if @@error <> 0 goto ControlError
 
-	delete Asiento where as_id = @@as_id
-	if @@error <> 0 goto ControlError
+  delete Asiento where as_id = @@as_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el Asiento. sp_DocAsientoDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el Asiento. sp_DocAsientoDelete.', 16, 1)
+  rollback transaction  
 
 end

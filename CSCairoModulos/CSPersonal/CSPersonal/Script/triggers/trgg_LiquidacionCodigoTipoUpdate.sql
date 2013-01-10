@@ -15,24 +15,24 @@ declare @liqct_id int
 
 declare c_LiquidacionCodigoTipoUpdate insensitive cursor for
 
-	select liqct_id from inserted
+  select liqct_id from inserted
 
 open c_LiquidacionCodigoTipoUpdate
 
 fetch next from c_LiquidacionCodigoTipoUpdate into @liqct_id
 while @@fetch_status = 0
 begin
-	if @liqct_id = 1 begin
-		update LiquidacionCodigoTipo set liqct_nombre = 'Remunerativo' where liqct_id = 1
-	end
-	if @liqct_id = 2 begin
-		update LiquidacionCodigoTipo set liqct_nombre = 'No Remunerativo' where liqct_id = 2
-	end
-	if @liqct_id = 3 begin
-		update LiquidacionCodigoTipo set liqct_nombre = 'Descuento' where liqct_id = 3
-	end
+  if @liqct_id = 1 begin
+    update LiquidacionCodigoTipo set liqct_nombre = 'Remunerativo' where liqct_id = 1
+  end
+  if @liqct_id = 2 begin
+    update LiquidacionCodigoTipo set liqct_nombre = 'No Remunerativo' where liqct_id = 2
+  end
+  if @liqct_id = 3 begin
+    update LiquidacionCodigoTipo set liqct_nombre = 'Descuento' where liqct_id = 3
+  end
 
-	fetch next from c_LiquidacionCodigoTipoUpdate into @liqct_id
+  fetch next from c_LiquidacionCodigoTipoUpdate into @liqct_id
 end
 
 close c_LiquidacionCodigoTipoUpdate

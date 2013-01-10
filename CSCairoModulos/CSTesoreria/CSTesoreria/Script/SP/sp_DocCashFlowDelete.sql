@@ -11,33 +11,33 @@ sp_DocCashFlowDelete null,'20060101 00:00:00','20061029 00:00:00'
 
 */
 create procedure sp_DocCashFlowDelete  (
-	@@cf_id 		int,
-	@@emp_id		int,
-	@@us_id			int
+  @@cf_id     int,
+  @@emp_id    int,
+  @@us_id      int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete CashFlowItem where cf_id = @@cf_id
-	if @@error <> 0 goto ControlError
+  delete CashFlowItem where cf_id = @@cf_id
+  if @@error <> 0 goto ControlError
 
-	delete CashFlowParam where cf_id = @@cf_id
-	if @@error <> 0 goto ControlError
+  delete CashFlowParam where cf_id = @@cf_id
+  if @@error <> 0 goto ControlError
 
-	delete CashFlow where cf_id = @@cf_id
-	if @@error <> 0 goto ControlError
+  delete CashFlow where cf_id = @@cf_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el flujo de fondos. sp_DocCashFlowDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el flujo de fondos. sp_DocCashFlowDelete.', 16, 1)
+  rollback transaction  
 
-end				
+end        

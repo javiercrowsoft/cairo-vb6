@@ -20,15 +20,15 @@ as
 begin
 
 select 
- 			convert (datetime,'20040101')   					as Fecha,
-			'Factura'         											  as Documento,
-			'C-125500014'      											  as Comprobante,
-			'Jose Lopez'       											  as Proveedores,
+       convert (datetime,'20040101')             as Fecha,
+      'Factura'                                 as Documento,
+      'C-125500014'                              as Comprobante,
+      'Jose Lopez'                               as Proveedores,
       'PAGO ATRASADO M.J.'                      As Descrip,
       'mercaderias'                             as cuenta,
-			convert (decimal(18,6), 1.6)	      		  as Haber,
-			convert (decimal(18,6), 2.6)	      		  as DEBe,
-			convert (decimal(18,6), 2.5)	      		  as Impuestos,            
+      convert (decimal(18,6), 1.6)              as Haber,
+      convert (decimal(18,6), 2.6)              as DEBe,
+      convert (decimal(18,6), 2.5)              as Impuestos,            
       'tipo'                                    as Tipo,
       'Orden'                                   as Orden,    
       'Resumido'                                as Resumido

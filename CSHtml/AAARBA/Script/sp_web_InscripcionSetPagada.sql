@@ -15,21 +15,21 @@ sp_columns cuenta_corriente_asociados
 
 go
 create procedure sp_web_InscripcionSetPagada (
-	@@insc_id			int
+  @@insc_id      int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	update aaarbaweb..inscripcion set aabainsc_pagada = 1 
-	where insc_id = @@insc_id
+  update aaarbaweb..inscripcion set aabainsc_pagada = 1 
+  where insc_id = @@insc_id
 
-	update aaarbaweb..inscripcion set est_id = 1008
-  where insc_id = @@insc_id	
-		and est_id <> 7 -- No esta anulada
-		and est_id <> 5 -- No esta finalizada
+  update aaarbaweb..inscripcion set est_id = 1008
+  where insc_id = @@insc_id  
+    and est_id <> 7 -- No esta anulada
+    and est_id <> 5 -- No esta finalizada
 
 end
 

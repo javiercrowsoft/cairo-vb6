@@ -14,53 +14,53 @@ sp_tables '%proveedor%'
 
 go
 create procedure sp_proveedorDelete (
-	@@prov_id 		int
+  @@prov_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	delete ProductoProveedor where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ProductoProveedor where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete EmpresaProveedor where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete EmpresaProveedor where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete ProveedorRetencion where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ProveedorRetencion where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete ProveedorCuentaGrupo where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ProveedorCuentaGrupo where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete ListaDescuentoProveedor where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ListaDescuentoProveedor where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete ListaPrecioProveedor where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ListaPrecioProveedor where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete ProveedorCacheCredito where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ProveedorCacheCredito where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete ProveedorCAI where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete ProveedorCAI where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete EmpresaProveedorDeuda where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete EmpresaProveedorDeuda where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	delete Proveedor where prov_id = @@prov_id
-	if @@error <> 0 goto ControlError
+  delete Proveedor where prov_id = @@prov_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar el proveedor. sp_proveedorDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar el proveedor. sp_proveedorDelete.', 16, 1)
+  rollback transaction  
 
 end
 go

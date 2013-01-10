@@ -21,27 +21,27 @@ set nocount on
 
   set nocount on
 
-	if @@fv_nrodoc <> '' begin
+  if @@fv_nrodoc <> '' begin
 
-		set @@fv_nrodoc = '%' + @@fv_nrodoc + '%'
+    set @@fv_nrodoc = '%' + @@fv_nrodoc + '%'
 
-	  select fv_id,
-					 doc_nombre as Documento,
-	         fv_numero  as Numero,
-	         fv_nrodoc  as Comprobante,
-	         fv_fecha   as Fecha,
-					 cli_nombre as Cliente,
-					 emp_nombre as Empresa,
-					 fv_descrip as Observaciones
-	
-	  from facturaVenta fv inner join cliente  cli  on fv.cli_id = cli.cli_id
-												 inner join empresa  emp  on fv.emp_id = emp.emp_id
-												 inner join documento doc on fv.doc_id = doc.doc_id
-	  where fv_nrodoc like @@fv_nrodoc
+    select fv_id,
+           doc_nombre as Documento,
+           fv_numero  as Numero,
+           fv_nrodoc  as Comprobante,
+           fv_fecha   as Fecha,
+           cli_nombre as Cliente,
+           emp_nombre as Empresa,
+           fv_descrip as Observaciones
+  
+    from facturaVenta fv inner join cliente  cli  on fv.cli_id = cli.cli_id
+                         inner join empresa  emp  on fv.emp_id = emp.emp_id
+                         inner join documento doc on fv.doc_id = doc.doc_id
+    where fv_nrodoc like @@fv_nrodoc
 
-	end
-	else
+  end
+  else
 
-		select 0,'Debe indicar un número de factura' as Mensaje
+    select 0,'Debe indicar un número de factura' as Mensaje
 end
 go

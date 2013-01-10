@@ -12,82 +12,82 @@ GO
 
 */
 create procedure sp_TareaHelp (
-	@@emp_id          int,
+  @@emp_id          int,
   @@us_id           int,
-	@@bForAbm         tinyint,
-	@@filter 					varchar(255)  = '',
-  @@check  					smallint 			= 0,
-  @@tar_id          int						= 0,
+  @@bForAbm         tinyint,
+  @@filter           varchar(255)  = '',
+  @@check            smallint       = 0,
+  @@tar_id          int            = 0,
   @@filteraux       varchar(255)  = ''
 )
 as
 begin
 
-	set nocount on
-	
-	set @@filter = replace(@@filter,'''','''''')
+  set nocount on
+  
+  set @@filter = replace(@@filter,'''','''''')
 
-		declare @sqlstmt varchar(8000)
+    declare @sqlstmt varchar(8000)
 
-		if @@filteraux = '' set @@filteraux = '1=1' -- para que no falle cuando esta vacio
+    if @@filteraux = '' set @@filteraux = '1=1' -- para que no falle cuando esta vacio
 
-		if @@check <> 0 begin
+    if @@check <> 0 begin
 
-			set @sqlstmt = 
+      set @sqlstmt = 
 
-		 'select	tar_id,
-							tar_nombre				as [Nombre],
-							tar_numero   		  as [Número]
-	
-			from Tarea t inner join Proyecto proy on t.proy_id = proy.proy_id
-	
-			where (tar_nombre = '''+convert(varchar(255),@@filter)+''' or tar_numero = '''+convert(varchar(255),@@filter)+''')
-				and '''+convert(varchar(255),@@filter)+''' <> ''''
-		    and t.activo <> 0
-				and ('+@@filteraux+')
-				and (			'+convert(varchar(255),@@bForAbm)+' <> 0 
-							or (exists (select * from Permiso p
+     'select  tar_id,
+              tar_nombre        as [Nombre],
+              tar_numero         as [Número]
+  
+      from Tarea t inner join Proyecto proy on t.proy_id = proy.proy_id
+  
+      where (tar_nombre = '''+convert(varchar(255),@@filter)+''' or tar_numero = '''+convert(varchar(255),@@filter)+''')
+        and '''+convert(varchar(255),@@filter)+''' <> ''''
+        and t.activo <> 0
+        and ('+@@filteraux+')
+        and (      '+convert(varchar(255),@@bForAbm)+' <> 0 
+              or (exists (select * from Permiso p
                           where p.pre_id = proy.pre_id_listTarea
-														and (		 us_id  = '+convert(varchar(255),@@us_id)+' 
-																	or exists(select * from usuariorol where rol_id = p.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
-																)
+                            and (     us_id  = '+convert(varchar(255),@@us_id)+' 
+                                  or exists(select * from usuariorol where rol_id = p.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
+                                )
                          )
-									)
-						)'
-	
-		end else begin
+                  )
+            )'
+  
+    end else begin
 
-				set @sqlstmt = 
-	
-			 'select top 50
-							 tar_id,
-							 tar_nombre			 as [Nombre],
-							 tar_numero   	 as [Número],
-							 cli_nombre      as [Cliente],
-							 proy_nombre     as [Proyecto]
-	
-				from Tarea t inner join Proyecto proy on t.proy_id = proy.proy_id
+        set @sqlstmt = 
+  
+       'select top 50
+               tar_id,
+               tar_nombre       as [Nombre],
+               tar_numero      as [Número],
+               cli_nombre      as [Cliente],
+               proy_nombre     as [Proyecto]
+  
+        from Tarea t inner join Proyecto proy on t.proy_id = proy.proy_id
                      inner join Cliente cli   on t.cli_id  = cli.cli_id
-		
-					where (tar_numero like ''%'+convert(varchar(255),@@filter)+'%'' or tar_nombre like ''%'+convert(varchar(255),@@filter)+'%'' 
-	                or '''+convert(varchar(255),@@filter)+''' = '''')
-					and ('+@@filteraux+')
-					and (			'+convert(varchar(255),@@bForAbm)+' <> 0 
-								or (
-									 (exists (select * from Permiso p
+    
+          where (tar_numero like ''%'+convert(varchar(255),@@filter)+'%'' or tar_nombre like ''%'+convert(varchar(255),@@filter)+'%'' 
+                  or '''+convert(varchar(255),@@filter)+''' = '''')
+          and ('+@@filteraux+')
+          and (      '+convert(varchar(255),@@bForAbm)+' <> 0 
+                or (
+                   (exists (select * from Permiso p
                             where p.pre_id = proy.pre_id_listTarea 
-															and (		 us_id  = '+convert(varchar(255),@@us_id)+'
-																		or exists(select * from usuariorol where rol_id = p.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
-																	)
-	                         )
-										) 
-										and t.activo <> 0
-										)
-							)'
+                              and (     us_id  = '+convert(varchar(255),@@us_id)+'
+                                    or exists(select * from usuariorol where rol_id = p.rol_id and us_id = '+convert(varchar(255),@@us_id)+')
+                                  )
+                           )
+                    ) 
+                    and t.activo <> 0
+                    )
+              )'
 
-		end
+    end
 
-		exec(@sqlstmt)
+    exec(@sqlstmt)
 
 end
 

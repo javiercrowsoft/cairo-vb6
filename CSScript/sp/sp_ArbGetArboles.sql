@@ -3,7 +3,7 @@ drop procedure [dbo].[SP_ArbGetArboles]
 
 go
 create procedure sp_ArbGetArboles (
-	@@tbl_id int
+  @@tbl_id int
 )
 as
 

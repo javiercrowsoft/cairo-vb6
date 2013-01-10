@@ -9,37 +9,37 @@ go
 */
 
 create procedure sp_DocDepositoCuponDelete (
-	@@dcup_id 			int,
-	@@emp_id    		int,
-	@@us_id					int
+  @@dcup_id       int,
+  @@emp_id        int,
+  @@us_id          int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	if isnull(@@dcup_id,0) = 0 return
+  if isnull(@@dcup_id,0) = 0 return
 
-	declare @bEditable 		tinyint
-	declare @editMsg   		varchar(255)
+  declare @bEditable     tinyint
+  declare @editMsg       varchar(255)
 
-	exec sp_DocDepositoCuponEditableGet	@@emp_id    	,
-																			@@dcup_id 		,
-																		  @@us_id     	,
-																			@bEditable 		out,
-																			@editMsg   		out,
-																		  0							, --@@ShowMsg
-																			0  						,	--@@bNoAnulado
-																			1							  --@@bDelete
+  exec sp_DocDepositoCuponEditableGet  @@emp_id      ,
+                                      @@dcup_id     ,
+                                      @@us_id       ,
+                                      @bEditable     out,
+                                      @editMsg       out,
+                                      0              , --@@ShowMsg
+                                      0              ,  --@@bNoAnulado
+                                      1                --@@bDelete
 
-	if @bEditable = 0 begin
+  if @bEditable = 0 begin
 
-		set @editMsg = '@@ERROR_SP:' + @editMsg
-		raiserror (@editMsg, 16, 1)
+    set @editMsg = '@@ERROR_SP:' + @editMsg
+    raiserror (@editMsg, 16, 1)
 
-		return
-	end
+    return
+  end
 
   -- Solo puedo borrar esta presentacion si ninguno de los cupons
   -- ha sido conciliado por una resolucion de cupones
@@ -47,18 +47,18 @@ begin
                                                 inner join ResolucionCuponItem r on t.tjcc_id = r.tjcc_id
             where dcup_id = @@dcup_id) begin
 
-  	raiserror ('@@ERROR_SP:Existen cupones en esta presentación que ya han sido conciliados. La presentación no puede borrarce.', 16, 1)
-  	return	
+    raiserror ('@@ERROR_SP:Existen cupones en esta presentación que ya han sido conciliados. La presentación no puede borrarce.', 16, 1)
+    return  
   end
 
-	begin transaction
+  begin transaction
 
-	declare @as_id int
+  declare @as_id int
 
-	select @as_id = as_id from DepositoCupon where dcup_id = @@dcup_id
+  select @as_id = as_id from DepositoCupon where dcup_id = @@dcup_id
   update DepositoCupon set as_id = null where dcup_id = @@dcup_id
-	exec sp_DocAsientoDelete @as_id, @@emp_id, @@us_id, 1 -- No check access
-	if @@error <> 0 goto ControlError
+  exec sp_DocAsientoDelete @as_id, @@emp_id, @@us_id, 1 -- No check access
+  if @@error <> 0 goto ControlError
 
   -- Devuelvo los cupones a su estado original
   --
@@ -66,21 +66,21 @@ begin
   from CobranzaItem 
   where TarjetaCreditoCupon.tjcc_id = CobranzaItem.tjcc_id
     and exists(select * from DepositoCuponItem where tjcc_id = TarjetaCreditoCupon.tjcc_id and dcup_id = @@dcup_id)
-	if @@error <> 0 goto ControlError
+  if @@error <> 0 goto ControlError
   -----------------------------------------------------------------------------------------
 
-	delete DepositoCuponItem where dcup_id = @@dcup_id
-	if @@error <> 0 goto ControlError
+  delete DepositoCuponItem where dcup_id = @@dcup_id
+  if @@error <> 0 goto ControlError
 
-	delete DepositoCupon where dcup_id = @@dcup_id
-	if @@error <> 0 goto ControlError
+  delete DepositoCupon where dcup_id = @@dcup_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la presentacion de cupones. sp_DocDepositoCuponDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la presentacion de cupones. sp_DocDepositoCuponDelete.', 16, 1)
+  rollback transaction  
 
 end

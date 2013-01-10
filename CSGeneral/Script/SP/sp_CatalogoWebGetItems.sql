@@ -11,8 +11,8 @@ go
 -- sp_CatalogoWebGetItems 2
 
 create procedure sp_CatalogoWebGetItems (
-	@@catw_id				int,
-  @@pr_nombre			varchar(255)
+  @@catw_id        int,
+  @@pr_nombre      varchar(255)
 )
 as
 
@@ -20,17 +20,17 @@ set nocount on
 
 begin
 
-	if @@pr_nombre <> '' set @@pr_nombre = '%' + @@pr_nombre + '%'
+  if @@pr_nombre <> '' set @@pr_nombre = '%' + @@pr_nombre + '%'
 
-	select top 50 	catwi.*, 
-									pr_nombreventa    as pr_nombre
+  select top 50   catwi.*, 
+                  pr_nombreventa    as pr_nombre
 
-	from CatalogoWebItem catwi inner join Producto p on catwi.pr_id = p.pr_id
-	where catw_id = @@catw_id 
-		and (			pr_nombreventa like @@pr_nombre or @@pr_nombre = ''
-					or  pr_codigo      like @@pr_nombre or @@pr_nombre = ''
-				)
-	order by pr_nombreventa
+  from CatalogoWebItem catwi inner join Producto p on catwi.pr_id = p.pr_id
+  where catw_id = @@catw_id 
+    and (      pr_nombreventa like @@pr_nombre or @@pr_nombre = ''
+          or  pr_codigo      like @@pr_nombre or @@pr_nombre = ''
+        )
+  order by pr_nombreventa
 
 end
 

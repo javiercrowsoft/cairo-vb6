@@ -8,30 +8,30 @@ SET ANSI_NULLS ON
 GO
 /*
 
-	select * from usuario
+  select * from usuario
 
   sp_SysModuloGetEx 38
 
 */
 create procedure sp_SysModuloGetEx (
-	@@us_id            int
+  @@us_id            int
 )
 as
 begin
-	set nocount on
+  set nocount on
 
-	delete sysModuloUser where us_id = @@us_id
+  delete sysModuloUser where us_id = @@us_id
 
-	insert into sysModuloUser (sysm_id, us_id)
+  insert into sysModuloUser (sysm_id, us_id)
 
-	select distinct s.sysm_id, @@us_id from sysModulo s inner join permiso p on s.pre_id = p.pre_id
+  select distinct s.sysm_id, @@us_id from sysModulo s inner join permiso p on s.pre_id = p.pre_id
   
-	where (				exists (select per_id from permiso where per_id = p.per_id and us_id = @@us_id)
-        	or		
-								exists (select per_id from permiso inner join usuariorol on permiso.rol_id = usuariorol.rol_id
-                                      where 			per_id = p.per_id
-																						and		usuariorol.us_id = @@us_id)
-				)
+  where (        exists (select per_id from permiso where per_id = p.per_id and us_id = @@us_id)
+          or    
+                exists (select per_id from permiso inner join usuariorol on permiso.rol_id = usuariorol.rol_id
+                                      where       per_id = p.per_id
+                                            and    usuariorol.us_id = @@us_id)
+        )
 
 end
 

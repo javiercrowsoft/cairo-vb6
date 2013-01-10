@@ -12,7 +12,7 @@ go
 -- sp_productoBOMEsEditable 13443
 
 create procedure sp_productoBOMEsEditable (
-	@@pr_id	int
+  @@pr_id  int
 )
 as
 
@@ -20,7 +20,7 @@ set nocount on
 
 begin
 
-	select 1
+  select 1
 end
 
 go

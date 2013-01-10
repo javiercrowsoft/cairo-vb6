@@ -13,42 +13,42 @@ go
 -- sp_tareaDelete 131
 
 create procedure sp_tareaDelete (
-	@@tar_id	int
+  @@tar_id  int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	begin transaction
+  begin transaction
 
-	declare @tar_id 		int
-	declare @prns_id 		int
+  declare @tar_id     int
+  declare @prns_id     int
 
-	select prns_id = prns_id 
-	from Tarea 
-	where tar_id = @@tar_id
+  select prns_id = prns_id 
+  from Tarea 
+  where tar_id = @@tar_id
 
-	select @tar_id = max(tar_id)
-	from Tarea t
+  select @tar_id = max(tar_id)
+  from Tarea t
   where t.tar_id <> @@tar_id
-		and t.prns_id = @prns_id
+    and t.prns_id = @prns_id
 
-	update ProductoNumeroSerie set tar_id = @tar_id
+  update ProductoNumeroSerie set tar_id = @tar_id
   where prns_id = @prns_id
-	if @@error <> 0 goto ControlError
+  if @@error <> 0 goto ControlError
 
-	delete Tarea where tar_id = @@tar_id
-	if @@error <> 0 goto ControlError
+  delete Tarea where tar_id = @@tar_id
+  if @@error <> 0 goto ControlError
 
-	commit transaction
+  commit transaction
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al borrar la tarea. sp_tareaDelete.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al borrar la tarea. sp_tareaDelete.', 16, 1)
+  rollback transaction  
 
 end
 

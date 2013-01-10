@@ -9,13 +9,13 @@ drop procedure [dbo].[sp_ProductoBOMIGet]
 
 go
 create procedure sp_ProductoBOMIGet (
-	@@pbm_id 		int
+  @@pbm_id     int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
   select 
       pbmi.*,
@@ -24,18 +24,18 @@ begin
 
   from
     ProductoBOMItem pbmi inner join ProductoBOMItemTipo pbmit on pbmi.pbmit_id = pbmit.pbmit_id
-												 left  join Producto            pr    on pbmi.pr_id = pr.pr_id
+                         left  join Producto            pr    on pbmi.pr_id = pr.pr_id
   
   where pbmi.pbm_id = @@pbm_id
 
-	select
-			pbmi.*,
+  select
+      pbmi.*,
       pr_nombreCompra
 
-	from
-		ProductoBOMItemA pbmia inner join ProductoBOMItem pbmi on pbmia.pbmi_id = pbmi.pbmi_id
-													 inner join Producto pr    			 on pbmia.pr_id = pr.pr_id
-	where pbmi.pbm_id = @@pbm_id
+  from
+    ProductoBOMItemA pbmia inner join ProductoBOMItem pbmi on pbmia.pbmi_id = pbmi.pbmi_id
+                           inner join Producto pr           on pbmia.pr_id = pr.pr_id
+  where pbmi.pbm_id = @@pbm_id
 
 end
 

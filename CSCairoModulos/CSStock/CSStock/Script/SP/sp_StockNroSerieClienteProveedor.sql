@@ -49,8 +49,8 @@ begin
 
     select @st_id = st_id from StockItem where prns_id = @prns_id and sti_salida > 0 and depl_id = -3
                                   /*
-                                  2	Factura de Compra	
-                                  4	Remito de Compra	
+                                  2  Factura de Compra  
+                                  4  Remito de Compra  
                                   */
     select @prov_id = case doct_id_cliente
             when 2 then (select prov_id from FacturaCompra where fc_id = id_cliente)
@@ -68,17 +68,17 @@ begin
                                     doct_id_ingreso = @doct_id_cliente
     where prns_id = @prns_id
 
-		-- Aprovecho el cursor para resolver un temilla en clientes
-		--
-	  -- Todos los numeros de serie que no estan en el deposito tercero
-	  -- no tiene cliente asociado
-	  --
-	  update ProductoNumeroSerie set 
-	                                  cli_id         = null, 
-	                                  doc_id_salida  = null,
-	                                  doct_id_salida = null
-	  where depl_id <> -3
-			and prns_id = @prns_id
+    -- Aprovecho el cursor para resolver un temilla en clientes
+    --
+    -- Todos los numeros de serie que no estan en el deposito tercero
+    -- no tiene cliente asociado
+    --
+    update ProductoNumeroSerie set 
+                                    cli_id         = null, 
+                                    doc_id_salida  = null,
+                                    doct_id_salida = null
+    where depl_id <> -3
+      and prns_id = @prns_id
   
     fetch next from c_prns_prov into @prns_id
   end
@@ -105,8 +105,8 @@ begin
 
     select top 1 @st_id = st_id from StockItem where prns_id = @prns_id and sti_ingreso > 0 and depl_id = -3 order by st_id desc
                                   /*
-                                  1	Factura de Venta	
-                                  3	Remito de Venta	
+                                  1  Factura de Venta  
+                                  3  Remito de Venta  
                                   */
     select @cli_id = case doct_id_cliente
             when 1 then (select cli_id from FacturaVenta where fv_id = id_cliente)

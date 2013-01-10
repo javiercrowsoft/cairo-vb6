@@ -3,22 +3,22 @@ drop procedure [dbo].[sp_DocPackingListSaveAplic]
 
 /*
 begin transaction
-	exec	sp_DocPackingListSaveAplic 17
+  exec  sp_DocPackingListSaveAplic 17
 rollback transaction
 
 */
 
 go
 create procedure sp_DocPackingListSaveAplic (
-	@@pklstTMP_id int	
+  @@pklstTMP_id int  
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @pklst_id 				int
+  declare @pklst_id         int
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,11 +28,11 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	declare @modifico int
+  declare @modifico int
 
-	select @pklst_id = pklst_id, @modifico = modifico from PackingListTMP where pklstTMP_id = @@pklstTMP_id
+  select @pklst_id = pklst_id, @modifico = modifico from PackingListTMP where pklstTMP_id = @@pklstTMP_id
 
-	begin transaction
+  begin transaction
 
   declare @bSuccess      tinyint
 
@@ -44,10 +44,10 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocPackingLstSaveAplic @pklst_id, @@pklstTMP_id, 1, @bSuccess out
+  exec sp_DocPackingLstSaveAplic @pklst_id, @@pklstTMP_id, 1, @bSuccess out
 
-	-- Si fallo al guardar
-	if IsNull(@bSuccess,0) = 0 goto ControlError
+  -- Si fallo al guardar
+  if IsNull(@bSuccess,0) = 0 goto ControlError
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,8 +57,8 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_DocPackingListSetCredito @pklst_id
-	exec sp_DocPackingListSetEstado @pklst_id
+  exec sp_DocPackingListSetCredito @pklst_id
+  exec sp_DocPackingListSetEstado @pklst_id
 
 /*
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +68,7 @@ begin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	exec sp_HistoriaUpdate 22005, @pklst_id, @modifico, 6
+  exec sp_HistoriaUpdate 22005, @pklst_id, @modifico, 6
 
 /*
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,20 +78,20 @@ begin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
-	delete PackingListFacturaVentaTMP where pklstTMP_ID = @@pklstTMP_ID
-	delete PedidoPackingListTMP where pklstTMP_ID = @@pklstTMP_ID
+  delete PackingListFacturaVentaTMP where pklstTMP_ID = @@pklstTMP_ID
+  delete PedidoPackingListTMP where pklstTMP_ID = @@pklstTMP_ID
   delete PackingListDevolucionTMP where pklstTMP_ID = @@pklstTMP_ID
-	delete PackingListTMP where pklstTMP_ID = @@pklstTMP_ID
+  delete PackingListTMP where pklstTMP_ID = @@pklstTMP_ID
 
-	commit transaction
+  commit transaction
 
-	select @pklst_id
+  select @pklst_id
 
-	return
+  return
 ControlError:
 
-	raiserror ('Ha ocurrido un error al grabar la aplicación del packing list. sp_DocPackingListSaveAplic.', 16, 1)
-	rollback transaction	
+  raiserror ('Ha ocurrido un error al grabar la aplicación del packing list. sp_DocPackingListSaveAplic.', 16, 1)
+  rollback transaction  
 
 end 
 

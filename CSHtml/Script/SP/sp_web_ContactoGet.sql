@@ -10,21 +10,21 @@ drop procedure [dbo].[sp_web_ContactoGet]
 go
 create procedure sp_web_ContactoGet (
 
-	@@us_id int
+  @@us_id int
 
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	exec sp_web_ContactoGetEx 
-																  0,
-																  0,
-																  '',
-																  @@us_id,
-																	0
+  exec sp_web_ContactoGetEx 
+                                  0,
+                                  0,
+                                  '',
+                                  @@us_id,
+                                  0
 
 end
 go

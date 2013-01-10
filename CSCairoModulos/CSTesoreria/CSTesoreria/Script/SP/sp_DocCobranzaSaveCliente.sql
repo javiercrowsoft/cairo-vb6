@@ -4,10 +4,10 @@ drop procedure [dbo].[sp_DocCobranzaSaveCliente]
 go
 
 create procedure sp_DocCobranzaSaveCliente (
-	@@cobz_id     int,
-	@@cobzTMP_ID	int,
+  @@cobz_id     int,
+  @@cobzTMP_ID  int,
   @@bSuccess    tinyint out,
-	@@ErrorMsg    varchar(5000) out
+  @@ErrorMsg    varchar(5000) out
 )
 as
 
@@ -15,7 +15,7 @@ begin
 
   set nocount on
 
-	set @@bSuccess = 1
+  set @@bSuccess = 1
 
 end
 GO

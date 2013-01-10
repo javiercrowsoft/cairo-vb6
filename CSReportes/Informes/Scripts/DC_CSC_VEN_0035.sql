@@ -15,14 +15,14 @@ go
 create procedure DC_CSC_VEN_0035(
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
-	@@cico_id  				varchar(255),
-	@@pr_id 	 				varchar(255),
-  @@doc_id	 				varchar(255),
-  @@emp_id   				varchar(255),
-	@@top             tinyint
+  @@cico_id          varchar(255),
+  @@pr_id            varchar(255),
+  @@doc_id           varchar(255),
+  @@emp_id           varchar(255),
+  @@top             tinyint
 
 ) 
 
@@ -34,33 +34,33 @@ set nocount on
 
 create table #tbl_dc_csc_ven_0030 (
 
-	Orden										int,
-	producto								varchar(255),
-	[ventas neto]						decimal(18,6),
-	ventas									decimal(18,6),
-	[compras neto]					decimal(18,6),
-	compras									decimal(18,6),
-	ivaventas								decimal(18,6),
-	ivacompras							decimal(18,6),
-	[cant. ventas]					decimal(18,6),
-	[cant. compras]					decimal(18,6)
+  Orden                    int,
+  producto                varchar(255),
+  [ventas neto]            decimal(18,6),
+  ventas                  decimal(18,6),
+  [compras neto]          decimal(18,6),
+  compras                  decimal(18,6),
+  ivaventas                decimal(18,6),
+  ivacompras              decimal(18,6),
+  [cant. ventas]          decimal(18,6),
+  [cant. compras]          decimal(18,6)
 )
 
 
-	insert into #tbl_dc_csc_ven_0030 exec DC_CSC_VEN_0030 @@us_id, @@Fini, @@Ffin, @@cico_id, @@pr_id, @@doc_id, @@emp_id
+  insert into #tbl_dc_csc_ven_0030 exec DC_CSC_VEN_0030 @@us_id, @@Fini, @@Ffin, @@cico_id, @@pr_id, @@doc_id, @@emp_id
 
-	declare @sqlstmt varchar(255)
-	set @sqlstmt = 'select top ' + convert(varchar,@@top) + ' * '
-								 + ' from #tbl_dc_csc_ven_0030 where orden = 1'
+  declare @sqlstmt varchar(255)
+  set @sqlstmt = 'select top ' + convert(varchar,@@top) + ' * '
+                 + ' from #tbl_dc_csc_ven_0030 where orden = 1'
 
-							+  ' union all '
+              +  ' union all '
 
-							+  'select top ' + convert(varchar,@@top) + ' * '
-								 + ' from #tbl_dc_csc_ven_0030 where orden = 2'
+              +  'select top ' + convert(varchar,@@top) + ' * '
+                 + ' from #tbl_dc_csc_ven_0030 where orden = 2'
 
-								 + ' order by orden, [ventas neto] desc, [compras neto] desc'
+                 + ' order by orden, [ventas neto] desc, [compras neto] desc'
 
-	exec(@sqlstmt)
+  exec(@sqlstmt)
 
 end
 go

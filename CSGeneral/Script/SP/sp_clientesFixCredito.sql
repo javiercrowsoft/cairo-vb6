@@ -14,23 +14,23 @@ as
 
 begin
 
-	declare @cli_id int
+  declare @cli_id int
 
-	declare c_cliente insensitive cursor for select cli_id from Cliente
+  declare c_cliente insensitive cursor for select cli_id from Cliente
 
-	open c_cliente
+  open c_cliente
 
-	fetch next from c_cliente into @cli_id	
-	while @@fetch_status=0
-	begin
+  fetch next from c_cliente into @cli_id  
+  while @@fetch_status=0
+  begin
 
-		exec sp_ClienteFixCredito @cli_id
+    exec sp_ClienteFixCredito @cli_id
 
-		fetch next from c_cliente into @cli_id
-	end
+    fetch next from c_cliente into @cli_id
+  end
 
-	close c_cliente
-	deallocate c_cliente
+  close c_cliente
+  deallocate c_cliente
 
 end
 go

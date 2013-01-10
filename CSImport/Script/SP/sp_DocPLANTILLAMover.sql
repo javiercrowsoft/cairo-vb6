@@ -22,7 +22,7 @@ sp_DocNOMBRE_DOCMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocNOMBRE_DOCMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -30,47 +30,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select NOMBRE_CAMPO_id from NOMBRE_TABLA 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select NOMBRE_CAMPO_id from NOMBRE_TABLA 
                                                         where NOMBRE_CAMPO_NUMERO = (
-																																	select min(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
+                                                                  select min(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select NOMBRE_CAMPO_id from NOMBRE_TABLA 
+                                                        select NOMBRE_CAMPO_id from NOMBRE_TABLA 
                                                         where NOMBRE_CAMPO_NUMERO = (
-																																	select max(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
+                                                                  select max(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
                                                                   where doc_id = @@DocId 
-																																			and NOMBRE_CAMPO_NUMERO < @@currNro 
-																																)
+                                                                      and NOMBRE_CAMPO_NUMERO < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select NOMBRE_CAMPO_id from NOMBRE_TABLA 
+                                                        select NOMBRE_CAMPO_id from NOMBRE_TABLA 
                                                         where NOMBRE_CAMPO_NUMERO = (
-																																	select min(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
+                                                                  select min(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
                                                                   where doc_id = @@DocId 
                                                                       and NOMBRE_CAMPO_NUMERO > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select NOMBRE_CAMPO_id from NOMBRE_TABLA 
+                                                        select NOMBRE_CAMPO_id from NOMBRE_TABLA 
                                                         where NOMBRE_CAMPO_NUMERO = (
-																																	select max(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
+                                                                  select max(NOMBRE_CAMPO_NUMERO) from NOMBRE_TABLA 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

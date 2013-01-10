@@ -14,7 +14,7 @@ sp_DocStockProveedorMover 5,1,7 -- LAST
 
 go
 create procedure sp_DocStockProveedorMover (
-	@@MoveTo 			 smallint,
+  @@MoveTo        smallint,
   @@currNro      int,
   @@DocId        int
 )
@@ -22,47 +22,47 @@ as
 
 begin
 
-  declare @MSG_DOC_FIRST 		  smallint 
-  declare @MSG_DOC_PREVIOUS 	smallint
-  declare @MSG_DOC_NEXT 			smallint
-  declare @MSG_DOC_LAST 			smallint
+  declare @MSG_DOC_FIRST       smallint 
+  declare @MSG_DOC_PREVIOUS   smallint
+  declare @MSG_DOC_NEXT       smallint
+  declare @MSG_DOC_LAST       smallint
 
   set @MSG_DOC_FIRST = 101
   set @MSG_DOC_PREVIOUS = 102
   set @MSG_DOC_NEXT = 103
   set @MSG_DOC_LAST = 104
 
-	if 					 @@MoveTo = @MSG_DOC_FIRST        begin
-																										    select stprov_id from StockProveedor 
+  if            @@MoveTo = @MSG_DOC_FIRST        begin
+                                                        select stprov_id from StockProveedor 
                                                         where stprov_numero = (
-																																	select min(stprov_numero) from StockProveedor 
+                                                                  select min(stprov_numero) from StockProveedor 
                                                                   where doc_id = @@DocId
-																																)
-																								end
+                                                                )
+                                                end
   else if      @@MoveTo = @MSG_DOC_PREVIOUS     begin
-																										    select stprov_id from StockProveedor 
+                                                        select stprov_id from StockProveedor 
                                                         where stprov_numero = (
-																																	select max(stprov_numero) from StockProveedor 
+                                                                  select max(stprov_numero) from StockProveedor 
                                                                   where doc_id = @@DocId 
-																																			and stprov_numero < @@currNro 
-																																)
+                                                                      and stprov_numero < @@currNro 
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_NEXT         begin
-																										    select stprov_id from StockProveedor 
+                                                        select stprov_id from StockProveedor 
                                                         where stprov_numero = (
-																																	select min(stprov_numero) from StockProveedor 
+                                                                  select min(stprov_numero) from StockProveedor 
                                                                   where doc_id = @@DocId 
                                                                       and stprov_numero > @@currNro 
-																																)
+                                                                )
 
-																								end
+                                                end
   else if      @@MoveTo = @MSG_DOC_LAST         begin
-																										    select stprov_id from StockProveedor 
+                                                        select stprov_id from StockProveedor 
                                                         where stprov_numero = (
-																																	select max(stprov_numero) from StockProveedor 
+                                                                  select max(stprov_numero) from StockProveedor 
                                                                   where doc_id = @@DocId
-																																)
+                                                                )
 
-																								end
+                                                end
 end

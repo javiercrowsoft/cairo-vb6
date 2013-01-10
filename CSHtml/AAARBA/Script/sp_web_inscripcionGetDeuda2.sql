@@ -15,30 +15,30 @@ sp_col inscripcion
 
 go
 create procedure sp_web_inscripcionGetDeuda2(
-	@@insc_id int
+  @@insc_id int
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	insc_id, 
-					insc_fecha,
-					insc_categoria,
-					insc_tipodocumento,
-					insc_documento,
-					insc_nombre,
-					insc_apellido,
-					insc_numero,
-					aabainsc_acompannantes,
-					insc.cpg_id,
-					cpg_nombre 
+  select   insc_id, 
+          insc_fecha,
+          insc_categoria,
+          insc_tipodocumento,
+          insc_documento,
+          insc_nombre,
+          insc_apellido,
+          insc_numero,
+          aabainsc_acompannantes,
+          insc.cpg_id,
+          cpg_nombre 
 
-	from aaarbaweb..inscripcion insc inner join condicionPago cpg on insc.cpg_id = cpg.cpg_id
+  from aaarbaweb..inscripcion insc inner join condicionPago cpg on insc.cpg_id = cpg.cpg_id
 
-	where insc_id = @@insc_id
-	
+  where insc_id = @@insc_id
+  
 end
 
 go

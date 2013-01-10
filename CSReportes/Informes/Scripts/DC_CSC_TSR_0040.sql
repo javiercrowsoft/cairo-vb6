@@ -16,11 +16,11 @@ go
 create procedure DC_CSC_TSR_0040 (
 
   @@us_id    int,
-	@@Fini 		 datetime,
-	@@Ffin 		 datetime,
+  @@Fini      datetime,
+  @@Ffin      datetime,
 
 @@bco_id  varchar(255),
-@@cli_id	varchar(255), -- TODO:EMPRESA
+@@cli_id  varchar(255), -- TODO:EMPRESA
 @@prov_id varchar(255),
 @@cue_id  varchar(255),
 @@cheq_id int,
@@ -74,58 +74,58 @@ exec sp_GetRptId @clienteID out
 
 if @ram_id_banco <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_banco, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_banco, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_banco, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_banco, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_banco, @clienteID 
-	end else 
-		set @ram_id_banco = 0
+    exec sp_ArbGetAllHojas @ram_id_banco, @clienteID 
+  end else 
+    set @ram_id_banco = 0
 end
 
 if @ram_id_Cliente <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Cliente, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Cliente, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Cliente, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Cliente, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Cliente, @clienteID 
-	end else 
-		set @ram_id_Cliente = 0
+    exec sp_ArbGetAllHojas @ram_id_Cliente, @clienteID 
+  end else 
+    set @ram_id_Cliente = 0
 end
 
 if @ram_id_Proveedor <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Proveedor, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Proveedor, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Proveedor, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Proveedor, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Proveedor, @clienteID 
-	end else 
-		set @ram_id_Proveedor = 0
+    exec sp_ArbGetAllHojas @ram_id_Proveedor, @clienteID 
+  end else 
+    set @ram_id_Proveedor = 0
 end
 
 if @ram_id_Cuenta <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Cuenta, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Cuenta, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Cuenta, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Cuenta, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Cuenta, @clienteID 
-	end else 
-		set @ram_id_Cuenta = 0
+    exec sp_ArbGetAllHojas @ram_id_Cuenta, @clienteID 
+  end else 
+    set @ram_id_Cuenta = 0
 end
 
 -- TODO:EMPRESA
 if @ram_id_Empresa <> 0 begin
 
---	exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
+--  exec sp_ArbGetGroups @ram_id_Empresa, @clienteID, @@us_id
 
-	exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
+  exec sp_ArbIsRaiz @ram_id_Empresa, @IsRaiz out
   if @IsRaiz = 0 begin
-		exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
-	end else 
-		set @ram_id_Empresa = 0
+    exec sp_ArbGetAllHojas @ram_id_Empresa, @clienteID 
+  end else 
+    set @ram_id_Empresa = 0
 end
 
 /*- ///////////////////////////////////////////////////////////////////////
@@ -137,18 +137,18 @@ FIN PRIMERA PARTE DE ARBOLES
 
 select 
 
-						cheq.cheq_id,
+            cheq.cheq_id,
             o.opg_id,
             cli_nombre        as [Cliente],
-						cheq_numero				as [Numero],
-						cheq_numerodoc		as [Cheque],
-						cheq_fechaVto			as [Fecha],
+            cheq_numero        as [Numero],
+            cheq_numerodoc    as [Cheque],
+            cheq_fechaVto      as [Fecha],
             mon_nombre        as [Moneda],
             bco_nombre        as [Banco],
             isnull(cue_nombre,'(Pago a proveedores)')         
                               as [Cuenta],
-						cheq_importe      as [Importe],
-						cobz_nrodoc       as [Cobranza],
+            cheq_importe      as [Importe],
+            cobz_nrodoc       as [Cobranza],
             cobz_numero       as [Cobranza Numero],
             doc_nombre        as [Documento],
             emp_nombre        as [Empresa], -- TODO:EMPRESA
@@ -160,11 +160,11 @@ select
 
 from 
 
-			Cheque cheq inner join Cobranza	c						on cheq.cobz_id   = c.cobz_id
-									inner join CobranzaItem ci      on cheq.cheq_id   = ci.cheq_id
-                  inner join Banco  b 						on cheq.bco_id    = b.bco_id
-                  inner join Moneda m 						on cheq.mon_id    = m.mon_id
-                  inner join Cliente cli   				on c.cli_id       = cli.cli_id
+      Cheque cheq inner join Cobranza  c            on cheq.cobz_id   = c.cobz_id
+                  inner join CobranzaItem ci      on cheq.cheq_id   = ci.cheq_id
+                  inner join Banco  b             on cheq.bco_id    = b.bco_id
+                  inner join Moneda m             on cheq.mon_id    = m.mon_id
+                  inner join Cliente cli           on c.cli_id       = cli.cli_id
                   inner join Documento doc        on c.doc_id       = doc.doc_id
                   inner join Empresa              on doc.emp_id     = Empresa.emp_id -- TODO:EMPRESA
                   
@@ -174,18 +174,18 @@ from
 
 where 
 
-				  @@Fini <= cheq_fechacobro
-			and	@@Ffin >= cheq_fechacobro
+          @@Fini <= cheq_fechacobro
+      and  @@Ffin >= cheq_fechacobro
       and (cheq.cheq_id = @@cheq_id or @@cheq_id = 0)
 
 -- TODO:EMPRESA
-			and (
-						exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
-					)
-			and (
-						exists(select * from UsuarioEmpresa where cli_id = c.cli_id and us_id = @@us_id) or (@us_empresaEx = 0)
-					)
-					
+      and (
+            exists(select * from EmpresaUsuario where emp_id = doc.emp_id and us_id = @@us_id) or (@@us_id = 1)
+          )
+      and (
+            exists(select * from UsuarioEmpresa where cli_id = c.cli_id and us_id = @@us_id) or (@us_empresaEx = 0)
+          )
+          
 /* -///////////////////////////////////////////////////////////////////////
 
 INICIO SEGUNDA PARTE DE ARBOLES
@@ -200,70 +200,70 @@ and   (Empresa.emp_id = @emp_id or @emp_id=0) -- TODO:EMPRESA
 
 -- Arboles
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 13 -- tbl_id de Proyecto
                   and  rptarb_hojaid = b.bco_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_banco = 0)
-			 )
+           (@ram_id_banco = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 28 -- tbl_id de Proyecto
                   and  rptarb_hojaid = cli.cli_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Cliente = 0)
-			 )
+           (@ram_id_Cliente = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 29 -- select * from tabla where tbl_nombre = 'proveedor'
                   and  rptarb_hojaid = o.prov_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Proveedor = 0)
-			 )
+           (@ram_id_Proveedor = 0)
+       )
 
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 17 -- select * from tabla where tbl_nombre = 'cuenta'
                   and  rptarb_hojaid = cheq.cue_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_cuenta = 0)
-			 )
+           (@ram_id_cuenta = 0)
+       )
 
 -- TODO:EMPRESA
 and   (
-					(exists(select rptarb_hojaid 
+          (exists(select rptarb_hojaid 
                   from rptArbolRamaHoja 
                   where
                        rptarb_cliente = @clienteID
                   and  tbl_id = 1018 -- select * from tabla where tbl_nombre = 'empresa'
                   and  rptarb_hojaid = doc.emp_id
-							   ) 
+                 ) 
            )
         or 
-					 (@ram_id_Empresa = 0)
-			 )
+           (@ram_id_Empresa = 0)
+       )
 
 end
 go

@@ -3,11 +3,11 @@ drop table [dbo].[PedidoVenta]
 GO
 
 CREATE TABLE [dbo].[PedidoVenta] (
-	[pv_id] [int] NOT NULL ,
-	[creado] [datetime] NOT NULL ,
-	[modificado] [datetime] NOT NULL ,
-	[modifico] [int] NULL ,
-	[te_id] [int] NULL 
+  [pv_id] [int] NOT NULL ,
+  [creado] [datetime] NOT NULL ,
+  [modificado] [datetime] NOT NULL ,
+  [modifico] [int] NULL ,
+  [te_id] [int] NULL 
 ) ON [PRIMARY]
 GO
 

@@ -11,16 +11,16 @@ sp_DocCobranzaCdoMoveCtaCte  29183
 */
 
 create procedure sp_DocCobranzaCdoMoveCtaCte (
-	@@fv_id   int
+  @@fv_id   int
 )
 as
 
 begin
 
-	set nocount off
+  set nocount off
 
-	update FacturaVentaCajero set fvcj_ctacte = 1 where fv_id = @@fv_id
+  update FacturaVentaCajero set fvcj_ctacte = 1 where fv_id = @@fv_id
 
-	select 1
+  select 1
 
 end

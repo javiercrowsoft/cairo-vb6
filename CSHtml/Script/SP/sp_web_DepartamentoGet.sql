@@ -15,22 +15,22 @@ sp_web_DepartamentoGet 1
 
 create Procedure sp_web_DepartamentoGet
 (
-	@@us_id int  
+  @@us_id int  
 ) 
 as
 begin
 
-	select dpto_id, 
-				 dpto_nombre as [Departamento]
+  select dpto_id, 
+         dpto_nombre as [Departamento]
 
-	from Departamento
+  from Departamento
 
-	union
+  union
 
-	select 0 as dpto_id, 
-				 '(Ninguno)' as [Departamento]
+  select 0 as dpto_id, 
+         '(Ninguno)' as [Departamento]
 
-	order by dpto_nombre
+  order by dpto_nombre
 
 end
 go

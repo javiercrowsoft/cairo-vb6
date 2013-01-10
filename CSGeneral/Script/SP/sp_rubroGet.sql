@@ -11,7 +11,7 @@ go
 -- sp_RubroGet 6
 
 create procedure sp_RubroGet (
-	@@rub_id	int
+  @@rub_id  int
 )
 as
 
@@ -20,7 +20,7 @@ set nocount on
 begin
 
 select 
-		Rubro.*, 
+    Rubro.*, 
     rt1.rubt_nombre as rubro1,
     rt2.rubt_nombre as rubro2,
     rt3.rubt_nombre as rubro3,
@@ -43,7 +43,7 @@ select
     rti10.rubti_nombre as rubroi10
 
 from 
-		Rubro left join RubroTabla as rt1  on Rubro.rubt_id1  = rt1.rubt_id
+    Rubro left join RubroTabla as rt1  on Rubro.rubt_id1  = rt1.rubt_id
           left join RubroTabla as rt2  on Rubro.rubt_id2  = rt2.rubt_id
           left join RubroTabla as rt3  on Rubro.rubt_id3  = rt3.rubt_id    
           left join RubroTabla as rt4  on Rubro.rubt_id4  = rt4.rubt_id
@@ -67,7 +67,7 @@ from
 
 where 
 
-		rub_id = @@rub_id
+    rub_id = @@rub_id
 
 end
 

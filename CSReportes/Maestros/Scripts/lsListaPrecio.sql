@@ -17,10 +17,10 @@ drop procedure [dbo].[lsListaPrecio]
 go
 create procedure lsListaPrecio (
 
-@@lp_id					varchar(255),
-@@pr_id					varchar(255),
-@@bIva      		smallint,
-@@bSinClientes	smallint,
+@@lp_id          varchar(255),
+@@pr_id          varchar(255),
+@@bIva          smallint,
+@@bSinClientes  smallint,
 @@bSinBases     smallint
 
 )as 
@@ -32,38 +32,38 @@ begin
 -- Arboles
 --/////////////////////////////////////////////////////////////////////////////////
 
-	declare @lp_id int
+  declare @lp_id int
   declare @pr_id int
-	declare @Ram_id_ListaPrecio int
-	declare @Ram_id_Producto    int
-	
-	declare @clienteID 	int
-	declare @IsRaiz 		tinyint
+  declare @Ram_id_ListaPrecio int
+  declare @Ram_id_Producto    int
+  
+  declare @clienteID   int
+  declare @IsRaiz     tinyint
 
-	exec sp_ArbConvertId @@lp_id, @lp_id out, @Ram_id_ListaPrecio out
-	exec sp_ArbConvertId @@pr_id, @pr_id out, @Ram_id_Producto out
-	
-	if @Ram_id_ListaPrecio <> 0 or @Ram_id_Producto <> 0 begin
+  exec sp_ArbConvertId @@lp_id, @lp_id out, @Ram_id_ListaPrecio out
+  exec sp_ArbConvertId @@pr_id, @pr_id out, @Ram_id_Producto out
+  
+  if @Ram_id_ListaPrecio <> 0 or @Ram_id_Producto <> 0 begin
 
-		exec sp_GetRptId @clienteID out
+    exec sp_GetRptId @clienteID out
 
-		if @Ram_id_ListaPrecio <> 0 begin	
-			exec sp_ArbIsRaiz @Ram_id_ListaPrecio, @IsRaiz out
-		  if @IsRaiz = 0	exec sp_ArbGetAllHojas @Ram_id_ListaPrecio, @clienteID
-			else    				set @Ram_id_ListaPrecio = 0
-		end
+    if @Ram_id_ListaPrecio <> 0 begin  
+      exec sp_ArbIsRaiz @Ram_id_ListaPrecio, @IsRaiz out
+      if @IsRaiz = 0  exec sp_ArbGetAllHojas @Ram_id_ListaPrecio, @clienteID
+      else            set @Ram_id_ListaPrecio = 0
+    end
 
-		if @Ram_id_Producto <> 0 begin	
-			exec sp_ArbIsRaiz @Ram_id_Producto, @IsRaiz out
-		  if @IsRaiz = 0  exec sp_ArbGetAllHojas @Ram_id_Producto, @clienteID
-			else    				set @Ram_id_Producto = 0
-		end
-	
-	end else begin
-	
-		set @clienteID = 0
-	
-	end
+    if @Ram_id_Producto <> 0 begin  
+      exec sp_ArbIsRaiz @Ram_id_Producto, @IsRaiz out
+      if @IsRaiz = 0  exec sp_ArbGetAllHojas @Ram_id_Producto, @clienteID
+      else            set @Ram_id_Producto = 0
+    end
+  
+  end else begin
+  
+    set @clienteID = 0
+  
+  end
 
 --/////////////////////////////////////////////////////////////////////////////////
 -- Que productos van en que lista
@@ -77,21 +77,21 @@ begin
 
   declare c_listas insensitive cursor for select lp_id from ListaPrecio 
   where 
-	      (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
+        (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
   
-	-- Arboles
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 27 -- tbl_id de ListaPrecio
-	                  and  rptarb_hojaid = ListaPrecio.lp_id
-								   ) 
-	           )
-	        or 
-						 (@Ram_id_ListaPrecio = 0)
-				 )
+  -- Arboles
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 27 -- tbl_id de ListaPrecio
+                    and  rptarb_hojaid = ListaPrecio.lp_id
+                   ) 
+             )
+          or 
+             (@Ram_id_ListaPrecio = 0)
+         )
   open c_listas
 
   fetch next from c_listas into @lp_id_pr
@@ -129,19 +129,19 @@ begin
                         where pr_id = ListaPrecioItem.pr_id
                           and lp_id = @lp_id_pr
                       )
-      	and   (ListaPrecioItem.pr_id = @pr_id or @pr_id=0)
-      	and   (
-      						(exists(select rptarb_hojaid 
-      	                  from rptArbolRamaHoja 
-      	                  where
-      	                       rptarb_cliente = @clienteID
-      	                  and  tbl_id = 30 -- select tbl_id, tbl_nombrefisico from tabla where tbl_nombre = 'producto'
-      	                  and  rptarb_hojaid = ListaPrecioItem.pr_id
-      								   ) 
-      	           )
-      	        or 
-      						 (@Ram_id_Producto = 0)
-      				 )
+        and   (ListaPrecioItem.pr_id = @pr_id or @pr_id=0)
+        and   (
+                  (exists(select rptarb_hojaid 
+                          from rptArbolRamaHoja 
+                          where
+                               rptarb_cliente = @clienteID
+                          and  tbl_id = 30 -- select tbl_id, tbl_nombrefisico from tabla where tbl_nombre = 'producto'
+                          and  rptarb_hojaid = ListaPrecioItem.pr_id
+                         ) 
+                   )
+                or 
+                   (@Ram_id_Producto = 0)
+               )
 
   
       set @t = @t+1
@@ -164,61 +164,61 @@ begin
 --/////////////////////////////////////////////////////////////////////////////////
   
   create table #tmpListaPrecio(
-  	Tipo						tinyint not null, 
-  	lp_id						int not null,	
-  	lp_nombre				varchar	(100) not null,
-  	lp_codigo				varchar	(15) not null,
-  	lp_descrip			varchar	(255) not null,
-  	lp_fechadesde		datetime not null,
-  	lp_fechahasta		datetime not null,
-  	lp_default			varchar(10),
-  	lp_id_padre			int null,
-  	lp_porcentaje		decimal not null,
-  	lp_tipo					varchar(100) not null,
-  	activo					tinyint not null,
-  	creado					datetime not null,
-  	modificado			datetime not null,
-  	modifico				int not null,
+    Tipo            tinyint not null, 
+    lp_id            int not null,  
+    lp_nombre        varchar  (100) not null,
+    lp_codigo        varchar  (15) not null,
+    lp_descrip      varchar  (255) not null,
+    lp_fechadesde    datetime not null,
+    lp_fechahasta    datetime not null,
+    lp_default      varchar(10),
+    lp_id_padre      int null,
+    lp_porcentaje    decimal not null,
+    lp_tipo          varchar(100) not null,
+    activo          tinyint not null,
+    creado          datetime not null,
+    modificado      datetime not null,
+    modifico        int not null,
     lpi_id          int null,
-  	pr_nombreventa 	varchar(255),
-  	pr_codigo 			varchar(100),
+    pr_nombreventa   varchar(255),
+    pr_codigo       varchar(100),
     pr_id           int,
-  	cli_nombre			varchar(100),
-  	cli_codigo			varchar(100),
-  	lpPadre         varchar(100),
-  	lpPadreCodigo   varchar(15),
-  	lpi_precio			decimal(18,6),
-  	lpi_porcentaje  decimal(18,6),
+    cli_nombre      varchar(100),
+    cli_codigo      varchar(100),
+    lpPadre         varchar(100),
+    lpPadreCodigo   varchar(15),
+    lpi_precio      decimal(18,6),
+    lpi_porcentaje  decimal(18,6),
     rub_nombre      varchar(100),
   )
   
   insert into
   #tmpListaPrecio(
-  	Tipo,
-  	lp_id,
-  	lp_nombre,
-  	lp_codigo,
-  	lp_descrip,
-  	lp_fechadesde,
-  	lp_fechahasta,
-  	lp_default,
-  	lp_id_padre,
-  	lp_porcentaje,
-  	lp_tipo,
-  	activo,
-  	creado,
-  	modificado,
-  	modifico,
+    Tipo,
+    lp_id,
+    lp_nombre,
+    lp_codigo,
+    lp_descrip,
+    lp_fechadesde,
+    lp_fechahasta,
+    lp_default,
+    lp_id_padre,
+    lp_porcentaje,
+    lp_tipo,
+    activo,
+    creado,
+    modificado,
+    modifico,
     lpi_id,
-  	pr_nombreventa,
-  	pr_codigo,
+    pr_nombreventa,
+    pr_codigo,
     pr_id,
-  	cli_nombre,
-  	cli_codigo,
-  	lpPadre,
-  	lpPadreCodigo,
-  	lpi_precio,
-  	lpi_porcentaje,
+    cli_nombre,
+    cli_codigo,
+    lpPadre,
+    lpPadreCodigo,
+    lpi_precio,
+    lpi_porcentaje,
     rub_nombre
   )
 
@@ -234,10 +234,10 @@ begin
   listaprecio.lp_descrip,
   listaprecio.lp_fechadesde,
   listaprecio.lp_fechahasta,
-	case listaprecio.lp_default
-		when 0 then 'No'
+  case listaprecio.lp_default
+    when 0 then 'No'
     else        'Si'
-	end,
+  end,
   listaprecio.lp_id_padre,
   listaprecio.lp_porcentaje,
   case 
@@ -271,35 +271,35 @@ begin
               left join Rubro                    on Producto.rub_id         = Rubro.rub_id
   
   where 
-	      (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
-	and   (ListaPrecioItem.pr_id = @pr_id or @pr_id=0)
+        (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
+  and   (ListaPrecioItem.pr_id = @pr_id or @pr_id=0)
 
-	-- Arboles
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 27 -- tbl_id de ListaPrecio
-	                  and  rptarb_hojaid = ListaPrecio.lp_id
-								   ) 
-	           )
-	        or 
-						 (@Ram_id_ListaPrecio = 0)
-				 )
-	
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 30 -- select tbl_id, tbl_nombrefisico from tabla where tbl_nombre = 'producto'
-	                  and  rptarb_hojaid = ListaPrecioItem.pr_id
-								   ) 
-	           )
-	        or 
-						 (@Ram_id_Producto = 0)
-				 )
+  -- Arboles
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 27 -- tbl_id de ListaPrecio
+                    and  rptarb_hojaid = ListaPrecio.lp_id
+                   ) 
+             )
+          or 
+             (@Ram_id_ListaPrecio = 0)
+         )
+  
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 30 -- select tbl_id, tbl_nombrefisico from tabla where tbl_nombre = 'producto'
+                    and  rptarb_hojaid = ListaPrecioItem.pr_id
+                   ) 
+             )
+          or 
+             (@Ram_id_Producto = 0)
+         )
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
@@ -320,10 +320,10 @@ begin
   listaprecio.lp_descrip,
   listaprecio.lp_fechadesde,
   listaprecio.lp_fechahasta,
-	case listaprecio.lp_default
-		when 0 then 'No'
+  case listaprecio.lp_default
+    when 0 then 'No'
     else        'Si'
-	end,
+  end,
   listaprecio.lp_id_padre,
   listaprecio.lp_porcentaje,
   case 
@@ -359,22 +359,22 @@ begin
               left join Rubro                    on Producto.rub_id = Rubro.rub_id
   
   where 
-	      (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
+        (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
   
-	-- Arboles
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 27 -- tbl_id de ListaPrecio
-	                  and  rptarb_hojaid = ListaPrecio.lp_id
-								   ) 
-	           )
-	        or 
-						 (@Ram_id_ListaPrecio = 0)
-				 )
-	
+  -- Arboles
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 27 -- tbl_id de ListaPrecio
+                    and  rptarb_hojaid = ListaPrecio.lp_id
+                   ) 
+             )
+          or 
+             (@Ram_id_ListaPrecio = 0)
+         )
+  
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -394,10 +394,10 @@ begin
   listaprecio.lp_descrip,
   listaprecio.lp_fechadesde,
   listaprecio.lp_fechahasta,
-	case listaprecio.lp_default
-		when 0 then 'No'
+  case listaprecio.lp_default
+    when 0 then 'No'
     else        'Si'
-	end,
+  end,
   listaprecio.lp_id_padre,
   listaprecio.lp_porcentaje,
   listaprecio.lp_tipo,
@@ -420,27 +420,27 @@ begin
   from 
   
   ListaPrecio 
-              inner join ListaPrecioCliente       on 	ListaPrecio.lp_id = ListaPrecioCliente.lp_id
-																									and	@@bSinClientes = 0
+              inner join ListaPrecioCliente       on   ListaPrecio.lp_id = ListaPrecioCliente.lp_id
+                                                  and  @@bSinClientes = 0
               inner join Cliente                  on ListaPrecioCliente.cli_id = Cliente.cli_id
-																									and	@@bSinClientes = 0  
-							left join ListaPrecio as ListaBase on ListaPrecio.lp_id_padre = ListaBase.lp_id
+                                                  and  @@bSinClientes = 0  
+              left join ListaPrecio as ListaBase on ListaPrecio.lp_id_padre = ListaBase.lp_id
   where 
-	      (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
+        (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
   
-	-- Arboles
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 27 -- tbl_id de ListaPrecio
-	                  and  rptarb_hojaid = ListaPrecio.lp_id
-								   ) 
-	           )
-	        or 
-						 (@Ram_id_ListaPrecio = 0)
-				 )
+  -- Arboles
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 27 -- tbl_id de ListaPrecio
+                    and  rptarb_hojaid = ListaPrecio.lp_id
+                   ) 
+             )
+          or 
+             (@Ram_id_ListaPrecio = 0)
+         )
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -460,10 +460,10 @@ begin
   listaprecio.lp_descrip,
   listaprecio.lp_fechadesde,
   listaprecio.lp_fechahasta,
-	case listaprecio.lp_default
-		when 0 then 'No'
+  case listaprecio.lp_default
+    when 0 then 'No'
     else        'Si'
-	end,
+  end,
   listaprecio.lp_id_padre,
   listaprecio.lp_porcentaje,
   listaprecio.lp_tipo,
@@ -489,22 +489,22 @@ begin
               inner join ListaPrecio as ListaBase on ListaPrecioLista.lp_id_padre = ListaBase.lp_id
   
   where 
-	      (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
+        (ListaPrecio.lp_id     = @lp_id or @lp_id=0)
   
-	-- Arboles
-	and   (
-						(exists(select rptarb_hojaid 
-	                  from rptArbolRamaHoja 
-	                  where
-	                       rptarb_cliente = @clienteID
-	                  and  tbl_id = 27 -- tbl_id de ListaPrecio
-	                  and  rptarb_hojaid = ListaPrecio.lp_id
-								   ) 
-	           )
-	        or 
-						 (@Ram_id_ListaPrecio = 0)
-				 )
-	and @@bSinBases = 0
+  -- Arboles
+  and   (
+            (exists(select rptarb_hojaid 
+                    from rptArbolRamaHoja 
+                    where
+                         rptarb_cliente = @clienteID
+                    and  tbl_id = 27 -- tbl_id de ListaPrecio
+                    and  rptarb_hojaid = ListaPrecio.lp_id
+                   ) 
+             )
+          or 
+             (@Ram_id_ListaPrecio = 0)
+         )
+  and @@bSinBases = 0
 
   order by Tipo
 
@@ -516,20 +516,20 @@ begin
   declare @precio decimal(18,6)
   
   declare c_precio insensitive cursor 
-  									for select lp_id, pr_id 
-  									from #tmpListaPrecio 
-  									where tipo = 0 and lpi_precio = 0
+                    for select lp_id, pr_id 
+                    from #tmpListaPrecio 
+                    where tipo = 0 and lpi_precio = 0
   
   open c_precio
   
   fetch next from c_precio into @lp_id, @pr_id 
   while @@fetch_status = 0 begin
   
-  	exec sp_lpGetPrecio @lp_id, @pr_id, @precio out, 0
+    exec sp_lpGetPrecio @lp_id, @pr_id, @precio out, 0
   
-  	update #tmpListaPrecio set lpi_precio = @precio where pr_id = @pr_id and lp_id = @lp_id
-  		
-  	fetch next from c_precio into @lp_id, @pr_id 
+    update #tmpListaPrecio set lpi_precio = @precio where pr_id = @pr_id and lp_id = @lp_id
+      
+    fetch next from c_precio into @lp_id, @pr_id 
   end
   
   close c_precio
@@ -538,36 +538,36 @@ begin
   
   if @@bIva <> 0 
     select 
-    	t.Tipo,
-    	t.lp_id,
-    	t.lp_nombre,
-    	t.lp_codigo,
-    	t.lp_descrip,
-    	t.lp_fechadesde,
-    	t.lp_fechahasta,
-    	t.lp_default,
-    	t.lp_id_padre,
-    	t.lp_porcentaje,
-    	t.lp_tipo,
-    	t.activo,
-    	t.creado,
-    	t.modificado,
-    	t.modifico,
+      t.Tipo,
+      t.lp_id,
+      t.lp_nombre,
+      t.lp_codigo,
+      t.lp_descrip,
+      t.lp_fechadesde,
+      t.lp_fechahasta,
+      t.lp_default,
+      t.lp_id_padre,
+      t.lp_porcentaje,
+      t.lp_tipo,
+      t.activo,
+      t.creado,
+      t.modificado,
+      t.modifico,
       t.lpi_id,
-    	t.pr_nombreventa,
-    	t.pr_codigo,
+      t.pr_nombreventa,
+      t.pr_codigo,
       t.pr_id,
-    	t.cli_nombre,
-    	t.cli_codigo,
-    	t.lpPadre,
-    	t.lpPadreCodigo,
-    	case l.lp_tipo
+      t.cli_nombre,
+      t.cli_codigo,
+      t.lpPadre,
+      t.lpPadreCodigo,
+      case l.lp_tipo
         when 1 then t.lpi_precio + t.lpi_precio * (tv.ti_porcentaje /100)
         when 2 then t.lpi_precio + t.lpi_precio * (tc.ti_porcentaje /100)
       end lpi_precio,
-    	t.lpi_porcentaje,
+      t.lpi_porcentaje,
       t.rub_nombre,
-			1 as ivaIncluido,
+      1 as ivaIncluido,
       @@bSinBases as sinBase
 
     from #tmpListaPrecio t left join Producto p        on t.pr_id = p.pr_id
@@ -579,11 +579,11 @@ begin
   else
 
     select 
-			*,
-			0 as ivaIncluido,
+      *,
+      0 as ivaIncluido,
       @@bSinBases as sinBase
 
-	  from #tmpListaPrecio order by Tipo
+    from #tmpListaPrecio order by Tipo
 
 end
 go

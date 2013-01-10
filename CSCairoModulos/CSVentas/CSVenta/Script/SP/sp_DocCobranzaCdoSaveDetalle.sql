@@ -11,15 +11,15 @@ sp_DocCobranzaCdoSaveDetalle  29183
 */
 
 create procedure sp_DocCobranzaCdoSaveDetalle (
-	@@fv_id   		int,
-	@@cobz_id 		int,
-	@@pagocvxi		decimal(18,6),
-	@@hojaRuta    tinyint
+  @@fv_id       int,
+  @@cobz_id     int,
+  @@pagocvxi    decimal(18,6),
+  @@hojaRuta    tinyint
 )
 as
 
 begin
 
-	select 1
+  select 1
 
 end

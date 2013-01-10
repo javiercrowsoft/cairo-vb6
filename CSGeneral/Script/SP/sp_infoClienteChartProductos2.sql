@@ -9,34 +9,34 @@ sp_infoClienteChartProductos 1,1,34
 
 go
 create procedure sp_infoClienteChartProductos2 (
-	@@us_id        int,
-	@@emp_id       int,
-	@@cli_id       int,
-	@@info_aux     varchar(255) = ''
+  @@us_id        int,
+  @@emp_id       int,
+  @@cli_id       int,
+  @@info_aux     varchar(255) = ''
 )
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	declare @fDesde datetime
+  declare @fDesde datetime
 
-	set @fDesde = dateadd(d,-180,getdate())
+  set @fDesde = dateadd(d,-180,getdate())
 
-	select 	pr_nombreventa						as [Artículo],
-					sum(case when doct_id = 7 then -fvi_neto else fvi_neto end)   					     					
-																		as Total
+  select   pr_nombreventa            as [Artículo],
+          sum(case when doct_id = 7 then -fvi_neto else fvi_neto end)                            
+                                    as Total
 
-	from FacturaVenta fv inner join FacturaVentaItem fvi on fv.fv_id 	= fvi.fv_id
-											 inner join Producto pr          on fvi.pr_id	= pr.pr_id
-	where cli_id = @@cli_id 
-		and fv_fecha >= @fDesde
-		and est_id <> 7
+  from FacturaVenta fv inner join FacturaVentaItem fvi on fv.fv_id   = fvi.fv_id
+                       inner join Producto pr          on fvi.pr_id  = pr.pr_id
+  where cli_id = @@cli_id 
+    and fv_fecha >= @fDesde
+    and est_id <> 7
 
-	group by pr_nombreventa
+  group by pr_nombreventa
 
-	order by sum(case when doct_id = 7 then -fvi_neto else fvi_neto end) desc, pr_nombreventa
+  order by sum(case when doct_id = 7 then -fvi_neto else fvi_neto end) desc, pr_nombreventa
 
 end
 go

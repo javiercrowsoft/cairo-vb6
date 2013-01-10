@@ -21,22 +21,22 @@ DC_CSC_VEN_0240 1,'20050107','20050107','1','2'
 go
 create procedure DC_CSC_VEN_0240 (
 
-  @@us_id    	int,
-	@@Fini 		 	datetime,
-	@@Ffin 		 	datetime
+  @@us_id      int,
+  @@Fini        datetime,
+  @@Ffin        datetime
 )as 
 begin
 
-	select distinct
-				 cli.cli_id,
-	       cli_nombre					as Nombre,
-				 cli_codigo					as Codigo,
-				 cli_razonsocial    as [Razon Social],
-         cli_descrip				as Observacines
+  select distinct
+         cli.cli_id,
+         cli_nombre          as Nombre,
+         cli_codigo          as Codigo,
+         cli_razonsocial    as [Razon Social],
+         cli_descrip        as Observacines
 
-	from cliente cli inner join facturaventa fv on cli.cli_id = fv.cli_id
-	where pro_id is null
-		and fv_fecha between @@Fini and @@Ffin
+  from cliente cli inner join facturaventa fv on cli.cli_id = fv.cli_id
+  where pro_id is null
+    and fv_fecha between @@Fini and @@Ffin
 
 end
 go

@@ -18,7 +18,7 @@ MUR_DepartamentoCliente 106,2
 
 */
 create Procedure MUR_DepartamentoCliente (
-	@@dpto_id          int,
+  @@dpto_id          int,
   @@cli_codigo_min   varchar(50),
   @@cli_codigo_max   varchar(50)
 )

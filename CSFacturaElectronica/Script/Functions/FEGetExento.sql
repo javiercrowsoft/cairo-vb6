@@ -19,11 +19,11 @@ returns decimal(18,6)
 as
 begin
 
-	declare @exento decimal(18,6)
+  declare @exento decimal(18,6)
 
-	select @exento = sum(fvi_neto) from FacturaVentaItem where fv_id = @@fv_id and fvi_ivarniporc = 0 and fvi_ivariporc = 0
+  select @exento = sum(fvi_neto) from FacturaVentaItem where fv_id = @@fv_id and fvi_ivarniporc = 0 and fvi_ivariporc = 0
 
-	return isnull(@exento,0)
+  return isnull(@exento,0)
 
 end
 

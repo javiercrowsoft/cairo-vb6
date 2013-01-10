@@ -8,22 +8,22 @@ go
 
 create procedure sp_comunidadInternetTextoItemsGet (
 
-	@@cmit_id int
+  @@cmit_id int
 )
 
 as
 
 begin
 
-	set nocount on
+  set nocount on
 
-	select 	i.*,
-					p.cmiti_nombre as padre
+  select   i.*,
+          p.cmiti_nombre as padre
 
-	from ComunidadInternetTextoItem i 
-						left join ComunidadInternetTextoItem p on i.cmiti_id_padre = p.cmiti_id
+  from ComunidadInternetTextoItem i 
+            left join ComunidadInternetTextoItem p on i.cmiti_id_padre = p.cmiti_id
 
-	where i.cmit_id = @@cmit_id
+  where i.cmit_id = @@cmit_id
 
-	order by i.cmiti_orden
+  order by i.cmiti_orden
 end

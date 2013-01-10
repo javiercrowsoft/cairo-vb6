@@ -9,15 +9,15 @@ go
 
 create procedure sp_AuditoriaCreditoCheckDocRV (
 
-	@@rv_id     	int,
+  @@rv_id       int,
   @@bSuccess    tinyint out,
-	@@bErrorMsg   varchar(5000) out
+  @@bErrorMsg   varchar(5000) out
 )
 as
 
 begin
 
-	exec sp_AuditoriaCreditoCheckDocRVCliente @@rv_id, @@bSuccess out, @@bErrorMsg out
+  exec sp_AuditoriaCreditoCheckDocRVCliente @@rv_id, @@bSuccess out, @@bErrorMsg out
 
 end
 GO
