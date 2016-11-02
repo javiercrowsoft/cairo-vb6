@@ -1,0 +1,72 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CSFEWSAA
+</name>
+</assembly>
+<members>
+<member name="P:CSFEWSAA.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:CSFEWSAA.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:CSFEWSAA.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:CSFEWSAA.cCertificadosX509Lib.FirmaBytesMensaje(System.Byte[],System.Security.Cryptography.X509Certificates.X509Certificate2)">
+	<summary>
+ Firma mensaje
+ </summary>
+	<param name="argBytesMsg">Bytes del mensaje</param>
+	<param name="argCertFirmante">Certificado usado para firmar</param>
+	<returns>Bytes del mensaje firmado</returns>
+	<remarks></remarks>
+</member><member name="M:CSFEWSAA.cCertificadosX509Lib.ObtieneCertificadoDesdeArchivo(System.String,System.Security.SecureString)">
+	<summary>
+ Lee certificado de disco
+ </summary>
+	<param name="argArchivo">Ruta del certificado a leer.</param>
+	<returns>Un objeto certificado X509</returns>
+	<remarks></remarks>
+</member><member name="M:CSFEWSAA.Wsaa.LoginCMSService.#ctor">
+	<remarks/>
+</member><member name="E:CSFEWSAA.Wsaa.LoginCMSService.loginCmsCompleted">
+	<remarks/>
+</member><member name="M:CSFEWSAA.Wsaa.LoginCMSService.loginCms(System.String)">
+	<remarks/>
+</member><member name="M:CSFEWSAA.Wsaa.LoginCMSService.loginCmsAsync(System.String)">
+	<remarks/>
+</member><member name="M:CSFEWSAA.Wsaa.LoginCMSService.loginCmsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:CSFEWSAA.Wsaa.LoginCMSService.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:CSFEWSAA.Wsaa.LoginCMSService">
+	<remarks/>
+</member><member name="T:CSFEWSAA.Wsaa.loginCmsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFEWSAA.Wsaa.loginCmsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFEWSAA.Wsaa.loginCmsCompletedEventArgs">
+	<remarks/>
+</member><member name="M:CSFEWSAA.cLoginTicket.ObtenerLoginTicketResponse(System.String,System.String,System.String,System.Security.SecureString,System.String,System.String,System.String,System.Boolean)">
+	<summary>
+ Construye un Login Ticket obtenido del WSAA
+ </summary>
+	<param name="argServicio">Servicio al que se desea acceder</param>
+	<param name="argUrlWsaa">URL del WSAA</param>
+	<param name="argRutaCertX509Firmante">Ruta del certificado X509 (con clave privada) usado para firmar</param>
+	<param name="argPassword">Password del certificado X509 (con clave privada) usado para firmar</param>
+	<param name="argProxy">IP:port del proxy</param>
+	<param name="argProxyUser">Usuario del proxy</param>''' 
+ <param name="argProxyPassword">Password del proxy</param>
+	<param name="argVerbose">Nivel detallado de descripcion? true/false</param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

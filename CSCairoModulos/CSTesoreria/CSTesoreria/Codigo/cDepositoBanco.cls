@@ -263,12 +263,12 @@ Private Function cIABMClient_MessageEx(ByVal MessageID As Long, ByVal Info As Va
     Case MSG_DOC_SIGNATURE
       cIABMClient_MessageEx = pFirmar()
     
-    Case MSG_GRID_ROW_DELETED
+    Case MSG_GRID_ROW_DELETEDl
       cIABMClient_MessageEx = True
       pShowTotales
     
     Case MSG_DOC_EDIT_STATE
-      ShowEditState m_DocEditMsg, LNGGetText(2160, vbNullString)  'Depósitos Bancarios
+      ShowEditState m_DocEditMsg, LNGGetText(2160, vbNullString)  'Depï¿½sitos Bancarios
       
     Case MSG_DOC_DELETE
       If cIEditGeneric_Delete(m_Id) Then
@@ -567,7 +567,7 @@ Private Function cIABMClient_Validate() As Boolean
           End If
         Case K_COTIZACION
           If ValEmpty(.Value, csDouble) And .Visible Then
-            MsgInfo LNGGetText(1626, vbNullString)  'Debe indicar una cotización
+            MsgInfo LNGGetText(1626, vbNullString)  'Debe indicar una cotizaciï¿½n
             Exit Function
           End If
       End Select
@@ -1079,7 +1079,7 @@ Private Function pValidateRowTCheques(ByRef Row As CSInterfacesABM.cIABMGridRow,
   Next
   
   If Not bCueIdOrCheqe Then
-    MsgInfo LNGGetText(2161, vbNullString)  'Debe indicar una Cuenta ó un Cheque (1)
+    MsgInfo LNGGetText(2161, vbNullString)  'Debe indicar una Cuenta ï¿½ un Cheque (1)
     Exit Function
   End If
   
@@ -1158,7 +1158,7 @@ Private Function pValidateRowCheques(ByRef Row As CSInterfacesABM.cIABMGridRow, 
       
       Case KICH_CHEQUE
         If ValEmpty(Cell.Value, csText) Then
-          MsgInfo LNGGetText(2116, vbNullString, strRow)   'Debe indicar una número de cheque (1)
+          MsgInfo LNGGetText(2116, vbNullString, strRow)   'Debe indicar una nï¿½mero de cheque (1)
           Exit Function
         End If
       
@@ -1230,7 +1230,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, csDocNumberID)
       .PropertyType = cspNumeric
       .SubType = cspInteger
-      .Name = LNGGetText(1065, vbNullString)  'Número
+      .Name = LNGGetText(1065, vbNullString)  'Nï¿½mero
       .Key = K_NUMERO
       .Value = m_Numero
       .Enabled = False
@@ -1255,7 +1255,7 @@ Private Function LoadCollection() As Boolean
     
     With .Add(Nothing, cscDbcoNrodoc)
       .PropertyType = cspText
-      .Name = LNGGetText(1065, vbNullString)  'Número
+      .Name = LNGGetText(1065, vbNullString)  'Nï¿½mero
       .Size = 50
       .Key = K_NRODOC
       .Value = m_Nrodoc
@@ -1304,7 +1304,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscDbcoCotizacion)
       .PropertyType = cspNumeric
       .SubType = cspMoney
-      .Name = LNGGetText(1635, vbNullString)  'Cotización
+      .Name = LNGGetText(1635, vbNullString)  'Cotizaciï¿½n
       .Format = m_GeneralConfig.FormatDecCotizacion
       .Key = K_COTIZACION
       .Value = m_Cotizacion
@@ -2069,7 +2069,7 @@ Private Function cIMenuClient_Initialize(F As Object, Host As CSMenu.cIMenuHost)
   Set m_Host = Host
   m_Host.Server.AddMenu str_2048, csMenuEnum.csMenuTesoreria, vbNullString, 1, False, False, False, True, False, Nothing
   m_Host.Server.AddMenu LNGGetText(2163, vbNullString), csPreTsrListDepositoBanco, str_2048, 0, True, False, False, False, False, Me
-                          '&Depósitos Bancarios
+                          '&Depï¿½sitos Bancarios
   cIMenuClient_Initialize = True
   
   GoTo ExitProc
@@ -2082,7 +2082,7 @@ End Function
 
 Private Function cIMenuClient_ProcessMenu(ByVal Id As Long) As Variant
   m_Host.MenuListDocClick "CSABMInterface2.cABMGeneric", "CSTesoreria2.cDepositoBanco", "CSABMInterface2.CABMGenericListDoc", "CSTesoreria2.cDepositoBancoListDoc", Me, LNGGetText(2164, vbNullString), 0
-                                                                                                                                                                        'Depósito Bancario
+                                                                                                                                                                        'Depï¿½sito Bancario
 End Function
 
 Private Function pSaveEfectivo(ByVal Id As Long, ByVal Cotizacion As Double, ByVal bMonedaLegal As Boolean) As Boolean

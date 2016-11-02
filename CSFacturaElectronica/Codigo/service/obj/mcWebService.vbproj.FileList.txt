@@ -1,0 +1,12 @@
+obj\Debug\mcWebService.exe
+obj\Debug\mcWebService.pdb
+bin\Debug\mcWebService.exe
+bin\Debug\mcWebService.pdb
+bin\Debug\mcWebService.xml
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\mcWebService.xml
+bin\Release\mcWebService.exe
+bin\Release\mcWebService.xml
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\mcWebService.exe
+obj\Release\mcWebService.xml

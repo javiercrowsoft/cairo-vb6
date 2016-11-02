@@ -10,7 +10,7 @@ drop procedure [dbo].[sp_FE_UpdateConsultaTalonarios]
 go
 create procedure [dbo].[sp_FE_UpdateConsultaTalonarios] (
 
-  @@msg varchar(255)
+	@@msg varchar(255)
 
 )
 
@@ -18,8 +18,8 @@ as
 
 begin
 
-  set nocount on
+	set nocount on
 
-  exec sp_cfg_setvalor 'Ventas-General', 'Update Talonarios AFIP-Respuesta', @@msg, null
+	exec sp_cfg_setvalor 'Ventas-General', 'Update Talonarios AFIP-Respuesta', @@msg, null
 
 end

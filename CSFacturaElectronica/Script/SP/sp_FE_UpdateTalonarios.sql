@@ -14,37 +14,37 @@ as
 
 begin
 
-  set nocount on
+	set nocount on
 
-  exec sp_FE_UpdateConsultaTalonarios ''
+	exec sp_FE_UpdateConsultaTalonarios ''
 
-  exec sp_cfg_setvalor 'Ventas-General', 'Update Talonarios AFIP', '1', null
+	exec sp_cfg_setvalor 'Ventas-General', 'Update Talonarios AFIP', '1', null
 
-  declare @cfg_valor varchar(5000) 
+	declare @cfg_valor varchar(5000) 
 
-  declare @n int
-  set @n = 1
-  set @cfg_valor = ''
+	declare @n int
+	set @n = 1
+	set @cfg_valor = ''
 
-  -- Cada 3 segundos veo si ya procese la factura (lo hago durante 1 minuto)
-  --
-  while @n < 20 /* 1 minuto */ and @cfg_valor = ''
-  begin
+	-- Cada 3 segundos veo si ya procese la factura (lo hago durante 1 minuto)
+	--
+	while @n < 20 /* 1 minuto */ and @cfg_valor = ''
+	begin
 
-  exec sp_cfg_getvalor  'Ventas-General',
-                        'Update Talonarios AFIP-Respuesta',
-                        @cfg_valor out,
-                        0,
-                        null
+	exec sp_cfg_getvalor  'Ventas-General',
+											  'Update Talonarios AFIP-Respuesta',
+											  @cfg_valor out,
+											  0,
+												null
 
-    exec sp_sleep '000:00:03'
-    set @n = @n +1
+		exec sp_sleep '000:00:03'
+		set @n = @n +1
 
-  end
+	end
 
-  set @cfg_valor = isnull(@cfg_valor,'')
+	set @cfg_valor = isnull(@cfg_valor,'')
 
-  if @cfg_valor = '' set @cfg_valor = 'Los talonarios no pudieron ser actualizados'
+	if @cfg_valor = '' set @cfg_valor = 'Los talonarios no pudieron ser actualizados'
 
   select @cfg_valor as info
 

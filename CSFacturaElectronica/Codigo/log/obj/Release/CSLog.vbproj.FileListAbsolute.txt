@@ -1,0 +1,10 @@
+C:\proyectos\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.dll
+C:\proyectos\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.pdb
+C:\proyectos\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.xml
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\ResolveAssemblyReference.cache
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.Resources.resources
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.read.1.tlog
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.write.1.tlog
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.dll
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.xml
+C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.pdb

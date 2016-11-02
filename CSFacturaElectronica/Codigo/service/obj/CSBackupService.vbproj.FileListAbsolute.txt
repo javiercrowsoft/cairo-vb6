@@ -1,0 +1,11 @@
+D:\proyectos.net\CSBackup\Codigo service\bin\Release\CSBackupService.exe
+D:\proyectos.net\CSBackup\Codigo service\bin\Release\CSBackupService.xml
+D:\proyectos.net\CSBackup\Codigo service\bin\Release\CSBackupSrv.dll
+D:\proyectos.net\CSBackup\Codigo service\bin\Release\Nini.dll
+D:\proyectos.net\CSBackup\Codigo service\bin\Release\ICSharpCode.SharpZipLib.dll
+D:\proyectos.net\CSBackup\Codigo service\bin\Release\CSBackupSrv.xml
+D:\proyectos.net\CSBackup\Codigo service\obj\Release\ResolveAssemblyReference.cache
+D:\proyectos.net\CSBackup\Codigo service\obj\Release\ProjectInstaller.resources
+D:\proyectos.net\CSBackup\Codigo service\obj\Release\CSBackupService.vbproj.GenerateResource.Cache
+D:\proyectos.net\CSBackup\Codigo service\obj\Release\CSBackupService.exe
+D:\proyectos.net\CSBackup\Codigo service\obj\Release\CSBackupService.xml

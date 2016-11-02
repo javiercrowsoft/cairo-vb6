@@ -1,0 +1,28 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CSBackupService
+</name>
+</assembly>
+<members>
+<member name="F:CSFEService.WinService1.components">
+	<summary> 
+    Required designer variable.
+ </summary>
+</member><member name="M:CSFEService.WinService1.InitializeComponent">
+	<summary> 
+    Required method for Designer support - do not modify 
+    the contents of this method with the code editor.
+ </summary>
+</member><member name="M:CSFEService.WinService1.OnStart(System.String[])">
+	<summary>
+    Set things in motion so your service can do its work.
+ </summary>
+</member><member name="M:CSFEService.WinService1.OnStop">
+	<summary>
+    Stop this service.
+ </summary>
+</member>
+</members>
+</doc>

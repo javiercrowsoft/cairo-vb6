@@ -1,0 +1,11 @@
+bin\Release\CSBackupSrv.dll
+bin\Release\Nini.dll
+bin\Release\ICSharpCode.SharpZipLib.dll
+bin\Release\CSBackupSrv.xml
+obj\Release\ResolveAssemblyReference.cache
+bin\Release\CSBackupService.exe
+bin\Release\CSBackupService.xml
+obj\Release\CSBackupService.exe
+obj\Release\CSBackupService.xml
+obj\Release\ProjectInstaller.resources
+obj\Release\CSBackupService.vbproj.GenerateResource.Cache

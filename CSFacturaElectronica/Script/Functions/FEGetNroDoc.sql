@@ -19,7 +19,7 @@ returns int
 as
 begin
 
-  return substring(@@fv_nrodoc,8,50)
+	return substring(@@fv_nrodoc,8,50)
 
 end
 

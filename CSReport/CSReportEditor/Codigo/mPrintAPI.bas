@@ -153,7 +153,8 @@ Public Function ShowPrintDialog(ByVal hwnd As Long, ByRef DeviceName As String, 
                                 ByRef FromPage As Long, ByRef ToPage As Long, _
                                 ByRef Copies As Long, _
                                 ByRef PaperBin As Long) As Boolean
-  Dim printDlg As PrinterDlg
+  Dim printDlg As
+  ()
   Set printDlg = New PrinterDlg
   
   If Copies < 0 Then Copies = 1
@@ -271,11 +272,11 @@ Public Sub PrinterSetSizeAndOrient(PrinterName As String, _
     LastError = GetLastError()
     
     If LastError <> 0 Then
-      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la página en la impresora. Número de error: " & LastError, vbExclamation, App.EXEName
+      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la pï¿½gina en la impresora. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
     End If
     
     '/////////////////////////////////////////////////////////////////////////////////
-    ' @#¡¡¡¡¡ y la reputa que lo pario
+    ' @#ï¿½ï¿½ï¿½ï¿½ï¿½ y la reputa que lo pario
     ' LO QUE SIGUE ES POR QUE ME TIENE LAS PELOTAS RELLENAS CON FALLAS A ESTA FUNCION
     '
     If hDC <> 0 Then nSize = ResetDC(hDC, aDevMode(1))      ' Reset the DEVMODE
@@ -285,14 +286,14 @@ Public Sub PrinterSetSizeAndOrient(PrinterName As String, _
     End If
     '
     If LastError <> 0 Then
-      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la página en la impresora. Número de error: " & LastError, vbExclamation, App.EXEName
+      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la pï¿½gina en la impresora. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
     End If
     '
     '/////////////////////////////////////////////////////////////////////////////////
     
   Else
     LastError = GetLastError()
-    Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la página en la impresora. Número de error: " & LastError, vbExclamation, App.EXEName
+    Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la pï¿½gina en la impresora. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
   End If
 End Sub
 
@@ -350,11 +351,11 @@ Public Function PrinterSetPaperBin(PrinterName As String, _
     LastError = GetLastError()
     
     If LastError <> 0 Then
-      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la bandeja en la impresora. Número de error: " & LastError, vbExclamation, App.EXEName
+      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la bandeja en la impresora. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
     End If
     
     '/////////////////////////////////////////////////////////////////////////////////
-    ' @#¡¡¡¡¡ y la reputa que lo pario
+    ' @#ï¿½ï¿½ï¿½ï¿½ï¿½ y la reputa que lo pario
     ' LO QUE SIGUE ES POR QUE ME TIENE LAS PELOTAS RELLENAS CON FALLAS A ESTA FUNCION
     '
     If hDC <> 0 Then nSize = ResetDC(hDC, aDevMode(1))      ' Reset the DEVMODE
@@ -364,14 +365,14 @@ Public Function PrinterSetPaperBin(PrinterName As String, _
     End If
     '
     If LastError <> 0 Then
-      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la bandeja en la impresora. Número de error: " & LastError, vbExclamation, App.EXEName
+      Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la bandeja en la impresora. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
     End If
     '
     '/////////////////////////////////////////////////////////////////////////////////
     
   Else
     LastError = GetLastError()
-    Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la bandeja en la impresora. Número de error: " & LastError, vbExclamation, App.EXEName
+    Err.Raise vbObjectError + 15, "Ha ocurrido un error al setear la bandeja en la impresora. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
   End If
 End Function
 
@@ -530,7 +531,7 @@ Public Function GetPaperType(ByVal hwnd As Long, ByVal PrinterName As String) As
     ClosePrinter PrinterHandle
   Else
     LastError = GetLastError()
-    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaño del papel. Número de error: " & LastError, vbExclamation, App.EXEName
+    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaï¿½o del papel. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
   End If
 End Function
 
@@ -564,7 +565,7 @@ Public Function GetPrinterOrientation(ByVal hwnd As Long, ByVal PrinterName As S
     ClosePrinter PrinterHandle
   Else
     LastError = GetLastError()
-    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaño del papel. Número de error: " & LastError, vbExclamation, App.EXEName
+    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaï¿½o del papel. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
   End If
 End Function
 
@@ -598,7 +599,7 @@ Public Function GetPaperBin(ByVal hwnd As Long, ByVal PrinterName As String) As 
     ClosePrinter PrinterHandle
   Else
     LastError = GetLastError()
-    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaño del papel. Número de error: " & LastError, vbExclamation, App.EXEName
+    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaï¿½o del papel. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
   End If
 End Function
 
@@ -635,7 +636,7 @@ Public Function GetPaperSize(ByVal hwnd As Long, ByVal PrinterName As String) As
     GetPaperSize = rtn
   Else
     LastError = GetLastError()
-    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaño del papel. Número de error: " & LastError, vbExclamation, App.EXEName
+    Err.Raise vbObjectError + 15, "Ha ocurrido un error al obtener el tamaï¿½o del papel. Nï¿½mero de error: " & LastError, vbExclamation, App.EXEName
   End If
 End Function
 

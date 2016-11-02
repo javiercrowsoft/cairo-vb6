@@ -5,7 +5,7 @@ drop procedure [dbo].[sp_FE_GetConsultaComprobantes]
 
  sp_FE_GetConsultaComprobantes 
 
-  select * from facturaelectronica
+	select * from facturaelectronica
 
 */
 
@@ -16,9 +16,9 @@ as
 
 begin
 
-  set nocount on
+	set nocount on
 
-  select * from FacturaElectronicaConsulta where fvfec_respuesta = ''
+	select * from FacturaElectronicaConsulta where fvfec_respuesta = ''
 
 end
 

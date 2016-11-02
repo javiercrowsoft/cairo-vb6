@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CSFacturaElectronica">
+</Property><Property Name="Solution File" Value="C:\proyectos\CSFacturaElectronica\Codigo\fe\CSFacturaElectronica.sln">
+</Property><Property Name="Date" Value="Wednesday, June 17, 2015">
+</Property><Property Name="Time" Value="12:40 PM">
+</Property></Properties><Event ErrorLevel="0" Project="CSFacturaElectronica" Source="CSFacturaElectronica.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CSFacturaElectronica" Source="CSFacturaElectronica.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CSFEService" Source="..\service\CSFEService.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CSFEService" Source="..\service\CSFEService.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CSFEWSAA" Source="..\wsaa\CSFEWSAA.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CSFEWSAA" Source="..\wsaa\CSFEWSAA.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CSLog" Source="..\log\CSLog.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CSLog" Source="..\log\CSLog.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="test" Source="..\test\test.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="test" Source="..\test\test.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="CSFacturaElectronica.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="CSFacturaElectronica.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CSFacturaElectronica" Source="CSFacturaElectronica.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CSFEService" Source="..\service\CSFEService.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CSFEWSAA" Source="..\wsaa\CSFEWSAA.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="CSLog" Source="..\log\CSLog.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="test" Source="..\test\test.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

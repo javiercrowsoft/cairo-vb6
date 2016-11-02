@@ -1,0 +1,41 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+mcWebService
+</name>
+</assembly>
+<members>
+<member name="F:mcWebService.WinService1.components">
+	<summary> 
+    Required designer variable.
+ </summary>
+</member><member name="M:mcWebService.WinService1.InitializeComponent">
+	<summary> 
+    Required method for Designer support - do not modify 
+    the contents of this method with the code editor.
+ </summary>
+</member><member name="M:mcWebService.WinService1.OnStart(System.String[])">
+	<summary>
+    Set things in motion so your service can do its work.
+ </summary>
+</member><member name="M:mcWebService.WinService1.OnStop">
+	<summary>
+    Stop this service.
+ </summary>
+</member><member name="F:mcWebService.ProjectInstaller.components">
+	<summary>
+    Required designer variable.
+ </summary>
+</member><member name="M:mcWebService.ProjectInstaller.InitializeComponent">
+	<summary>
+    Required method for Designer support - do not modify
+    the contents of this method with the code editor.
+ </summary>
+</member><member name="T:mcWebService.ProjectInstaller">
+	<summary>
+     Summary description for ProjectInstaller.
+ </summary>
+</member>
+</members>
+</doc>
