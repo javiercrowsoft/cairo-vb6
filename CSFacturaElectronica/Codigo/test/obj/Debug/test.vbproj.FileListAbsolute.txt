@@ -1,0 +1,3 @@
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Debug\test.exe
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Debug\test.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Debug\test.pdb

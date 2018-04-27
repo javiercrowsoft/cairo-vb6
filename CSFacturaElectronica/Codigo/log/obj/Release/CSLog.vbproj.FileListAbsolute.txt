@@ -8,3 +8,23 @@ C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.write.
 C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.dll
 C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.xml
 C:\proyectos\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\ResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.Resources.resources
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.read.1.tlog
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.write.1.tlog
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.pdb
+Y:\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.dll
+Y:\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.pdb
+Y:\CSFacturaElectronica\Codigo\log\bin\Release\CSLog.xml
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\ResolveAssemblyReference.cache
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.Resources.resources
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.read.1.tlog
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\GenerateResource.write.1.tlog
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.dll
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.xml
+Y:\CSFacturaElectronica\Codigo\log\obj\Release\CSLog.pdb

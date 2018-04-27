@@ -59,6 +59,7 @@
     <Compile Include="cConnection.vb" />
     <Compile Include="cFacturaElectronica.vb" />
     <Compile Include="cIni.vb" />
+    <Compile Include="cFacturaElectronicaExpo.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -74,12 +75,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Web References\ar.gov.afip.wswhomo1\Reference.vb">
+    <Compile Include="Web References\ar.gov.afip.wsfexhomo\Reference.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\ar.gov.afip.wswhomo\Reference.vb">
+    <Compile Include="Web References\ar.gov.afip.wsfev1homo\Reference.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -121,20 +122,9 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://wswhomo.afip.gov.ar/wsfe/service.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ar.gov.afip.wswhomo\</RelPath>
-      <UpdateFromURL>https://wswhomo.afip.gov.ar/wsfe/service.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CSFacturaElectronica_ar_gov_afip_wswhomo_Service</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="https://wswhomo.afip.gov.ar/wsfev1/service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ar.gov.afip.wswhomo1\</RelPath>
+      <RelPath>Web References\ar.gov.afip.wsfev1homo\</RelPath>
       <UpdateFromURL>https://wswhomo.afip.gov.ar/wsfev1/service.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -143,95 +133,144 @@
       <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CSFacturaElectronica_ar_gov_afip_wswhomo1_Service</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://wswhomo.afip.gov.ar/wsfexv1/service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.wsfexhomo\</RelPath>
+      <UpdateFromURL>https://wswhomo.afip.gov.ar/wsfexv1/service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CSFacturaElectronica_ar_gov_afip_wsfexhomo_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Web References\ar.gov.afip.wswhomo\DummyResponse.datasource">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\CbteTipoResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\FEConsultaCAEResponse.datasource">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\ConceptoTipoResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\FERecuperaLastCMPResponse.datasource">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\DocTipoResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\FERecuperaQTYResponse.datasource">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\DummyResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\FEResponse.datasource">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECAEAGetResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\FEUltNroResponse.datasource">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECAEAResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\Reference.map">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECAEASinMovConsResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECAEASinMovResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECAEResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECompConsultaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FECotizacionResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FEPtoVentaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FERecuperaLastCbteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FERegXReqResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\FETributoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\IvaTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\MonedaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1homo\OpcionalTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\DummyResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXGetCMPResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponseAuthorize.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponseLast_CMP.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Cbte_Tipo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_CheckPermiso.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Ctz.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_DST_cuit.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_DST_pais.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Idi.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Inc.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_LastID.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Mon.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Opc.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_PtoVenta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Tex.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\FEXResponse_Umed.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo\service.disco" />
-    <None Include="Web References\ar.gov.afip.wswhomo\service.wsdl" />
+    <None Include="Web References\ar.gov.afip.wsfexhomo\service.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\ar.gov.afip.wswhomo1\CbteTipoResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\ConceptoTipoResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\DocTipoResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\DummyResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECAEAGetResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECAEAResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECAEASinMovConsResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECAEASinMovResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECAEResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECompConsultaResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FECotizacionResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FEPtoVentaResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FERecuperaLastCbteResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FERegXReqResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\FETributoResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\IvaTipoResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\MonedaResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\OpcionalTipoResponse.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\Reference.map">
+    <None Include="Web References\ar.gov.afip.wsfev1homo\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
-    <None Include="Web References\ar.gov.afip.wswhomo1\service.disco" />
-    <None Include="Web References\ar.gov.afip.wswhomo1\service.wsdl" />
+    <None Include="Web References\ar.gov.afip.wsfev1homo\service.disco" />
+    <None Include="Web References\ar.gov.afip.wsfev1homo\service.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ar.gov.afip.wsfexhomo\service.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,3 +21,49 @@ C:\proyectos\CSFacturaElectronica\Codigo\test\obj\Release\ResolveAssemblyReferen
 C:\proyectos\CSFacturaElectronica\Codigo\test\obj\Release\test.Resources.resources
 C:\proyectos\CSFacturaElectronica\Codigo\test\obj\Release\GenerateResource.read.1.tlog
 C:\proyectos\CSFacturaElectronica\Codigo\test\obj\Release\GenerateResource.write.1.tlog
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\test.exe
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\test.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\test.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.ini
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\test.exe
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\test.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\test.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSLog.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\Nini.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSLog.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSLog.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.pdb
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.xml
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.XmlSerializers.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.XmlSerializers.dll
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\ResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\test.Resources.resources
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\GenerateResource.read.1.tlog
+\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\obj\Release\GenerateResource.write.1.tlog
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\test.exe
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\test.xml
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\test.pdb
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.ini
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\test.exe
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\test.pdb
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\test.xml
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.dll
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSLog.dll
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.dll
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\Nini.dll
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.pdb
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.xml
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSLog.pdb
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSLog.xml
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.pdb
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.xml
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFacturaElectronica.XmlSerializers.dll
+Y:\CSFacturaElectronica\Codigo\test\bin\Release\CSFEWSAA.XmlSerializers.dll
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\ResolveAssemblyReference.cache
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\test.Resources.resources
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\GenerateResource.read.1.tlog
+Y:\CSFacturaElectronica\Codigo\test\obj\Release\GenerateResource.write.1.tlog

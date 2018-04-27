@@ -46,6 +46,10 @@ Public Class cLog
 
   End Sub
 
+  Public Shared Sub write(ByVal msg As String, ByVal moduleName As String)
+    write(msg, "", moduleName)
+  End Sub
+
   Public Shared Sub write(ByVal msg As String, ByVal strTrace As String, ByVal moduleName As String)
 
     Dim path As String

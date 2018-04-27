@@ -8,12 +8,6 @@ Imports CSFEWSAA
 
 Public Class cFacturaElectronica
 
-  Private Class cCAE
-    Public cae As String
-    Public nro_factura As String
-    Public vencimiento As String
-  End Class
-
   Private Const c_module As String = "cFacturaElectronica"
 
   Private Const C_PRINT_SERVICE_STATE_WRITING = 1
@@ -21,10 +15,8 @@ Public Class cFacturaElectronica
 
   Private Shared m_Timer As System.Timers.Timer
   Private m_cancel As Boolean
-  Private m_objFEAuthRequest As New ar.gov.afip.wswhomo.FEAuthRequest
-  Private m_objFEAuthRequest1 As New ar.gov.afip.wswhomo1.FEAuthRequest
-  Private m_objWSFE As New ar.gov.afip.wswhomo.Service
-  Private m_objWSFE1 As New ar.gov.afip.wswhomo1.Service
+  Private m_objFEAuthRequest1 As New ar.gov.afip.wsfev1homo.FEAuthRequest
+  Private m_objWSFE1 As New ar.gov.afip.wsfev1homo.Service
 
   ' wsaa
   Private m_wsaa As cFEWSAA
@@ -51,11 +43,7 @@ Public Class cFacturaElectronica
   Dim m_database As String
   Dim m_emp_id As Integer
 
-  '//------------------------------------------------------------------------------
-  '
-  ' Timer
-  '
-  '--------------------------------------------------------------------------------
+  Dim urlWsfex_Wsdl As String
 
   Public Sub initProcess()
 
@@ -73,8 +61,8 @@ Public Class cFacturaElectronica
     cLog.write("Iniciando el timer", "endProcess", c_module)
 
     Dim interval As Integer
-    Dim urlWsfeWsdl As String
-    Dim urlWsfeWsdl1 As String
+    Dim urlWsfe_Wsdl1 As String
+    
 
     interval = Val(cIni.getValue("CONFIG", "Interval", 1000))
     m_urlWsaaWsdl = cIni.getValue("CONFIG", "urlWsaaWsdl", "")
@@ -84,8 +72,8 @@ Public Class cFacturaElectronica
     m_proxyUser = cIni.getValue("CONFIG", "proxyUser", "")
     m_proxyPassword = cIni.getValue("CONFIG", "proxyPassword", "")
     m_verboseMode = CBool(Val(cIni.getValue("CONFIG", "verboseMode", "")))
-    urlWsfeWsdl = cIni.getValue("CONFIG", "urlWsfeWsdl", "")
-    urlWsfeWsdl1 = cIni.getValue("CONFIG", "urlWsfeWsdl1", "")
+    urlWsfe_Wsdl1 = cIni.getValue("CONFIG", "urlWsfeWsdl1", "")
+    urlWsfex_Wsdl = cIni.getValue("CONFIG", "urlWsfexWsdl", "")
     m_cuit = cIni.getValue("CONFIG", "cuit", "")
     m_ptoVta1 = cIni.getValue("CONFIG", "ptoVta1", "1")
     m_ptoVta2 = cIni.getValue("CONFIG", "ptoVta2", "1")
@@ -98,8 +86,8 @@ Public Class cFacturaElectronica
 
     cLog.write("Interval: " & interval & vbCrLf & _
                "urlWsaaWdl: " & m_urlWsaaWsdl & vbCrLf & _
-               "urlWsfeWsdl: " & urlWsfeWsdl & vbCrLf & _
-               "urlWsfeWsdl1: " & urlWsfeWsdl1 & vbCrLf & _
+               "urlWsfeWsdl1: " & urlWsfe_Wsdl1 & vbCrLf & _
+               "urlWsfexWsdl: " & urlWsfex_Wsdl & vbCrLf & _
                "idServicioNegocio: " & m_idServicioNegocio & vbCrLf & _
                "rutaCertSigner: " & m_rutaCertSigner & vbCrLf & _
                "proxy: " & m_proxy & vbCrLf & _
@@ -111,57 +99,21 @@ Public Class cFacturaElectronica
                "ptoVta2:" & m_ptoVta2 & vbCrLf & _
                "emp_id:" & m_emp_id & vbCrLf, "endProcess ***Params:", c_module)
 
-    m_objWSFE.Url = urlWsfeWsdl
-    m_objWSFE1.Url = urlWsfeWsdl1
+    m_objWSFE1.Url = urlWsfe_Wsdl1
 
-    'getLastDoc()
     getLastDocV1()
-
-    ' TIMER
 
     While True
       System.Threading.Thread.Sleep(interval)
       work
     End While    
-
-    ' OLD VERSION
-
-    ''-------------------------------------------------------
-    '' Timer
-    ''
-
-    '' Normally, the timer is declared at the class level,
-    '' so that it stays in scope as long as it is needed.
-    '' If the timer is declared in a long-running method,  
-    '' KeepAlive must be used to prevent the JIT compiler 
-    '' from allowing aggressive garbage collection to occur 
-    '' before the method ends. (See end of method.)
-    ''Dim aTimer As System.Timers.Timer
-
-    '' Create a timer with a ten second interval.
-    'm_Timer = New System.Timers.Timer(interval)
-
-    '' Hook up the Elapsed event for the timer.
-    'AddHandler m_Timer.Elapsed, AddressOf OnTimedEvent
-
-    'm_Timer.Enabled = True
-
-    '' If the timer is declared in a long-running method, use
-    '' KeepAlive to prevent garbage collection from occurring
-    '' before the method ends.
-    'GC.KeepAlive(m_Timer)
-
-    ''-------------------------------------------------------
-
-    'cLog.write("Timer iniciado", "initProcess", c_module)
-
     
   End Sub
 
   Private Sub work()
     Try
 
-      cLog.write("Timer tick", "OnTimedEvent", c_module)
+      cLog.write("Timer tick", "work", c_module)
 
       m_cancel = False
       processFacturas()
@@ -170,7 +122,7 @@ Public Class cFacturaElectronica
 
     Catch ex As Exception
 
-      cLog.write(ex.Message, "OnTimedEvent", c_module)
+      cLog.write(ex.Message, "work", c_module)
 
     End Try
   End Sub
@@ -192,32 +144,6 @@ Public Class cFacturaElectronica
     End Try
 
     cLog.write("Ejecución de CSBackup Service terminada con éxito", "endProcess", c_module)
-
-  End Sub
-
-  ' This method is called by the timer delegate.
-  Private Sub OnTimedEvent(ByVal source As Object, ByVal e As ElapsedEventArgs)
-
-    m_Timer.Stop()
-
-    Try
-
-      cLog.write("Timer tick", "OnTimedEvent", c_module)
-
-      m_cancel = False
-      processFacturas()
-      processCompRequest()
-      processGetLastNumbers()
-
-    Catch ex As Exception
-
-      cLog.write(ex.Message, "OnTimedEvent", c_module)
-
-    Finally
-
-      m_Timer.Start()
-
-    End Try
 
   End Sub
 
@@ -259,41 +185,78 @@ Public Class cFacturaElectronica
 
         cLog.write("in for 1", "processFacturas", c_module)
 
-        Dim ArrayOfIva() As ar.gov.afip.wswhomo1.AlicIva
+        Dim ArrayOfIva() As ar.gov.afip.wsfev1homo.AlicIva
         If Not pGetArrayOfIva(dr.Item("fv_id"), ArrayOfIva) Then Exit Sub
 
-        Dim ArrayOfTributos() As ar.gov.afip.wswhomo1.Tributo
+        Dim ArrayOfTributos() As ar.gov.afip.wsfev1homo.Tributo
         If Not pGetArrayOfTributo(dr.Item("fv_id"), ArrayOfTributos) Then Exit Sub
 
         cLog.write("in for 2", "processFacturas", c_module)
 
-        cae = getCAEV1(dr.Item("cuit"), _
-             dr.Item("tipo_doc"), _
-             dr.Item("nro_doc"), _
-             dr.Item("tipo_cbte"), _
-             dr.Item("punto_vta"), _
-             dr.Item("cbt_desde"), _
-             dr.Item("cbt_hasta"), _
-             dr.Item("imp_total"), _
-             dr.Item("imp_tot_conc"), _
-             dr.Item("imp_neto"), _
-             dr.Item("impto_liq"), _
-             dr.Item("impto_liq_rni"), _
-             dr.Item("imp_tributo"), _
-             dr.Item("imp_op_ex"), _
-             CDate(dr.Item("fecha_cbte")).ToString("yyyyMMdd"), _
-             CDate(dr.Item("fecha_serv_desde")).ToString("yyyyMMdd"), _
-             CDate(dr.Item("fecha_serv_hasta")).ToString("yyyyMMdd"), _
-             CDate(dr.Item("fecha_venc_pago")).ToString("yyyyMMdd"), _
-             ArrayOfIva,
-             ArrayOfTributos)
+
+        If(dr.Item("es_factura_expo")) then
+
+              Dim feExpo as cFacturaElectronicaExpo = New cFacturaElectronicaExpo
+              
+              cae = feExpo.getCAE_EX(m_wsaa, _
+                                      urlWsfex_Wsdl, _
+                                      m_cuit, _
+                                      dr.Item("fv_id"), _
+                                      dr.Item("nro_doc"), _
+                                      dr.Item("cli_razonsocial"), _
+                                      dr.Item("tipo_doc"), _
+                                      dr.Item("nro_doc"), _
+                                      dr.Item("tipo_cbte"), _
+                                      dr.Item("punto_vta"), _
+                                      dr.Item("cbt_desde"), _
+                                      dr.Item("cbt_hasta"), _
+                                      dr.Item("imp_total_origen"), _
+                                      dr.Item("imp_tot_conc"), _
+                                      dr.Item("imp_neto"), _
+                                      dr.Item("impto_liq"), _
+                                      dr.Item("impto_liq_rni"), _
+                                      dr.Item("imp_tributo"), _
+                                      dr.Item("imp_op_ex"), _
+                                      dr.Item("moneda_id"), _
+                                      dr.Item("moneda_cotizacion"), _
+                                      dr.Item("pais_id"), _
+                                      CDate(dr.Item("fecha_cbte")).ToString("yyyyMMdd"), _
+                                      CDate(dr.Item("fecha_serv_desde")).ToString("yyyyMMdd"), _
+                                      CDate(dr.Item("fecha_serv_hasta")).ToString("yyyyMMdd"), _
+                                      CDate(dr.Item("fecha_venc_pago")).ToString("yyyyMMdd"), _
+                                      ArrayOfIva,
+                                      ArrayOfTributos)
+        
+        Else
+
+              cae = getCAEV1(dr.Item("cuit"), _
+                              dr.Item("tipo_doc"), _
+                              dr.Item("nro_doc"), _
+                              dr.Item("tipo_cbte"), _
+                              dr.Item("punto_vta"), _
+                              dr.Item("cbt_desde"), _
+                              dr.Item("cbt_hasta"), _
+                              dr.Item("imp_total"), _
+                              dr.Item("imp_tot_conc"), _
+                              dr.Item("imp_neto"), _
+                              dr.Item("impto_liq"), _
+                              dr.Item("impto_liq_rni"), _
+                              dr.Item("imp_tributo"), _
+                              dr.Item("imp_op_ex"), _
+                              CDate(dr.Item("fecha_cbte")).ToString("yyyyMMdd"), _
+                              CDate(dr.Item("fecha_serv_desde")).ToString("yyyyMMdd"), _
+                              CDate(dr.Item("fecha_serv_hasta")).ToString("yyyyMMdd"), _
+                              CDate(dr.Item("fecha_venc_pago")).ToString("yyyyMMdd"), _
+                              ArrayOfIva,
+                              ArrayOfTributos)
+        End If
 
         If cae.cae <> "" And LCase$(cae.cae) <> "null" Then
           sqlstmt = "sp_FE_UpdateCae " & dr.Item("fv_id") _
-                                       & ",'" & cae.cae & "','" _
-                                       & cae.nro_factura & "','" _
-                                       & cae.vencimiento & "','" _
-                                       & CDate(dr.Item("fecha_cbte")).ToString("yyyyMMdd") & "'"
+                                        & ",'" & cae.cae & "','" _
+                                        & cae.nro_factura & "','" _
+                                        & cae.vencimiento & "','" _
+                                        & CDate(dr.Item("fecha_cbte")).ToString("yyyyMMdd") & "'"
           m_cn.Execute(sqlstmt)
 
           sendEmail(dr.Item("fv_id"))
@@ -315,7 +278,7 @@ Public Class cFacturaElectronica
 
   End Sub
 
-  Private Function pGetArrayOfIva(ByVal fv_id As Long, ByRef ArrayOfIva() As ar.gov.afip.wswhomo1.AlicIva) As Boolean
+  Private Function pGetArrayOfIva(ByVal fv_id As Long, ByRef ArrayOfIva() As ar.gov.afip.wsfev1homo.AlicIva) As Boolean
     Dim rs As DataSet = Nothing
     Dim sqlstmt As String
 
@@ -331,7 +294,7 @@ Public Class cFacturaElectronica
       For Each dr In rs.Tables(0).Rows
 
         ReDim Preserve ArrayOfIva(i)
-        ArrayOfIva(i) = New ar.gov.afip.wswhomo1.AlicIva
+        ArrayOfIva(i) = New ar.gov.afip.wsfev1homo.AlicIva
         With ArrayOfIva(i)
           .BaseImp = dr.Item("baseImp")
           .Id = dr.Item("ivaId")
@@ -356,7 +319,7 @@ Public Class cFacturaElectronica
 
   End Function
 
-  Private Function pGetArrayOfTributo(ByVal fv_id As Long, ByRef ArrayOfTributo() As ar.gov.afip.wswhomo1.Tributo) As Boolean
+  Private Function pGetArrayOfTributo(ByVal fv_id As Long, ByRef ArrayOfTributo() As ar.gov.afip.wsfev1homo.Tributo) As Boolean
     Dim rs As DataSet = Nothing
     Dim sqlstmt As String
 
@@ -372,7 +335,7 @@ Public Class cFacturaElectronica
       For Each dr In rs.Tables(0).Rows
 
         ReDim Preserve ArrayOfTributo(i)
-        ArrayOfTributo(i) = New ar.gov.afip.wswhomo1.Tributo
+        ArrayOfTributo(i) = New ar.gov.afip.wsfev1homo.Tributo
         With ArrayOfTributo(i)
           .BaseImp = dr.Item("baseImp")
           .Id = dr.Item("tribId")
@@ -398,174 +361,6 @@ Public Class cFacturaElectronica
 
   End Function
 
-  
-  'Private Function getCAE(ByVal cuit As Long, _
-  '                        ByVal tipo_doc As Integer, _
-  '                        ByVal nro_doc As Long, _
-  '                        ByVal tipo_cbte As Integer, _
-  '                        ByVal punto_vta As Integer, _
-  '                        ByVal cbt_desde As Long, _
-  '                        ByVal cbt_hasta As Long, _
-  '                        ByVal imp_total As Double, _
-  '                        ByVal imp_tot_conc As Double, _
-  '                        ByVal imp_neto As Double, _
-  '                        ByVal impto_liq As Double, _
-  '                        ByVal impto_liq_rni As Double, _
-  '                        ByVal imp_op_ex As Double, _
-  '                        ByVal fecha_cbte As String, _
-  '                        ByVal fecha_serv_desde As String, _
-  '                        ByVal fecha_serv_hasta As String, _
-  '                        ByVal fecha_venc_pago As String) As cCAE
-
-  '  Dim cantidadreg As Integer = 1
-  '  Dim indicemax As Integer = 0
-  '  Dim d As Integer = 0
-
-  '  Dim objFERequest As New ar.gov.afip.wswhomo.FERequest
-  '  Dim objFECabeceraRequest As New ar.gov.afip.wswhomo.FECabeceraRequest
-  '  Dim ArrayOfFEDetalleRequest(indicemax) As ar.gov.afip.wswhomo.FEDetalleRequest
-  '  Dim objFEResponse As New ar.gov.afip.wswhomo.FEResponse
-
-  '  Dim cae As New cCAE
-
-  '  m_objFEAuthRequest.cuit = cuit
-  '  m_objFEAuthRequest.Token = m_wsaa.token
-  '  m_objFEAuthRequest.Sign = m_wsaa.sign
-
-  '  '----------------------------------------------
-  '  '
-  '  Dim requestId As Long
-
-  '  '
-  '  ' Invoco al método FEUltNroRequest para setear el campo FECabeceraRequest.id del Formulario
-  '  '
-  '  Dim objFEUltNroResponse As New ar.gov.afip.wswhomo.FEUltNroResponse
-  '  Try
-  '    objFEUltNroResponse = m_objWSFE.FEUltNroRequest(m_objFEAuthRequest)
-  '    If objFEUltNroResponse.nro Is Nothing Then
-  '      cLog.write("FEUltNroResponse.RError.percode: " + objFEUltNroResponse.RError.percode.ToString + vbCrLf + _
-  '                 "FEUltNroResponse.RError.perrmsg: " + objFEUltNroResponse.RError.perrmsg + vbCrLf + vbCrLf + _
-  '                 "No se pudo setear el campo FECabeceraRequest.id del Formulario" _
-  '                 , "getCAE: FEUltNroResponse:", c_module)
-  '    Else
-  '      requestId = objFEUltNroResponse.nro.value + 1
-  '    End If
-  '  Catch ex As Exception
-  '    cLog.write(ex.Message, "getCAE", c_module)
-  '  End Try
-
-  '  '
-  '  ' Invoco al método FERecuperaLastCMPRequest para setear los campos
-  '  ' FEDetalleRequest.cbt_desde y FEDetalleRequest.cbt_hasta
-  '  '
-  '  Dim last_cbte_nro As Long
-
-  '  Dim objFELastCMPtype As New ar.gov.afip.wswhomo.FELastCMPtype
-  '  Dim objFERecuperaLastCMPResponse As New ar.gov.afip.wswhomo.FERecuperaLastCMPResponse
-
-  '  objFELastCMPtype.TipoCbte = tipo_cbte
-  '  objFELastCMPtype.PtoVta = punto_vta
-  '  Try
-  '    objFERecuperaLastCMPResponse = m_objWSFE.FERecuperaLastCMPRequest(m_objFEAuthRequest, objFELastCMPtype)
-  '    last_cbte_nro = objFERecuperaLastCMPResponse.cbte_nro
-  '  Catch ex As Exception
-  '    cLog.write(ex.Message, "getCAE", c_module)
-  '  End Try
-
-  '  '
-  '  '----------------------------------------------
-
-  '  objFECabeceraRequest.id = requestId
-  '  objFECabeceraRequest.cantidadreg = cantidadreg
-  '  objFECabeceraRequest.presta_serv = 0
-  '  objFERequest.Fecr = objFECabeceraRequest
-
-  '  Dim objFEDetalleRequest As New ar.gov.afip.wswhomo.FEDetalleRequest
-  '  With objFEDetalleRequest
-  '    .tipo_doc = tipo_doc
-  '    .nro_doc = nro_doc
-  '    .tipo_cbte = tipo_cbte
-  '    .punto_vta = punto_vta
-  '    .cbt_desde = cbt_desde ' last_cbte_nro + 1 'cbt_desde
-  '    .cbt_hasta = cbt_hasta ' last_cbte_nro + 1 'cbt_hasta
-  '    .imp_total = imp_total
-  '    .imp_tot_conc = imp_tot_conc
-  '    .imp_neto = imp_neto
-  '    .impto_liq = impto_liq
-  '    .impto_liq_rni = impto_liq_rni
-  '    .imp_op_ex = imp_op_ex
-  '    .fecha_cbte = fecha_cbte
-  '    .fecha_serv_desde = fecha_serv_desde
-  '    .fecha_serv_hasta = fecha_serv_hasta
-  '    .fecha_venc_pago = fecha_venc_pago
-  '  End With
-  '  ArrayOfFEDetalleRequest(d) = objFEDetalleRequest
-  '  objFERequest.Fedr = ArrayOfFEDetalleRequest
-
-  '  cLog.write("Factura: " & vbCrLf & _
-  '              "tipo_doc = " & tipo_doc & vbCrLf & _
-  '              "nro_doc = " & nro_doc & vbCrLf & _
-  '              "tipo_cbte = " & tipo_cbte & vbCrLf & _
-  '              "punto_vta = " & punto_vta & vbCrLf & _
-  '              "last_cbte_nro = " & last_cbte_nro + 1 & vbCrLf & _
-  '              "cbt_desde = " & cbt_desde & vbCrLf & _
-  '              "cbt_hasta = " & cbt_hasta & vbCrLf & _
-  '              "imp_total = " & imp_total & vbCrLf & _
-  '              "imp_tot_conc = " & imp_tot_conc & vbCrLf & _
-  '              "imp_neto = " & imp_neto & vbCrLf & _
-  '              "impto_liq = " & impto_liq & vbCrLf & _
-  '              "impto_liq_rni = " & impto_liq_rni & vbCrLf & _
-  '              "imp_op_ex = " & imp_op_ex & vbCrLf & _
-  '              "fecha_cbte = " & fecha_cbte & vbCrLf & _
-  '              "fecha_serv_desde = " & fecha_serv_desde & vbCrLf & _
-  '              "fecha_serv_hasta = " & fecha_serv_hasta & vbCrLf & _
-  '              "fecha_venc_pago = " & fecha_venc_pago & vbCrLf _
-  '              , "getCAE", c_module)
-
-  '  ' Invoco al método FEAutRequest
-  '  Try
-  '    objFEResponse = m_objWSFE.FEAutRequest(m_objFEAuthRequest, objFERequest)
-  '    If objFEResponse.FecResp Is Nothing Then
-  '      cLog.write("FEResponse.RError.percode: " + objFEResponse.RError.percode.ToString + vbCrLf + _
-  '                 "FEResponse.RError.perrmsg: " + objFEResponse.RError.perrmsg + vbCrLf _
-  '                 , "getCAE: FEResponse:", c_module)
-  '    Else
-  '      cLog.write("FEResponse.FecResp.motivo: " + objFEResponse.FecResp.motivo + vbCrLf + _
-  '                  "FEResponse.FecResp.reproceso: " + objFEResponse.FecResp.reproceso + vbCrLf + _
-  '                  "FEResponse.FecResp.resultado: " + objFEResponse.FecResp.resultado + vbCrLf _
-  '                  , "getCAE: FEResponse", c_module)
-
-  '      ' Solo si fue aprobada
-  '      '
-  '      If objFEResponse.FecResp.resultado = "A" Then
-  '        For d = 0 To (indicemax)
-
-  '          ' Solo si fue aprobada
-  '          '
-  '          If objFEResponse.FedResp(d).resultado = "A" Then
-  '            cae.cae = objFEResponse.FedResp(d).cae.ToString
-  '            cae.nro_factura = objFEResponse.FedResp(d).cbt_desde
-  '            cae.vencimiento = objFEResponse.FedResp(d).fecha_vto
-  '            cLog.write("FEResponse.FedResp(" + d.ToString + ").cae: " + objFEResponse.FedResp(d).cae.ToString + vbCrLf + _
-  '                        "FEResponse.FedResp(" + d.ToString + ").cbt_desde: " + objFEResponse.FedResp(d).cbt_desde.ToString + vbCrLf + _
-  '                        "FEResponse.FedResp(" + d.ToString + ").resultado: " + objFEResponse.FedResp(d).resultado + vbCrLf _
-  '                        , "getCAE: FEResponse", c_module)
-  '          End If
-  '        Next d
-  '        cLog.write("FEResponse.RError.percode: " + objFEResponse.RError.percode.ToString + vbCrLf + _
-  '                    "FEResponse.RError.perrmsg: " + objFEResponse.RError.perrmsg + vbCrLf _
-  '                    , "getCAE: FEResponse", c_module)
-  '      End If
-  '    End If
-
-  '  Catch ex As Exception
-  '    cLog.write(ex.Message, "getCAE", c_module)
-  '  End Try
-
-  '  Return cae
-
-  'End Function
-
   Private Function getCAEV1(ByVal cuit As Long, _
                             ByVal tipo_doc As Integer, _
                             ByVal nro_doc As Long, _
@@ -584,17 +379,17 @@ Public Class cFacturaElectronica
                             ByVal fecha_serv_desde As String, _
                             ByVal fecha_serv_hasta As String, _
                             ByVal fecha_venc_pago As String, _
-                            ByVal ArrayOfIva() As ar.gov.afip.wswhomo1.AlicIva,
-                            ByVal ArrayOfTributos() As ar.gov.afip.wswhomo1.Tributo) As cCAE
+                            ByVal ArrayOfIva() As ar.gov.afip.wsfev1homo.AlicIva,
+                            ByVal ArrayOfTributos() As ar.gov.afip.wsfev1homo.Tributo) As cCAE
 
     Dim cantidadreg As Integer = 1
     Dim indicemax As Integer = 0
     Dim d As Integer = 0
 
-    Dim objFERequest As New ar.gov.afip.wswhomo1.FECAERequest
-    Dim objFECabeceraRequest As New ar.gov.afip.wswhomo1.FECAECabRequest
-    Dim ArrayOfFEDetalleRequest(indicemax) As ar.gov.afip.wswhomo1.FECAEDetRequest
-    Dim objFEResponse As New ar.gov.afip.wswhomo1.FECAEResponse
+    Dim objFERequest As New ar.gov.afip.wsfev1homo.FECAERequest
+    Dim objFECabeceraRequest As New ar.gov.afip.wsfev1homo.FECAECabRequest
+    Dim ArrayOfFEDetalleRequest(indicemax) As ar.gov.afip.wsfev1homo.FECAEDetRequest
+    Dim objFEResponse As New ar.gov.afip.wsfev1homo.FECAEResponse
 
     Dim cae As New cCAE
 
@@ -610,13 +405,11 @@ Public Class cFacturaElectronica
     objFECabeceraRequest.CbteTipo = tipo_cbte
     objFERequest.FeCabReq = objFECabeceraRequest
 
-    Dim objFEDetalleRequest As New ar.gov.afip.wswhomo1.FECAEDetRequest
+    Dim objFEDetalleRequest As New ar.gov.afip.wsfev1homo.FECAEDetRequest
     With objFEDetalleRequest
       .Concepto = 1
       .DocTipo = tipo_doc
       .DocNro = nro_doc
-      '.tipo_cbte = tipo_cbte
-      '.punto_vta = punto_vta
       .CbteDesde = cbt_desde ' last_cbte_nro + 1 'cbt_desde
       .CbteHasta = cbt_hasta ' last_cbte_nro + 1 'cbt_hasta
       .ImpTotal = imp_total
@@ -624,12 +417,8 @@ Public Class cFacturaElectronica
       .ImpNeto = imp_neto
       .ImpIVA = impto_liq
       .ImpTrib = imp_tributo
-      '.impto_liq_rni = impto_liq_rni
       .ImpOpEx = imp_op_ex
       .CbteFch = fecha_cbte
-      '.FchServDesde = fecha_serv_desde
-      '.FchServHasta = fecha_serv_hasta
-      '.FchVtoPago = fecha_venc_pago
       .Iva = ArrayOfIva
       .Tributos = ArrayOfTributos
       .MonId = "PES"
@@ -668,7 +457,7 @@ Public Class cFacturaElectronica
         cLog.write("FEResponse.Errors: " + objFEResponse.Errors.ToString + vbCrLf _
                    , "getCAEV1: FEResponse:", c_module)
         
-        Dim err As ar.gov.afip.wswhomo1.Err
+        Dim err As ar.gov.afip.wsfev1homo.Err
 
         For Each err in objFEResponse.Errors
           cLog.write("err-code: " & err.Code, "", c_module)
@@ -696,7 +485,7 @@ Public Class cFacturaElectronica
           cLog.write("FEResponse.Errors: " + objFEResponse.Errors.ToString + vbCrLf _
                       , "getCAEV1: FEResponse", c_module)
 
-          Dim err As ar.gov.afip.wswhomo1.Err
+          Dim err As ar.gov.afip.wsfev1homo.Err
           For Each err In objFEResponse.Errors
             cLog.write("Error " + err.Msg, "getCAEV1: Error", c_module)
           Next
@@ -730,7 +519,7 @@ Public Class cFacturaElectronica
 
             If Not objFEResponse.FeDetResp(d).Observaciones Is Nothing Then
 
-              Dim obs As ar.gov.afip.wswhomo1.Obs
+              Dim obs As ar.gov.afip.wsfev1homo.Obs
               For Each obs In objFEResponse.FeDetResp(d).Observaciones
                 cLog.write("Error " + obs.Msg, "getCAEV1: Error", c_module)
               Next
@@ -762,7 +551,7 @@ Public Class cFacturaElectronica
 
     Try
 
-      sqlstmt = "sp_FE_GetConsultaTalonarios"
+      sqlstmt = "sp_FE_GetConsultaTalonarios " & m_emp_id
 
       If Not m_cn.openRs(sqlstmt, rs) Then Exit Sub
 
@@ -790,7 +579,7 @@ Public Class cFacturaElectronica
 
       End If
 
-      sqlstmt = "sp_FE_UpdateConsultaTalonarios '" & strResponse & "'"
+      sqlstmt = "sp_FE_UpdateConsultaTalonarios '" & strResponse & "', " & m_emp_id
 
       m_cn.Execute(sqlstmt)
 
@@ -848,7 +637,7 @@ Public Class cFacturaElectronica
       If Not m_cn.openRs(sqlstmt, rs) Then Exit Sub
 
       Dim dr As DataRow
-      Dim response As ar.gov.afip.wswhomo1.FECompConsResponse
+      Dim response As ar.gov.afip.wsfev1homo.FECompConsResponse
       Dim strResponse As String = ""
 
       For Each dr In rs.Tables(0).Rows
@@ -881,7 +670,7 @@ Public Class cFacturaElectronica
                         "Moneda:" & response.MonId & vbCrLf
 
           Dim strObs As String = ""
-          Dim obs As ar.gov.afip.wswhomo1.Obs
+          Dim obs As ar.gov.afip.wsfev1homo.Obs
           If Not response.Observaciones Is Nothing Then
 
             For Each obs In response.Observaciones
@@ -894,7 +683,7 @@ Public Class cFacturaElectronica
           If Not response.Iva Is Nothing Then
 
 
-            Dim iva As ar.gov.afip.wswhomo1.AlicIva
+            Dim iva As ar.gov.afip.wsfev1homo.AlicIva
             For Each iva In response.Iva
               strIva += "Base Imponible: " & iva.BaseImp & vbCrLf & _
                         "Base Imponible: :" & iva.Importe & vbCrLf & _
@@ -936,9 +725,9 @@ Public Class cFacturaElectronica
   Private Function getComp(ByVal cuit As Long, _
                            ByVal cbteTipo As Integer, _
                            ByVal ptoVta As Integer, _
-                           ByVal cbteNro As Integer) As ar.gov.afip.wswhomo1.FECompConsResponse
+                           ByVal cbteNro As Integer) As ar.gov.afip.wsfev1homo.FECompConsResponse
 
-    Dim objFERequest As New ar.gov.afip.wswhomo1.FECompConsultaReq
+    Dim objFERequest As New ar.gov.afip.wsfev1homo.FECompConsultaReq
 
     objFERequest.CbteNro = cbteNro
     objFERequest.CbteTipo = cbteTipo
@@ -948,14 +737,14 @@ Public Class cFacturaElectronica
     m_objFEAuthRequest1.Token = m_wsaa.token
     m_objFEAuthRequest1.Sign = m_wsaa.sign
 
-    Dim objFECompResponse As New ar.gov.afip.wswhomo1.FECompConsultaResponse
+    Dim objFECompResponse As New ar.gov.afip.wsfev1homo.FECompConsultaResponse
     Try
 
       objFECompResponse = m_objWSFE1.FECompConsultar(m_objFEAuthRequest1, objFERequest)
-      Dim response As ar.gov.afip.wswhomo1.FECompConsResponse = objFECompResponse.ResultGet
+      Dim response As ar.gov.afip.wsfev1homo.FECompConsResponse = objFECompResponse.ResultGet
 
       If response Is Nothing Then
-        Dim objError As ar.gov.afip.wswhomo1.Err
+        Dim objError As ar.gov.afip.wsfev1homo.Err
         For Each objError In objFECompResponse.Errors
           cLog.write("FEUltNroResponse.RError.percode: " + objError.Code.ToString() + vbCrLf + _
                      "FEUltNroResponse.RError.perrmsg: " + objError.Msg + vbCrLf + vbCrLf + _
@@ -1000,97 +789,6 @@ Public Class cFacturaElectronica
 
   End Function
 
-  'Private Sub getLastDoc()
-
-  '  If Not initWSAA() Then Exit Sub
-
-  '  If Not pConnect() Then Exit Sub
-
-  '  Dim objFERequest As New ar.gov.afip.wswhomo.FERequest
-  '  Dim objFECabeceraRequest As New ar.gov.afip.wswhomo.FECabeceraRequest
-  '  Dim objFEResponse As New ar.gov.afip.wswhomo.FEResponse
-
-
-  '  m_objFEAuthRequest.cuit = m_cuit
-  '  'm_objFEAuthRequest.cuit = 30707587241
-  '  'm_objFEAuthRequest.cuit = 20250282010
-  '  m_objFEAuthRequest.Token = m_wsaa.token
-  '  m_objFEAuthRequest.Sign = m_wsaa.sign
-
-  '  '----------------------------------------------
-  '  '
-  '  Dim requestId As Long
-
-  '  '
-  '  ' Invoco al método FEUltNroRequest para setear el campo FECabeceraRequest.id del Formulario
-  '  '
-  '  Dim objFEUltNroResponse As New ar.gov.afip.wswhomo.FEUltNroResponse
-  '  Try
-  '    objFEUltNroResponse = m_objWSFE.FEUltNroRequest(m_objFEAuthRequest)
-  '    If objFEUltNroResponse.nro Is Nothing Then
-  '      cLog.write("FEUltNroResponse.RError.percode: " + objFEUltNroResponse.RError.percode.ToString + vbCrLf + _
-  '                 "FEUltNroResponse.RError.perrmsg: " + objFEUltNroResponse.RError.perrmsg + vbCrLf + vbCrLf + _
-  '                 "No se pudo setear el campo FECabeceraRequest.id del Formulario" _
-  '                 , "getCAE: FEUltNroResponse:", c_module)
-  '    Else
-  '      requestId = objFEUltNroResponse.nro.value + 1
-  '    End If
-  '  Catch ex As Exception
-  '    cLog.write(ex.Message, "getLastDoc", c_module)
-  '  End Try
-
-  '  '
-  '  ' Invoco al método FERecuperaLastCMPRequest para setear los campos
-  '  ' FEDetalleRequest.cbt_desde y FEDetalleRequest.cbt_hasta
-  '  '
-  '  Dim last_cbte_nro As Long
-
-  '  Dim objFELastCMPtype As New ar.gov.afip.wswhomo.FELastCMPtype
-  '  Dim objFERecuperaLastCMPResponse As New ar.gov.afip.wswhomo.FERecuperaLastCMPResponse
-
-  '  '----------------------------------------------------------------------------------
-  '  Dim vTipoCbte(8) As Integer
-  '  vTipoCbte(0) = 1
-  '  vTipoCbte(1) = 6
-  '  vTipoCbte(2) = 11
-  '  vTipoCbte(3) = 3
-  '  vTipoCbte(4) = 8
-  '  vTipoCbte(5) = 13
-  '  vTipoCbte(6) = 2
-  '  vTipoCbte(7) = 7
-  '  vTipoCbte(8) = 12
-
-  '  Dim ptoVta(1) As Integer
-  '  ptoVta(0) = m_ptoVta1
-  '  ptoVta(1) = m_ptoVta2
-  '  'ptoVta(0) = 1
-  '  'ptoVta(1) = 1
-
-  '  Dim i As Integer
-  '  Dim j As Integer
-
-  '  For j = 0 To 1
-  '    For i = 0 To 8
-
-  '      objFELastCMPtype.TipoCbte = vTipoCbte(i)
-  '      objFELastCMPtype.PtoVta = ptoVta(j)
-  '      'objFELastCMPtype.PtoVta = 1
-  '      Try
-  '        objFERecuperaLastCMPResponse = m_objWSFE.FERecuperaLastCMPRequest(m_objFEAuthRequest, objFELastCMPtype)
-  '        last_cbte_nro = objFERecuperaLastCMPResponse.cbte_nro
-
-  '        cLog.write("Pto. Vta.: " & ptoVta(j) & "  cbte_tipo: " & vTipoCbte(i) & "  numero: " & last_cbte_nro, "getLastDoc", c_module)
-
-  '      Catch ex As Exception
-  '        cLog.write(ex.Message, "getLastDoc", c_module)
-  '      End Try
-  '    Next
-  '  Next
-  '  '
-  '  '----------------------------------------------
-
-  'End Sub
-
   Private Sub getLastDocV1()
 
     Try
@@ -1101,7 +799,7 @@ Public Class cFacturaElectronica
       cLog.write("Line: 2", "getLastDocV1", c_module)
       If Not pConnect() Then Exit Sub
 
-      Dim objFEResponse As New ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse
+      Dim objFEResponse As New ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse
       Dim last_cbte_nro As Long
 
       cLog.write("Line: 3", "getLastDocV1", c_module)
@@ -1162,8 +860,8 @@ Public Class cFacturaElectronica
 
       cLog.write("Line: 8", "getLastDocV1", c_module)
 
-      Dim tiposIva As ar.gov.afip.wswhomo1.IvaTipoResponse = m_objWSFE1.FEParamGetTiposIva(m_objFEAuthRequest1)
-      Dim tipoIva As ar.gov.afip.wswhomo1.IvaTipo
+      Dim tiposIva As ar.gov.afip.wsfev1homo.IvaTipoResponse = m_objWSFE1.FEParamGetTiposIva(m_objFEAuthRequest1)
+      Dim tipoIva As ar.gov.afip.wsfev1homo.IvaTipo
 
       cLog.write("Line: 9", "getLastDocV1", c_module)
 
@@ -1177,8 +875,8 @@ Public Class cFacturaElectronica
 
       cLog.write("Line: 10", "getLastDocV1", c_module)
 
-      Dim tiposMoneda As ar.gov.afip.wswhomo1.MonedaResponse = m_objWSFE1.FEParamGetTiposMonedas(m_objFEAuthRequest1)
-      Dim tipoMoneda As ar.gov.afip.wswhomo1.Moneda
+      Dim tiposMoneda As ar.gov.afip.wsfev1homo.MonedaResponse = m_objWSFE1.FEParamGetTiposMonedas(m_objFEAuthRequest1)
+      Dim tipoMoneda As ar.gov.afip.wsfev1homo.Moneda
 
       cLog.write("Line: 11", "getLastDocV1", c_module)
 
@@ -1192,8 +890,8 @@ Public Class cFacturaElectronica
 
       cLog.write("Line: 12", "getLastDocV1", c_module)
 
-      Dim tiposTributo As ar.gov.afip.wswhomo1.FETributoResponse = m_objWSFE1.FEParamGetTiposTributos(m_objFEAuthRequest1)
-      Dim tipoTributo As ar.gov.afip.wswhomo1.TributoTipo
+      Dim tiposTributo As ar.gov.afip.wsfev1homo.FETributoResponse = m_objWSFE1.FEParamGetTiposTributos(m_objFEAuthRequest1)
+      Dim tipoTributo As ar.gov.afip.wsfev1homo.TributoTipo
 
       cLog.write("Line: 9", "getLastDocV1", c_module)
 
@@ -1213,74 +911,6 @@ Public Class cFacturaElectronica
     End Try
   End Sub
 
-  'Private Function getLastDoc(ByVal ptoVta As Integer, ByVal tipoDoc As Integer) As Long
-
-  '  If Not initWSAA() Then Exit Function
-
-  '  If Not pConnect() Then Exit Function
-
-  '  Dim objFERequest As New ar.gov.afip.wswhomo.FERequest
-  '  Dim objFECabeceraRequest As New ar.gov.afip.wswhomo.FECabeceraRequest
-  '  Dim objFEResponse As New ar.gov.afip.wswhomo.FEResponse
-
-  '  m_objFEAuthRequest.cuit = m_cuit
-  '  'm_objFEAuthRequest.cuit = 30707587241
-  '  'm_objFEAuthRequest.cuit = 20250282010
-  '  m_objFEAuthRequest.Token = m_wsaa.token
-  '  m_objFEAuthRequest.Sign = m_wsaa.sign
-
-  '  '----------------------------------------------
-  '  '
-  '  Dim requestId As Long
-
-  '  '
-  '  ' Invoco al método FEUltNroRequest para setear el campo FECabeceraRequest.id del Formulario
-  '  '
-  '  Dim objFEUltNroResponse As New ar.gov.afip.wswhomo.FEUltNroResponse
-  '  Try
-  '    objFEUltNroResponse = m_objWSFE.FEUltNroRequest(m_objFEAuthRequest)
-  '    If objFEUltNroResponse.nro Is Nothing Then
-  '      cLog.write("FEUltNroResponse.RError.percode: " + objFEUltNroResponse.RError.percode.ToString + vbCrLf + _
-  '                 "FEUltNroResponse.RError.perrmsg: " + objFEUltNroResponse.RError.perrmsg + vbCrLf + vbCrLf + _
-  '                 "No se pudo setear el campo FECabeceraRequest.id del Formulario" _
-  '                 , "getCAE: FEUltNroResponse:", c_module)
-  '    Else
-  '      requestId = objFEUltNroResponse.nro.value + 1
-  '    End If
-  '  Catch ex As Exception
-  '    cLog.write(ex.Message, "getLastDoc", c_module)
-  '  End Try
-
-  '  '
-  '  ' Invoco al método FERecuperaLastCMPRequest para setear los campos
-  '  ' FEDetalleRequest.cbt_desde y FEDetalleRequest.cbt_hasta
-  '  '
-  '  Dim last_cbte_nro As Long
-
-  '  Dim objFELastCMPtype As New ar.gov.afip.wswhomo.FELastCMPtype
-  '  Dim objFERecuperaLastCMPResponse As New ar.gov.afip.wswhomo.FERecuperaLastCMPResponse
-
-  '  '----------------------------------------------------------------------------------
-
-  '  objFELastCMPtype.TipoCbte = tipoDoc
-  '  objFELastCMPtype.PtoVta = ptoVta
-
-  '  Try
-  '    objFERecuperaLastCMPResponse = m_objWSFE.FERecuperaLastCMPRequest(m_objFEAuthRequest, objFELastCMPtype)
-  '    last_cbte_nro = objFERecuperaLastCMPResponse.cbte_nro
-
-  '    cLog.write("Pto. Vta.: " & ptoVta & "  cbte_tipo: " & tipoDoc & "  numero: " & last_cbte_nro, "getLastDoc", c_module)
-
-  '    Return last_cbte_nro
-
-  '  Catch ex As Exception
-  '    cLog.write(ex.Message, "getLastDoc", c_module)
-  '  End Try
-  '  '
-  '  '----------------------------------------------
-
-  'End Function
-
   Private Function getLastDocV1(ByVal ptoVta As Integer, ByVal tipoDoc As Integer) As Long
 
     Try
@@ -1289,7 +919,7 @@ Public Class cFacturaElectronica
 
       If Not pConnect() Then Exit Function
 
-      Dim objFEResponse As New ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse
+      Dim objFEResponse As New ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse
       Dim last_cbte_nro As Long
 
       m_objFEAuthRequest1.Cuit = m_cuit
@@ -1520,4 +1150,10 @@ Public Class cFacturaElectronica
     Return "'" + sString.Replace("'", "''") + "'"
   End Function
 
+End Class
+
+Public Class cCAE
+  Public cae As String
+  Public nro_factura As String
+  Public vencimiento As String
 End Class

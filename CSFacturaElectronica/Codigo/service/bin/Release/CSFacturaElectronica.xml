@@ -6,1032 +6,1469 @@ CSFacturaElectronica
 </name>
 </assembly>
 <members>
-<member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.#ctor">
+<member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.#ctor">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAESolicitarCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAESolicitarCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompTotXRequestCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompTotXRequestCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEDummyCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEDummyCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompUltimoAutorizadoCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompUltimoAutorizadoCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompConsultarCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompConsultarCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEARegInformativoCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEARegInformativoCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASolicitarCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASolicitarCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoConsultarCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoConsultarCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoInformarCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoInformarCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEAConsultarCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEAConsultarCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetCotizacionCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetCotizacionCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposTributosCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposTributosCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposMonedasCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposMonedasCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposIvaCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposIvaCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposOpcionalCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposOpcionalCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposConceptoCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposConceptoCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetPtosVentaCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetPtosVentaCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposCbteCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposCbteCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposDocCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposDocCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAESolicitar(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAERequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAESolicitar(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAERequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAESolicitarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAERequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAESolicitarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAERequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAESolicitarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAERequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAESolicitarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAERequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompTotXRequest(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompTotXRequest(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompTotXRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompTotXRequestAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompTotXRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompTotXRequestAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEDummy">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEDummy">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEDummyAsync">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEDummyAsync">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEDummyAsync(System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEDummyAsync(System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompUltimoAutorizado(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int32)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompUltimoAutorizado(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int32)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompUltimoAutorizadoAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int32)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompUltimoAutorizadoAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int32)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompUltimoAutorizadoAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int32,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompUltimoAutorizadoAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int32,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompConsultar(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompConsultar(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompConsultarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompConsultarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECompConsultarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECompConsultarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEARegInformativo(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEARegInformativo(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEARegInformativoAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEARegInformativoAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEARegInformativoAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEARegInformativoAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASolicitar(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int16)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASolicitar(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int16)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASolicitarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int16)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASolicitarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int16)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASolicitarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int16,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASolicitarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int16,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoConsultar(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.String,System.Int32)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoConsultar(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.String,System.Int32)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoConsultarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.String,System.Int32)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoConsultarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.String,System.Int32)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoConsultarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.String,System.Int32,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoConsultarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.String,System.Int32,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoInformar(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.String)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoInformar(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.String)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoInformarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.String)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoInformarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.String)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEASinMovimientoInformarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.String,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEASinMovimientoInformarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.String,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEAConsultar(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int16)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEAConsultar(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int16)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEAConsultarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int16)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEAConsultarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int16)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FECAEAConsultarAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Int32,System.Int16,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FECAEAConsultarAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Int32,System.Int16,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetCotizacion(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.String)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetCotizacion(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.String)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetCotizacionAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.String)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetCotizacionAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.String)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetCotizacionAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.String,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetCotizacionAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.String,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposTributos(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposTributos(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposTributosAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposTributosAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposTributosAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposTributosAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposMonedas(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposMonedas(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposMonedasAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposMonedasAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposMonedasAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposMonedasAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposIva(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposIva(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposIvaAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposIvaAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposIvaAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposIvaAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposOpcional(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposOpcional(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposOpcionalAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposOpcionalAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposOpcionalAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposOpcionalAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposConcepto(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposConcepto(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposConceptoAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposConceptoAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposConceptoAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposConceptoAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetPtosVenta(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetPtosVenta(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetPtosVentaAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetPtosVentaAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetPtosVentaAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetPtosVentaAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposCbte(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposCbte(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposCbteAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposCbteAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposCbteAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposCbteAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposDoc(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposDoc(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposDocAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposDocAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.FEParamGetTiposDocAsync(CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.FEParamGetTiposDocAsync(CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service.CancelAsync(System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service.CancelAsync(System.Object)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Service">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Service">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest.Token">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest.Token">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest.Sign">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest.Sign">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest.Cuit">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest.Cuit">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEAuthRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEAuthRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipo.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipo.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipo.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipo.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipoResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipoResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipoResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipoResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipoResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipoResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.DocTipoResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DocTipoResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Err.Code">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Err.Code">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Err.Msg">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Err.Msg">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Err">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Err">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Evt.Code">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Evt.Code">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Evt.Msg">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Evt.Msg">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Evt">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Evt">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipo.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipo.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipo.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipo.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipoResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipoResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipoResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipoResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipoResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipoResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteTipoResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteTipoResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.PtoVenta.Nro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.PtoVenta.Nro">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.PtoVenta.EmisionTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.PtoVenta.EmisionTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.PtoVenta.Bloqueado">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.PtoVenta.Bloqueado">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.PtoVenta.FchBaja">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.PtoVenta.FchBaja">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.PtoVenta">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.PtoVenta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEPtoVentaResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEPtoVentaResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEPtoVentaResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEPtoVentaResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEPtoVentaResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEPtoVentaResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEPtoVentaResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEPtoVentaResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipo.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipo.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipo.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipo.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipoResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipoResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipoResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipoResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipoResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipoResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.ConceptoTipoResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.ConceptoTipoResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipo.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipo.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipo.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipo.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipoResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipoResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipoResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipoResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipoResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipoResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.OpcionalTipoResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.OpcionalTipoResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipo.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipo.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipo.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipo.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipoResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipoResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipoResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipoResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipoResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipoResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.IvaTipoResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.IvaTipoResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Moneda.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Moneda.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Moneda.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Moneda.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Moneda.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Moneda.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Moneda.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Moneda.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Moneda">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Moneda">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.MonedaResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.MonedaResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.MonedaResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.MonedaResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.MonedaResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.MonedaResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.MonedaResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.MonedaResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.TributoTipo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.TributoTipo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.TributoTipo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.TributoTipo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.TributoTipo.FchDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.TributoTipo.FchDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.TributoTipo.FchHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.TributoTipo.FchHasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.TributoTipo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.TributoTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FETributoResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FETributoResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FETributoResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FETributoResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FETributoResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FETributoResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FETributoResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FETributoResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Cotizacion.MonId">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Cotizacion.MonId">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Cotizacion.MonCotiz">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Cotizacion.MonCotiz">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Cotizacion.FchCotiz">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Cotizacion.FchCotiz">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Cotizacion">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Cotizacion">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECotizacionResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECotizacionResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECotizacionResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECotizacionResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECotizacionResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECotizacionResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECotizacionResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECotizacionResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMov.CAEA">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMov.CAEA">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMov.FchProceso">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMov.FchProceso">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMov.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMov.PtoVta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMov">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMov">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovResponse.Resultado">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovResponse.Resultado">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovConsResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovConsResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovConsResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovConsResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovConsResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovConsResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovConsResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovConsResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.CAEA">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.CAEA">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.Periodo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.Periodo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.Orden">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.Orden">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.FchVigDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.FchVigDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.FchVigHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.FchVigHasta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.FchTopeInf">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.FchTopeInf">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet.FchProceso">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet.FchProceso">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGet">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGetResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGetResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGetResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGetResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGetResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGetResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAGetResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAGetResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAResponse.FeCabResp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAResponse.FeCabResp">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAResponse.FeDetResp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAResponse.FeDetResp">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAResponse.Events">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAResponse.Errors">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAResponse">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEACabResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEACabResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.Cuit">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.Cuit">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.PtoVta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.CbteTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.CbteTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.FchProceso">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.FchProceso">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.CantReg">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.CantReg">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.Resultado">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.Resultado">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse.Reproceso">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse.Reproceso">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabResponse">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAECabResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAECabResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEADetResponse.CAEA">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEADetResponse.CAEA">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEADetResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEADetResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.Concepto">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.Concepto">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.DocTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.DocTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.DocNro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.DocNro">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.CbteDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.CbteDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.CbteHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.CbteHasta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.CbteFch">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.CbteFch">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.Resultado">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.Resultado">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse.Observaciones">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse.Observaciones">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Obs.Code">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Obs.Code">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Obs.Msg">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Obs.Msg">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Obs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Obs">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEDetResponse.CAE">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEDetResponse.CAE">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEDetResponse.CAEFchVto">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEDetResponse.CAEFchVto">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEDetResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEDetResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARequest.FeCabReq">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARequest.FeCabReq">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARequest.FeDetReq">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARequest.FeDetReq">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARequest">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEACabRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEACabRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabRequest.CantReg">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabRequest.CantReg">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabRequest.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabRequest.PtoVta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabRequest.CbteTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabRequest.CbteTipo">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECabRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECabRequest">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAECabRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAECabRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEADetRequest.CAEA">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEADetRequest.CAEA">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEADetRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEADetRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.Concepto">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.Concepto">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.DocTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.DocTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.DocNro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.DocNro">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.CbteDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.CbteDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.CbteHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.CbteHasta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.CbteFch">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.CbteFch">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.ImpTotal">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.ImpTotal">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.ImpTotConc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.ImpTotConc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.ImpNeto">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.ImpNeto">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.ImpOpEx">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.ImpOpEx">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.ImpTrib">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.ImpTrib">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.ImpIVA">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.ImpIVA">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.FchServDesde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.FchServDesde">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.FchServHasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.FchServHasta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.FchVtoPago">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.FchVtoPago">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.MonId">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.MonId">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.MonCotiz">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.MonCotiz">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.CbtesAsoc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.CbtesAsoc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.Tributos">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.Tributos">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.Iva">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.Iva">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest.Opcionales">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest.Opcionales">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDetRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDetRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteAsoc.Tipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteAsoc.Tipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteAsoc.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteAsoc.PtoVta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteAsoc.Nro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteAsoc.Nro">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.CbteAsoc">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.CbteAsoc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Tributo.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Tributo.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Tributo.Desc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Tributo.Desc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Tributo.BaseImp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Tributo.BaseImp">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Tributo.Alic">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Tributo.Alic">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Tributo.Importe">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Tributo.Importe">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Tributo">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Tributo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.AlicIva.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.AlicIva.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.AlicIva.BaseImp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.AlicIva.BaseImp">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.AlicIva.Importe">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.AlicIva.Importe">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.AlicIva">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.AlicIva">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Opcional.Id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Opcional.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.Opcional.Valor">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Opcional.Valor">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.Opcional">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.Opcional">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEDetRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEDetRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.Resultado">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.Resultado">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.CodAutorizacion">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.CodAutorizacion">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.EmisionTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.EmisionTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.FchVto">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.FchVto">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.FchProceso">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.FchProceso">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.Observaciones">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.Observaciones">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.PtoVta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse.CbteTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse.CbteTipo">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaResponse.ResultGet">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaResponse.ResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq.CbteTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq.CbteTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq.CbteNro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq.CbteNro">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq.PtoVta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultaReq">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultaReq">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse.PtoVta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse.CbteTipo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse.CbteTipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse.CbteNro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse.CbteNro">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERecuperaLastCbteResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERecuperaLastCbteResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DummyResponse.AppServer">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DummyResponse.AppServer">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DummyResponse.DbServer">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DummyResponse.DbServer">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.DummyResponse.AuthServer">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DummyResponse.AuthServer">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.DummyResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.DummyResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERegXReqResponse.RegXReq">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERegXReqResponse.RegXReq">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERegXReqResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERegXReqResponse.Errors">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERegXReqResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERegXReqResponse.Events">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FERegXReqResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FERegXReqResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEResponse.FeCabResp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEResponse.FeCabResp">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEResponse.FeDetResp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEResponse.FeDetResp">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEResponse.Events">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEResponse.Events">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEResponse.Errors">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEResponse.Errors">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAERequest.FeCabReq">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAERequest.FeCabReq">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAERequest.FeDetReq">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAERequest.FeDetReq">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAERequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAERequest">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAESolicitarCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAESolicitarCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAESolicitarCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAESolicitarCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAESolicitarCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAESolicitarCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompTotXRequestCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompTotXRequestCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompTotXRequestCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompTotXRequestCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompTotXRequestCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompTotXRequestCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDummyCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDummyCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDummyCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDummyCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEDummyCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEDummyCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompUltimoAutorizadoCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompUltimoAutorizadoCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompUltimoAutorizadoCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompUltimoAutorizadoCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompUltimoAutorizadoCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompUltimoAutorizadoCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultarCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultarCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultarCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultarCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECompConsultarCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECompConsultarCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARegInformativoCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARegInformativoCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARegInformativoCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARegInformativoCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEARegInformativoCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEARegInformativoCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASolicitarCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASolicitarCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASolicitarCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASolicitarCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASolicitarCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASolicitarCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovimientoConsultarCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovimientoConsultarCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovimientoConsultarCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovimientoConsultarCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovimientoConsultarCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovimientoConsultarCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovimientoInformarCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovimientoInformarCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovimientoInformarCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovimientoInformarCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEASinMovimientoInformarCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEASinMovimientoInformarCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAConsultarCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAConsultarCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAConsultarCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAConsultarCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FECAEAConsultarCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FECAEAConsultarCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetCotizacionCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetCotizacionCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetCotizacionCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetCotizacionCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetCotizacionCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetCotizacionCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposTributosCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposTributosCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposTributosCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposTributosCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposTributosCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposTributosCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposMonedasCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposMonedasCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposMonedasCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposMonedasCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposMonedasCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposMonedasCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposIvaCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposIvaCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposIvaCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposIvaCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposIvaCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposIvaCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposOpcionalCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposOpcionalCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposOpcionalCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposOpcionalCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposOpcionalCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposOpcionalCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposConceptoCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposConceptoCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposConceptoCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposConceptoCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposConceptoCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposConceptoCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetPtosVentaCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetPtosVentaCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetPtosVentaCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetPtosVentaCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetPtosVentaCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetPtosVentaCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposCbteCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposCbteCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposCbteCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposCbteCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposCbteCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposCbteCompletedEventArgs">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposDocCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposDocCompletedEventHandler">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposDocCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposDocCompletedEventArgs.Result">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo1.FEParamGetTiposDocCompletedEventArgs">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfev1homo.FEParamGetTiposDocCompletedEventArgs">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.#ctor">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.#ctor">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaQTYRequestCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXAuthorizeCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEDummyCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetCMPCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaLastCMPRequestCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Cbte_TipoCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEUltNroRequestCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Tipo_ExpoCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEAutRequestCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_IncotermsCompleted">
 	<remarks/>
-</member><member name="E:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEConsultaCAERequestCompleted">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_IdiomasCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaQTYRequest(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_UMedCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaQTYRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_paisCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaQTYRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,System.Object)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_CUITCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEDummy">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_MONCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEDummyAsync">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_CMPCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEDummyAsync(System.Object)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXDummyCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaLastCMPRequest(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FELastCMPtype)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_CtzCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaLastCMPRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FELastCMPtype)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_IDCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FERecuperaLastCMPRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FELastCMPtype,System.Object)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_PtoVentaCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEUltNroRequest(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXCheck_PermisoCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEUltNroRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest)">
+</member><member name="E:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_OpcionalesCompleted">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEUltNroRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXAuthorize(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEAutRequest(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FERequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXAuthorizeAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEAutRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FERequest)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXAuthorizeAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEAutRequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FERequest,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetCMP(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEConsultaCAERequest(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetCMPAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEConsultaCAERequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetCMPAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP,System.Object)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.FEConsultaCAERequestAsync(CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest,CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq,System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Cbte_Tipo(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="M:CSFacturaElectronica.ar.gov.afip.wswhomo.Service.CancelAsync(System.Object)">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Cbte_TipoAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.Service">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Cbte_TipoAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest.Token">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Tipo_Expo(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest.Sign">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Tipo_ExpoAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest.cuit">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Tipo_ExpoAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAuthRequest">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Incoterms(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEResponse.Resultado">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_IncotermsAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEResponse.RError">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_IncotermsAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEResponse">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Idiomas(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.vError.percode">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_IdiomasAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.vError.perrmsg">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_IdiomasAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.vError">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_UMed(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.cuit_emisor">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_UMedAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.tipo_cbte">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_UMedAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.punto_vta">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_pais(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.cbt_nro">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_paisAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.imp_total">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_paisAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.cae">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_CUIT(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq.fecha_cbte">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_CUITAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAEReq">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_DST_CUITAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.tipo_doc">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_MON(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.nro_doc">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_MONAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.tipo_cbte">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_MONAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.punto_vta">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_CMP(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.cbt_desde">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_CMPAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.cbt_hasta">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_CMPAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.imp_total">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXDummy">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.imp_tot_conc">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXDummyAsync">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.imp_neto">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXDummyAsync(System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.impto_liq">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Ctz(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.String)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.impto_liq_rni">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_CtzAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.String)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.imp_op_ex">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_CtzAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.String,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.resultado">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_ID(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.cae">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_IDAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.fecha_cbte">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetLast_IDAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.fecha_vto">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_PtoVenta(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.motivo">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_PtoVentaAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.fecha_serv_desde">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_PtoVentaAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.fecha_serv_hasta">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXCheck_Permiso(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.String,System.Int32)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse.fecha_venc_pago">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXCheck_PermisoAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.String,System.Int32)">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleResponse">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXCheck_PermisoAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.String,System.Int32,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.id">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_Opcionales(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.cuit">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_OpcionalesAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.fecha_cae">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.FEXGetPARAM_OpcionalesAsync(CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest,System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.cantidadreg">
+</member><member name="M:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service.CancelAsync(System.Object)">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.resultado">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Service">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.motivo">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest.Token">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.reproceso">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest.Sign">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse.presta_serv">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest.Cuit">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraResponse">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXAuthRequest">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEResponse.FecResp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Opc.Opc_Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEResponse.FedResp">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Opc.Opc_Ds">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEResponse.RError">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Opc.Opc_vig_desde">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEResponse">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Opc.Opc_vig_hasta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.tipo_doc">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Opc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.nro_doc">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Opc.FEXResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.tipo_cbte">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Opc.FEXErr">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.punto_vta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Opc.FEXEvents">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.cbt_desde">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Opc">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.cbt_hasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXErr.ErrCode">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.imp_total">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXErr.ErrMsg">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.imp_tot_conc">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXErr">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.imp_neto">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXEvents.EventCode">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.impto_liq">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXEvents.EventMsg">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.impto_liq_rni">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXEvents">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.imp_op_ex">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_CheckPermiso.Status">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.fecha_cbte">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_CheckPermiso">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.fecha_serv_desde">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_CheckPermiso.FEXResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.fecha_serv_hasta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_CheckPermiso.FEXErr">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest.fecha_venc_pago">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_CheckPermiso.FEXEvents">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDetalleRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_CheckPermiso">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraRequest.id">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_PtoVenta.Pve_Nro">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraRequest.cantidadreg">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_PtoVenta.Pve_Bloqueado">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraRequest.presta_serv">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_PtoVenta.Pve_FchBaja">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FECabeceraRequest">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_PtoVenta">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERequest.Fecr">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_PtoVenta.FEXResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERequest.Fedr">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_PtoVenta.FEXErr">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERequest">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_PtoVenta.FEXEvents">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.UltNroResponse.value">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_PtoVenta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.UltNroResponse">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_LastID.Id">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEUltNroResponse.nro">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_LastID">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEUltNroResponse.RError">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_LastID.FEXResultGet">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEUltNroResponse">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_LastID.FEXErr">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaLastCMPResponse.cbte_nro">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_LastID.FEXEvents">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaLastCMPResponse.RError">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_LastID">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaLastCMPResponse">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Ctz.Mon_ctz">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FELastCMPtype.PtoVta">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Ctz.Mon_fecha">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FELastCMPtype.TipoCbte">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Ctz">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FELastCMPtype">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Ctz.FEXResultGet">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.DummyResponse.appserver">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Ctz.FEXErr">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.DummyResponse.dbserver">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Ctz.FEXEvents">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.DummyResponse.authserver">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Ctz">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.DummyResponse">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.DummyResponse.AppServer">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTY.value">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.DummyResponse.DbServer">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTY">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.DummyResponse.AuthServer">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTYResponse.qty">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.DummyResponse">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTYResponse.RError">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP_Response.Cbte_nro">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTYResponse">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP_Response.Cbte_fecha">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTYRequestCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP_Response">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTYRequestCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseLast_CMP.FEXResult_LastCMP">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaQTYRequestCompletedEventArgs">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseLast_CMP.FEXErr">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDummyCompletedEventHandler">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseLast_CMP.FEXEvents">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDummyCompletedEventArgs.Result">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseLast_CMP">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEDummyCompletedEventArgs">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP.Token">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaLastCMPRequestCompletedEventHandler">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP.Sign">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaLastCMPRequestCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP.Cuit">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FERecuperaLastCMPRequestCompletedEventArgs">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP.Pto_venta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEUltNroRequestCompletedEventHandler">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP.Cbte_Tipo">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEUltNroRequestCompletedEventArgs.Result">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEX_LastCMP">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEUltNroRequestCompletedEventArgs">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Mon.Mon_Id">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAutRequestCompletedEventHandler">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Mon.Mon_Ds">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAutRequestCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Mon.Mon_vig_desde">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEAutRequestCompletedEventArgs">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Mon.Mon_vig_hasta">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAERequestCompletedEventHandler">
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Mon">
 	<remarks/>
-</member><member name="P:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAERequestCompletedEventArgs.Result">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Mon.FEXResultGet">
 	<remarks/>
-</member><member name="T:CSFacturaElectronica.ar.gov.afip.wswhomo.FEConsultaCAERequestCompletedEventArgs">
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Mon.FEXErr">
 	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Mon.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Mon">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_DST_cuit.DST_CUIT">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_DST_cuit.DST_Ds">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_DST_cuit">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_cuit.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_cuit.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_cuit.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_cuit">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_DST_pais.DST_Codigo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_DST_pais.DST_Ds">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_DST_pais">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_pais.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_pais.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_pais.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_DST_pais">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_UMed.Umed_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_UMed.Umed_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_UMed.Umed_vig_desde">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_UMed.Umed_vig_hasta">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_UMed">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Umed.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Umed.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Umed.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Umed">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Idi.Idi_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Idi.Idi_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Idi.Idi_vig_desde">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Idi.Idi_vig_hasta">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Idi">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Idi.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Idi.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Idi.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Idi">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Inc.Inc_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Inc.Inc_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Inc.Inc_vig_desde">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Inc.Inc_vig_hasta">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Inc">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Inc.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Inc.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Inc.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Inc">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Tex.Tex_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Tex.Tex_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Tex.Tex_vig_desde">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Tex.Tex_vig_hasta">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Tex">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Tex.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Tex.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Tex.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Tex">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Cbte_Tipo.Cbte_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Cbte_Tipo.Cbte_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Cbte_Tipo.Cbte_vig_desde">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Cbte_Tipo.Cbte_vig_hasta">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXResponse_Cbte_Tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Cbte_Tipo.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Cbte_Tipo.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Cbte_Tipo.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponse_Cbte_Tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Fecha_cbte">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Cbte_tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Punto_vta">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Cbte_nro">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Tipo_expo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Permiso_existente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Permisos">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Dst_cmp">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Cliente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Cuit_pais_cliente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Domicilio_cliente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Id_impositivo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Moneda_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Moneda_ctz">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Obs_comerciales">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Imp_total">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Obs">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Cmps_asoc">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Forma_pago">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Incoterms">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Incoterms_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Idioma_cbte">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Items">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Fecha_cbte_cae">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Fch_venc_Cae">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Cae">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Resultado">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Motivos_Obs">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR.Opcionales">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMPR">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Permiso.Id_permiso">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Permiso.Dst_merc">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Permiso">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Cmp_asoc.Cbte_tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Cmp_asoc.Cbte_punto_vta">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Cmp_asoc.Cbte_nro">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Cmp_asoc.Cbte_cuit">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Cmp_asoc">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_codigo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_qty">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_umed">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_precio_uni">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_bonificacion">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item.Pro_total_item">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Item">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Opcional.Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Opcional.Valor">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.Opcional">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPResponse.FEXResultGet">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPResponse.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPResponse.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPResponse">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP.Cbte_tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP.Punto_vta">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP.Cbte_nro">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXGetCMP">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Cuit">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Cbte_tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Punto_vta">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Cbte_nro">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Cae">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Fch_venc_Cae">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Fch_cbte">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Resultado">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Reproceso">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize.Motivos_Obs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXOutAuthorize">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseAuthorize.FEXResultAuth">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseAuthorize.FEXErr">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseAuthorize.FEXEvents">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXResponseAuthorize">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Fecha_cbte">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Cbte_Tipo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Punto_vta">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Cbte_nro">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Tipo_expo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Permiso_existente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Permisos">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Dst_cmp">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Cliente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Cuit_pais_cliente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Domicilio_cliente">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Id_impositivo">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Moneda_Id">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Moneda_ctz">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Obs_comerciales">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Imp_total">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Obs">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Cmps_asoc">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Forma_pago">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Incoterms">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Incoterms_Ds">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Idioma_cbte">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Items">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest.Opcionales">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.ClsFEXRequest">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXAuthorizeCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXAuthorizeCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXAuthorizeCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetCMPCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_Cbte_TipoCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_Cbte_TipoCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_Cbte_TipoCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_Tipo_ExpoCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_Tipo_ExpoCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_Tipo_ExpoCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_IncotermsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_IncotermsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_IncotermsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_IdiomasCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_IdiomasCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_IdiomasCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_UMedCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_UMedCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_UMedCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_DST_paisCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_DST_paisCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_DST_paisCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_DST_CUITCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_DST_CUITCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_DST_CUITCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_MONCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_MONCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_MONCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetLast_CMPCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetLast_CMPCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetLast_CMPCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXDummyCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXDummyCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXDummyCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_CtzCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_CtzCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_CtzCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetLast_IDCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetLast_IDCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetLast_IDCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_PtoVentaCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_PtoVentaCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_PtoVentaCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXCheck_PermisoCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXCheck_PermisoCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXCheck_PermisoCompletedEventArgs">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_OpcionalesCompletedEventHandler">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_OpcionalesCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:CSFacturaElectronica.ar.gov.afip.wsfexhomo.FEXGetPARAM_OpcionalesCompletedEventArgs">
+	<remarks/>
+</member><member name="P:CSFacturaElectronica.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:CSFacturaElectronica.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:CSFacturaElectronica.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
 </member>
 </members>
 </doc>

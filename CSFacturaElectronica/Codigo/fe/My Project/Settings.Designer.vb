@@ -57,20 +57,20 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://wswhomo.afip.gov.ar/wsfe/service.asmx")>  _
-        Public ReadOnly Property CSFacturaElectronica_ar_gov_afip_wswhomo_Service() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("https://wswhomo.afip.gov.ar/wsfev1/service.asmx")>  _
+        Public ReadOnly Property CSFacturaElectronica_ar_gov_afip_wswhomo1_Service() As String
             Get
-                Return CType(Me("CSFacturaElectronica_ar_gov_afip_wswhomo_Service"),String)
+                Return CType(Me("CSFacturaElectronica_ar_gov_afip_wswhomo1_Service"),String)
             End Get
         End Property
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://wswhomo.afip.gov.ar/wsfev1/service.asmx")>  _
-        Public ReadOnly Property CSFacturaElectronica_ar_gov_afip_wswhomo1_Service() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("https://wswhomo.afip.gov.ar/wsfexv1/service.asmx")>  _
+        Public ReadOnly Property CSFacturaElectronica_ar_gov_afip_wsfexhomo_Service() As String
             Get
-                Return CType(Me("CSFacturaElectronica_ar_gov_afip_wswhomo1_Service"),String)
+                Return CType(Me("CSFacturaElectronica_ar_gov_afip_wsfexhomo_Service"),String)
             End Get
         End Property
     End Class

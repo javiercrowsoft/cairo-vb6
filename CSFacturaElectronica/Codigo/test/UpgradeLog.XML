@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="test">
+</Property><Property Name="Solution File" Value="\\vmware-host\Shared Folders\cairo-vb6\CSFacturaElectronica\Codigo\test\test.sln">
+</Property><Property Name="Date" Value="Wednesday, April 25, 2018">
+</Property><Property Name="Time" Value="6:19 AM">
+</Property></Properties><Event ErrorLevel="0" Project="test" Source="test.vbproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="test" Source="test.vbproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="" Source="test.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="test.sln" Description="Converted">
+</Event></UpgradeLog>

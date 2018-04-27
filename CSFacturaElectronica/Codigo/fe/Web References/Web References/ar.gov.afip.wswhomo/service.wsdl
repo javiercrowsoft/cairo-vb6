@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ar.gov.afip.dif.facturaelectronica/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://ar.gov.afip.dif.facturaelectronica/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AFIP Web Service de Facturacion Electronica - Version 1</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ar.gov.afip.dif.facturaelectronica/">
+      <s:element name="FERecuperaQTYRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="argAuth" type="tns:FEAuthRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FEAuthRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="cuit" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FERecuperaQTYRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FERecuperaQTYRequestResult" type="tns:FERecuperaQTYResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FERecuperaQTYResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="qty" type="tns:FERecuperaQTY" />
+          <s:element minOccurs="0" maxOccurs="1" name="RError" type="tns:vError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FERecuperaQTY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="value" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="vError">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="percode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="perrmsg" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FEDummy">
+        <s:complexType />
+      </s:element>
+      <s:element name="FEDummyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FEDummyResult" type="tns:DummyResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DummyResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="appserver" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dbserver" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="authserver" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FERecuperaLastCMPRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="argAuth" type="tns:FEAuthRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="argTCMP" type="tns:FELastCMPtype" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FELastCMPtype">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PtoVta" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipoCbte" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FERecuperaLastCMPRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FERecuperaLastCMPRequestResult" type="tns:FERecuperaLastCMPResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FERecuperaLastCMPResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cbte_nro" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RError" type="tns:vError" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FEUltNroRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="argAuth" type="tns:FEAuthRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FEUltNroRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FEUltNroRequestResult" type="tns:FEUltNroResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FEUltNroResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="nro" type="tns:UltNroResponse" />
+          <s:element minOccurs="0" maxOccurs="1" name="RError" type="tns:vError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UltNroResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="value" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FEAutRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="argAuth" type="tns:FEAuthRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fer" type="tns:FERequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FERequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fecr" type="tns:FECabeceraRequest" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fedr" type="tns:ArrayOfFEDetalleRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FECabeceraRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="cantidadreg" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="presta_serv" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFEDetalleRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FEDetalleRequest" nillable="true" type="tns:FEDetalleRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FEDetalleRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="tipo_doc" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="nro_doc" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipo_cbte" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="punto_vta" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="cbt_desde" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="cbt_hasta" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_total" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_tot_conc" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_neto" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="impto_liq" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="impto_liq_rni" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_op_ex" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_cbte" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_serv_desde" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_serv_hasta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_venc_pago" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FEAutRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FEAutRequestResult" type="tns:FEResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FEResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FecResp" type="tns:FECabeceraResponse" />
+          <s:element minOccurs="0" maxOccurs="1" name="FedResp" type="tns:ArrayOfFEDetalleResponse" />
+          <s:element minOccurs="0" maxOccurs="1" name="RError" type="tns:vError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FECabeceraResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="cuit" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_cae" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="cantidadreg" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="resultado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="motivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="reproceso" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="presta_serv" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFEDetalleResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FEDetalleResponse" nillable="true" type="tns:FEDetalleResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FEDetalleResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="tipo_doc" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="nro_doc" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipo_cbte" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="punto_vta" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="cbt_desde" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="cbt_hasta" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_total" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_tot_conc" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_neto" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="impto_liq" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="impto_liq_rni" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_op_ex" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="resultado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cae" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_cbte" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_vto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="motivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_serv_desde" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_serv_hasta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_venc_pago" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FEConsultaCAERequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="argAuth" type="tns:FEAuthRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="argCAERequest" type="tns:FEConsultaCAEReq" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FEConsultaCAEReq">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cuit_emisor" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="tipo_cbte" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="punto_vta" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="cbt_nro" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="imp_total" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="cae" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_cbte" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FEConsultaCAERequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FEConsultaCAERequestResult" type="tns:FEConsultaCAEResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FEConsultaCAEResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Resultado" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RError" type="tns:vError" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DummyResponse" nillable="true" type="tns:DummyResponse" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FERecuperaQTYRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:FERecuperaQTYRequest" />
+  </wsdl:message>
+  <wsdl:message name="FERecuperaQTYRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:FERecuperaQTYRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="FEDummySoapIn">
+    <wsdl:part name="parameters" element="tns:FEDummy" />
+  </wsdl:message>
+  <wsdl:message name="FEDummySoapOut">
+    <wsdl:part name="parameters" element="tns:FEDummyResponse" />
+  </wsdl:message>
+  <wsdl:message name="FERecuperaLastCMPRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:FERecuperaLastCMPRequest" />
+  </wsdl:message>
+  <wsdl:message name="FERecuperaLastCMPRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:FERecuperaLastCMPRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="FEUltNroRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:FEUltNroRequest" />
+  </wsdl:message>
+  <wsdl:message name="FEUltNroRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:FEUltNroRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="FEAutRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:FEAutRequest" />
+  </wsdl:message>
+  <wsdl:message name="FEAutRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:FEAutRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="FEConsultaCAERequestSoapIn">
+    <wsdl:part name="parameters" element="tns:FEConsultaCAERequest" />
+  </wsdl:message>
+  <wsdl:message name="FEConsultaCAERequestSoapOut">
+    <wsdl:part name="parameters" element="tns:FEConsultaCAERequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="FEDummyHttpGetIn" />
+  <wsdl:message name="FEDummyHttpGetOut">
+    <wsdl:part name="Body" element="tns:DummyResponse" />
+  </wsdl:message>
+  <wsdl:message name="FEDummyHttpPostIn" />
+  <wsdl:message name="FEDummyHttpPostOut">
+    <wsdl:part name="Body" element="tns:DummyResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="FERecuperaQTYRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna la cantidad maxima de registros de detalle que puede tener una invocacion al FEAutorizarRequest.</wsdl:documentation>
+      <wsdl:input message="tns:FERecuperaQTYRequestSoapIn" />
+      <wsdl:output message="tns:FERecuperaQTYRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FEDummy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo dummy para verificacion basica de funcionamiento.</wsdl:documentation>
+      <wsdl:input message="tns:FEDummySoapIn" />
+      <wsdl:output message="tns:FEDummySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FERecuperaLastCMPRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna el ultimo comprobante autorizado para el  tipo de comprobante /cuit / punto de venta ingresado.</wsdl:documentation>
+      <wsdl:input message="tns:FERecuperaLastCMPRequestSoapIn" />
+      <wsdl:output message="tns:FERecuperaLastCMPRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FEUltNroRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna el ultimo número de Request.</wsdl:documentation>
+      <wsdl:input message="tns:FEUltNroRequestSoapIn" />
+      <wsdl:output message="tns:FEUltNroRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FEAutRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Dado un lote de comprobantes retorna el mismo autorizado con el CAE otorgado.</wsdl:documentation>
+      <wsdl:input message="tns:FEAutRequestSoapIn" />
+      <wsdl:output message="tns:FEAutRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FEConsultaCAERequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta el CAE.</wsdl:documentation>
+      <wsdl:input message="tns:FEConsultaCAERequestSoapIn" />
+      <wsdl:output message="tns:FEConsultaCAERequestSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpGet">
+    <wsdl:operation name="FEDummy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo dummy para verificacion basica de funcionamiento.</wsdl:documentation>
+      <wsdl:input message="tns:FEDummyHttpGetIn" />
+      <wsdl:output message="tns:FEDummyHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpPost">
+    <wsdl:operation name="FEDummy">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Metodo dummy para verificacion basica de funcionamiento.</wsdl:documentation>
+      <wsdl:input message="tns:FEDummyHttpPostIn" />
+      <wsdl:output message="tns:FEDummyHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FERecuperaQTYRequest">
+      <soap:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FERecuperaQTYRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEDummy">
+      <soap:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEDummy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FERecuperaLastCMPRequest">
+      <soap:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FERecuperaLastCMPRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEUltNroRequest">
+      <soap:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEUltNroRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEAutRequest">
+      <soap:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEAutRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEConsultaCAERequest">
+      <soap:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEConsultaCAERequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FERecuperaQTYRequest">
+      <soap12:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FERecuperaQTYRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEDummy">
+      <soap12:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEDummy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FERecuperaLastCMPRequest">
+      <soap12:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FERecuperaLastCMPRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEUltNroRequest">
+      <soap12:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEUltNroRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEAutRequest">
+      <soap12:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEAutRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FEConsultaCAERequest">
+      <soap12:operation soapAction="http://ar.gov.afip.dif.facturaelectronica/FEConsultaCAERequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpGet" type="tns:ServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="FEDummy">
+      <http:operation location="/FEDummy" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpPost" type="tns:ServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="FEDummy">
+      <http:operation location="/FEDummy" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">AFIP Web Service de Facturacion Electronica - Version 1</wsdl:documentation>
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://wswhomo.afip.gov.ar/wsfe/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://wswhomo.afip.gov.ar/wsfe/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpGet" binding="tns:ServiceHttpGet">
+      <http:address location="https://wswhomo.afip.gov.ar/wsfe/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpPost" binding="tns:ServiceHttpPost">
+      <http:address location="https://wswhomo.afip.gov.ar/wsfe/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
