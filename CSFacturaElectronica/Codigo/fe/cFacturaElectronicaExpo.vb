@@ -33,8 +33,11 @@ Public Class cFacturaElectronicaExpo
     Public objProdFEXGetCMPResponse As New ar.gov.afip.wsfexhomo.FEXGetCMPResponse
 
 
+    Public Sub init(byval urlWsfex_Wsdl As String)
+      objProdWSFEX.Url = urlWsfex_Wsdl
+    End Sub
+
     public function getCAE_EX(ByVal wsaa As cFEWSAA,
-                              byval urlWsfex_Wsdl As String,
                               ByVal facturador_cuit As Long,
                               ByVal fvId As Long,
                               ByVal cuit_pais As Long, _
@@ -55,6 +58,7 @@ Public Class cFacturaElectronicaExpo
                               ByVal moneda_id As String, _
                               ByVal moneda_cotiz As Decimal, _
                               ByVal pais_id As Short, _
+                              ByVal cli_domicilio As String, _
                               ByVal fecha_cbte As String, _
                               ByVal fecha_serv_desde As String, _
                               ByVal fecha_serv_hasta As String, _
@@ -65,16 +69,16 @@ Public Class cFacturaElectronicaExpo
       Dim comp as Comprobante = New Comprobante
 
       comp.Id = fvId
-      comp.Cbte_tipo = tipo_doc 
+      comp.Cbte_tipo = tipo_cbte 
       comp.Fecha_cbte = fecha_cbte
       comp.Punto_vta = punto_vta
-      comp.Cbte_nro = nro_doc
+      comp.Cbte_nro = cbt_desde
       comp.Tipo_expo = 2
-      comp.Permiso_existente = "N" 
+      comp.Permiso_existente = "" 
       comp.Dst_cmp = pais_id
       comp.Cliente = cliente_nombre
       comp.Cuit_pais_cliente = cuit_pais 
-      comp.Domicilio_cliente = ""
+      comp.Domicilio_cliente = cli_domicilio
       comp.ID_impositivo = ""
       comp.Moneda_ID = moneda_id
       comp.Moneda_Ctz = moneda_cotiz
@@ -96,21 +100,20 @@ Public Class cFacturaElectronicaExpo
 
       Dim cae As New cCAE
 
-      solicitarCAE_ex(comp, cae, wsaa, urlWsfex_Wsdl, facturador_cuit)
+      solicitarCAE_ex(comp, cae, wsaa, facturador_cuit)
 
       Return cae
 
     end function
 
-    Public Function solicitarCAE_ex(ByVal pun_comprobante As Comprobante, ByVal cae As cCAE, 
+    Public Function solicitarCAE_ex(ByVal comp As Comprobante, ByVal cae As cCAE, 
                                     ByVal wsaa As cFEWSAA,
-                                    ByVal urlWsfex_Wsdl As String,
                                     ByVal facturador_cuit As Long) As Boolean
 
         Try
 
-                objProdWSFEX.Url = urlWsfex_Wsdl
-                AdaptarFormatoAFIPPROD_EX(pun_comprobante, wsaa, facturador_cuit)
+                
+                AdaptarFormatoAFIPPROD_EX(comp, wsaa, facturador_cuit)
                 objProdFEXResponseAuthorize = objProdWSFEX.FEXAuthorize(objProdFEXAuthRequest, objProdFEXRequest)
                 If Not objProdFEXResponseAuthorize.FEXResultAuth Is Nothing Then
                     respuesta = objProdFEXResponseAuthorize.FEXResultAuth.Resultado.ToString()
@@ -124,9 +127,9 @@ Public Class cFacturaElectronicaExpo
         If respuesta = "R" Or respuesta Is Nothing Then
 
                 If objProdFEXResponseAuthorize.FEXErr.ErrCode <> 0 Then
-                    cLog.write("ErrCode: " + objProdFEXResponseAuthorize.FEXErr.ErrCode, c_module)
-                    cLog.write("ErrMsg: " + objProdFEXResponseAuthorize.FEXErr.ErrMsg, c_module)
-                    cLog.write("idsolicitud: " + pun_comprobante.Id, c_module)
+                    cLog.write("ErrCode: " & objProdFEXResponseAuthorize.FEXErr.ErrCode, c_module)
+                    cLog.write("ErrMsg: " & objProdFEXResponseAuthorize.FEXErr.ErrMsg, c_module)
+                    cLog.write("idsolicitud: " & comp.Id, c_module)
                 Else
                     cLog.write("Comprobante rechazado por error desconocido.", c_module)
                 End If
@@ -138,12 +141,12 @@ Public Class cFacturaElectronicaExpo
         cae.vencimiento = objProdFEXResponseAuthorize.FEXResultAuth.Fch_venc_Cae
 
         cLog.write("Actualizando datos del comprobante", c_module)
-        cLog.write("fecha comprobante: " + objProdFEXResponseAuthorize.FEXResultAuth.Fch_cbte, c_module)
-        cLog.write("id auth: " + objProdFEXResponseAuthorize.FEXResultAuth.Id, c_module)
-        cLog.write("pto venta: " + objProdFEXResponseAuthorize.FEXResultAuth.Punto_vta, c_module)
-        cLog.write("cae: " + cae.cae, c_module)
-        cLog.write("nro_factura: " + cae.nro_factura, c_module)
-        cLog.write("vto: " + cae.vencimiento, c_module)
+        cLog.write("fecha comprobante: " & objProdFEXResponseAuthorize.FEXResultAuth.Fch_cbte, c_module)
+        cLog.write("id auth: " & objProdFEXResponseAuthorize.FEXResultAuth.Id, c_module)
+        cLog.write("pto venta: " & objProdFEXResponseAuthorize.FEXResultAuth.Punto_vta, c_module)
+        cLog.write("cae: " & cae.cae, c_module)
+        cLog.write("nro_factura: " & cae.nro_factura, c_module)
+        cLog.write("vto: " & cae.vencimiento, c_module)
 
         solicitarCAE_ex = True
 
@@ -187,24 +190,24 @@ Public Class cFacturaElectronicaExpo
 
         'Dim i As Integer = 0
         'For Each unv_Items_ex As v_Items_EX In unv_Items_exDAO.listav_Items_EX
-        '    ReDim Preserve ArrayOfv_ItemsProd(0 To i)
+            ReDim Preserve ArrayOfv_ItemsProd(0)
         '    existeItems = True
-        '    ArrayOfv_ItemsProd(0 To i) = New ar.gov.afip.wsfexhomo.Item
+            ArrayOfv_ItemsProd(0) = New ar.gov.afip.wsfexhomo.Item
         '    ArrayOfv_ItemsProd(i).Pro_codigo = unv_Items_ex.Pro_codigo.valor
-        '    ArrayOfv_ItemsProd(i).Pro_ds = unv_Items_ex.Pro_ds.valor
-        '    ArrayOfv_ItemsProd(i).Pro_precio_uni = unv_Items_ex.Pro_precio_uni.valor
-        '    ArrayOfv_ItemsProd(i).Pro_qty = unv_Items_ex.Pro_qty.valor
-        '    ArrayOfv_ItemsProd(i).Pro_total_item = unv_Items_ex.Pro_total_item.valor
-        '    ArrayOfv_ItemsProd(i).Pro_umed = unv_Items_ex.Pro_umed.valor
+            ArrayOfv_ItemsProd(0).Pro_ds = "Servicios"
+            ArrayOfv_ItemsProd(0).Pro_precio_uni = comp.Imp_total
+            ArrayOfv_ItemsProd(0).Pro_qty = 1
+            ArrayOfv_ItemsProd(0).Pro_total_item = comp.Imp_total
+            ArrayOfv_ItemsProd(0).Pro_umed = 7
 
         '    i = i + 1
         'Next
         'If existeItems Then
-        '    objProdFEXRequest.Items = ArrayOfv_ItemsProd
-        '    cLog.write("Lista de Items creada", c_module)
+            objProdFEXRequest.Items = ArrayOfv_ItemsProd
+            cLog.write("Lista de Items creada", c_module)
         'End If
 
-        cLog.write("Adaptacion Prodlogacion Completa", c_module)
+        cLog.write("Adaptacion Completa", c_module)
         AdaptarFormatoAFIPPROD_EX = True
 
     End Function

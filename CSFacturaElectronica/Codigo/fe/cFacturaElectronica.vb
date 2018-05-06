@@ -20,14 +20,18 @@ Public Class cFacturaElectronica
 
   ' wsaa
   Private m_wsaa As cFEWSAA
+  Private m_wsaaEX As cFEWSAA
   Private m_ticketAutorization As String
   Private m_urlWsaaWsdl As String
   Private m_idServicioNegocio As String
+  Private m_idServicioNegocioExpo As String
   Private m_rutaCertSigner As String
   Private m_proxy As String
   Private m_proxyUser As String
   Private m_proxyPassword As String
   Private m_verboseMode As Boolean
+
+  private m_feExpo as cFacturaElectronicaExpo = New cFacturaElectronicaExpo
 
   Private m_cn As cConnection
 
@@ -67,6 +71,7 @@ Public Class cFacturaElectronica
     interval = Val(cIni.getValue("CONFIG", "Interval", 1000))
     m_urlWsaaWsdl = cIni.getValue("CONFIG", "urlWsaaWsdl", "")
     m_idServicioNegocio = cIni.getValue("CONFIG", "idServicioNegocio", "")
+    m_idServicioNegocioExpo = cIni.getValue("CONFIG", "idServicioNegocioExpo", "")
     m_rutaCertSigner = cIni.getValue("CONFIG", "rutaCertSigner", "APP_PATH")
     m_proxy = cIni.getValue("CONFIG", "proxy", "")
     m_proxyUser = cIni.getValue("CONFIG", "proxyUser", "")
@@ -89,6 +94,7 @@ Public Class cFacturaElectronica
                "urlWsfeWsdl1: " & urlWsfe_Wsdl1 & vbCrLf & _
                "urlWsfexWsdl: " & urlWsfex_Wsdl & vbCrLf & _
                "idServicioNegocio: " & m_idServicioNegocio & vbCrLf & _
+               "idServicioNegocioExpo: " & m_idServicioNegocioExpo & vbCrLf & _
                "rutaCertSigner: " & m_rutaCertSigner & vbCrLf & _
                "proxy: " & m_proxy & vbCrLf & _
                "proxyUser: " & m_proxyUser & vbCrLf & _
@@ -100,6 +106,8 @@ Public Class cFacturaElectronica
                "emp_id:" & m_emp_id & vbCrLf, "endProcess ***Params:", c_module)
 
     m_objWSFE1.Url = urlWsfe_Wsdl1
+    
+    m_feExpo.init(urlWsfex_Wsdl)
 
     getLastDocV1()
 
@@ -167,6 +175,7 @@ Public Class cFacturaElectronica
       If m_cancel Then Exit Sub
 
       If Not initWSAA() Then Exit Sub
+      If Not initWSAAEX() Then Exit Sub
       
       cLog.write("3", "processFacturas", c_module)
 
@@ -195,11 +204,8 @@ Public Class cFacturaElectronica
 
 
         If(dr.Item("es_factura_expo")) then
-
-              Dim feExpo as cFacturaElectronicaExpo = New cFacturaElectronicaExpo
               
-              cae = feExpo.getCAE_EX(m_wsaa, _
-                                      urlWsfex_Wsdl, _
+              cae = m_feExpo.getCAE_EX(m_wsaaEx, _
                                       m_cuit, _
                                       dr.Item("fv_id"), _
                                       dr.Item("nro_doc"), _
@@ -207,7 +213,7 @@ Public Class cFacturaElectronica
                                       dr.Item("tipo_doc"), _
                                       dr.Item("nro_doc"), _
                                       dr.Item("tipo_cbte"), _
-                                      dr.Item("punto_vta"), _
+                                      dr.Item("punto_vta_ex"), _
                                       dr.Item("cbt_desde"), _
                                       dr.Item("cbt_hasta"), _
                                       dr.Item("imp_total_origen"), _
@@ -220,6 +226,7 @@ Public Class cFacturaElectronica
                                       dr.Item("moneda_id"), _
                                       dr.Item("moneda_cotizacion"), _
                                       dr.Item("pais_id"), _
+                                      dr.Item("cli_domicilio"), _
                                       CDate(dr.Item("fecha_cbte")).ToString("yyyyMMdd"), _
                                       CDate(dr.Item("fecha_serv_desde")).ToString("yyyyMMdd"), _
                                       CDate(dr.Item("fecha_serv_hasta")).ToString("yyyyMMdd"), _
@@ -784,6 +791,31 @@ Public Class cFacturaElectronica
 
     Catch ex As Exception
       cLog.write(ex.Message, "initWSAA", c_module)
+      Return False
+    End Try
+
+  End Function
+
+  Private Function initWSAAEX() As Boolean
+    Try
+
+      If m_wsaaEX Is Nothing Then
+        m_wsaaEX = New cFEWSAA
+      End If
+
+      If m_wsaaEX.expirationTime < DateAdd(DateInterval.Minute, -5, Now) Then
+        m_ticketAutorization = m_wsaaEX.getTA(m_urlWsaaWsdl, _
+                                            m_idServicioNegocioExpo, _
+                                            m_rutaCertSigner, _
+                                            m_proxy, _
+                                            m_proxyUser, _
+                                            m_proxyPassword, _
+                                            m_verboseMode)
+      End If
+      Return True
+
+    Catch ex As Exception
+      cLog.write(ex.Message, "initWSAAEX", c_module)
       Return False
     End Try
 
