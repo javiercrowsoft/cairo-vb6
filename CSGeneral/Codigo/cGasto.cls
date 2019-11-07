@@ -539,10 +539,10 @@ Private Function Load(ByVal Id As Long) As Boolean
   Dim rs      As Recordset
 
   sqlstmt = "Select Gasto.*, mon_nombre, ti_nombre" & _
-            " from Gasto, Moneda, TasaImpositiva" & _
-            " where gto_id = " & Id & _
-            " and Gasto.mon_id *= Moneda.mon_id" & _
-            " and Gasto.ti_id *= TasaImpositiva.ti_id"
+            " from Gasto " & _
+            " left join Moneda on Gasto.mon_id = Moneda.mon_id" & _
+            " TasaImpositiva on Gasto.ti_id = TasaImpositiva.ti_id" & _
+            " where gto_id = " & Id
   
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, C_LoadFunction, C_Module) Then Exit Function
 

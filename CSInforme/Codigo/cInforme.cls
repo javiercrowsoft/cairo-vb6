@@ -1337,9 +1337,9 @@ Private Function pLoadParametros(ByRef Propiedad As cIABMProperty) As Boolean
   Dim rs      As ADODB.Recordset
   
   sqlstmt = "select InformeParametro.*, tbl_nombre" & _
-            " from InformeParametro, Tabla " & _
-              " where inf_id = " & m_Id & _
-                " and InformeParametro.tbl_id *= Tabla.tbl_id" & _
+            " from InformeParametro" & _
+            " left join Tabla on InformeParametro.tbl_id = Tabla.tbl_id" & _
+            " where inf_id = " & m_Id & _
             " order by infp_orden"
   
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, "pLoadParametros", C_Module) Then Exit Function

@@ -251,31 +251,31 @@ Private Function cIABMClient_Save() As Boolean
     With IPropiedad
       Select Case .Key
         Case K_NAME
-          register.fields.Add2 cscUsNombre, .Value, csText
+          register.Fields.Add2 cscUsNombre, .Value, csText
         Case K_KEY
-          register.fields.Add2 cscUsClave, pEncrypt(UCase(.Value)), csText
+          register.Fields.Add2 cscUsClave, pEncrypt(UCase(.Value)), csText
         Case K_ACTIVE
-          register.fields.Add2 cscActivo, Val(.Value), csBoolean
+          register.Fields.Add2 cscActivo, Val(.Value), csBoolean
         Case K_USDEPOSITO
-          register.fields.Add2 cscUsDeposito, Val(.Value), csBoolean
+          register.Fields.Add2 cscUsDeposito, Val(.Value), csBoolean
         Case K_DESCRIP
-          register.fields.Add2 cscUsDescrip, .Value, csText
+          register.Fields.Add2 cscUsDescrip, .Value, csText
         Case K_EXTERNO
-          register.fields.Add2 cscUsExterno, Val(.Value), csBoolean
+          register.Fields.Add2 cscUsExterno, Val(.Value), csBoolean
         Case K_CLIPROV_X_DPTO
-          register.fields.Add2 cscUsEmpXDpto, Val(.Value), csBoolean
+          register.Fields.Add2 cscUsEmpXDpto, Val(.Value), csBoolean
         Case K_EMPRESAEX
-          register.fields.Add2 cscUsEmpresaEx, Val(.Value), csBoolean
+          register.Fields.Add2 cscUsEmpresaEx, Val(.Value), csBoolean
         Case K_PRS_ID
-          register.fields.Add2 cscPrsId, .HelpId, csId
+          register.Fields.Add2 cscPrsId, .HelpId, csId
         Case K_SUC_ID
-          register.fields.Add2 cscSucId, .HelpId, csId
+          register.Fields.Add2 cscSucId, .HelpId, csId
       End Select
     End With
   Next
   
-  register.fields.HaveLastUpdate = True
-  register.fields.HaveWhoModify = True
+  register.Fields.HaveLastUpdate = True
+  register.Fields.HaveWhoModify = True
   
   If Not register.BeginTrans(gDB) Then Exit Function
   
@@ -665,12 +665,12 @@ Private Function pSaveItemsEmpresa() As Boolean
         register.Table = csTEmpresaUsuario
         register.Id = csNew
         
-        register.fields.Add2 cscEmpId, pCell(Row, KI_EMP_ID).Id, csId
+        register.Fields.Add2 cscEmpId, pCell(Row, KI_EMP_ID).Id, csId
         
-        register.fields.Add2 cscUsId, m_Id, csId
+        register.Fields.Add2 cscUsId, m_Id, csId
         
-        register.fields.HaveLastUpdate = True
-        register.fields.HaveWhoModify = True
+        register.Fields.HaveLastUpdate = True
+        register.Fields.HaveWhoModify = True
         
         If Not gDB.Save(register, , "pSaveItemsEmpresa", C_Module, "Error al grabar percepciones") Then Exit Function
       End If
@@ -709,16 +709,16 @@ Private Function pSaveItemsCliProv() As Boolean
                 register.Id = Val(Cell.Value)
               End If
             Case KI_CLI_ID
-              register.fields.Add2 cscCliId, Cell.Id, csId
+              register.Fields.Add2 cscCliId, Cell.Id, csId
             Case KI_PROV_ID
-              register.fields.Add2 cscProvId, Cell.Id, csId
+              register.Fields.Add2 cscProvId, Cell.Id, csId
           End Select
         Next
         
-        register.fields.Add2 cscUsId, m_Id, csId
+        register.Fields.Add2 cscUsId, m_Id, csId
         
-        register.fields.HaveLastUpdate = True
-        register.fields.HaveWhoModify = True
+        register.Fields.HaveLastUpdate = True
+        register.Fields.HaveWhoModify = True
         
         If Not gDB.Save(register, , "pSaveItemsCliProv", C_Module, C_ErrorInSave) Then Exit Function
       End If
@@ -748,8 +748,8 @@ Private Function pSaveItemsRoles() As Boolean
 
     With register
       .Table = csTusuarioRol
-      .fields.HaveLastUpdate = True
-      .fields.HaveWhoModify = True
+      .Fields.HaveLastUpdate = True
+      .Fields.HaveWhoModify = True
       .UtilizaIdentity = True
     
       .Filter = "us_id = " & m_Id & " and " & _
@@ -758,7 +758,7 @@ Private Function pSaveItemsRoles() As Boolean
       If Not .Exists(gDB, bExists) Then Exit Function
       If Not bExists Then
         
-        With .fields
+        With .Fields
           .Add2 cscRolId, pCell(Row, KI_ROL_ID).Id, csId
           .Add2 cscUsId, m_Id, csId
           
@@ -1030,19 +1030,19 @@ Private Function Load(ByVal Id As Long) As Boolean
     m_Suc_id = csNO_ID
     m_Sucursal = vbNullString
   Else
-    m_Active = gDB.ValField(rs.fields, cscActivo)
-    m_UsDeposito = gDB.ValField(rs.fields, cscUsDeposito)
-    m_Name = gDB.ValField(rs.fields, cscUsNombre)
-    m_Id = gDB.ValField(rs.fields, cscUsId)
-    m_Clave = Encrypt.Decript(gDB.ValField(rs.fields, cscUsClave), c_LoginSignature)
-    m_Descrip = gDB.ValField(rs.fields, cscUsDescrip)
-    m_Externo = gDB.ValField(rs.fields, cscUsExterno)
-    m_prs_id = gDB.ValField(rs.fields, cscPrsId)
-    m_Persona = gDB.ValField(rs.fields, cscPrsNombre)
-    m_Suc_id = gDB.ValField(rs.fields, cscSucId)
-    m_Sucursal = gDB.ValField(rs.fields, cscSucNombre)
-    m_EmpXDpto = gDB.ValField(rs.fields, cscUsEmpXDpto)
-    m_EmpresaEx = gDB.ValField(rs.fields, cscUsEmpresaEx)
+    m_Active = gDB.ValField(rs.Fields, cscActivo)
+    m_UsDeposito = gDB.ValField(rs.Fields, cscUsDeposito)
+    m_Name = gDB.ValField(rs.Fields, cscUsNombre)
+    m_Id = gDB.ValField(rs.Fields, cscUsId)
+    m_Clave = Encrypt.Decript(gDB.ValField(rs.Fields, cscUsClave), c_LoginSignature)
+    m_Descrip = gDB.ValField(rs.Fields, cscUsDescrip)
+    m_Externo = gDB.ValField(rs.Fields, cscUsExterno)
+    m_prs_id = gDB.ValField(rs.Fields, cscPrsId)
+    m_Persona = gDB.ValField(rs.Fields, cscPrsNombre)
+    m_Suc_id = gDB.ValField(rs.Fields, cscSucId)
+    m_Sucursal = gDB.ValField(rs.Fields, cscSucNombre)
+    m_EmpXDpto = gDB.ValField(rs.Fields, cscUsEmpXDpto)
+    m_EmpresaEx = gDB.ValField(rs.Fields, cscUsEmpresaEx)
   End If
   Load = True
 End Function
@@ -1057,10 +1057,10 @@ Private Function pLoadCliProv(ByRef Propiedad As cIABMProperty) As Boolean
   ReDim m_vRowCliProvUpdated(0)
   
   sqlstmt = "select UsuarioEmpresa.*, prov_nombre, cli_nombre" & _
-            " from UsuarioEmpresa, Proveedor, Cliente" & _
-              " where UsuarioEmpresa.us_id = " & m_Id & _
-                " and UsuarioEmpresa.prov_id *= Proveedor.prov_id" & _
-                " and UsuarioEmpresa.cli_id *= Cliente.cli_id" & _
+            " from UsuarioEmpresa" & _
+            " left join Proveedor on UsuarioEmpresa.prov_id = Proveedor.prov_id" & _
+            " left join Cliente on UsuarioEmpresa.cli_id = Cliente.cli_id" & _
+            " where UsuarioEmpresa.us_id = " & m_Id & _
             " order by cli_nombre,prov_nombre"
   
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, "pLoadCliProv", C_Module) Then Exit Function
@@ -1109,14 +1109,14 @@ Private Function pLoadCliProv(ByRef Propiedad As cIABMProperty) As Boolean
           End With
           
           With .Add(Nothing)
-            .Value = gDB.ValField(rs.fields, cscCliNombre)
-            .Id = gDB.ValField(rs.fields, cscCliId)
+            .Value = gDB.ValField(rs.Fields, cscCliNombre)
+            .Id = gDB.ValField(rs.Fields, cscCliId)
             .Key = KI_CLI_ID
           End With
           
           With .Add(Nothing)
-            .Value = gDB.ValField(rs.fields, cscProvNombre)
-            .Id = gDB.ValField(rs.fields, cscProvId)
+            .Value = gDB.ValField(rs.Fields, cscProvNombre)
+            .Id = gDB.ValField(rs.Fields, cscProvId)
             .Key = KI_PROV_ID
           End With
         End With
@@ -1171,8 +1171,8 @@ Private Function pLoadRoles(ByRef Propiedad As cIABMProperty) As Boolean
           End With
           
           With .Add(Nothing)
-            .Value = gDB.ValField(rs.fields, cscRolNombre)
-            .Id = gDB.ValField(rs.fields, cscRolId)
+            .Value = gDB.ValField(rs.Fields, cscRolNombre)
+            .Id = gDB.ValField(rs.Fields, cscRolId)
             .Key = KI_ROL_ID
           End With
           
@@ -1233,12 +1233,12 @@ Private Function pLoadEmpresas(ByRef Propiedad As cIABMProperty) As Boolean
     fv.Value = rs(cscEmpId).Value
     
     Set fv = F.Add(Nothing)
-    fv.Value = gDB.ValField(rs.fields, cscEmpNombre)
+    fv.Value = gDB.ValField(rs.Fields, cscEmpNombre)
     fv.Id = rs(cscEmpId).Value
     fv.Key = KI_EMP_ID
     
     Set fv = F.Add(Nothing)
-    fv.Id = gDB.ValField(rs.fields, cscEmpUsId)
+    fv.Id = gDB.ValField(rs.Fields, cscEmpUsId)
     fv.Value = fv.Id
     fv.Key = KI_EMPUS_ID
     

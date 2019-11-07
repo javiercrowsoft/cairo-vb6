@@ -478,9 +478,8 @@ Private Function Load(ByVal Id As Long) As Boolean
   Dim rs      As ADODB.Recordset
 
   sqlstmt = "select vendedor.*, us_nombre" & _
-            " from vendedor,usuario" & _
-            " where vendedor.us_id *= usuario.us_id" & _
-              " and ven_id = " & Id
+            " from vendedor left join usuario on vendedor.us_id = usuario.us_id" & _
+            " where and ven_id = " & Id
   
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, C_LoadFunction, C_Module) Then Exit Function
   

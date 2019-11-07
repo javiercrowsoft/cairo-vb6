@@ -549,12 +549,12 @@ Private Function LoadCollection() As Boolean
       .Clear
   
       With .Add(Nothing)
-        .Name = C_strGeneral
+        .name = C_strGeneral
       End With
       
       With .Add(Nothing)
         .Index = c_TabItems
-        .Name = c_Items
+        .name = c_Items
       End With
     
     End With
@@ -565,7 +565,7 @@ Private Function LoadCollection() As Boolean
   
       With .Add(Nothing, cscEdNombre)
         .PropertyType = cspText
-        .Name = C_strNombre
+        .name = C_strNombre
         .Size = 50
         .Width = 6800
         .key = K_NOMBRE
@@ -574,7 +574,7 @@ Private Function LoadCollection() As Boolean
       
       With .Add(Nothing, cscEdCodigo)
         .PropertyType = cspText
-        .Name = C_strCodigo
+        .name = C_strCodigo
         .Size = 50
         .key = K_CODIGO
         .Value = m_Codigo
@@ -582,7 +582,7 @@ Private Function LoadCollection() As Boolean
       
       With .Add(Nothing, cscActivo)
         .PropertyType = cspCheck
-        .Name = C_strActivo
+        .name = C_strActivo
         .key = K_ACTIVO
         .Value = CInt(m_Activo)
       End With
@@ -590,7 +590,7 @@ Private Function LoadCollection() As Boolean
       With .Add(Nothing, cscRubId)
         .PropertyType = cspHelp
         .table = csRubro
-        .Name = LNGGetText(1299, vbNullString)    'Rubro
+        .name = LNGGetText(1299, vbNullString)    'Rubro
         .key = K_RUB_ID
         .Value = m_Rubro
         .HelpId = m_Rub_id
@@ -599,7 +599,7 @@ Private Function LoadCollection() As Boolean
       With .Add(Nothing, cscEdDescrip)
         .PropertyType = cspText
         .SubType = cspMemo
-        .Name = C_strDescrip
+        .name = C_strDescrip
         .Size = 1000
         .LeftFromProperty = cscEdNombre
         .Width = 6800
@@ -613,7 +613,7 @@ Private Function LoadCollection() As Boolean
         .PropertyType = cspGrid
         .LeftLabel = -1
         If Not pLoadItems(c) Then Exit Function
-        .Name = c_Items
+        .name = c_Items
         .key = K_ITEMS
         .TabIndex = c_TabItems
         .GridAdd = True
@@ -716,9 +716,8 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
   Dim rs      As ADODB.Recordset
   
   sqlstmt = "select EquipoDetalleItem.*, tbl_nombre" & _
-            " from EquipoDetalleItem, Tabla" & _
+            " from EquipoDetalleItem left join Tabla on EquipoDetalleItem.tbl_id = Tabla.tbl_id" & _
             " where ed_id = " & m_Id & _
-              " and EquipoDetalleItem.tbl_id *= Tabla.tbl_id" & _
             " order by edi_orden"
   
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, "pLoadItems", C_Module) Then Exit Function
@@ -732,20 +731,20 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       .Clear
       
       With .Add(Nothing)
-        .Name = "edi_id"
+        .name = "edi_id"
         .Visible = False
         .key = KI_EDI_ID
       End With
       
       With .Add(Nothing)
-        .Name = C_strNombre
+        .name = C_strNombre
         .PropertyType = cspText
         .Width = 2000
         .key = KI_NOMBRE
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1809, vbNullString)   'Orden
+        .name = LNGGetText(1809, vbNullString)   'Orden
         .PropertyType = cspNumeric
         .SubType = cspInteger
         .Width = 1200
@@ -753,7 +752,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1223, vbNullString)   'Tipo
+        .name = LNGGetText(1223, vbNullString)   'Tipo
         .PropertyType = cspList
       
         With .List.Add(Nothing)
@@ -795,7 +794,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1810, vbNullString)   'Tabla
+        .name = LNGGetText(1810, vbNullString)   'Tabla
         .PropertyType = cspHelp
         .table = csTabla
         .Width = 2500
@@ -803,14 +802,14 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(2276, vbNullString)   'Sqlstmt
+        .name = LNGGetText(2276, vbNullString)   'Sqlstmt
         .PropertyType = cspText
         .Width = 4000
         .key = KI_SQLSTMT
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(2277, vbNullString)   'Default
+        .name = LNGGetText(2277, vbNullString)   'Default
         .PropertyType = cspText
         .Width = 4000
         .key = KI_DEFAULT

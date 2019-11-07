@@ -253,9 +253,9 @@ Public Function Load(ByVal ID As Long) As Boolean
   Dim rs      As Recordset
   
   sqlstmt = "select AFIPParametro.*, afesq_nombre" & _
-            " from AFIPParametro, AFIPEsquema" & _
-              " where afparam_id = " & ID & _
-                " and AFIPParametro.afesq_id *= AFIPEsquema.afesq_id"
+            " from AFIPParametro" & _
+            " left join AFIPEsquema on AFIPParametro.afesq_id = AFIPEsquema.afesq_id" & _
+            " where afparam_id = " & ID
 
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, "Load", C_Module) Then Exit Function
 

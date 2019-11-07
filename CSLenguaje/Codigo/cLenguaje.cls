@@ -742,9 +742,9 @@ Private Function Load(ByVal Id As Long) As Boolean
   Dim sqlstmt As String
   Dim rs As Recordset
   
-  sqlstmt = "select Lenguaje.*,L2.leng_nombre as padre from Lenguaje, Lenguaje L2 " & _
-              " where Lenguaje.leng_id_padre *= L2.leng_id" & _
-                " and Lenguaje.leng_id = " & Id
+  sqlstmt = "select Lenguaje.*,L2.leng_nombre as padre " & _
+              " from Lenguaje left join Lenguaje L2 on Lenguaje.leng_id_padre = L2.leng_id" & _
+              " where Lenguaje.leng_id = " & Id
 
   If Not gDB.OpenRs(sqlstmt, rs, csRsStatic, csLockReadOnly, csCmdText, "Load", C_Module) Then Exit Function
 

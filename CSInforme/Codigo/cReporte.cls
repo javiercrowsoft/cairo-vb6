@@ -1926,10 +1926,10 @@ Private Function Load(ByVal Id As Long) As Boolean
   Dim sqlstmt As String
 
   sqlstmt = "select reporte.*, inf_nombre, us_nombre" & _
-            " from reporte, informe, usuario " & _
-              " where reporte.inf_id = informe.inf_id " & _
-                " and informe.inf_id *= usuario.us_id" & _
-                " and reporte.rpt_id = " & Id
+            " from reporte" & _
+            " left join informe on reporte.inf_id = informe.inf_id " & _
+            " left join usuario on informe.inf_id = usuario.us_id " & _
+            " where reporte.rpt_id = " & Id
 
   Dim rs As Recordset
 

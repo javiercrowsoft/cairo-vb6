@@ -869,7 +869,7 @@ Private Function pProcessMultiRow(ByVal Info As Variant) As Boolean
           
           If LenB(oCell.HelpValueProcess) Then
             If InStr(1, oCell.HelpValueProcess, ",") Then
-              pAddMultiRows oCell.HelpValueProcess, Info
+              AddMultiRowsVentas oCell.HelpValueProcess, Info, KI_CANTIDAD
               pProcessMultiRow = True
             End If
           End If
@@ -879,74 +879,74 @@ Private Function pProcessMultiRow(ByVal Info As Variant) As Boolean
   
 End Function
 
-Private Sub pAddMultiRows(ByVal Ids As String, _
-                          ByRef Info As Variant)
-  Dim sqlstmt As String
-  Dim rs      As ADODB.Recordset
-    
-  sqlstmt = "select pr_nombreventa, pr_id from Producto where pr_id in (" & Ids & ")"
-  If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
-  If rs.EOF Then Exit Sub
-  
-  Dim i As Long
-  Dim j As Long
-  Dim k As Long
-  Dim pr_id As Long
-  Dim vIds  As Variant
-  Dim vIds2 As Variant
-  Dim bFound As Boolean
-  
-  vIds2 = Split(Ids, ",")
-  
-  ReDim vIds(UBound(vIds2))
-  
-  For i = 0 To UBound(vIds2)
-    bFound = False
-    For j = 0 To UBound(vIds)
-    
-      If vIds2(i) = vIds(j) Then
-        bFound = True
-        Exit For
-      End If
-      
-    Next
-    If Not bFound Then
-      vIds(k) = vIds2(i)
-      k = k + 1
-    End If
-  Next
-  
-  ReDim Preserve vIds(k - 1)
-  
-  ' Ahora respeto el orden de seleccion
-  '
-  For i = 0 To UBound(vIds)
-  
-    rs.MoveFirst
-    
-    Do While Not rs.EOF
-  
-      pr_id = gDB.ValField(rs.fields, cscPrId)
-      
-      If Val(vIds(i)) = pr_id Then
-        Info.NewId.Add pr_id
-        Info.NewValue.Add gDB.ValField(rs.fields, cscPrNombreVenta)
-        Exit Do
-      End If
-      
-      rs.MoveNext
-    Loop
-    
-  Next
-  
-  ' No lo toquen, es mas 1 :( o explota todooo :P
-  ' ups al final no era jeje
-  '
-  Info.iAddRows = Info.NewId.count '+ 1
-  
-  Info.bAddRows = Info.iAddRows
-  
-End Sub
+'Private Sub pAddMultiRows(ByVal Ids As String, _
+'                          ByRef Info As Variant)
+'  Dim sqlstmt As String
+'  Dim rs      As ADODB.Recordset
+'
+'  sqlstmt = "select pr_nombreventa, pr_id from Producto where pr_id in (" & Ids & ")"
+'  If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
+'  If rs.EOF Then Exit Sub
+'
+'  Dim i As Long
+'  Dim j As Long
+'  Dim k As Long
+'  Dim pr_id As Long
+'  Dim vIds  As Variant
+'  Dim vIds2 As Variant
+'  Dim bFound As Boolean
+'
+'  vIds2 = Split(Ids, ",")
+'
+'  ReDim vIds(UBound(vIds2))
+'
+'  For i = 0 To UBound(vIds2)
+'    bFound = False
+'    For j = 0 To UBound(vIds)
+'
+'      If vIds2(i) = vIds(j) Then
+'        bFound = True
+'        Exit For
+'      End If
+'
+'    Next
+'    If Not bFound Then
+'      vIds(k) = vIds2(i)
+'      k = k + 1
+'    End If
+'  Next
+'
+'  ReDim Preserve vIds(k - 1)
+'
+'  ' Ahora respeto el orden de seleccion
+'  '
+'  For i = 0 To UBound(vIds)
+'
+'    rs.MoveFirst
+'
+'    Do While Not rs.EOF
+'
+'      pr_id = gDB.ValField(rs.fields, cscPrId)
+'
+'      If Val(vIds(i)) = pr_id Then
+'        Info.NewId.Add pr_id
+'        Info.NewValue.Add gDB.ValField(rs.fields, cscPrNombreVenta)
+'        Exit Do
+'      End If
+'
+'      rs.MoveNext
+'    Loop
+'
+'  Next
+'
+'  ' No lo toquen, es mas 1 :( o explota todooo :P
+'  ' ups al final no era jeje
+'  '
+'  Info.iAddRows = Info.NewId.count '+ 1
+'
+'  Info.bAddRows = Info.iAddRows
+'
+'End Sub
 
 Private Function cIABMClientGrid_ColumnAfterEdit(ByVal Key As Integer, ByVal lRow As Long, ByVal lCol As Long, ByVal NewValue As Variant, ByVal NewValueID As Long) As Boolean
   On Error GoTo ControlError
@@ -1183,17 +1183,17 @@ Private Function LoadCollection() As Boolean
     .Clear
   
     With .Add(Nothing)
-      .Name = C_strGeneral
+      .name = C_strGeneral
     End With
     
     With .Add(Nothing)
       .Index = 1
-      .Name = LNGGetText(1566, vbNullString)    'Adicionales
+      .name = LNGGetText(1566, vbNullString)    'Adicionales
     End With
     
     With .Add(Nothing)
       .Index = 2
-      .Name = LNGGetText(1050, vbNullString) 'Transporte
+      .name = LNGGetText(1050, vbNullString) 'Transporte
     End With
     
   End With
@@ -1203,7 +1203,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscDocId)
       .PropertyType = cspHelp
       .Table = CSDocumento2.CSDocumento
-      .Name = LNGGetText(1567, vbNullString)    'Documento
+      .name = LNGGetText(1567, vbNullString)    'Documento
       .Key = K_DOC_ID
       
       If m_doc_id <> csNO_ID Then
@@ -1224,7 +1224,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, csDocNumberID)
       .PropertyType = cspNumeric
       .SubType = cspInteger
-      .Name = LNGGetText(1065, vbNullString)    'Número
+      .name = LNGGetText(1065, vbNullString)    'Número
       .Key = K_NUMERO
       .Value = m_Numero
       .Enabled = False
@@ -1232,7 +1232,7 @@ Private Function LoadCollection() As Boolean
     
     With .Add(Nothing, csDocEstateID)
       .PropertyType = cspText
-      .Name = LNGGetText(1568, vbNullString)    'Estado
+      .name = LNGGetText(1568, vbNullString)    'Estado
       .Key = K_EST_ID
       .Value = m_Estado
       .Enabled = False
@@ -1240,16 +1240,16 @@ Private Function LoadCollection() As Boolean
     
     With .Add(Nothing, cscPvFecha)
       .PropertyType = cspDate
-      .Name = LNGGetText(1569, vbNullString)    'Fecha
+      .name = LNGGetText(1569, vbNullString)    'Fecha
       .LeftLabel = -580
-      .Left = 700
+      .left = 700
       .Key = K_FECHA
       .Value = m_Fecha
     End With
     
     With .Add(Nothing, cscPvFechaentrega)
       .PropertyType = cspDate
-      .Name = LNGGetText(1570, vbNullString)    'Entrega
+      .name = LNGGetText(1570, vbNullString)    'Entrega
       .Key = K_FECHAENTREGA
       .Value = m_Fechaentrega
     End With
@@ -1258,9 +1258,9 @@ Private Function LoadCollection() As Boolean
       .PropertyType = cspHelp
       .Table = csCliente
       .TopFromProperty = cscPvFecha
-      .Left = 2700
+      .left = 2700
       .LeftLabel = -580
-      .Name = LNGGetText(1150, vbNullString)    'Cliente
+      .name = LNGGetText(1150, vbNullString)    'Cliente
       .Key = K_CLI_ID
       .HelpId = m_cli_id
       .Value = m_cliente
@@ -1272,7 +1272,7 @@ Private Function LoadCollection() As Boolean
     
     With .Add(Nothing, cscPvNrodoc)
       .PropertyType = cspText
-      .Name = LNGGetText(1065, vbNullString)    'Número
+      .name = LNGGetText(1065, vbNullString)    'Número
       .Size = 50
       .Key = K_NRODOC
       .Value = m_Nrodoc
@@ -1283,10 +1283,10 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscCpgId)
       .PropertyType = cspHelp
       .Table = csCondicionPago
-      .Name = LNGGetText(1571, vbNullString)    'Cond. Pago
+      .name = LNGGetText(1571, vbNullString)    'Cond. Pago
       .TopFromProperty = cscPvFecha
       .TopToPrevious = 440
-      .Left = 5900
+      .left = 5900
       .LeftLabel = -900
       .Key = K_CPG_ID
       .HelpId = m_cpg_id
@@ -1297,7 +1297,7 @@ Private Function LoadCollection() As Boolean
       .PropertyType = cspNumeric
       .SubType = cspPercent
       .LeftLabel = -600
-      .Name = LNGGetText(1573, vbNullString)    'Desc. 1
+      .name = LNGGetText(1573, vbNullString)    'Desc. 1
       .Key = K_DESCUENTO1
       .Value = m_Descuento1
       .Width = 1000
@@ -1307,9 +1307,9 @@ Private Function LoadCollection() As Boolean
       .PropertyType = cspNumeric
       .SubType = cspPercent
       .TopFromProperty = cscPvDescuento1
-      .Left = 7150
+      .left = 7150
       .LeftLabel = -150
-      .Name = "2"
+      .name = "2"
       .Key = K_DESCUENTO2
       .Value = m_Descuento2
       .Width = 1000
@@ -1321,7 +1321,7 @@ Private Function LoadCollection() As Boolean
       .LeftFromProperty = cscPvDescuento1
       .LeftLabel = -800
       .Table = csDepositoLogico
-      .Name = LNGGetText(1574, vbNullString)    'Depósito
+      .name = LNGGetText(1574, vbNullString)    'Depósito
       .Key = K_RAM_ID_STOCK
       
       If Val(m_ram_id_stock) <> csNO_ID Then
@@ -1347,10 +1347,10 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscLpId)
       .PropertyType = cspHelp
       .Table = csListaPrecio
-      .Name = LNGGetText(1397, vbNullString)    'Lista de Precios
+      .name = LNGGetText(1397, vbNullString)    'Lista de Precios
       .HelpFilter = GetListaPrecioGetXCliente(m_doc_id, m_cli_id)
       .TopFromProperty = cscPvFecha
-      .Left = 9400
+      .left = 9400
       .Key = K_LP_ID
       .HelpId = m_Lp_id
       .Value = m_ListaPrecio
@@ -1360,7 +1360,7 @@ Private Function LoadCollection() As Boolean
       .PropertyType = cspHelp
       .Table = csVendedores
       .LeftLabel = -800
-      .Name = LNGGetText(1510, vbNullString)    'Vendedor
+      .name = LNGGetText(1510, vbNullString)    'Vendedor
       .Key = K_VEN_ID
       .HelpId = m_ven_id
       .Value = m_vendedor
@@ -1369,7 +1369,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscCcosId)
       .PropertyType = cspHelp
       .Table = csCentroCosto
-      .Name = LNGGetText(1057, vbNullString)    'Centro de Costo
+      .name = LNGGetText(1057, vbNullString)    'Centro de Costo
       .Key = K_CCOS_ID
       .HelpId = m_ccos_id
       .Value = m_CentroCosto
@@ -1378,7 +1378,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscSucId)
       .PropertyType = cspHelp
       .Table = csSucursal
-      .Name = LNGGetText(1281, vbNullString)    'Sucursal
+      .name = LNGGetText(1281, vbNullString)    'Sucursal
       .Key = K_SUC_ID
       .HelpId = m_suc_id
       .Value = m_Sucursal
@@ -1387,7 +1387,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvDescrip)
       .PropertyType = cspText
       .SubType = cspMemo
-      .Name = LNGGetText(1618, vbNullString)
+      .name = LNGGetText(1618, vbNullString)
       .LeftLabel = -600
       .Size = 5000
       .Key = K_DESCRIP
@@ -1402,8 +1402,8 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscLgjId)
       .PropertyType = cspHelp
       .Table = csLegajo
-      .Left = 1500
-      .Name = LNGGetText(1575, vbNullString)    'Legajo
+      .left = 1500
+      .name = LNGGetText(1575, vbNullString)    'Legajo
       .Key = K_LGJ_ID
       .HelpId = m_lgj_id
       .Value = m_Legajo
@@ -1413,7 +1413,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscClisId)
       .PropertyType = cspHelp
       .Table = csSucursalCliente
-      .Name = LNGGetText(1576, vbNullString)    'Sucursal del Cliente
+      .name = LNGGetText(1576, vbNullString)    'Sucursal del Cliente
       .Key = K_CLIS_ID
       .Value = m_ClienteSucursal
       .HelpId = m_clis_id
@@ -1423,7 +1423,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscProIdOrigen)
       .PropertyType = cspHelp
       .Table = csProvincia
-      .Name = LNGGetText(1577, vbNullString)     'Pcia. Origen
+      .name = LNGGetText(1577, vbNullString)     'Pcia. Origen
       .Key = K_PRO_ID_ORIGEN
       .HelpId = m_pro_id_origen
       .Value = m_ProOrigen
@@ -1433,7 +1433,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscProIdDestino)
       .PropertyType = cspHelp
       .Table = csProvincia
-      .Name = LNGGetText(1578, vbNullString)    'Pcia. Destino
+      .name = LNGGetText(1578, vbNullString)    'Pcia. Destino
       .Key = K_PRO_ID_DESTINO
       .HelpId = m_pro_id_destino
       .Value = m_ProDestino
@@ -1442,7 +1442,7 @@ Private Function LoadCollection() As Boolean
       
     With .Add(Nothing, cscPvOrdenCompra)
       .PropertyType = cspText
-      .Name = LNGGetText(1924, vbNullString)    'Orden de Compra
+      .name = LNGGetText(1924, vbNullString)    'Orden de Compra
       .Key = K_ORDENCOMPRA
       .Value = m_OrdenCompra
       .TabIndex = 1
@@ -1451,7 +1451,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscLdId)
       .PropertyType = cspHelp
       .Table = csListaDescuento
-      .Name = LNGGetText(1398, vbNullString)    'Lista de Descuentos
+      .name = LNGGetText(1398, vbNullString)    'Lista de Descuentos
       .HelpFilter = GetListaDescGetXCliente(m_doc_id, m_cli_id)
       .Key = K_LD_ID
       .HelpId = m_Ld_id
@@ -1462,7 +1462,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscTransId)
       .PropertyType = cspHelp
       .Table = csTransporte
-      .Name = LNGGetText(1050, vbNullString) 'Transporte
+      .name = LNGGetText(1050, vbNullString) 'Transporte
       .Key = K_TRANS_ID
       .Value = m_Transporte
       .HelpId = m_trans_id
@@ -1472,7 +1472,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscChofId)
       .PropertyType = cspHelp
       .Table = csChofer
-      .Name = LNGGetText(1051, vbNullString) 'Chofer
+      .name = LNGGetText(1051, vbNullString) 'Chofer
       .Key = K_CHOF_ID
       .Value = m_Chofer
       .HelpId = m_chof_id
@@ -1483,20 +1483,20 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscCamId)
       .PropertyType = cspHelp
       .Table = csCamion
-      .Name = LNGGetText(3489, vbNullString) 'Camion
+      .name = LNGGetText(3489, vbNullString) 'Camion
       .Key = K_CAM_ID
       .Value = m_Camion
       .HelpId = m_cam_id
       .HelpFilter = GetHelpTransporte(m_trans_id)
       .TopFromProperty = cscTransId
-      .Left = 6000
+      .left = 6000
       .TabIndex = 2
     End With
     
     With .Add(Nothing, cscCamIdSemi)
       .PropertyType = cspHelp
       .Table = csCamionSemi
-      .Name = LNGGetText(3493, vbNullString) 'Semi
+      .name = LNGGetText(3493, vbNullString) 'Semi
       .Key = K_CAM_ID_SEMI
       .Value = m_Semi
       .HelpId = m_cam_id_semi
@@ -1507,7 +1507,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvDestinatario)
       .PropertyType = cspText
       .SubType = cspMemo
-      .Name = LNGGetText(3494, vbNullString) 'Destinatario
+      .name = LNGGetText(3494, vbNullString) 'Destinatario
       .Key = K_DESTINATARIO
       .Value = m_Destinatario
       .Width = 7000
@@ -1551,7 +1551,7 @@ Private Function LoadCollection() As Boolean
         .Top = 3460
       End If
 
-      .Left = 9210
+      .left = 9210
       .Height = 330
     End With
     
@@ -1571,7 +1571,7 @@ Private Function LoadCollection() As Boolean
         .Top = 3480
       End If
 
-      .Left = 9220
+      .left = 9220
       .Height = 300
     End With
   
@@ -1580,7 +1580,7 @@ Private Function LoadCollection() As Boolean
     Set oProp = iProp
     With iProp
       .PropertyType = cspCheck
-      .Name = LNGGetText(3901, vbNullString)  'Ocultar Columnas
+      .name = LNGGetText(3901, vbNullString)  'Ocultar Columnas
       .Key = K_HIDECOLS
       .Value = CInt(CSKernelClient2.GetRegistry(csInterface, c_HideColsPv, 1))
       .TopNotChange = True
@@ -1595,7 +1595,7 @@ Private Function LoadCollection() As Boolean
         .Top = 3500
       End If
 
-      .Left = 11120
+      .left = 11120
       .LeftLabel = -1500
     End With
     oProp.IsEditProperty = False
@@ -1610,7 +1610,7 @@ Private Function LoadCollection() As Boolean
     .Clear
   
     With .Add(Nothing)
-      .Name = LNGGetText(1371, vbNullString)    'Items
+      .name = LNGGetText(1371, vbNullString)    'Items
     End With
   
   End With
@@ -1632,7 +1632,7 @@ Private Function LoadCollection() As Boolean
       .PropertyType = cspGrid
       .LeftLabel = -1
       If Not pLoadItems(c) Then Exit Function
-      .Name = c_Items
+      .name = c_Items
       .Key = K_ITEMS
       .TabIndex = 0
       .GridAdd = True
@@ -1656,7 +1656,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvSubTotal)
       .PropertyType = cspNumeric
       .SubType = cspMoney
-      .Name = LNGGetText(1579, vbNullString)    'Sub Total
+      .name = LNGGetText(1579, vbNullString)    'Sub Total
       .Key = K_SUBTOTAL
       .Value = m_SubTotal
       .Format = m_GeneralConfig.FormatDecImporte
@@ -1666,7 +1666,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvImporteDesc1)
       .PropertyType = cspNumeric
       .SubType = cspMoney
-      .Name = LNGGetText(1573, vbNullString)    'Desc. 1
+      .name = LNGGetText(1573, vbNullString)    'Desc. 1
       .Key = K_IMPORTEDESC1
       .Value = m_ImporteDesc1
       .Format = m_GeneralConfig.FormatDecImporte
@@ -1676,7 +1676,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvImporteDesc2)
       .PropertyType = cspNumeric
       .SubType = cspMoney
-      .Name = LNGGetText(1580, vbNullString)    'Desc. 2
+      .name = LNGGetText(1580, vbNullString)    'Desc. 2
       .Key = K_IMPORTEDESC2
       .Value = m_ImporteDesc2
       .Format = m_GeneralConfig.FormatDecImporte
@@ -1686,7 +1686,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvNeto)
       .PropertyType = cspNumeric
       .SubType = cspMoney
-      .Name = LNGGetText(1581, vbNullString)    'Neto
+      .name = LNGGetText(1581, vbNullString)    'Neto
       .Key = K_NETO
       .Value = m_Neto
       .Format = m_GeneralConfig.FormatDecImporte
@@ -1695,7 +1695,7 @@ Private Function LoadCollection() As Boolean
     
     With .Add(Nothing, cscPvIvari)
       .PropertyType = cspNumeric
-      .Name = LNGGetText(1582, vbNullString)    'IVA RI
+      .name = LNGGetText(1582, vbNullString)    'IVA RI
       .SubType = cspMoney
       .Key = K_IVARI
       .Value = m_Ivari
@@ -1705,7 +1705,7 @@ Private Function LoadCollection() As Boolean
     
     With .Add(Nothing, cscPvIvarni)
       .PropertyType = cspNumeric
-      .Name = LNGGetText(1583, vbNullString)    'IVA RNI
+      .name = LNGGetText(1583, vbNullString)    'IVA RNI
       .SubType = cspMoney
       .Key = K_IVARNI
       .Value = m_Ivarni
@@ -1716,7 +1716,7 @@ Private Function LoadCollection() As Boolean
     With .Add(Nothing, cscPvTotal)
       .PropertyType = cspNumeric
       .Format = m_GeneralConfig.FormatDecImporte
-      .Name = LNGGetText(1584, vbNullString)    'Total
+      .name = LNGGetText(1584, vbNullString)    'Total
       .SubType = cspMoney
       .Key = K_TOTAL
       .Value = m_Total
@@ -1775,7 +1775,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       Set iCol = .Add(Nothing)
       Set oCol = iCol
       With iCol
-        .Name = LNGGetText(1367, vbNullString)  'Articulo
+        .name = LNGGetText(1367, vbNullString)  'Articulo
         .PropertyType = cspHelp
         .Table = csProductoVenta
         .Width = 1800
@@ -1788,7 +1788,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       Set oCol = Nothing
       
       With .Add(Nothing)
-        .Name = LNGGetText(1618, vbNullString)
+        .name = LNGGetText(1618, vbNullString)
         .PropertyType = cspText
         .SubType = cspTextButtonEx
         .Width = 1200
@@ -1796,7 +1796,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1374, vbNullString)   'Cantidad
+        .name = LNGGetText(1374, vbNullString)   'Cantidad
         .Format = m_GeneralConfig.FormatDecCantidad
         .PropertyType = cspNumeric
         .SubType = cspDouble
@@ -1808,7 +1808,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(3568, vbNullString)   'Disponible
+        .name = LNGGetText(3568, vbNullString)   'Disponible
         .Format = m_GeneralConfig.FormatDecCantidad
         .PropertyType = cspText
         .Enabled = False
@@ -1817,7 +1817,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(3567, vbNullString)   'Sotck Real
+        .name = LNGGetText(3567, vbNullString)   'Sotck Real
         .Format = m_GeneralConfig.FormatDecCantidad
         .PropertyType = cspText
         .Enabled = False
@@ -1826,7 +1826,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1694, vbNullString)   'Pedidos
+        .name = LNGGetText(1694, vbNullString)   'Pedidos
         .Format = m_GeneralConfig.FormatDecCantidad
         .PropertyType = cspText
         .Enabled = False
@@ -1835,7 +1835,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1585, vbNullString)   'Descuento
+        .name = LNGGetText(1585, vbNullString)   'Descuento
         .PropertyType = cspNumeric
         .Format = m_GeneralConfig.FormatDecImporte
         .SubType = cspMoney
@@ -1846,7 +1846,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1165, vbNullString)   'Unidad
+        .name = LNGGetText(1165, vbNullString)   'Unidad
         .PropertyType = cspText
         .Width = 1200
         .Key = KI_UNIDAD
@@ -1855,7 +1855,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1587, vbNullString)   'Precio (LP)
+        .name = LNGGetText(1587, vbNullString)   'Precio (LP)
         .PropertyType = cspNumeric
         .SubType = cspMoney
         .Format = m_GeneralConfig.FormatDecImporte
@@ -1866,7 +1866,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1586, vbNullString)   'Precio
+        .name = LNGGetText(1586, vbNullString)   'Precio
         .PropertyType = cspNumeric
         .SubType = cspMoney
         .Width = 1200
@@ -1876,7 +1876,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1588, vbNullString)   'Precio c/desc.
+        .name = LNGGetText(1588, vbNullString)   'Precio c/desc.
         .PropertyType = cspNumeric
         .SubType = cspMoney
         .Width = 1200
@@ -1886,7 +1886,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1581, vbNullString)   'Neto
+        .name = LNGGetText(1581, vbNullString)   'Neto
         .PropertyType = cspNumeric
         .SubType = cspMoney
         .Format = m_GeneralConfig.FormatDecImporte
@@ -1896,7 +1896,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1582, vbNullString)   'IVA RI
+        .name = LNGGetText(1582, vbNullString)   'IVA RI
         .PropertyType = cspNumeric
         .SubType = cspMoney
         .Format = m_GeneralConfig.FormatDecImporte
@@ -1906,7 +1906,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1583, vbNullString)   'IVA RNI
+        .name = LNGGetText(1583, vbNullString)   'IVA RNI
         .PropertyType = cspNumeric
         .Format = m_GeneralConfig.FormatDecImporte
         .SubType = cspMoney
@@ -1917,7 +1917,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1228, vbNullString)   'Importe
+        .name = LNGGetText(1228, vbNullString)   'Importe
         .PropertyType = cspNumeric
         .Format = m_GeneralConfig.FormatDecImporte
         .SubType = cspMoney
@@ -1937,7 +1937,7 @@ Private Function pLoadItems(ByRef Propiedad As cIABMProperty) As Boolean
       End With
       
       With .Add(Nothing)
-        .Name = LNGGetText(1057, vbNullString)   'Centro de Costo
+        .name = LNGGetText(1057, vbNullString)   'Centro de Costo
         .PropertyType = cspHelp
         .Table = csCentroCosto
         .Width = 1800
@@ -2075,7 +2075,7 @@ Private Function Load(ByVal id As Long) As Boolean
 
   Dim sqlstmt As String
 
-  sqlstmt = "sp_DocPedidoVentaGet " & EmpId & "," & id & "," & gDB.UserId
+  sqlstmt = "sp_DocPedidoVentaGet " & empId & "," & id & "," & gDB.UserId
   
   Dim rs As Recordset
 
@@ -2397,7 +2397,11 @@ Private Sub pSetDataProducto(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal pr
   Dim sqlstmt As String
   Dim rs      As Recordset
   
-  sqlstmt = "select un_nombre, ccos_id_venta, ccos_nombre from producto, unidad, centrocosto where un_id_venta = un_id and ccos_id_venta *= ccos_id and pr_id = " & pr_id
+  sqlstmt = "select un_nombre, ccos_id_venta, ccos_nombre" & _
+            " from producto" & _
+            " left join unidad on un_id_venta = un_id" & _
+            " left join centrocosto on ccos_id_venta = ccos_id" & _
+            " where pr_id = " & pr_id
   
   If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
   
@@ -3152,7 +3156,7 @@ End Sub
 ' HIDECOLS - fin
 
 Private Function pGetFileNamePostFix() As String
-  pGetFileNamePostFix = Left$(m_cliente, 50) & "-" & m_Nrodoc
+  pGetFileNamePostFix = left$(m_cliente, 50) & "-" & m_Nrodoc
 End Function
 
 Private Sub pShowMenuDocAction()

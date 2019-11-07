@@ -945,7 +945,7 @@ Private Function cIEditGeneric_Delete(Id As Long) As Boolean
 
   Dim sqlstmt As String
   
-  sqlstmt = "sp_DocPedidoVentaDelete " & Id & "," & EmpId & "," & User.Id
+  sqlstmt = "sp_DocPedidoVentaDelete " & Id & "," & empId & "," & User.Id
   
   cIEditGeneric_Delete = gDB.Execute(sqlstmt, "cIEditGeneric_Delete", C_Module)
 End Function
@@ -1128,7 +1128,7 @@ Private Function pProcessMultiRow(ByVal Info As Variant) As Boolean
           
           If LenB(oCell.HelpValueProcess) Then
             If InStr(1, oCell.HelpValueProcess, ",") Then
-              pAddMultiRows oCell.HelpValueProcess, Info
+              AddMultiRowsVentas oCell.HelpValueProcess, Info, KI_CANTIDAD
               pProcessMultiRow = True
             End If
           End If
@@ -1138,74 +1138,74 @@ Private Function pProcessMultiRow(ByVal Info As Variant) As Boolean
   
 End Function
 
-Private Sub pAddMultiRows(ByVal Ids As String, _
-                          ByRef Info As Variant)
-  Dim sqlstmt As String
-  Dim rs      As ADODB.Recordset
-    
-  sqlstmt = "select pr_nombreventa, pr_id from Producto where pr_id in (" & Ids & ")"
-  If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
-  If rs.EOF Then Exit Sub
-  
-  Dim i As Long
-  Dim j As Long
-  Dim k As Long
-  Dim PR_ID As Long
-  Dim vIds  As Variant
-  Dim vIds2 As Variant
-  Dim bFound As Boolean
-  
-  vIds2 = Split(Ids, ",")
-  
-  ReDim vIds(UBound(vIds2))
-  
-  For i = 0 To UBound(vIds2)
-    bFound = False
-    For j = 0 To UBound(vIds)
-    
-      If vIds2(i) = vIds(j) Then
-        bFound = True
-        Exit For
-      End If
-      
-    Next
-    If Not bFound Then
-      vIds(k) = vIds2(i)
-      k = k + 1
-    End If
-  Next
-  
-  ReDim Preserve vIds(k - 1)
-  
-  ' Ahora respeto el orden de seleccion
-  '
-  For i = 0 To UBound(vIds)
-  
-    rs.MoveFirst
-    
-    Do While Not rs.EOF
-  
-      PR_ID = gDB.ValField(rs.Fields, cscPrId)
-      
-      If Val(vIds(i)) = PR_ID Then
-        Info.NewId.Add PR_ID
-        Info.NewValue.Add gDB.ValField(rs.Fields, cscPrNombreventa)
-        Exit Do
-      End If
-      
-      rs.MoveNext
-    Loop
-    
-  Next
-  
-  ' No lo toquen, es mas 1 :( o explota todooo :P
-  ' ups al final no era jeje
-  '
-  Info.iAddRows = Info.NewId.Count '+ 1
-  
-  Info.bAddRows = Info.iAddRows
-  
-End Sub
+'Private Sub pAddMultiRows(ByVal Ids As String, _
+'                          ByRef Info As Variant)
+'  Dim sqlstmt As String
+'  Dim rs      As ADODB.Recordset
+'
+'  sqlstmt = "select pr_nombreventa, pr_id from Producto where pr_id in (" & Ids & ")"
+'  If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
+'  If rs.EOF Then Exit Sub
+'
+'  Dim i As Long
+'  Dim j As Long
+'  Dim k As Long
+'  Dim pr_id As Long
+'  Dim vIds  As Variant
+'  Dim vIds2 As Variant
+'  Dim bFound As Boolean
+'
+'  vIds2 = Split(Ids, ",")
+'
+'  ReDim vIds(UBound(vIds2))
+'
+'  For i = 0 To UBound(vIds2)
+'    bFound = False
+'    For j = 0 To UBound(vIds)
+'
+'      If vIds2(i) = vIds(j) Then
+'        bFound = True
+'        Exit For
+'      End If
+'
+'    Next
+'    If Not bFound Then
+'      vIds(k) = vIds2(i)
+'      k = k + 1
+'    End If
+'  Next
+'
+'  ReDim Preserve vIds(k - 1)
+'
+'  ' Ahora respeto el orden de seleccion
+'  '
+'  For i = 0 To UBound(vIds)
+'
+'    rs.MoveFirst
+'
+'    Do While Not rs.EOF
+'
+'      pr_id = gDB.ValField(rs.Fields, cscPrId)
+'
+'      If Val(vIds(i)) = pr_id Then
+'        Info.NewId.Add pr_id
+'        Info.NewValue.Add gDB.ValField(rs.Fields, cscPrNombreventa)
+'        Exit Do
+'      End If
+'
+'      rs.MoveNext
+'    Loop
+'
+'  Next
+'
+'  ' No lo toquen, es mas 1 :( o explota todooo :P
+'  ' ups al final no era jeje
+'  '
+'  Info.iAddRows = Info.NewId.Count '+ 1
+'
+'  Info.bAddRows = Info.iAddRows
+'
+'End Sub
 
 Private Function cIABMClientGrid_ColumnAfterEdit(ByVal Key As Integer, ByVal lRow As Long, ByVal lCol As Long, ByVal NewValue As Variant, ByVal NewValueID As Long) As Boolean
   On Error GoTo ControlError
@@ -2321,7 +2321,7 @@ Private Function Load(ByVal Id As Long) As Boolean
 
   Dim sqlstmt As String
 
-  sqlstmt = "sp_DocPedidoVentaGet " & EmpId & "," & Id & "," & gDB.UserId
+  sqlstmt = "sp_DocPedidoVentaGet " & empId & "," & Id & "," & gDB.UserId
   
   Dim rs As Recordset
 
@@ -2784,7 +2784,11 @@ Private Sub pSetDataProducto(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal PR
   Dim sqlstmt As String
   Dim rs      As Recordset
   
-  sqlstmt = "select un_nombre, ccos_id_venta, ccos_nombre from producto, unidad, centrocosto where un_id_venta = un_id and ccos_id_venta *= ccos_id and pr_id = " & PR_ID
+  sqlstmt = "select un_nombre, ccos_id_venta, ccos_nombre" & _
+            " from producto" & _
+            " left join unidad on un_id_venta = un_id" & _
+            " left join centrocosto on ccos_id_venta = ccos_id" & _
+            " where pr_id = " & PR_ID
   
   If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
   

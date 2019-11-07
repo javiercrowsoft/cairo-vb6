@@ -1856,13 +1856,13 @@ Private Sub pShowTotales(ByRef Rows As CSInterfacesABM.cIABMGridRows)
   m_Footer.RefreshControls
 End Sub
 
-Private Sub pSetTasasImpositivas(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal pr_id As Long, ByVal pr_nombre As String)
+Private Sub pSetTasasImpositivas(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal PR_ID As Long, ByVal pr_nombre As String)
   Dim ti_ri    As Long
   Dim ti_rni   As Long
   
-  If pr_id = 0 Then Exit Sub
+  If PR_ID = 0 Then Exit Sub
   
-  If Not GetTasaFromProducto(pr_id, ti_ri, ti_rni, True) Then Exit Sub
+  If Not GetTasaFromProducto(PR_ID, ti_ri, ti_rni, True) Then Exit Sub
   
   If ti_ri = 0 Then
     MsgWarning LNGGetText(1597, vbNullString, pr_nombre)
@@ -1902,11 +1902,15 @@ Private Sub pSetTasasImpositivas(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVa
   End If
 End Sub
 
-Private Sub pSetDataProducto(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal pr_id As Long)
+Private Sub pSetDataProducto(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal PR_ID As Long)
   Dim sqlstmt As String
   Dim rs      As Recordset
   
-  sqlstmt = "select un_nombre, ccos_id_compra, ccos_nombre from producto, unidad, centrocosto where un_id_compra = un_id and ccos_id_compra *= ccos_id and pr_id = " & pr_id
+  sqlstmt = "select un_nombre, ccos_id_compra, ccos_nombre" & _
+            " from producto" & _
+            " left join unidad on un_id_compra = un_id" & _
+            " left join centrocosto on ccos_id_compra = ccos_id" & _
+            " where pr_id = " & PR_ID
   
   If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
   
@@ -1920,7 +1924,7 @@ Private Sub pSetDataProducto(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal pr
   End If
 End Sub
 
-Private Sub pSetPrecios(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal pr_id As Long)
+Private Sub pSetPrecios(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal PR_ID As Long)
   Dim LP        As cListaPrecio
   Dim lp_id     As Long
   Dim Precio    As Double
@@ -1929,7 +1933,7 @@ Private Sub pSetPrecios(ByRef Row As CSInterfacesABM.cIABMGridRow, ByVal pr_id A
     
   If lp_id <> 0 Then
     Set LP = New cListaPrecio
-    Precio = LP.GetPrecio(lp_id, pr_id)
+    Precio = LP.GetPrecio(lp_id, PR_ID)
   End If
   
   pCell(Row, KI_PRECIO_LP).Value = Precio
@@ -2297,7 +2301,7 @@ Private Function pProcessMultiRow(ByVal Info As Variant) As Boolean
           
           If LenB(oCell.HelpValueProcess) Then
             If InStr(1, oCell.HelpValueProcess, ",") Then
-              pAddMultiRows oCell.HelpValueProcess, Info
+              AddMultiRowsCompras oCell.HelpValueProcess, Info, KI_CANTIDAD
               pProcessMultiRow = True
             End If
           End If
@@ -2307,74 +2311,74 @@ Private Function pProcessMultiRow(ByVal Info As Variant) As Boolean
   
 End Function
 
-Private Sub pAddMultiRows(ByVal Ids As String, _
-                          ByRef Info As Variant)
-  Dim sqlstmt As String
-  Dim rs      As ADODB.Recordset
-    
-  sqlstmt = "select pr_nombrecompra, pr_id from Producto where pr_id in (" & Ids & ")"
-  If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
-  If rs.EOF Then Exit Sub
-  
-  Dim i As Long
-  Dim j As Long
-  Dim k As Long
-  Dim pr_id As Long
-  Dim vIds  As Variant
-  Dim vIds2 As Variant
-  Dim bFound As Boolean
-  
-  vIds2 = Split(Ids, ",")
-  
-  ReDim vIds(UBound(vIds2))
-  
-  For i = 0 To UBound(vIds2)
-    bFound = False
-    For j = 0 To UBound(vIds)
-    
-      If vIds2(i) = vIds(j) Then
-        bFound = True
-        Exit For
-      End If
-      
-    Next
-    If Not bFound Then
-      vIds(k) = vIds2(i)
-      k = k + 1
-    End If
-  Next
-  
-  ReDim Preserve vIds(k - 1)
-  
-  ' Ahora respeto el orden de seleccion
-  '
-  For i = 0 To UBound(vIds)
-  
-    rs.MoveFirst
-    
-    Do While Not rs.EOF
-  
-      pr_id = gDB.ValField(rs.fields, cscPrId)
-      
-      If Val(vIds(i)) = pr_id Then
-        Info.NewId.Add pr_id
-        Info.NewValue.Add gDB.ValField(rs.fields, cscPrNombrecompra)
-        Exit Do
-      End If
-      
-      rs.MoveNext
-    Loop
-    
-  Next
-  
-  ' No lo toquen, es mas 1 :( o explota todooo :P
-  ' ups al final no era jeje
-  '
-  Info.iAddRows = Info.NewId.Count '+ 1
-  
-  Info.bAddRows = Info.iAddRows
-  
-End Sub
+'Private Sub pAddMultiRows(ByVal Ids As String, _
+'                          ByRef Info As Variant)
+'  Dim sqlstmt As String
+'  Dim rs      As ADODB.Recordset
+'
+'  sqlstmt = "select pr_nombrecompra, pr_id from Producto where pr_id in (" & Ids & ")"
+'  If Not gDB.OpenRs(sqlstmt, rs) Then Exit Sub
+'  If rs.EOF Then Exit Sub
+'
+'  Dim i As Long
+'  Dim j As Long
+'  Dim k As Long
+'  Dim PR_ID As Long
+'  Dim vIds  As Variant
+'  Dim vIds2 As Variant
+'  Dim bFound As Boolean
+'
+'  vIds2 = Split(Ids, ",")
+'
+'  ReDim vIds(UBound(vIds2))
+'
+'  For i = 0 To UBound(vIds2)
+'    bFound = False
+'    For j = 0 To UBound(vIds)
+'
+'      If vIds2(i) = vIds(j) Then
+'        bFound = True
+'        Exit For
+'      End If
+'
+'    Next
+'    If Not bFound Then
+'      vIds(k) = vIds2(i)
+'      k = k + 1
+'    End If
+'  Next
+'
+'  ReDim Preserve vIds(k - 1)
+'
+'  ' Ahora respeto el orden de seleccion
+'  '
+'  For i = 0 To UBound(vIds)
+'
+'    rs.MoveFirst
+'
+'    Do While Not rs.EOF
+'
+'      PR_ID = gDB.ValField(rs.fields, cscPrId)
+'
+'      If Val(vIds(i)) = PR_ID Then
+'        Info.NewId.Add PR_ID
+'        Info.NewValue.Add gDB.ValField(rs.fields, cscPrNombrecompra)
+'        Exit Do
+'      End If
+'
+'      rs.MoveNext
+'    Loop
+'
+'  Next
+'
+'  ' No lo toquen, es mas 1 :( o explota todooo :P
+'  ' ups al final no era jeje
+'  '
+'  Info.iAddRows = Info.NewId.Count '+ 1
+'
+'  Info.bAddRows = Info.iAddRows
+'
+'End Sub
 
 Private Function pGetItems() As cIABMProperty
   Set pGetItems = m_Items.Properties.Item(c_Items)
